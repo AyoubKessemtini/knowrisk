@@ -1,0 +1,65 @@
+{
+  "root": true,
+  "extends": [
+    "@react-native",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jest/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
+  ],
+  "env": {
+    "es6": true,
+    "jest": true,
+    "jest/globals": true,
+    "react-native/react-native": true,
+  },
+  "plugins": [
+    "react",
+    "react-native",
+    "import",
+    "promise",
+    "jest",
+    "testing-library",
+    "@tanstack/query",
+    "reactotron",
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+    },
+  },
+  "rules": {
+    "reactotron/no-tron-in-production": "error",
+    "import/prefer-default-export": "off",
+    "class-methods-use-this": "off",
+    "react/function-component-definition": [0],
+    "operator-linebreak": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/brace-style": "off",
+    "@tanstack/query/exhaustive-deps": "error",
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 1,
+    "react-native/no-color-literals": 1,
+    "react-native/no-raw-text": 1,
+    "react-native/no-single-element-style-arrays": 2,
+    "react/no-unstable-nested-components": "off",
+    "no-restricted-imports": [
+      "warn",
+      {
+        "name": "react-redux",
+        "importNames": ["useSelector", "useDispatch"],
+        "message": "use hooks 'useAppDispatch' or 'useAppSelector' for typing support",
+      },
+    ],
+  },
+  "overrides": [
+    {
+      "files": ["*.test.tsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+      },
+    },
+  ],
+}

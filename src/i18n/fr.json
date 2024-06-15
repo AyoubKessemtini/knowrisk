@@ -1,0 +1,11 @@
+{
+  "common": {
+    "continue": "French Continue",
+    "apply": "APPLY INPUT",
+    "showsheet": "SHOW SHEET"
+  },
+  "home": { "foo": "French Home Screen" },
+  "profile": { "foo": "French Profile Screen" },
+  "language": { "english": "English", "french": "French" },
+  "test": "test"
+}

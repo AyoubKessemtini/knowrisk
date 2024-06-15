@@ -1,0 +1,6 @@
+{
+  "common": { "continue": "Continue", "apply": "APPLY INPUT" },
+  "home": { "foo": "Home Screen" },
+  "profile": { "foo": "Profile Screen" },
+  "language": { "english": "English", "french": "French" }
+}

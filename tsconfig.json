@@ -1,0 +1,28 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@i18n": ["src/i18n/i18n.ts"],
+      "@config/*": ["src/config/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@modules/*": ["src/modules/*"],
+      "@navigators/*": ["src/navigators/*"],
+      "@query/*": ["src/react-query/*"],
+      "@storage/*": ["src/storage/*"],
+      "@store/*": ["src/store/*"],
+      "@constants/*": ["src/constants/*"],
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["assets/*"],
+      "@core/*": ["core/*"],
+      "@core/entities/*": ["core/domain/entities/*"],
+      "@core/fixture/*": ["core/fixtures/*"],
+      "@core/usecases/*": ["core/usecases/*"],
+      "@core/real/*": ["core/adapters/real/*"],
+      "@core/inmemory/*": ["core/adapters/inmemory/*"]
+    }
+  },
+  "exclude": ["node_modules", "ios", "android", "**/*.test.tsx"],
+  "include": ["src/**/*", "core/**/*", "jest.setup.ts"]
+}

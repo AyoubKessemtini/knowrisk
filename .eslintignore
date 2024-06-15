@@ -1,0 +1,12 @@
+ios/*
+node_modules/*
+./node_modules/**
+**/node_modules/*
+.eslintrc.js
+babel.config.js
+metro.config.js
+jest.config.ts
+jest.setup.ts
+react-native.config.js
+index.js
+coverage

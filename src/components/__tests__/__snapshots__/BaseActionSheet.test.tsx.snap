@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[COMPONENTS]: BaseActionSheet renders correctly with dark theme 1`] = `
+[
+  <RCTSafeAreaView
+    collapsable={false}
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "backgroundColor": "transparent",
+        "height": 0,
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+        "width": 1,
+      }
+    }
+  >
+    <View />
+  </RCTSafeAreaView>,
+  <RCTSafeAreaView
+    collapsable={false}
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "backgroundColor": "transparent",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "width": 1,
+      }
+    }
+  >
+    <View />
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`[COMPONENTS]: BaseActionSheet renders correctly with light theme 1`] = `
+[
+  <RCTSafeAreaView
+    collapsable={false}
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "backgroundColor": "transparent",
+        "height": 0,
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+        "width": 1,
+      }
+    }
+  >
+    <View />
+  </RCTSafeAreaView>,
+  <RCTSafeAreaView
+    collapsable={false}
+    onLayout={[Function]}
+    pointerEvents="none"
+    style={
+      {
+        "backgroundColor": "transparent",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "width": 1,
+      }
+    }
+  >
+    <View />
+  </RCTSafeAreaView>,
+]
+`;

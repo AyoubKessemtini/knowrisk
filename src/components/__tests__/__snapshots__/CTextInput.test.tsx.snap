@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[COMPONENTS]: CTextInput renders correctly 1`] = `
+<View>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "backgroundColor": "#e7e5e8",
+            "borderColor": "#01080a",
+            "borderRadius": 20,
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "overflow": "hidden",
+            "paddingLeft": 24,
+            "paddingRight": 16,
+            "paddingVertical": 20,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <TextInput
+        autoCapitalize="none"
+        autoComplete="off"
+        autoCorrect={false}
+        editable={true}
+        placeholder="test"
+        placeholderTextColor="#e7e5e8"
+        style={
+          [
+            {
+              "alignSelf": "stretch",
+              "flex": 1,
+              "paddingHorizontal": 0,
+              "paddingVertical": 0,
+            },
+            {
+              "color": "#202020",
+              "fontFamily": "GoogleSans-Bold",
+              "fontSize": 20,
+            },
+            false,
+            false,
+            undefined,
+          ]
+        }
+        textAlignVertical="center"
+      />
+    </View>
+  </View>
+</View>
+`;

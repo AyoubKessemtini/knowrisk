@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "max-classes-per-file": "off",
+    "no-underscore-dangle": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+  },
+}

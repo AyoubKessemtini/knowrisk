@@ -1,0 +1,60 @@
+diff --git a/node_modules/reactotron-core-client/src/client-options.ts b/node_modules/reactotron-core-client/src/client-options.ts
+index 3682cb6..2d729a2 100644
+--- a/node_modules/reactotron-core-client/src/client-options.ts
++++ b/node_modules/reactotron-core-client/src/client-options.ts
+@@ -1,3 +1,4 @@
++//@ts-nocheck
+ import type { LifeCycleMethods, PluginCreator } from "./reactotron-core-client"
+ import NodeWebSocket from "ws"
+ 
+diff --git a/node_modules/reactotron-core-client/src/plugins/benchmark.ts b/node_modules/reactotron-core-client/src/plugins/benchmark.ts
+index 37e71f7..6ee4caa 100644
+--- a/node_modules/reactotron-core-client/src/plugins/benchmark.ts
++++ b/node_modules/reactotron-core-client/src/plugins/benchmark.ts
+@@ -1,3 +1,4 @@
++//@ts-nocheck
+ import type { ReactotronCore, Plugin } from "../reactotron-core-client"
+ 
+ /**
+diff --git a/node_modules/reactotron-core-client/src/reactotron-core-client.ts b/node_modules/reactotron-core-client/src/reactotron-core-client.ts
+index d522a61..6c7ad07 100644
+--- a/node_modules/reactotron-core-client/src/reactotron-core-client.ts
++++ b/node_modules/reactotron-core-client/src/reactotron-core-client.ts
+@@ -1,3 +1,4 @@
++//@ts-nocheck
+ import WebSocket from "ws"
+ import type { Command, CommandTypeKey } from "reactotron-core-contract"
+ import validate from "./validate"
+diff --git a/node_modules/reactotron-core-client/src/serialize.ts b/node_modules/reactotron-core-client/src/serialize.ts
+index 9c69c63..9880933 100644
+--- a/node_modules/reactotron-core-client/src/serialize.ts
++++ b/node_modules/reactotron-core-client/src/serialize.ts
+@@ -2,7 +2,7 @@
+ // falsy values.  This does.
+ //
+ // Mostly adapted from https://github.com/isaacs/json-stringify-safe
+-
++//@ts-nocheck
+ // replacement tokens
+ const UNDEFINED = "~~~ undefined ~~~"
+ const NULL = `~~~ null ~~~`
+diff --git a/node_modules/reactotron-core-client/src/stopwatch.ts b/node_modules/reactotron-core-client/src/stopwatch.ts
+index 5f51e31..36ec866 100644
+--- a/node_modules/reactotron-core-client/src/stopwatch.ts
++++ b/node_modules/reactotron-core-client/src/stopwatch.ts
+@@ -1,5 +1,5 @@
+ /// <reference types="node" />
+-
++//@ts-nocheck
+ declare const global: any
+ 
+ const hasHirezNodeTimer =
+diff --git a/node_modules/reactotron-core-client/src/validate.ts b/node_modules/reactotron-core-client/src/validate.ts
+index c70bc6b..7506c32 100644
+--- a/node_modules/reactotron-core-client/src/validate.ts
++++ b/node_modules/reactotron-core-client/src/validate.ts
+@@ -1,3 +1,4 @@
++//@ts-nocheck
+ import type { ClientOptions } from "./client-options"
+ import type { ReactotronCore } from "./reactotron-core-client"
+ 

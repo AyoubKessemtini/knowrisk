@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[COMPONENTS]: Screen renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "flex": 1,
+        "height": "100%",
+        "paddingVertical": 8,
+        "width": "100%",
+      },
+      {
+        "backgroundColor": undefined,
+      },
+      {
+        "paddingHorizontal": 24,
+      },
+    ]
+  }
+  testID="SCREEN_ANIMATED_VIEW"
+>
+  <RNCSafeAreaView
+    edges={
+      {
+        "bottom": "additive",
+        "left": "off",
+        "right": "off",
+        "top": "additive",
+      }
+    }
+    style={
+      {
+        "flex": 1,
+      }
+    }
+    testID="SCREEN_SAFE_AREA_VIEW"
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        [
+          {
+            "flex": 1,
+          },
+          {
+            "paddingBottom": 0,
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        contentContainerStyle={
+          [
+            {
+              "flexGrow": 1,
+              "paddingVertical": 16,
+            },
+            undefined,
+          ]
+        }
+        onContentSizeChange={[MockFunction]}
+        onLayout={[MockFunction]}
+        scrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+        style={
+          {
+            "flex": 1,
+            "height": "100%",
+            "width": "100%",
+          }
+        }
+      >
+        <View />
+      </RCTScrollView>
+    </View>
+  </RNCSafeAreaView>
+</View>
+`;

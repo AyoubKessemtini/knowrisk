@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/GoogleSans-Bold.ttf",
+      "sha1": "0bda83bea23241b8b9b30de0898240862df6e5e4"
+    },
+    {
+      "path": "assets/fonts/GoogleSans-BoldItalic.ttf",
+      "sha1": "549bb723d63b3293fa35a72f71a8e4b5b218d5f4"
+    },
+    {
+      "path": "assets/fonts/GoogleSans-Italic.ttf",
+      "sha1": "9caf3a4620c79621e5926a26f2263120e8a901f0"
+    },
+    {
+      "path": "assets/fonts/GoogleSans-Medium.ttf",
+      "sha1": "d45d7641ac2473cc19c260ecabf0f76381703ab6"
+    },
+    {
+      "path": "assets/fonts/GoogleSans-MediumItalic.ttf",
+      "sha1": "3cc0b8ca06acf185efdabc07c3199ec89687cf67"
+    },
+    {
+      "path": "assets/fonts/GoogleSans-Regular.ttf",
+      "sha1": "4974453e73089c1d8bcf2a6b5eeff51302da45ec"
+    }
+  ]
+}
