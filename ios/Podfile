@@ -52,7 +52,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'AiroApp' do
+target 'airoApp' do
   config = use_native_modules!
 
   use_react_native!(
@@ -66,7 +66,7 @@ target 'AiroApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'AiroAppTests' do
+  target 'airoAppTests' do
     inherit! :complete
     # Pods for testing
   end

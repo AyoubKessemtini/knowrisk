@@ -1,5 +1,5 @@
 {
-  "name": "airoapp",
+  "name": "airoApp",
   "version": "0.0.1",
   "author": "Aironas Kulvelis <aironaskul@gmail.com>",
   "private": true,
@@ -21,7 +21,7 @@
     "reset": "find . -type dir -name node_modules | xargs rm -rf && rm -rf yarn.lock",
     "prepare": "husky",
     "generate-icons": "npx icon-set-creator create ./assets/images/app_icon.jpeg",
-    "generate-bootsplash": "yarn react-native generate-bootsplash ./assets/svg/logo.svg --platforms=android,ios --assets-output=assets --flavor=main --html=index.html",
+    "generate-bootsplash": "yarn react-native generate-bootsplash ./assets/images/logo.svg --platforms=android,ios --assets-output=assets --flavor=main --html=index.html",
     "rename-app": "sh ./scripts/rename-app.sh",
     "link-fonts": "npx react-native-asset",
     "madge": "npx madge --circular --extensions ts,tsx src core"
@@ -47,7 +47,7 @@
     "react": "18.2.0",
     "react-error-boundary": "^4.0.11",
     "react-hook-form": "^7.49.3",
-    "react-native": "0.73.7",
+    "react-native": "0.73.5",
     "react-native-actions-sheet": "^0.9.2",
     "react-native-bootsplash": "^5.1.3",
     "react-native-easy-icon": "^1.0.10",

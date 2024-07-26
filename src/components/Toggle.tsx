@@ -22,10 +22,7 @@ export const Toggle = ({
   const KNOB_SIZE = size * 0.8;
 
   const animatedSwitchKnob = useAnimatedStyle(() => {
-    const [offsetLeft, offsetRight] = [
-      4,
-      4,
-    ];
+    const [offsetLeft, offsetRight] = [4, 4];
 
     const start = withTiming(activated ? '100%' : '0%');
     const marginStart = withTiming(
