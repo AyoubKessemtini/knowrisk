@@ -53,6 +53,7 @@
     "react-native-easy-icon": "^1.0.10",
     "react-native-file-access": "^3.0.4",
     "react-native-gesture-handler": "^2.14.0",
+    "react-native-health": "^1.18.0",
     "react-native-mmkv": "^2.11.0",
     "react-native-permissions": "^4.0.4",
     "react-native-reanimated": "^3.6.1",
