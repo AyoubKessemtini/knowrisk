@@ -53,7 +53,7 @@ fi
 ruby_version=$(ruby -v 2>&1)
 if [ $? -eq 0 ]; then
   # Check if the Ruby version is 2.7.6
-  if [[ "$ruby_version" == "ruby 2.7.6"* ]]; then
+  if [[ "$ruby_version" == "ruby 3.1.3"* ]]; then
     success_message "Ruby is installed ($ruby_version)"
   else
     error_message "Ruby version $ruby_version is not supported. Please install Ruby 2.7.6."
