@@ -18,4 +18,8 @@ export class RDConversationsRepo implements ConversationsRepo {
     );
     return data;
   }
+  async SendIOSHealthData(req: any): Promise<void> {
+    const result: any = await this.httpClient.post('/ReceiveData', req);
+    return result;
+  }
 }

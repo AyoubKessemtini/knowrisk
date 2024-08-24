@@ -11,12 +11,12 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		231FAB79E8B197FE84060A6D /* libPods-airoApp-airoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D7501F52E080ABF3BCCDD /* libPods-airoApp-airoAppTests.a */; };
 		4110EF232AA4C9BE0061D6B4 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4110EF222AA4C9BD0061D6B4 /* BootSplash.storyboard */; };
+		518BBC6B11DCFC66EB0A139E /* libPods-airoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89AF09AF3E40DAEB57560883 /* libPods-airoApp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen */; };
 		8DC1E1423C0D4423A37A166C /* GoogleSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E18C2C3D8964E1EAAB3761B /* GoogleSans-Italic.ttf */; };
-		BF9324BE3016F1BACBDAFE91 /* libPods-airoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFD14F423CFEB1D7F7BB9E5 /* libPods-airoApp.a */; };
 		C608AA1FB7E34D4291ACA7D2 /* GoogleSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0A5344E1F5F40639B7E280B /* GoogleSans-MediumItalic.ttf */; };
-		C714A82CF245837A4713FCD4 /* libPods-airoApp-airoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C778A91479711FF15F7ED881 /* libPods-airoApp-airoAppTests.a */; };
 		D8CD39E5671B4496B4D347C8 /* GoogleSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8794049648C46AA8DBDF547 /* GoogleSans-Bold.ttf */; };
 		DD4FB5BD5FD3412B9F16BBE7 /* GoogleSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9045E6B27A854DD181A9E60A /* GoogleSans-Medium.ttf */; };
 		E160B635C4124CE7BC62793B /* GoogleSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DEDC9A0C14F4FE4A0A12BD4 /* GoogleSans-Regular.ttf */; };
@@ -37,7 +37,6 @@
 		00E356EE1AD99517003FC87E /* airoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = airoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* airoAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = airoAppTests.m; sourceTree = "<group>"; };
-		0FFD14F423CFEB1D7F7BB9E5 /* libPods-airoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-airoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* airoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = airoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = airoApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = airoApp/AppDelegate.mm; sourceTree = "<group>"; };
@@ -45,7 +44,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = airoApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = airoApp/main.m; sourceTree = "<group>"; };
 		13E4117E2C5A54C1001A6AA3 /* airoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = airoApp.entitlements; path = airoApp/airoApp.entitlements; sourceTree = "<group>"; };
-		37FCF23B90B726FDFAA6091C /* Pods-airoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airoApp.release.xcconfig"; path = "Target Support Files/Pods-airoApp/Pods-airoApp.release.xcconfig"; sourceTree = "<group>"; };
+		21A3813A2D3DA86D217D3A5F /* Pods-airoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airoApp.release.xcconfig"; path = "Target Support Files/Pods-airoApp/Pods-airoApp.release.xcconfig"; sourceTree = "<group>"; };
 		3DEDC9A0C14F4FE4A0A12BD4 /* GoogleSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Regular.ttf"; path = "../assets/fonts/GoogleSans-Regular.ttf"; sourceTree = "<group>"; };
 		4110EF222AA4C9BD0061D6B4 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = airoApp/BootSplash.storyboard; sourceTree = "<group>"; };
 		41701D162AB1B49800990880 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
@@ -67,14 +66,15 @@
 		41701D262AB1B49A00990880 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		41701D272AB1B49B00990880 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		41701D282AB1B49B00990880 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		5A1FF872990DBC797F4419A9 /* Pods-airoApp-airoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airoApp-airoAppTests.release.xcconfig"; path = "Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		67C1BF41C7C99022BD211D5F /* Pods-airoApp-airoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airoApp-airoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7D7A39CE20AA3E7B51BE62F2 /* Pods-airoApp-airoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airoApp-airoAppTests.release.xcconfig"; path = "Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = LaunchScreen; path = airoApp/LaunchScreen; sourceTree = "<group>"; };
+		841D7501F52E080ABF3BCCDD /* libPods-airoApp-airoAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-airoApp-airoAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89AF09AF3E40DAEB57560883 /* libPods-airoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-airoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E18C2C3D8964E1EAAB3761B /* GoogleSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Italic.ttf"; path = "../assets/fonts/GoogleSans-Italic.ttf"; sourceTree = "<group>"; };
 		901B9EA07E1F421FA7926F2C /* GoogleSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-BoldItalic.ttf"; path = "../assets/fonts/GoogleSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		9045E6B27A854DD181A9E60A /* GoogleSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Medium.ttf"; path = "../assets/fonts/GoogleSans-Medium.ttf"; sourceTree = "<group>"; };
-		ADECE5E3F03A846AA00F4BD2 /* Pods-airoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airoApp.debug.xcconfig"; path = "Target Support Files/Pods-airoApp/Pods-airoApp.debug.xcconfig"; sourceTree = "<group>"; };
-		C778A91479711FF15F7ED881 /* libPods-airoApp-airoAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-airoApp-airoAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7B728AE7FA3FC0A7604EB3B /* Pods-airoApp-airoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airoApp-airoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D56C9C476E1B31A0C09A09F5 /* Pods-airoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airoApp.debug.xcconfig"; path = "Target Support Files/Pods-airoApp/Pods-airoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E8794049648C46AA8DBDF547 /* GoogleSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Bold.ttf"; path = "../assets/fonts/GoogleSans-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F0A5344E1F5F40639B7E280B /* GoogleSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-MediumItalic.ttf"; path = "../assets/fonts/GoogleSans-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C714A82CF245837A4713FCD4 /* libPods-airoApp-airoAppTests.a in Frameworks */,
+				231FAB79E8B197FE84060A6D /* libPods-airoApp-airoAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF9324BE3016F1BACBDAFE91 /* libPods-airoApp.a in Frameworks */,
+				518BBC6B11DCFC66EB0A139E /* libPods-airoApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				0FFD14F423CFEB1D7F7BB9E5 /* libPods-airoApp.a */,
-				C778A91479711FF15F7ED881 /* libPods-airoApp-airoAppTests.a */,
+				89AF09AF3E40DAEB57560883 /* libPods-airoApp.a */,
+				841D7501F52E080ABF3BCCDD /* libPods-airoApp-airoAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -204,10 +204,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				ADECE5E3F03A846AA00F4BD2 /* Pods-airoApp.debug.xcconfig */,
-				37FCF23B90B726FDFAA6091C /* Pods-airoApp.release.xcconfig */,
-				67C1BF41C7C99022BD211D5F /* Pods-airoApp-airoAppTests.debug.xcconfig */,
-				5A1FF872990DBC797F4419A9 /* Pods-airoApp-airoAppTests.release.xcconfig */,
+				D56C9C476E1B31A0C09A09F5 /* Pods-airoApp.debug.xcconfig */,
+				21A3813A2D3DA86D217D3A5F /* Pods-airoApp.release.xcconfig */,
+				C7B728AE7FA3FC0A7604EB3B /* Pods-airoApp-airoAppTests.debug.xcconfig */,
+				7D7A39CE20AA3E7B51BE62F2 /* Pods-airoApp-airoAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -232,12 +232,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "airoAppTests" */;
 			buildPhases = (
-				030D3DD305FF03CB44357165 /* [CP] Check Pods Manifest.lock */,
+				05F6C1BF99FEB5542B8F3B52 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				216957E3714AF4299EF4F0C7 /* [CP] Embed Pods Frameworks */,
-				EC5ED8361D5945030A7D101A /* [CP] Copy Pods Resources */,
+				D378831620EF22A77375C35C /* [CP] Embed Pods Frameworks */,
+				850569FDDC6467AC04D1F367 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -253,14 +253,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "airoApp" */;
 			buildPhases = (
-				F1CF74D510C4E9203C50F12E /* [CP] Check Pods Manifest.lock */,
+				68A08A6E9F2D797BF5CE0748 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				7AB3C23E981D5D97049CCD13 /* [CP] Embed Pods Frameworks */,
-				335971EB62CDBC8EA1656434 /* [CP] Copy Pods Resources */,
+				AAEBB7C1D510EE204D9CED63 /* [CP] Embed Pods Frameworks */,
+				F0369F20A3472442F15B3772 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -351,7 +351,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		030D3DD305FF03CB44357165 /* [CP] Check Pods Manifest.lock */ = {
+		05F6C1BF99FEB5542B8F3B52 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -373,75 +373,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		216957E3714AF4299EF4F0C7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		335971EB62CDBC8EA1656434 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7AB3C23E981D5D97049CCD13 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EC5ED8361D5945030A7D101A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F1CF74D510C4E9203C50F12E /* [CP] Check Pods Manifest.lock */ = {
+		68A08A6E9F2D797BF5CE0748 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -461,6 +393,74 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		850569FDDC6467AC04D1F367 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAEBB7C1D510EE204D9CED63 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D378831620EF22A77375C35C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-airoApp-airoAppTests/Pods-airoApp-airoAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0369F20A3472442F15B3772 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-airoApp/Pods-airoApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -515,7 +515,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67C1BF41C7C99022BD211D5F /* Pods-airoApp-airoAppTests.debug.xcconfig */;
+			baseConfigurationReference = C7B728AE7FA3FC0A7604EB3B /* Pods-airoApp-airoAppTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -543,7 +543,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A1FF872990DBC797F4419A9 /* Pods-airoApp-airoAppTests.release.xcconfig */;
+			baseConfigurationReference = 7D7A39CE20AA3E7B51BE62F2 /* Pods-airoApp-airoAppTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -568,7 +568,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADECE5E3F03A846AA00F4BD2 /* Pods-airoApp.debug.xcconfig */;
+			baseConfigurationReference = D56C9C476E1B31A0C09A09F5 /* Pods-airoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -604,7 +604,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37FCF23B90B726FDFAA6091C /* Pods-airoApp.release.xcconfig */;
+			baseConfigurationReference = 21A3813A2D3DA86D217D3A5F /* Pods-airoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
