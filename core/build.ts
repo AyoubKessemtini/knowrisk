@@ -2,6 +2,8 @@ import { AxiosInstance } from 'axios';
 import { RDConversationsRepo } from './adapters/real/repositories/RDConversationsRepo';
 import { GetConversationsMapper } from './adapters/real/mappers/conversationRepository/GetConversationsMapper';
 import { GetConversations } from './usecases/conversationsRepository/getConversations/GetConversations';
+import { SendIOSHealthData } from './usecases/iosHealthData/sendIOSHealthData/SendIOSData';
+import { RDIOSHealthDataRepo } from './adapters/real/repositories/RDIOSHealthDataRepo';
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -24,12 +26,14 @@ export const Core = (configuration: CoreConfiguration) => {
   const httpClient = configuration.httpClient;
 
   //REPOSITORIES
+  const iosHealthDataRepo = new RDIOSHealthDataRepo(httpClient);
+
   const conversationsRepository = realDependencies
     ? new RDConversationsRepo(httpClient, new GetConversationsMapper())
     : new RDConversationsRepo(httpClient, new GetConversationsMapper());
 
   //USECASES
   const getConversations = new GetConversations(conversationsRepository);
-
-  return { getConversations };
+  const sendIOSHealthData = new SendIOSHealthData(iosHealthDataRepo);
+  return { getConversations, sendIOSHealthData };
 };
