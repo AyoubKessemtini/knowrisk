@@ -36,11 +36,11 @@ export const HealthDataRenderer = ({
         <CText>Start Time: {startTime}</CText>
         <CText>End Time: {endTime}</CText>
       </View>
-      {data.slice(0, 10).map((item, index) => (
+      {/* {data.slice(0, 10).map((item, index) => (
         <CText key={index}>
           {item?.value} at {new Date(item?.startDate).toLocaleString()}
         </CText>
-      ))}
+      ))} */}
     </View>
   );
 };

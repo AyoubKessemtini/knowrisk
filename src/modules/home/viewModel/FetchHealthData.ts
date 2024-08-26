@@ -41,11 +41,13 @@ const permissions: HealthKitPermissions = {
   },
 };
 
-type HealthData = {
-  [key: string]: HealthValue[] | undefined;
+export type HealthData = {
+  [key: string]: HealthValue[];
 };
 
-export const useFetchHealthData = (): {
+export const useFetchHealthData = (
+  date: Date,
+): {
   healthData: HealthData;
   loading: boolean;
   error: string | null;
@@ -64,149 +66,157 @@ export const useFetchHealthData = (): {
       }
       fetchData();
     });
-  }, []);
+  }, [date]);
 
   const fetchData = () => {
     setLoading(true);
-    const startDate = new Date();
-    startDate.setMonth(startDate.getMonth() - 1);
+    const now = new Date();
+    const isToday = now.toDateString() === date.toDateString();
+
+    const startDate = isToday ? new Date() : new Date(date);
+    startDate.setHours(isToday ? startDate.getHours() - 24 : 0, 0, 0, 0);
+
+    const endDate = new Date(date);
+    endDate.setHours(isToday ? now.getHours() : 23, 59, 59, 999);
+
     const startDateISOString = startDate.toISOString();
+    const endDateISOString = endDate.toISOString();
 
     const dataFetchers = [
       {
         key: 'stepCount',
         fetcher: AppleHealthKit.getDailyStepCountSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'distanceWalkingRunning',
         fetcher: AppleHealthKit.getDailyDistanceWalkingRunningSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'activeEnergyBurned',
         fetcher: AppleHealthKit.getActiveEnergyBurned,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'bodyFatPercentage',
         fetcher: AppleHealthKit.getBodyFatPercentageSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'height',
         fetcher: AppleHealthKit.getHeightSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'leanBodyMass',
         fetcher: AppleHealthKit.getLeanBodyMassSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'weight',
         fetcher: AppleHealthKit.getWeightSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'waistCircumference',
         fetcher: AppleHealthKit.getWaistCircumferenceSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'environmentalAudioExposure',
         fetcher: AppleHealthKit.getEnvironmentalAudioExposure,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'headphoneAudioExposure',
         fetcher: AppleHealthKit.getHeadphoneAudioExposure,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'heartRate',
         fetcher: AppleHealthKit.getHeartRateSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'restingHeartRate',
         fetcher: AppleHealthKit.getRestingHeartRateSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'walkingHeartRateAverage',
         fetcher: AppleHealthKit.getWalkingHeartRateAverage,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'heartRateVariability',
         fetcher: AppleHealthKit.getHeartRateVariabilitySamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'mindfulSession',
         fetcher: AppleHealthKit.getMindfulSession,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'stepLength',
         fetcher: AppleHealthKit.getStepCount,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'sixMinuteWalkTestDistance',
         fetcher: AppleHealthKit.getDistanceWalkingRunning,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'walkingSpeed',
         fetcher: AppleHealthKit.getDailyDistanceWalkingRunningSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'dietaryEnergyConsumed',
         fetcher: AppleHealthKit.getEnergyConsumedSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'water',
         fetcher: AppleHealthKit.getWaterSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'respiratoryRate',
         fetcher: AppleHealthKit.getRespiratoryRateSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'sleepAnalysis',
         fetcher: AppleHealthKit.getSleepSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'bloodGlucose',
         fetcher: AppleHealthKit.getBloodGlucoseSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'bloodPressureDiastolic',
         fetcher: AppleHealthKit.getBloodPressureSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'bloodPressureSystolic',
         fetcher: AppleHealthKit.getBloodPressureSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'bodyTemperature',
         fetcher: AppleHealthKit.getBodyTemperatureSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
       {
         key: 'oxygenSaturation',
         fetcher: AppleHealthKit.getOxygenSaturationSamples,
-        options: { startDate: startDateISOString },
+        options: { startDate: startDateISOString, endDate: endDateISOString },
       },
     ];
 
@@ -246,6 +256,7 @@ export const useFetchHealthData = (): {
       setHealthData(results as HealthData);
       setLoading(false);
     };
+
     fetchAllData();
   };
 

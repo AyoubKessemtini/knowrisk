@@ -4735,6 +4735,11 @@ getenv@^1.0.0:
   resolved "https://registry.yarnpkg.com/getenv/-/getenv-1.0.0.tgz#874f2e7544fbca53c7a4738f37de8605c3fcfc31"
   integrity sha512-7yetJWqbS9sbn0vIfliPsFgoXMKn/YMF+Wuiog97x+urnSRRRZ7xB+uVkwGKzRgq9CDFfMQnE9ruL5DHv9c6Xg==
 
+gifted-charts-core@^0.1.31:
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/gifted-charts-core/-/gifted-charts-core-0.1.31.tgz#e810b8ce8e587d7699f85cfa56e9a6461bdf54a8"
+  integrity sha512-u7G+RyfX390gqM62i7HBzmfEGmJz252BYhs0Y7mlp2MBFWqxmDUE4g3fIsUTko67CkUWv0QHoQezLsV8OzXELQ==
+
 github-from-package@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/github-from-package/-/github-from-package-0.0.0.tgz#97fb5d96bfde8973313f20e8288ef9a167fa64ce"
@@ -7156,12 +7161,24 @@ react-native-gesture-handler@^2.14.0:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-gifted-charts@^1.4.30:
+  version "1.4.30"
+  resolved "https://registry.yarnpkg.com/react-native-gifted-charts/-/react-native-gifted-charts-1.4.30.tgz#f1403eb7bea96c45207955b3387f4ff696c87811"
+  integrity sha512-Pxdw8LAlrdbqHgXEqtsBt3BKdwV3oapQfAhphdVQO1+P4rD4sR1DOMPeskW32LjSuCGYXgXdBnpfiCNw5KT93Q==
+  dependencies:
+    gifted-charts-core "^0.1.31"
+
 react-native-health@^1.18.0:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/react-native-health/-/react-native-health-1.18.0.tgz#714f4f8445a51cb0c78fd576fef05b2f6bf1bf61"
   integrity sha512-4CVLyBGrd6s/yPyb2/veZA0OobRP3SZ96eBZ2DunJr/1ZF3lKX3AuFFvGbCRNkycndni4VRr9T4b0MLqhXG+Hg==
   dependencies:
     "@expo/config-plugins" "^7.2.2"
+
+react-native-linear-gradient@^2.8.3:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz#9a116649f86d74747304ee13db325e20b21e564f"
+  integrity sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==
 
 react-native-mmkv@^2.11.0:
   version "2.12.2"
@@ -7210,10 +7227,10 @@ react-native-svg-transformer@^1.1.0:
     "@svgr/plugin-svgo" "^8.1.0"
     path-dirname "^1.0.2"
 
-react-native-svg@^15.5.0:
-  version "15.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-15.5.0.tgz#208647f2f1266a0a214f16e1b807fdc3ee7c0869"
-  integrity sha512-/DUPfmSf3eXt59WjG8hlRKVPzqVjM7duG9vJH6UYAJesj3NtYcyFsO5sYpSkovlOwagk84PibcVb92bBwMSmng==
+react-native-svg@^15.6.0:
+  version "15.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-15.6.0.tgz#13b2af53b1701597df301122b869b61918e1e9a5"
+  integrity sha512-TUtR+h+yi1ODsd8FHdom1TpjfWOmnaK5pri5rnSBXnMqpzq8o2zZfonHTjPX+nS3wb/Pu2XsoARgYaHNjVWXhQ==
   dependencies:
     css-select "^5.1.0"
     css-tree "^1.1.3"

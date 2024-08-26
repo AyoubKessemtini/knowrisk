@@ -8,7 +8,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import Icon from 'react-native-easy-icon';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -48,17 +48,19 @@ export function TabNavigator() {
         tabBarInactiveTintColor: Colors.grey2,
       }}
     >
-      <Tab.Screen
-        name={TabBarStackRoutes.HOME}
-        component={Home}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
-              <Icon type="antdesign" name="home" size={24} color={color} />
-            </Animated.View>
-          ),
-        }}
-      />
+      {Platform.OS === 'ios' && (
+        <Tab.Screen
+          name={TabBarStackRoutes.HOME}
+          component={Home}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
+                <Icon type="antdesign" name="home" size={24} color={color} />
+              </Animated.View>
+            ),
+          }}
+        />
+      )}
       <Tab.Screen
         name={TabBarStackRoutes.PROFILE}
         component={Profile}

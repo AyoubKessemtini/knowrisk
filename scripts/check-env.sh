@@ -52,15 +52,15 @@ fi
 
 ruby_version=$(ruby -v 2>&1)
 if [ $? -eq 0 ]; then
-  # Check if the Ruby version is 2.7.6
+  # Check if the Ruby version is 3.1.3
   if [[ "$ruby_version" == "ruby 3.1.3"* ]]; then
     success_message "Ruby is installed ($ruby_version)"
   else
-    error_message "Ruby version $ruby_version is not supported. Please install Ruby 2.7.6."
+    error_message "Ruby version $ruby_version is not supported. Please install Ruby 3.1.3."
     errors_found=true
   fi
 else
-  error_message "Ruby is not installed. Please use \033[1mrbenv install 2.7.6\033[0m to install Ruby 2.7.6."
+  error_message "Ruby is not installed. Please use \033[1mrbenv install 3.1.3\033[0m to install Ruby 3.1.3."
   errors_found=true
 fi
 
