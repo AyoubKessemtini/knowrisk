@@ -52,6 +52,15 @@ export const Home: React.FC = () => {
         error={weatherError || healthDataError}
       >
         <ConditionalRenderer show={currentSegment === 'overview'}>
+          <NestedRingChart
+            size={100}
+            strokeWidthOuter={7}
+            progressOuter={strain}
+            colorOuter={Colors.deepRed}
+            strokeWidthInner={7}
+            progressInner={recovery}
+            colorInner={Colors.grey2}
+          />
           {healthData.heartRate && (
             <HeartRateChart
               data={healthData.heartRate.map((rate) => ({
@@ -68,15 +77,6 @@ export const Home: React.FC = () => {
               <CText>Description: {weather.description}</CText>
             </>
           )}
-          <NestedRingChart
-            size={100}
-            strokeWidthOuter={7}
-            progressOuter={strain}
-            colorOuter={Colors.deepRed}
-            strokeWidthInner={7}
-            progressInner={recovery}
-            colorInner={Colors.grey2}
-          />
         </ConditionalRenderer>
 
         <SegmentedDataDisplay
@@ -90,7 +90,7 @@ export const Home: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    // padding: 16,
     alignItems: 'center',
     gap: 12,
     paddingTop: 40,

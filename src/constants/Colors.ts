@@ -6,7 +6,9 @@ const pallete = {
   primaryBlack: '#01080a',
 
   deepRed: '#FF0000',
-
+  green: 'green',
+  blue: '#124E78',
+  orange: '#FE5F55',
   black1: '#202020',
   grey1: '#e3e3e3',
   grey2: '#424242',
