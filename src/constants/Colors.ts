@@ -6,7 +6,7 @@ const pallete = {
   primaryBlack: '#01080a',
 
   deepRed: '#FF0000',
-  green: 'green',
+  deepPurple: '#8754FE',
   blue: '#124E78',
   orange: '#FE5F55',
   black1: '#202020',
@@ -44,7 +44,7 @@ export const Colors = {
 
   buttons: {
     light: {
-      primary: pallete.primaryWhite,
+      primary: pallete.deepPurple,
       secondary: pallete.primaryWhite,
       success: pallete.primaryWhite,
       danger: pallete.primaryWhite,

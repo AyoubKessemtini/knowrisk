@@ -573,8 +573,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Knowlepsy/Knowlepsy.entitlements;
-				CURRENT_PROJECT_VERSION = 28;
-				DEVELOPMENT_TEAM = VY8Y59C62U;
+				CURRENT_PROJECT_VERSION = 29;
+				DEVELOPMENT_TEAM = 3KH3W4DJ9Y;
 				ENABLE_BITCODE = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = Knowlepsy/Info.plist;
@@ -584,13 +584,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 25.0.3;
+				MARKETING_VERSION = 25.0.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.knowlepsy.healthh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowlepsy.health;
 				PRODUCT_NAME = Knowlepsy;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -610,8 +610,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Knowlepsy/Knowlepsy.entitlements;
-				CURRENT_PROJECT_VERSION = 28;
-				DEVELOPMENT_TEAM = VY8Y59C62U;
+				CURRENT_PROJECT_VERSION = 29;
+				DEVELOPMENT_TEAM = 3KH3W4DJ9Y;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = Knowlepsy/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Knowlepsy;
@@ -620,13 +620,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 25.0.3;
+				MARKETING_VERSION = 25.0.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.knowlepsy.healthh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowlepsy.health;
 				PRODUCT_NAME = Knowlepsy;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -7,14 +7,21 @@ import {
 import React, { useEffect } from 'react';
 import { navigatorConfig } from '../navigatorConfigs';
 import { RootStackRoutes } from '../routes';
-import { FooNavigator, FooStackParamList } from './FooNavigator';
+import { FooStackParamList } from './FooNavigator';
 import { TabNavigator, TabStackParamList } from './TabNavigator';
 import { useAuth } from '@hooks/useAuth';
+import {
+  OnboardingNavigator,
+  OnboardingStackParamList,
+} from './OnboardingNavigator';
+import { PersistenceStorage } from '@storage/index';
+import { KEYS } from '@storage/Keys';
 /* import { useAppSelector } from '@store/index'; */
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
   [RootStackRoutes.FOO_STACK]: NavigatorScreenParams<FooStackParamList>;
+  [RootStackRoutes.ONBOARDING_STACK]: NavigatorScreenParams<OnboardingStackParamList>;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -24,7 +31,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
   const { login } = useAuth();
-  //const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const isLoggedIn = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
 
   useEffect(() => {
     login();
@@ -37,8 +44,19 @@ export function RootNavigator() {
         navigationBarColor: Colors.deepRed,
       }}
     >
-      <Stack.Screen name={RootStackRoutes.TAB_STACK} component={TabNavigator} />
-      <Stack.Screen name={RootStackRoutes.FOO_STACK} component={FooNavigator} />
+      {!isLoggedIn ? (
+        <Stack.Screen
+          name={RootStackRoutes.ONBOARDING_STACK}
+          component={OnboardingNavigator}
+        />
+      ) : (
+        <>
+          <Stack.Screen
+            name={RootStackRoutes.TAB_STACK}
+            component={TabNavigator}
+          />
+        </>
+      )}
     </Stack.Navigator>
   );
 }

@@ -56,7 +56,6 @@ export const SegmentedDataDisplay = ({
         />
       </ConditionalRenderer>
 
-      {/* Adding all other available health data */}
       <HealthDataRenderer
         title="Waist Circumference"
         data={healthData.waistCircumference}

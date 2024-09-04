@@ -12,7 +12,7 @@ interface HeartRateChartProps {
 
 const HEART_RATE_ZONES = [
   { label: 'Resting', min: 0, max: 60, color: Colors.blue },
-  { label: 'Fat Burn', min: 61, max: 90, color: Colors.green },
+  { label: 'Fat Burn', min: 61, max: 90, color: Colors.deepPurple },
   { label: 'Cardio', min: 91, max: 120, color: Colors.orange },
   { label: 'Peak', min: 121, max: 200, color: Colors.deepRed },
 ];

@@ -2,16 +2,24 @@
   "common": {
     "continue": "French Continue",
     "apply": "APPLY INPUT",
-    "showsheet": "SHOW SHEET"
+    "showsheet": "SHOW SHEET",
+    "mail": "Email", 
+    "pass": "Password",
+    "connect": "Connect",
+    "logout":"logout"
   },
   "home": { "foo": "French Home Screen" },
   "profile": { "foo": "French Profile Screen" },
   "language": { "english": "English", "french": "French" },
   "test": "test",
-  "segment" :{
+  "segment": {
     "overview": "Overview",
     "sleep": "Sleep",
     "recovery": "Recovery",
     "strain": "Strain"
+  },
+  "onboarding": {
+    "forgotPass": "Forgot Password?",
+    "dontHaveAccount": "Don't have an account?"
   }
 }
