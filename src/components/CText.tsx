@@ -126,9 +126,10 @@ const styles = StyleSheet.create({
 });
 
 const weightStyles = StyleSheet.create({
-  bold: { fontFamily: 'GoogleSans-Bold' },
-  medium: { fontFamily: 'GoogleSans-Medium' },
+  bold: { fontFamily: 'Poppins Bold' },
+  medium: { fontFamily: 'Poppins Regular' },
   italic: { fontFamily: 'GoogleSans-Italic' },
+  light: { fontFamily: 'Poppins Light' },
 });
 
 const positionStyles = StyleSheet.create({
