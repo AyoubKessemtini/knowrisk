@@ -7,6 +7,7 @@ const pallete = {
 
   deepRed: '#FF0000',
   deepPurple: '#7B35DA',
+  purple: '#270B53',
   darkPurple: '#230F69',
   lightPurple: '#F5F2FF',
   blue: '#124E78',
@@ -37,16 +38,18 @@ export const Colors = {
   texts: {
     light: {
       black: pallete.primaryBlack,
-      white: pallete.primaryWhite,
+      white: pallete.white,
       deepPurple: pallete.deepPurple,
       darkPurple: pallete.darkPurple,
+      purple: pallete.purple,
       grey3: pallete.grey3,
     },
 
     dark: {
       black: pallete.primaryBlack,
-      white: pallete.primaryWhite,
+      white: pallete.white,
       deepPurple: pallete.deepPurple,
+      purple: pallete.purple,
       darkPurple: pallete.darkPurple,
       grey3: pallete.grey3,
     },

@@ -136,10 +136,10 @@ const styles = StyleSheet.create({
   inputWrapper: {
     overflow: 'hidden',
     borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 14,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 15,
+    paddingVertical: 12,
     paddingRight: 16,
     paddingLeft: 24,
   },

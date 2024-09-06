@@ -26,7 +26,13 @@ export const IntroQuestionScreen =
           text="common.questions_header"
         />
         <View style={styles.wrapper}>
-          <CText size="xl_bold">1.</CText>
+          <CText size="xl_medium" color="purple">
+            1.
+          </CText>
+          <CText size="xl_medium" color="purple" style={styles.textArea}>
+            How long ago were you diagnosed with Epilepsy?This question is
+            required.
+          </CText>
           <CButton
             mt={50}
             text="common.logout"
@@ -50,5 +56,8 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingTop: 0,
+  },
+  textArea: {
+    paddingHorizontal: 8,
   },
 });

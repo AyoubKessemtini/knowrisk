@@ -3,6 +3,7 @@ const ImageAssets = {
   PICCOLO: require('./piccolo.png'),
   WELCOME_BG: require('./onboarding/Knowlepsy-welcome.png'),
   LOGIN_BG: require('./onboarding/login_bg.png'),
+  LEFT_ARROW: require('./left-arrow-icon.png'),
 };
 
 export default ImageAssets;
