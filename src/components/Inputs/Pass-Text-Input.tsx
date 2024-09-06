@@ -20,6 +20,8 @@ export const PassTextInput = <TFieldValues extends FieldValues>({
     <ControlledInput
       secureTextEntry={isSecureEnabled}
       placeholderText="common.pass"
+      placeholderColor="grey2"
+      textStyle={{ color: Colors.deepPurple }}
       control={control}
       name={name}
       //   LeftAccessory={({ state }: { state: string }) => (
@@ -30,6 +32,7 @@ export const PassTextInput = <TFieldValues extends FieldValues>({
       //       color={state === 'focused' ? Colors.deepPurple : Colors.orange}
       //     />
       //   )}
+      backgroundColor={Colors.lightPink}
       RightAccessory={() => (
         <Pressable onPress={() => setIsSecuredEnabled(!isSecureEnabled)}>
           <Icon

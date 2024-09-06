@@ -15,4 +15,7 @@ export const FooStackRoutes = {
 } as const;
 export const OnboardingStackRoutes = {
   LOGIN_SCREEN: 'LoginScreen',
+  WELCOME_SCREEN: 'WelcomeScreen',
+  SIGNUP_SCREEN: 'SignUpScreen',
+  INTRO_QUESTION_SCREEN: 'IntroQuestionScreen',
 } as const;

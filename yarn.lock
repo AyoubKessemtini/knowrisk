@@ -7168,6 +7168,11 @@ react-native-gifted-charts@^1.4.30:
   dependencies:
     gifted-charts-core "^0.1.31"
 
+react-native-haptic-feedback@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-haptic-feedback/-/react-native-haptic-feedback-2.3.1.tgz#2ef4ac7d4f63ac06bd64b659f509362f127b16e5"
+  integrity sha512-dPfjV4iVHfhVyfG+nRd88ygjahbdup7KFZDM5L2aNIAzqbNtKxHZn5O1pHegwSj1t15VJliu0GyTX7XpBDeXUw==
+
 react-native-health@^1.18.0:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/react-native-health/-/react-native-health-1.18.0.tgz#714f4f8445a51cb0c78fd576fef05b2f6bf1bf61"

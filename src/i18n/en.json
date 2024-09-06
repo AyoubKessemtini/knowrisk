@@ -20,6 +20,10 @@
   },
   "onboarding": {
     "forgotPass": "Forgot Password?",
-    "dontHaveAccount": "Don't have an account?"
+    "dontHaveAccount": "Don't have an account?",
+    "get_started": "Get Started",
+    "welcome_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "already_member":"Already a member?",
+    "login": "Login"
   }
 }

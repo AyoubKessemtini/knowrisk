@@ -115,8 +115,8 @@ const $buttonTypesColors = {
 const $textsData: Record<ButtonTypes, { color: TextColors; size: TextSizes }> =
   {
     primary: {
-      color: 'black',
-      size: 'md_medium',
+      color: 'white',
+      size: 'md_bold',
     },
     danger: {
       color: 'black',
@@ -133,7 +133,7 @@ const $textsData: Record<ButtonTypes, { color: TextColors; size: TextSizes }> =
   };
 
 const styles = StyleSheet.create({
-  container: { width: '100%', borderRadius: 6 },
+  container: { width: '100%', borderRadius: 16 },
   baseButton: {
     flexDirection: 'row',
     justifyContent: 'center',

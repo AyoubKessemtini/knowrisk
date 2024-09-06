@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   sm: { fontSize: 14 },
   md: { fontSize: 16 },
   lg: { fontSize: 18 },
-  xl: { fontSize: 20 },
+  xl: { fontSize: 25 },
 });
 
 const weightStyles = StyleSheet.create({

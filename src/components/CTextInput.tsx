@@ -38,6 +38,8 @@ export type CustomTextInputProps = {
   placeholderColor?: string;
   labelText?: I18nKeyPath;
   textSize?: number;
+  borderColor?: string; // Added borderColor prop
+  backgroundColor?: string; // Added backgroundColor prop
 
   RightAccessory?: ComponentType<RightAccessoryProps>;
 } & Omit<TextInputProps, 'placeholder'> &
@@ -55,6 +57,8 @@ export const CTextInput = ({
   RightAccessory,
   bottomText,
   bottomTextColor = Colors.deepRed,
+  borderColor = Colors.primaryWhite,
+  backgroundColor = Colors.textInput.light.main,
   ...textInputProps
 }: CustomTextInputProps) => {
   const input = useRef<TextInput>(null);
@@ -70,10 +74,11 @@ export const CTextInput = ({
   const generateInputWrapperStyle = useMemo(
     () => [
       styles.inputWrapper,
+      { borderColor, backgroundColor }, // Apply borderColor and backgroundColor
       state === 'error' && { borderColor: Colors.deepRed },
       inputWrapperStyle,
     ],
-    [inputWrapperStyle, state],
+    [borderColor, backgroundColor, inputWrapperStyle, state],
   );
 
   const generateInpuStyle = useMemo(
@@ -132,11 +137,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderWidth: 1,
     borderRadius: 20,
-    backgroundColor: Colors.textInput.light.main,
-    borderColor: Colors.primaryBlack,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingRight: 16,
     paddingLeft: 24,
   },

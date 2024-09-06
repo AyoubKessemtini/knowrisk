@@ -6,12 +6,16 @@ const pallete = {
   primaryBlack: '#01080a',
 
   deepRed: '#FF0000',
-  deepPurple: '#8754FE',
+  deepPurple: '#7B35DA',
+  darkPurple: '#230F69',
+  lightPurple: '#F5F2FF',
   blue: '#124E78',
   orange: '#FE5F55',
+  lightPink: '#F5F2FFDE',
   black1: '#202020',
   grey1: '#e3e3e3',
   grey2: '#424242',
+  grey3: '#475467',
 } as const;
 
 export const Colors = {
@@ -33,12 +37,18 @@ export const Colors = {
   texts: {
     light: {
       black: pallete.primaryBlack,
-      white: pallete.primaryBlack,
+      white: pallete.primaryWhite,
+      deepPurple: pallete.deepPurple,
+      darkPurple: pallete.darkPurple,
+      grey3: pallete.grey3,
     },
 
     dark: {
-      black: pallete.primaryWhite,
+      black: pallete.primaryBlack,
       white: pallete.primaryWhite,
+      deepPurple: pallete.deepPurple,
+      darkPurple: pallete.darkPurple,
+      grey3: pallete.grey3,
     },
   },
 
@@ -50,7 +60,7 @@ export const Colors = {
       danger: pallete.primaryWhite,
     },
     dark: {
-      primary: pallete.primaryBlack,
+      primary: pallete.deepPurple,
       secondary: pallete.primaryBlack,
       success: pallete.primaryBlack,
       danger: pallete.primaryBlack,
