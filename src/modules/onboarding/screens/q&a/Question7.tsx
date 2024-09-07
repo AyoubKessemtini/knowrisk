@@ -9,8 +9,8 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LineInput } from '../../../../components/Inputs/LineInput';
-import { Colors } from '../../../../constants/Colors';
+import { LineInput } from '@components/Inputs/LineInput';
+import { Colors } from '@constants/Colors';
 import { EmailScheme, emailScheme } from '../../../../schemes/email.scheme';
 import { styles } from './styles';
 
@@ -44,7 +44,7 @@ export const Question7 =
       >
         <Header
           hasBackButton
-          currentStep={1}
+          currentStep={7}
           totalSteps={7}
           text="common.questions_header"
         />
@@ -57,6 +57,7 @@ export const Question7 =
           </CText>
           <LineInput
             placeholderText="onboarding.questions_placeholder.email"
+            inputType="qa"
             control={control}
             name="email"
             borderColor={
@@ -82,7 +83,7 @@ export const Question7 =
             text="common.continue"
             onPress={handleSubmit(() => {
               navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.QUESTION_TWO_SCREEN,
+                screen: OnboardingStackRoutes.THANKYOU_QA_SCREEN,
               });
             })}
           />

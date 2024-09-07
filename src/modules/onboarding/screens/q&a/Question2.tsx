@@ -13,8 +13,8 @@ import {
   AnswersScheme,
   answersScheme,
 } from '../../../../schemes/answers.scheme';
-import { LineInput } from '../../../../components/Inputs/LineInput';
-import { Colors } from '../../../../constants/Colors';
+import { LineInput } from '@components/Inputs/LineInput';
+import { Colors } from '@constants/Colors';
 import { styles } from './styles';
 
 export const Question2 =
@@ -47,7 +47,7 @@ export const Question2 =
       >
         <Header
           hasBackButton
-          currentStep={1}
+          currentStep={2}
           totalSteps={7}
           text="common.questions_header"
         />
@@ -60,6 +60,7 @@ export const Question2 =
           </CText>
           <LineInput
             placeholderText="onboarding.questions_placeholder.type_your_answer"
+            inputType="qa"
             control={control}
             name="answer"
             borderColor={
@@ -85,7 +86,7 @@ export const Question2 =
             text="common.continue"
             onPress={handleSubmit(() => {
               navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.QUESTION_TWO_SCREEN,
+                screen: OnboardingStackRoutes.QUESTION_THREE_SCREEN,
               });
             })}
           />

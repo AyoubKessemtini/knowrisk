@@ -5,20 +5,21 @@ import { Screen } from '@components/Screen';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
 import { View } from 'react-native';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { styles } from './styles';
+import { SelectBox } from '@components/SelectBoxs/SelectBox';
+import LineInput from '@components/Inputs/LineInput';
 import {
   AnswersScheme,
   answersScheme,
 } from '../../../../schemes/answers.scheme';
-import { LineInput } from '@components/Inputs/LineInput';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useState } from 'react';
 import { Colors } from '@constants/Colors';
-import { styles } from './styles';
 
-export const Question5 =
-  ({}: OnboardingStackScreenProps<'Question5'>): JSX.Element => {
+export const Question6 =
+  ({}: OnboardingStackScreenProps<'Question6'>): JSX.Element => {
     const navigation = useNavigation();
     const {
       control,
@@ -38,6 +39,9 @@ export const Question5 =
     const handleBlur = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: false }));
     };
+    const handleSelect = (value: string) => {
+      console.log('Selected value:', value);
+    };
 
     return (
       <Screen
@@ -47,32 +51,41 @@ export const Question5 =
       >
         <Header
           hasBackButton
-          currentStep={5}
+          currentStep={6}
           totalSteps={7}
           text="common.questions_header"
         />
         <View style={styles.wrapper}>
           <CText size="xl_medium" color="purple">
-            5.
+            6.
           </CText>
           <CText mt={5} size="xl_medium" color="purple">
-            If yes, please specify your triggers. If no, please type "N/A".
+            Please provide your phone number.This question is required.
           </CText>
-          <LineInput
-            placeholderText="onboarding.questions_placeholder.type_your_answer"
-            inputType="qa"
-            control={control}
-            name="answer"
-            borderColor={
-              errors.answer
-                ? Colors.lightRed
-                : isFocused.answer
-                  ? Colors.fadedPurple
-                  : Colors.fadedPurple
-            }
-            onFocus={() => handleFocus('answer')}
-            onBlur={() => handleBlur('answer')}
-          />
+          <View style={styles.row}>
+            <SelectBox
+              options={['US', 'FR', 'LT']}
+              placeholder="US"
+              onSelect={handleSelect}
+            />
+            <View style={styles.inputContainer}>
+              <LineInput
+                placeholderText="onboarding.questions_placeholder.phone"
+                inputType="qa"
+                control={control}
+                name="answer"
+                borderColor={
+                  errors.answer
+                    ? Colors.lightRed
+                    : isFocused.answer
+                      ? Colors.fadedPurple
+                      : Colors.fadedPurple
+                }
+                onFocus={() => handleFocus('answer')}
+                onBlur={() => handleBlur('answer')}
+              />
+            </View>
+          </View>
           {errors.answer && (
             <View style={styles.errorContainer}>
               <CText size="sm" color="darkRed">
@@ -81,12 +94,13 @@ export const Question5 =
             </View>
           )}
         </View>
+
         <View style={styles.button}>
           <CButton
             text="common.continue"
             onPress={handleSubmit(() => {
               navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.QUESTION_SIX_SCREEN,
+                screen: OnboardingStackRoutes.QUESTION_SEVEN_SCREEN,
               });
             })}
           />

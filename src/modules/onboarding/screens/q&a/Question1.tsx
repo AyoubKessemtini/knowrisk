@@ -13,8 +13,8 @@ import {
   AnswersScheme,
   answersScheme,
 } from '../../../../schemes/answers.scheme';
-import { LineInput } from '../../../../components/Inputs/LineInput';
-import { Colors } from '../../../../constants/Colors';
+import { LineInput } from '@components/Inputs/LineInput';
+import { Colors } from '@constants/Colors';
 import { styles } from './styles';
 
 export const Question1 =
@@ -62,6 +62,7 @@ export const Question1 =
           <LineInput
             placeholderText="onboarding.questions_placeholder.type_your_answer"
             control={control}
+            inputType="qa"
             name="answer"
             borderColor={
               errors.answer

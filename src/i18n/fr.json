@@ -7,7 +7,8 @@
     "pass": "Password",
     "connect": "Connect",
     "logout": "Logout",
-    "questions_header" : "Q&A"
+    "questions_header" : "Q&A",
+    "submit": "Submit"
   },
   "home": {
     "foo": "French Home Screen"
@@ -66,7 +67,8 @@
     },
     "questions_placeholder": {
       "type_your_answer": "Type your answer here...",
-      "email": "name@example.com"
+      "email": "name@example.com",
+      "phone": "(201) 555-33223"
     }
   },
   "questions":{
@@ -75,6 +77,17 @@
     "q2": "How can I help protect myself from getting sick?",
     "a2": "Regularly clean your hands, avoid touching your face, and stay informed about the latest COVID-19 updates.",
     "q3": "Can I get sick from a person who is sick?",
-    "a3": "Yes, you can get sick from a person who is sick. It is important to practice social distancing and follow the guidelines set by health officials."
+    "a3": "Yes, you can get sick from a person who is sick. It is important to practice social distancing and follow the guidelines set by health officials.",
+    "choices":{
+      "yes": "Yes",
+      "no": "No",
+      "once_a_year": "Once a year",
+      "times_a_year": "3-5 times a year",
+      "once_a_month": "Once a month",
+      "times_a_month": "2-3 times a month",
+      "once_a_week": "Once a week",
+      "multiple_times_a_week": "Multiple times a week",
+      "daily": "Daily"
+    }
   }
 }

@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
   md: { fontSize: 16 },
   lg: { fontSize: 18 },
   xl: { fontSize: 24 },
+  xxl: { fontSize: 28 },
 });
 
 const weightStyles = StyleSheet.create({

@@ -20,6 +20,8 @@ const pallete = {
   grey1: '#e3e3e3',
   grey2: '#424242',
   grey3: '#475467',
+  purpleGrey: '#9589A8',
+  purple1: '#5619B8',
 } as const;
 
 export const Colors = {
@@ -47,6 +49,8 @@ export const Colors = {
       purple: pallete.purple,
       grey3: pallete.grey3,
       darkRed: pallete.darkRed,
+      purpleGrey: pallete.purpleGrey,
+      purple1: pallete.purple1,
     },
 
     dark: {
@@ -57,6 +61,8 @@ export const Colors = {
       darkPurple: pallete.darkPurple,
       grey3: pallete.grey3,
       darkRed: pallete.darkRed,
+      purpleGrey: pallete.purpleGrey,
+      purple1: pallete.purple1,
     },
   },
 

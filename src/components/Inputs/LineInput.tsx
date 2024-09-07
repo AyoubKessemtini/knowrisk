@@ -1,8 +1,8 @@
 import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { StyleSheet, TextInput, View } from 'react-native';
-import { Colors } from '../../constants/Colors';
-import { CustomTextInputProps as CInputProps } from '../CTextInput';
+import { StyleSheet, View } from 'react-native';
+import { Colors } from '@constants/Colors';
+import { CTextInput, CustomTextInputProps as CInputProps } from '../CTextInput';
 
 interface LineInputProps<TFieldValues extends FieldValues = FieldValues>
   extends CInputProps {
@@ -24,7 +24,7 @@ export const LineInput = <TFieldValues extends FieldValues>({
           field: { value, onChange, onBlur },
           fieldState: { invalid },
         }) => (
-          <TextInput
+          <CTextInput
             placeholderTextColor={Colors.fadedPurple}
             style={styles.input}
             value={value}
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderBottomWidth: 1,
     borderColor: Colors.fadedPurple,
-    fontSize: 18,
+    fontSize: 16,
   },
 });
 export default LineInput;
