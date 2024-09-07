@@ -1,43 +1,69 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { CText } from '@components/CText';
-import { LoadingErrorWrapper } from '@components/LoadingErrorWrapper';
-import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
-import { useWeather } from '@hooks/weather';
-import { Segment, SegmentType } from '@components/Segment/Segment';
+import { StyleSheet, View } from 'react-native';
+// import { CText } from '@components/CText';
+// import { LoadingErrorWrapper } from '@components/LoadingErrorWrapper';
+// import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
+// import { useWeather } from '@hooks/weather';
+// import { Segment, SegmentType } from '@components/Segment/Segment';
 import { Screen } from '@components/Screen';
-import NestedRingChart from '@modules/home/components/charts/ringChart/NestedRingChart';
-import { Colors } from '@constants/Colors';
+// import NestedRingChart from '@modules/home/components/charts/ringChart/NestedRingChart';
+// import { Colors } from '@constants/Colors';
 import { DateSelector } from '@components/DatePicker/DatePicker';
-import { ConditionalRenderer } from '@components/ConditionalRenderer';
-import { SegmentedDataDisplay } from '@modules/home/components/SegmentedDataDisplay';
-import { HeartRateChart } from '@components/charts/HeartRateChart';
+// import { ConditionalRenderer } from '@components/ConditionalRenderer';
+// import { SegmentedDataDisplay } from '@modules/home/components/SegmentedDataDisplay';
+// import { HeartRateChart } from '@components/charts/HeartRateChart';
+import { MainHeader } from '@components/Headers/MainHeader';
+import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
+import { ReportSeizureCard } from '@components/Cards/ReportSeizureCard';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const {
-    healthData,
-    loading: healthDataLoading,
-    error: healthDataError,
-  } = useFetchHealthData(selectedDate);
-  const {
-    weather,
-    loading: weatherLoading,
-    error: weatherError,
-  } = useWeather();
-  const [currentSegment, setCurrentSegment] = useState<SegmentType>('overview');
+  // const {
+  //   healthData,
+  //   loading: healthDataLoading,
+  //   error: healthDataError,
+  // } = useFetchHealthData(selectedDate);
+  // const {
+  //   weather,
+  //   loading: weatherLoading,
+  //   error: weatherError,
+  // } = useWeather();
+  // const [currentSegment, setCurrentSegment] = useState<SegmentType>('overview');
 
-  const strain = 0.59;
-  const recovery = 0.17;
+  // const strain = 0.59;
+  // const recovery = 0.17;
 
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
   };
 
   return (
-    <Screen fullscreen withoutTopEdge containerStyles={styles.container}>
-      <DateSelector
+    <Screen
+      fullscreen
+      withoutTopEdge
+      noHorizontalPadding
+      containerStyles={styles.container}
+    >
+      <MainHeader profilePicture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAs_TDUTeHiZQ1tqLJlvItaBOjcmRTeoSbHw&s" />
+      <View style={styles.wrapper}>
+        <PatientInfoCard
+          name="George Frank"
+          id="ID5434A533"
+          lastSeizure="Sun, Apr 07, 22:54"
+          seizureFrequency="Weekly"
+          seizureRisk="Moderate"
+          seizureForecast="Moderate"
+          isDevicePaired={true}
+        />
+        <ReportSeizureCard onPress={() => {}} />
+        <DateSelector
+          initialDate={selectedDate}
+          onDateChange={handleDateChange}
+        />
+      </View>
+
+      {/* <DateSelector
         initialDate={selectedDate}
         onDateChange={handleDateChange}
       />
@@ -83,7 +109,7 @@ export const Home: React.FC = () => {
           segment={currentSegment}
           healthData={healthData}
         />
-      </LoadingErrorWrapper>
+      </LoadingErrorWrapper> */}
     </Screen>
   );
 };
@@ -94,5 +120,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 12,
     paddingTop: 40,
+  },
+  wrapper: {
+    gap: 20,
   },
 });

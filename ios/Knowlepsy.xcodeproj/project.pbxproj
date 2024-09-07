@@ -230,6 +230,7 @@
 				51D4CE3C511141AE9C509E73 /* Poppins Bold.ttf */,
 				C60BE5C3918743DDA45DFE31 /* Poppins Light.ttf */,
 				C69262BDB08F4AC8BA38EFC2 /* Poppins Regular.ttf */,
+				BED2B67615AD4E399F503CF7 /* Poppins SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -341,6 +342,7 @@
 				338AA94F731D4AA4BFE8FB2F /* Poppins Bold.ttf in Resources */,
 				0F6FB60844BF4470A4A152C9 /* Poppins Light.ttf in Resources */,
 				534A1A0B0C0445F5B6D9019C /* Poppins Regular.ttf in Resources */,
+				BF80519B20CF4BD595E46CC8 /* Poppins SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

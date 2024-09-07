@@ -71,7 +71,7 @@ export const CText = ({
   );
   const content = tText || textProps.children;
 
-  const weights = 'bold|medium|italic';
+  const weights = 'bold|medium|italic|semiBold|light';
   const weightRegex = new RegExp(`(${weights})$`);
   const weightMatch = size.match(weightRegex)?.[1] as WeightKeys | undefined;
 
@@ -118,16 +118,19 @@ export const CText = ({
 const styles = StyleSheet.create({
   base: { fontFamily: 'GoogleSans-Regular' },
 
-  xs: { fontSize: 12 },
+  xs: { fontSize: 10 },
+  xm: { fontSize: 12 },
   sm: { fontSize: 14 },
   md: { fontSize: 16 },
   lg: { fontSize: 18 },
   xl: { fontSize: 24 },
   xxl: { fontSize: 28 },
+  xxxl: { fontSize: 32 },
 });
 
 const weightStyles = StyleSheet.create({
   bold: { fontFamily: 'Poppins Bold' },
+  semiBold: { fontFamily: 'Poppins SemiBold' },
   medium: { fontFamily: 'Poppins Regular' },
   italic: { fontFamily: 'GoogleSans-Italic' },
   light: { fontFamily: 'Poppins Light' },

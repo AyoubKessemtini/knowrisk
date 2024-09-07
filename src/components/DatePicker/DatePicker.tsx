@@ -17,18 +17,6 @@ export const DateSelector = ({
   const [date, setDate] = useState(initialDate);
   const [open, setOpen] = useState(false);
 
-  const handleLeftArrow = () => {
-    const newDate = new Date(date.setDate(date.getDate() - 1));
-    setDate(newDate);
-    onDateChange(newDate);
-  };
-
-  const handleRightArrow = () => {
-    const newDate = new Date(date.setDate(date.getDate() + 1));
-    setDate(newDate);
-    onDateChange(newDate);
-  };
-
   const handleConfirm = (newDate: Date) => {
     setOpen(false);
     setDate(newDate);
@@ -37,29 +25,39 @@ export const DateSelector = ({
 
   const isToday = new Date().toDateString() === date.toDateString();
 
+  const formatDate = (date: Date) => {
+    const options: Intl.DateTimeFormatOptions = {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    };
+    return `${isToday ? 'Today, ' : ''}${date.toLocaleDateString(undefined, options)}`;
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleLeftArrow}>
+      {/* <TouchableOpacity onPress={handleLeftArrow}>
+        <Icon type="material" name="chevron-left" size={30} color={Colors.white} />
+      </TouchableOpacity> */}
+
+      <TouchableOpacity
+        style={styles.dateContainer}
+        onPress={() => setOpen(true)}
+      >
+        <CText size="sm_medium" color="white">
+          {formatDate(date)}
+        </CText>
         <Icon
           type="material"
-          name="chevron-left"
-          size={30}
-          color={Colors.black}
+          name="expand-more"
+          size={24}
+          color={Colors.white}
         />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.date} onPress={() => setOpen(true)}>
-        <CText size="xl_bold">{isToday ? 'Today' : date.toDateString()}</CText>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={handleRightArrow}>
-        <Icon
-          type="material"
-          name="chevron-right"
-          size={30}
-          color={Colors.black}
-        />
-      </TouchableOpacity>
+      {/* <TouchableOpacity onPress={handleRightArrow}>
+        <Icon type="material" name="chevron-right" size={30} color={Colors.white} />
+      </TouchableOpacity> */}
 
       <DatePicker
         modal
@@ -77,8 +75,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.deepPurple, // Assuming Colors.deepPurple matches the image
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
-  date: {
+  dateContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.deepPurple,
     paddingHorizontal: 12,
   },
 });
