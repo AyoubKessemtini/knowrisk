@@ -21,7 +21,7 @@ export const WeatherCard = ({ temperature, lastUpdated }: WeatherCardProps) => {
         showProgressValue={false}
         radius={50}
         maxValue={50}
-        activeStrokeColor={Colors.purple}
+        activeStrokeColor={Colors.purple2}
         inActiveStrokeColor={Colors.lightPurple}
         inActiveStrokeOpacity={0.3}
         title={`${temperature}°C`}

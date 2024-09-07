@@ -13,7 +13,6 @@ const pallete = {
   darkPurple: '#230F69',
   midPurple: '#F1E8FF',
   lightPurple: '#F5F2FF',
-  purple: '#8754FE',
   blue: '#124E78',
   orange: '#FE5F55',
   lightRed: '#FCCCCC',

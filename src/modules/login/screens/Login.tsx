@@ -4,15 +4,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { ImageBackground, Pressable, StyleSheet, View } from 'react-native';
 import { LoginScheme, loginScheme } from '../../../schemes/login.scheme';
 import { PassTextInput } from '@components/Inputs/Pass-Text-Input';
 import { useLoginWithEmailMutation } from '@query/queries/auth/authMutations';
 import { CText } from '@components/CText';
 import ImageAssets from '@assets/images';
 import { Colors } from '@constants/Colors';
+import { useNavigation } from '@react-navigation/native';
+import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 
 export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
+  const navigation = useNavigation();
   const { mutate: loginWithEmailMutate } = useLoginWithEmailMutation();
   const { control, handleSubmit } = useForm<LoginScheme>({
     defaultValues: { email: '', password: '' },
@@ -45,6 +48,7 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
       <CText mt={15} text="onboarding.email_address" color="white" size="md" />
       <ControlledInput
         placeholderText="common.mail"
+        placeholderColor="grey2"
         control={control}
         name="email"
         borderColor="white"
@@ -76,7 +80,15 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
       />
       <CText isCentered size="md">
         <CText text="onboarding.not_member" color="white" size="md" mb={30} />
-        <CText text="onboarding.register" color="deepPurple" size="md" />
+        <Pressable
+          onPress={() => {
+            navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+              screen: OnboardingStackRoutes.SIGNUP_SCREEN,
+            });
+          }}
+        >
+          <CText text="onboarding.register" color="deepPurple" size="md" />
+        </Pressable>
       </CText>
     </ImageBackground>
   );

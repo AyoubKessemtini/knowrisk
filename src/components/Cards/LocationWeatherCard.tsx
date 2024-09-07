@@ -82,7 +82,7 @@ export const LocationWeather = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.purple,
+    backgroundColor: Colors.purple2,
     borderRadius: 16,
     padding: 20,
     alignItems: 'center',

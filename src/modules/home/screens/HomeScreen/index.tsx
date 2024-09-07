@@ -19,6 +19,7 @@ import { WeatherCard } from '@components/Cards/WeatherCard';
 import { StepsCard } from '@components/Cards/StepsCard';
 import { LocationWeather } from '@components/Cards/LocationWeatherCard';
 import { useWeather } from '@hooks/weather';
+import { WearableCard } from '@components/Cards/WearableCard';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -79,7 +80,7 @@ export const Home: React.FC = () => {
             lastUpdated="10:45 AM"
             temperature={Math.round(Number(weather?.temperature))}
           />
-          <StepsCard lastUpdated="10:45 AM" steps={335} />
+          <WearableCard lastConnection="10:45 AM" minutesDuration={750} />
         </View>
         {/* <LocationWeather city={weather?.city as string} lastUpdated='10:45 AM' temperature={Math.round(Number(weather?.temperature))} /> */}
       </View>

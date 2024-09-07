@@ -12,6 +12,7 @@ import { StyleSheet, View, Switch, Pressable } from 'react-native';
 import { registerScheme, RegisterScheme } from 'src/schemes/register.scheme';
 import Icon from 'react-native-vector-icons/Ionicons'; // Example icon library
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
+import { BackButton } from '@components/BackButton';
 
 export const RegisterScreen =
   ({}: OnboardingStackScreenProps<'SignUpScreen'>): JSX.Element => {
@@ -43,6 +44,9 @@ export const RegisterScreen =
 
     return (
       <Screen fullscreen containerStyles={styles.container}>
+        <View style={{ width: 35 }}>
+          <BackButton />
+        </View>
         <CText
           text="onboarding.signup.register_account"
           size="xl_medium"

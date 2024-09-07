@@ -1,3 +1,5 @@
+import React from 'react';
+import { View, StyleSheet, Platform } from 'react-native';
 import { Colors } from '@constants/Colors';
 import { useThemeInterpolation } from '@hooks/useThemeInterpolation';
 import { Home } from '@modules/home/screens/HomeScreen';
@@ -7,11 +9,8 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
-import React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-easy-icon';
 import Animated from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { tabConfig } from '../navigatorConfigs';
 import { TabBarStackRoutes } from '../routes';
 import { RootStackParamList, RootStackScreenProps } from './RootNavigator';
@@ -30,7 +29,6 @@ export type TabStackScreenProps<T extends keyof TabStackParamList> =
 const Tab = createBottomTabNavigator<TabStackParamList>();
 
 export function TabNavigator() {
-  const { bottom } = useSafeAreaInsets();
   const { animatedStyle } = useThemeInterpolation(
     Colors.white,
     Colors.primaryBlack,
@@ -42,24 +40,24 @@ export function TabNavigator() {
         <Tab.Navigator
           screenOptions={{
             ...tabConfig,
-
             tabBarStyle: {
               ...styles.tabBar,
-              height: bottom + 56,
+              height: '8%',
+
               ...Platform.select({
                 ios: {
-                  shadowColor: Colors.black, // Shadow for iOS
+                  shadowColor: Colors.black,
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.25,
                   shadowRadius: 3.84,
                 },
                 android: {
-                  elevation: 5, // Shadow for Android
+                  elevation: 5,
                 },
               }),
             },
-            tabBarActiveTintColor: Colors.deepPurple,
-            tabBarInactiveTintColor: Colors.grey2,
+            tabBarActiveTintColor: Colors.white,
+            tabBarInactiveTintColor: Colors.grey1,
           }}
         >
           {Platform.OS === 'ios' && (
@@ -67,16 +65,18 @@ export function TabNavigator() {
               name={TabBarStackRoutes.HOME}
               component={Home}
               options={{
-                tabBarIcon: ({ color }) => (
+                tabBarIcon: ({ color, focused }) => (
                   <Animated.View
                     style={[animatedStyle, styles.tabIconContainer]}
                   >
-                    <Icon
-                      type="antdesign"
-                      name="home"
-                      size={24}
-                      color={color}
-                    />
+                    <View style={focused && styles.activeTabStyle}>
+                      <Icon
+                        type="antdesign"
+                        name="home"
+                        size={24}
+                        color={color}
+                      />
+                    </View>
                   </Animated.View>
                 ),
               }}
@@ -86,14 +86,16 @@ export function TabNavigator() {
             name={TabBarStackRoutes.PROFILE}
             component={Profile}
             options={{
-              tabBarIcon: ({ color }) => (
+              tabBarIcon: ({ color, focused }) => (
                 <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
-                  <Icon
-                    type="antdesign"
-                    name="wallet"
-                    size={24}
-                    color={color}
-                  />
+                  <View style={focused && styles.activeTabStyle}>
+                    <Icon
+                      type="antdesign"
+                      name="wallet"
+                      size={24}
+                      color={color}
+                    />
+                  </View>
                 </Animated.View>
               ),
             }}
@@ -107,23 +109,28 @@ export function TabNavigator() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.backgroundWhite,
+    backgroundColor: Colors.white,
   },
   tabWrapper: {
     flex: 1,
     overflow: 'hidden',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    paddingBottom: 30,
   },
   tabBar: {
     paddingBottom: 0,
     borderTopWidth: 0,
     backgroundColor: Colors.white,
+    width: '90%',
+    alignSelf: 'center',
+    borderRadius: 8,
   },
   tabIconContainer: {
-    width: '100%',
-    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  activeTabStyle: {
+    backgroundColor: Colors.purple2,
+    borderRadius: 10,
+    padding: 5,
   },
 });

@@ -100,7 +100,8 @@
     "last_updated": "Last updated {{date}}",
     "temperature" : "Temperature",
     "steps" : "Steps",
-    "steps_number" : "{{steps}} steps"
+    "steps_number" : "{{steps}} steps",
+    "wearability" : "Wearability"
   }
 
 }

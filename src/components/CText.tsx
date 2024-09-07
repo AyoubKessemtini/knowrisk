@@ -116,7 +116,7 @@ export const CText = ({
 
 /* eslint-disable react-native/no-unused-styles */
 const styles = StyleSheet.create({
-  base: { fontFamily: 'GoogleSans-Regular' },
+  base: { fontFamily: 'Poppins Regular' },
 
   xs: { fontSize: 10 },
   xm: { fontSize: 12 },
@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
   xl: { fontSize: 24 },
   xxl: { fontSize: 28 },
   xxxl: { fontSize: 32 },
-
 });
 
 const weightStyles = StyleSheet.create({
