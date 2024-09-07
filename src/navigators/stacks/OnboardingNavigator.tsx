@@ -11,12 +11,20 @@ import { LoginScreen } from '@modules/login/screens/Login';
 import { WelcomeScreen } from '@modules/onboarding/screens/welcome-screen/WelcomeScreen';
 import { RegisterScreen } from '@modules/onboarding/screens/sign_up/RegisterScreen';
 import { IntroQuestionScreen } from '@modules/onboarding/screens/q&a/IntroQ&A_Screen';
+import { Question1 } from '../../modules/onboarding/screens/q&a/Question1';
+import { Question2 } from '../../modules/onboarding/screens/q&a/Question2';
+import { Question5 } from '../../modules/onboarding/screens/q&a/Question5';
+import { Question7 } from '../../modules/onboarding/screens/q&a/Question7';
 
 export type OnboardingStackParamList = {
   [OnboardingStackRoutes.LOGIN_SCREEN]: undefined;
   [OnboardingStackRoutes.WELCOME_SCREEN]: undefined;
   [OnboardingStackRoutes.SIGNUP_SCREEN]: undefined;
   [OnboardingStackRoutes.INTRO_QUESTION_SCREEN]: undefined;
+  [OnboardingStackRoutes.QUESTION_ONE_SCREEN]: undefined;
+  [OnboardingStackRoutes.QUESTION_TWO_SCREEN]: undefined;
+  [OnboardingStackRoutes.QUESTION_FIVE_SCREEN]: undefined;
+  [OnboardingStackRoutes.QUESTION_SEVEN_SCREEN]: undefined;
 };
 
 export type OnboardingStackScreenProps<
@@ -51,6 +59,22 @@ export function OnboardingNavigator() {
       <Stack.Screen
         name={OnboardingStackRoutes.INTRO_QUESTION_SCREEN}
         component={IntroQuestionScreen}
+      />
+      <Stack.Screen
+        name={OnboardingStackRoutes.QUESTION_ONE_SCREEN}
+        component={Question1}
+      />
+      <Stack.Screen
+        name={OnboardingStackRoutes.QUESTION_TWO_SCREEN}
+        component={Question2}
+      />
+      <Stack.Screen
+        name={OnboardingStackRoutes.QUESTION_FIVE_SCREEN}
+        component={Question5}
+      />
+      <Stack.Screen
+        name={OnboardingStackRoutes.QUESTION_SEVEN_SCREEN}
+        component={Question7}
       />
     </Stack.Navigator>
   );

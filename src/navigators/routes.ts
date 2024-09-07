@@ -18,4 +18,8 @@ export const OnboardingStackRoutes = {
   WELCOME_SCREEN: 'WelcomeScreen',
   SIGNUP_SCREEN: 'SignUpScreen',
   INTRO_QUESTION_SCREEN: 'IntroQuestionScreen',
+  QUESTION_ONE_SCREEN: 'Question1',
+  QUESTION_TWO_SCREEN: 'Question2',
+  QUESTION_FIVE_SCREEN: 'Question5',
+  QUESTION_SEVEN_SCREEN: 'Question7',
 } as const;

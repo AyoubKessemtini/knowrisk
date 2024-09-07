@@ -2,7 +2,6 @@ import { CButton } from '@components/Buttons/CButton';
 import { CText } from '@components/CText';
 import { Header } from '@components/Headers/Header';
 import { Screen } from '@components/Screen';
-import { useAuth } from '@hooks/useAuth';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import { useNavigation } from '@react-navigation/native';
@@ -11,8 +10,8 @@ import { StyleSheet, View } from 'react-native';
 
 export const IntroQuestionScreen =
   ({}: OnboardingStackScreenProps<'IntroQuestionScreen'>): JSX.Element => {
-    const { logout } = useAuth();
     const navigation = useNavigation();
+
     return (
       <Screen
         withoutTopEdge
@@ -27,19 +26,19 @@ export const IntroQuestionScreen =
         />
         <View style={styles.wrapper}>
           <CText size="xl_medium" color="purple">
-            1.
+            Ally is designed to help you forecast your potential risk of Seizure
+            !
           </CText>
-          <CText size="xl_medium" color="purple" style={styles.textArea}>
-            How long ago were you diagnosed with Epilepsy?This question is
-            required.
+          <CText mt={20} size="sm_medium" color="purple">
+            Let us know you better
           </CText>
+        </View>
+        <View style={styles.button}>
           <CButton
-            mt={50}
-            text="common.logout"
-            onPress={async () => {
-              await logout();
-              await navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.LOGIN_SCREEN,
+            text="common.continue"
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+                screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
               });
             }}
           />
@@ -49,15 +48,16 @@ export const IntroQuestionScreen =
   };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    gap: 20,
-    paddingHorizontal: 20,
-    paddingTop: 50,
-  },
   container: {
-    paddingTop: 0,
+    flex: 1,
   },
-  textArea: {
-    paddingHorizontal: 8,
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 29,
+  },
+  button: {
+    paddingHorizontal: 20,
+    paddingBottom: 30,
   },
 });

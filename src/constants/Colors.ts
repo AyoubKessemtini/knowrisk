@@ -6,12 +6,15 @@ const pallete = {
   primaryBlack: '#01080a',
 
   deepRed: '#FF0000',
+  darkRed: '#942020',
   deepPurple: '#7B35DA',
   purple: '#270B53',
+  fadedPurple: 'rgba(39, 11, 83, 0.47)',
   darkPurple: '#230F69',
   lightPurple: '#F5F2FF',
   blue: '#124E78',
   orange: '#FE5F55',
+  lightRed: '#FCCCCC',
   lightPink: '#F5F2FFDE',
   black1: '#202020',
   grey1: '#e3e3e3',
@@ -43,6 +46,7 @@ export const Colors = {
       darkPurple: pallete.darkPurple,
       purple: pallete.purple,
       grey3: pallete.grey3,
+      darkRed: pallete.darkRed,
     },
 
     dark: {
@@ -52,6 +56,7 @@ export const Colors = {
       purple: pallete.purple,
       darkPurple: pallete.darkPurple,
       grey3: pallete.grey3,
+      darkRed: pallete.darkRed,
     },
   },
 
