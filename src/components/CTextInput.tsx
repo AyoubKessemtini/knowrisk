@@ -32,14 +32,17 @@ type RightAccessoryProps = {
   state?: TextInputStatuses;
 };
 
+export type InputType = 'regular' | 'qa';
+
 export type CustomTextInputProps = {
+  inputType?: InputType;
   state?: TextInputStatuses;
   placeholderText?: I18nKeyPath;
   placeholderColor?: string;
   labelText?: I18nKeyPath;
   textSize?: number;
-  borderColor?: string; // Added borderColor prop
-  backgroundColor?: string; // Added backgroundColor prop
+  borderColor?: string;
+  backgroundColor?: string;
 
   RightAccessory?: ComponentType<RightAccessoryProps>;
 } & Omit<TextInputProps, 'placeholder'> &
@@ -47,6 +50,7 @@ export type CustomTextInputProps = {
   BottomTextProps;
 
 export const CTextInput = ({
+  inputType = 'regular',
   state,
   labelText,
   placeholderText,
@@ -73,18 +77,22 @@ export const CTextInput = ({
 
   const generateInputWrapperStyle = useMemo(
     () => [
-      styles.inputWrapper,
-      { borderColor, backgroundColor }, // Apply borderColor and backgroundColor
+      inputType === 'qa'
+        ? [styles.inputWrapper, { borderRadius: 0 }]
+        : styles.inputWrapper,
+      inputType === 'qa'
+        ? styles.qaInputWrapper
+        : { borderColor, backgroundColor },
       state === 'error' && { borderColor: Colors.deepRed },
       inputWrapperStyle,
     ],
-    [borderColor, backgroundColor, inputWrapperStyle, state],
+    [borderColor, backgroundColor, inputWrapperStyle, state, inputType],
   );
 
-  const generateInpuStyle = useMemo(
+  const generateInputStyle = useMemo(
     () => [
       styles.input,
-      styles.text,
+      inputType === 'qa' ? styles.qaText : styles.text,
       state === 'error' && styles.invalidText,
       disabled && { color: Colors.primaryBlack },
       textStyle && textStyle,
@@ -115,7 +123,7 @@ export const CTextInput = ({
             autoCorrect={false}
             {...textInputProps}
             editable={!disabled}
-            style={generateInpuStyle}
+            style={generateInputStyle}
           />
           {!!RightAccessory && <RightAccessory state={state} />}
         </View>
@@ -136,10 +144,18 @@ const styles = StyleSheet.create({
   inputWrapper: {
     overflow: 'hidden',
     borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 14,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 15,
+    paddingVertical: 12,
+    paddingRight: 16,
+    paddingLeft: 24,
+  },
+  qaInputWrapper: {
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderColor: Colors.fadedPurple,
+    paddingVertical: 12,
     paddingRight: 16,
     paddingLeft: 24,
   },
@@ -151,8 +167,13 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Colors.black1,
-    fontFamily: 'GoogleSans-Bold',
+    fontFamily: 'Poppins Bold',
     fontSize: 20,
+  },
+  qaText: {
+    color: Colors.purple,
+    fontFamily: 'Poppins Regular',
+    fontSize: 16,
   },
   invalidText: { color: Colors.deepRed },
   bottomText: { textAlign: 'center', marginTop: 14 },

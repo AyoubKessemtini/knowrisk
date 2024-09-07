@@ -18,12 +18,12 @@ export const RegisterScreen =
     const navigation = useNavigation();
     const { control, handleSubmit } = useForm<RegisterScheme>({
       defaultValues: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        phoneNumber: '',
-        medicalEntity: '',
-        referenceMedicalAssociationId: '',
+        firstname: 'd',
+        lastname: 'd',
+        email: 'd@dd.com',
+        phoneNumber: '2',
+        medicalEntity: '2',
+        referenceMedicalAssociationId: '2',
         isHospitalOrClinic: false,
         hospitalClinicName: '',
       },

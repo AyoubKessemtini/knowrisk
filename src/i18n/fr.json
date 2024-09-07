@@ -7,7 +7,8 @@
     "pass": "Password",
     "connect": "Connect",
     "logout": "Logout",
-    "questions_header" : "Q&A"
+    "questions_header" : "Q&A",
+    "submit": "Submit"
   },
   "home": {
     "foo": "French Home Screen"
@@ -27,18 +28,18 @@
     "strain": "Strain"
   },
   "onboarding": {
-    "forgotPass": "Forgot Password?",
+    "forgotPass": "Forgot Password",
     "dontHaveAccount": "Don't have an account?",
     "get_started": "Get Started",
     "welcome_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     "already_member": "Already a member?",
-    "login": "Login",
+    "login": "Log In",
     "login_description": "Empowering Transforming Patient Care",
     "login_to": "Log in to your account",
     "email_address": "Email Address",
     "password": "Password",
     "forgot_password": "Forgot Password?",
-    "not_member": "Not a Member? ",
+    "not_member": "Not a Member ? ",
     "register": "Register",
     "terms_and_conditions": "Terms & Conditions",
     "privacy_policy": "Privacy Policy",
@@ -63,6 +64,11 @@
       "create_password_placeholder": "Create a password",
       "confirm_password_placeholder": "Confirm your password",
       "already_have_account" :"Already have an account? "
+    },
+    "questions_placeholder": {
+      "type_your_answer": "Type your answer here...",
+      "email": "name@example.com",
+      "phone": "(201) 555-33223"
     }
   },
   "questions":{
@@ -71,7 +77,20 @@
     "q2": "How can I help protect myself from getting sick?",
     "a2": "Regularly clean your hands, avoid touching your face, and stay informed about the latest COVID-19 updates.",
     "q3": "Can I get sick from a person who is sick?",
-    "a3": "Yes, you can get sick from a person who is sick. It is important to practice social distancing and follow the guidelines set by health officials."
+
+    "a3": "Yes, you can get sick from a person who is sick. It is important to practice social distancing and follow the guidelines set by health officials.",
+    "choices":{
+      "yes": "Yes",
+      "no": "No",
+      "once_a_year": "Once a year",
+      "times_a_year": "3-5 times a year",
+      "once_a_month": "Once a month",
+      "times_a_month": "2-3 times a month",
+      "once_a_week": "Once a week",
+      "multiple_times_a_week": "Multiple times a week",
+      "daily": "Daily"
+    }
+
   },
   "buttons":{
     "tap_to_report":"Tap this button if you had a seizure",

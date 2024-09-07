@@ -1,16 +1,24 @@
 {
   "common": {
-    "continue": "French Continue",
+    "continue": "Continue",
     "apply": "APPLY INPUT",
     "showsheet": "SHOW SHEET",
-    "mail": "Email", 
+    "mail": "Email",
     "pass": "Password",
     "connect": "Connect",
-    "logout":"logout"
+    "logout": "Logout",
+    "questions_header" : "Q&A"
   },
-  "home": { "foo": "French Home Screen" },
-  "profile": { "foo": "French Profile Screen" },
-  "language": { "english": "English", "french": "French" },
+  "home": {
+    "foo": "French Home Screen"
+  },
+  "profile": {
+    "foo": "French Profile Screen"
+  },
+  "language": {
+    "english": "English",
+    "french": "French"
+  },
   "test": "test",
   "segment": {
     "overview": "Overview",
@@ -19,11 +27,54 @@
     "strain": "Strain"
   },
   "onboarding": {
-    "forgotPass": "Forgot Password?",
+    "forgotPass": "Forgot Password",
     "dontHaveAccount": "Don't have an account?",
     "get_started": "Get Started",
-    "welcome_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    "already_member":"Already a member?",
-    "login": "Login"
+    "welcome_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "already_member": "Already a member?",
+    "login": "Log In",
+    "login_description": "Empowering Transforming Patient Care",
+    "login_to": "Log in to your account",
+    "email_address": "Email Address",
+    "password": "Password",
+    "forgot_password": "Forgot Password?",
+    "not_member": "Not a Member ? ",
+    "register": "Register",
+    "terms_and_conditions": "Terms & Conditions",
+    "privacy_policy": "Privacy Policy",
+    "signup": {
+      "register_account": "Register to Your Account",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "phone_number": "Phone Number",
+      "medical_entity": "Medical Entity",
+      "reference_medical_association_id": "Reference Medical Association ID",
+      "hospital_clinic_name": "Hospital/Clinic Name",
+      "is_hospital_clinic": "Is Hospital or Clinic?",
+      "create_password": "Create Password",
+      "confirm_password": "Confirm Password",
+      "email_placeholder": "Enter your email",
+      "first_name_placeholder": "Enter your first name",
+      "last_name_placeholder": "Enter your last name",
+      "phone_number_placeholder": "Enter your phone number",
+      "medical_entity_placeholder": "Enter your medical entity",
+      "reference_medical_association_id_placeholder": "Enter your association ID",
+      "hospital_clinic_name_placeholder": "Enter your hospital/clinic name",
+      "create_password_placeholder": "Create a password",
+      "confirm_password_placeholder": "Confirm your password",
+      "already_have_account" :"Already have an account? "
+    },
+    "questions_placeholder": {
+      "type_your_answer": "Type your answer here...",
+      "email": "name@example.com"
+    }
+  },
+  "questions":{
+    "q1": "What is the best way to prevent the spread of COVID-19?",
+    "a1": "Stay at home, avoid touching your face, and wear a mask when needed.",
+    "q2": "How can I help protect myself from getting sick?",
+    "a2": "Regularly clean your hands, avoid touching your face, and stay informed about the latest COVID-19 updates.",
+    "q3": "Can I get sick from a person who is sick?",
+    "a3": "Yes, you can get sick from a person who is sick. It is important to practice social distancing and follow the guidelines set by health officials."
   }
 }

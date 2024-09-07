@@ -24,7 +24,11 @@ interface CustomButtonProps extends PressableProps {
   mb?: number;
   mt?: number;
   style?: StyleProp<ViewStyle>;
-  rightAccessory?: JSX.Element; // Added rightAccessory prop
+
+  textSize?: TextSizes;
+
+
+  rightAccessory?: JSX.Element; 
 }
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -36,7 +40,10 @@ export const CButton = ({
   mb,
   mt,
   style,
-  rightAccessory, // Added rightAccessory here
+
+  textSize = 'md_bold',
+
+  rightAccessory, 
   ...pressableProps
 }: CustomButtonProps): JSX.Element => {
   const { animatedStyle } = useThemeInterpolation(
@@ -82,7 +89,7 @@ export const CButton = ({
       >
         <CText
           isCentered
-          size={$textsData[buttonType].size}
+          size={textSize}
           text={text}
           color={$textsData[buttonType].color}
           style={styles.baseText}
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 64,
+    minHeight: 48,
     padding: 16,
     borderRadius: 6,
     overflow: 'hidden',

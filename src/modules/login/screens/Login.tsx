@@ -35,9 +35,14 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
   return (
     <ImageBackground source={ImageAssets.LOGIN_BG} style={styles.container}>
       <View style={styles.flexed}></View>
-      <CText text="onboarding.login_description" color="white" size="xl_bold" />
-      <CText text="onboarding.login_to" color="white" size="lg_bold" />
-      <CText text="onboarding.email_address" color="white" size="md" />
+      <CText
+        mt={38}
+        text="onboarding.login_description"
+        color="white"
+        size="xl_bold"
+      />
+      <CText mt={5} text="onboarding.login_to" color="white" size="md_medium" />
+      <CText mt={15} text="onboarding.email_address" color="white" size="md" />
       <ControlledInput
         placeholderText="common.mail"
         control={control}
@@ -54,11 +59,12 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
         //     />
         //   )}
       />
-      <CText text="onboarding.password" color="white" size="md" />
+      <CText mt={15} text="onboarding.password" color="white" size="md" />
       <PassTextInput name="password" control={control} />
       <CButton
+        mt={15}
         buttonType="primary"
-        text="common.connect"
+        text="onboarding.login"
         onPress={handleSubmit(onPressHandler)}
       />
       <CText
@@ -77,7 +83,7 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, gap: 12, paddingTop: 300, paddingHorizontal: 20 },
+  container: { flex: 1, gap: 5, paddingTop: 300, paddingHorizontal: 20 },
 
   flexed: { gap: 12 },
 });

@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
-    paddingVertical: 8,
+    paddingVertical: 0,
   },
   safeArewViewStyle: { flex: 1 },
   keyboardAvoidingViewStyle: { flex: 1 },
@@ -101,6 +101,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    paddingVertical: 16,
+    paddingVertical: 0,
   },
 });

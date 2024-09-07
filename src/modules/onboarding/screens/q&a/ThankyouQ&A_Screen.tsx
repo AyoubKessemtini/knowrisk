@@ -7,9 +7,11 @@ import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigat
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { CImage } from '@components/CImage';
+import ImageAssets from '@assets/images';
 
-export const IntroQuestionScreen =
-  ({}: OnboardingStackScreenProps<'IntroQuestionScreen'>): JSX.Element => {
+export const ThankyouScreen =
+  ({}: OnboardingStackScreenProps<'ThankyouScreen'>): JSX.Element => {
     const navigation = useNavigation();
 
     return (
@@ -18,24 +20,26 @@ export const IntroQuestionScreen =
         noHorizontalPadding
         containerStyles={styles.container}
       >
-        <Header
-          hasBackButton
-          currentStep={1}
-          totalSteps={7}
-          text="common.questions_header"
-        />
+        <Header hasBackButton text="common.questions_header" />
         <View style={styles.wrapper}>
-          <CText size="xl_medium" color="purple">
-            Ally is designed to help you forecast your potential risk of Seizure
-            !
+          <CImage
+            source={ImageAssets.THANKYOU_HEART}
+            height={280}
+            width={280}
+          />
+          <CText mt={40} size="xxl_bold" color="purple1" isCentered>
+            Thank you!
           </CText>
-          <CText mt={20} size="sm_medium" color="purple">
-            Let us know you better
+          <CText mt={20} size="lg_medium" color="purpleGrey" isCentered>
+            Our team will be in touch for a personalised assistance
+          </CText>
+          <CText mt={20} size="sm_medium" color="purpleGrey" isCentered>
+            Let's turn fear into preparedness with Ally.
           </CText>
         </View>
         <View style={styles.button}>
           <CButton
-            text="common.continue"
+            text="common.submit"
             onPress={() => {
               navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
                 screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 29,
+    alignItems: 'center',
   },
   button: {
     paddingHorizontal: 20,
