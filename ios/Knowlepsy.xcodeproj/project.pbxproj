@@ -24,6 +24,7 @@
 		DD4FB5BD5FD3412B9F16BBE7 /* GoogleSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9045E6B27A854DD181A9E60A /* GoogleSans-Medium.ttf */; };
 		E160B635C4124CE7BC62793B /* GoogleSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DEDC9A0C14F4FE4A0A12BD4 /* GoogleSans-Regular.ttf */; };
 		F9C9200574E84630A275668E /* GoogleSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 901B9EA07E1F421FA7926F2C /* GoogleSans-BoldItalic.ttf */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		E8794049648C46AA8DBDF547 /* GoogleSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Bold.ttf"; path = "../assets/fonts/GoogleSans-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F0A5344E1F5F40639B7E280B /* GoogleSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-MediumItalic.ttf"; path = "../assets/fonts/GoogleSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

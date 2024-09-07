@@ -77,6 +77,7 @@
     "q2": "How can I help protect myself from getting sick?",
     "a2": "Regularly clean your hands, avoid touching your face, and stay informed about the latest COVID-19 updates.",
     "q3": "Can I get sick from a person who is sick?",
+
     "a3": "Yes, you can get sick from a person who is sick. It is important to practice social distancing and follow the guidelines set by health officials.",
     "choices":{
       "yes": "Yes",
@@ -89,6 +90,7 @@
       "multiple_times_a_week": "Multiple times a week",
       "daily": "Daily"
     }
+
   },
   "buttons":{
     "tap_to_report":"Tap this button if you had a seizure",

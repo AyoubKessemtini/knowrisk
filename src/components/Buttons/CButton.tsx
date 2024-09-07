@@ -24,8 +24,11 @@ interface CustomButtonProps extends PressableProps {
   mb?: number;
   mt?: number;
   style?: StyleProp<ViewStyle>;
+
   textSize?: TextSizes;
-  rightAccessory?: JSX.Element; // Added rightAccessory prop
+
+
+  rightAccessory?: JSX.Element; 
 }
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -37,8 +40,10 @@ export const CButton = ({
   mb,
   mt,
   style,
+
   textSize = 'md_bold',
-  rightAccessory, // Added rightAccessory here
+
+  rightAccessory, 
   ...pressableProps
 }: CustomButtonProps): JSX.Element => {
   const { animatedStyle } = useThemeInterpolation(
