@@ -15,6 +15,10 @@ import { DateSelector } from '@components/DatePicker/DatePicker';
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
 import { ReportSeizureCard } from '@components/Cards/ReportSeizureCard';
+import { WeatherCard } from '@components/Cards/WeatherCard';
+import { StepsCard } from '@components/Cards/StepsCard';
+import { LocationWeather } from '@components/Cards/LocationWeatherCard';
+import { useWeather } from '@hooks/weather';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -24,11 +28,11 @@ export const Home: React.FC = () => {
   //   loading: healthDataLoading,
   //   error: healthDataError,
   // } = useFetchHealthData(selectedDate);
-  // const {
-  //   weather,
-  //   loading: weatherLoading,
-  //   error: weatherError,
-  // } = useWeather();
+  const {
+    weather,
+    // loading: weatherLoading,
+    // error: weatherError,
+  } = useWeather();
   // const [currentSegment, setCurrentSegment] = useState<SegmentType>('overview');
 
   // const strain = 0.59;
@@ -61,6 +65,23 @@ export const Home: React.FC = () => {
           initialDate={selectedDate}
           onDateChange={handleDateChange}
         />
+        <View style={styles.row}>
+          <WeatherCard
+            lastUpdated="10:45 AM"
+            temperature={Math.round(Number(weather?.temperature))}
+          />
+          <StepsCard lastUpdated="10:45 AM" steps={335} />
+        </View>
+        <View style={styles.row}>
+          <LocationWeather
+            description={weather?.description as string}
+            city={weather?.city as string}
+            lastUpdated="10:45 AM"
+            temperature={Math.round(Number(weather?.temperature))}
+          />
+          <StepsCard lastUpdated="10:45 AM" steps={335} />
+        </View>
+        {/* <LocationWeather city={weather?.city as string} lastUpdated='10:45 AM' temperature={Math.round(Number(weather?.temperature))} /> */}
       </View>
 
       {/* <DateSelector
@@ -120,8 +141,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 12,
     paddingTop: 40,
+    paddingHorizontal: 20,
   },
   wrapper: {
     gap: 20,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });

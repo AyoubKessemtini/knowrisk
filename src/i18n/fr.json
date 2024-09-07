@@ -93,6 +93,12 @@
   "buttons":{
     "tap_to_report":"Tap this button if you had a seizure",
     "report":"Report a seizure"
+  },
+  "home_screen":{
+    "last_updated": "Last updated {{date}}",
+    "temperature" : "Temperature",
+    "steps" : "Steps",
+    "steps_number" : "{{steps}} steps"
   }
 
 }
