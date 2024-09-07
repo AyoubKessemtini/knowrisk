@@ -8,6 +8,7 @@ import {
   StyleProp,
   StyleSheet,
   ViewStyle,
+  View,
 } from 'react-native';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import { I18nKeyPath } from 'src/i18n/types';
@@ -23,28 +24,11 @@ interface CustomButtonProps extends PressableProps {
   mb?: number;
   mt?: number;
   style?: StyleProp<ViewStyle>;
+  rightAccessory?: JSX.Element; // Added rightAccessory prop
 }
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-/**
- * Custom Button Component (`CButton`)
- *
- * @param {I18nKeyPath} [props.text] - The internationalization key path to the button text to display.
- * @param {lang.TranslateOptions} [props.textOptions] - Options for the translation function.
- * @param {ButtonTypes} [props.buttonType='primary'] - The type of the button.
- * @param {number} [props.mb] - The margin-bottom of the button component.
- * @param {number} [props.mt] - The margin-top of the button component.
- *
- * @example
- * // To use the `CButton` component:
- * <CButton
- *   text="common.continue"
- *   buttonType="danger"
- *   mb={10}
- *   onPress=(() => null)
- * />
- */
 export const CButton = ({
   text,
   textOptions,
@@ -52,6 +36,7 @@ export const CButton = ({
   mb,
   mt,
   style,
+  rightAccessory, // Added rightAccessory here
   ...pressableProps
 }: CustomButtonProps): JSX.Element => {
   const { animatedStyle } = useThemeInterpolation(
@@ -103,6 +88,9 @@ export const CButton = ({
           style={styles.baseText}
           textOptions={textOptions}
         />
+        {rightAccessory && (
+          <View style={styles.rightAccessory}>{rightAccessory}</View>
+        )}
       </AnimatedPressable>
     </Animated.View>
   );
@@ -149,12 +137,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     zIndex: 10,
   },
+  rightAccessory: {
+    marginLeft: 8, // Adjust the margin for spacing between text and accessory
+  },
   disabledButton: {
     opacity: 0.4,
   },
 });
 
-/* Extra buttons styles like border widths, border radius, heights that do not follow baseButton style */
 /* eslint-disable react-native/no-unused-styles */
 const buttonsTypesStyles: PRH<ButtonTypes, ViewStyle> = StyleSheet.create({
   danger: { height: 80 },
