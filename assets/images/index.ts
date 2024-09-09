@@ -8,6 +8,8 @@ const ImageAssets = {
   WARNING_ICON: require('./warning_icon.png'),
   INFO_ICON: require('./info_icon.png'),
   WEARABLE_ICON: require('./wearable_icon.png'),
+  BAR_CHART_ICON: require('./bar_Chart_Icon.png'),
+  LINE_CHART_ICON: require('./line_Chart_Icon.png'),
 };
 
 export default ImageAssets;

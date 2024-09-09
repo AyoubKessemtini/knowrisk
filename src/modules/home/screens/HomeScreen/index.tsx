@@ -20,6 +20,7 @@ import { StepsCard } from '@components/Cards/StepsCard';
 import { LocationWeather } from '@components/Cards/LocationWeatherCard';
 import { useWeather } from '@hooks/weather';
 import { WearableCard } from '@components/Cards/WearableCard';
+import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -82,6 +83,19 @@ export const Home: React.FC = () => {
           />
           <WearableCard lastConnection="10:45 AM" minutesDuration={750} />
         </View>
+        <View style={styles.row}>
+          <WeeklyHeartInfosCard
+            lastUpdated="11:54 AM"
+            heartRateData="91.10"
+            restingHeartRateData="91.10"
+            date="Yesterday"
+          />
+          <View style={styles.column}>
+            <StepsCard lastUpdated="10:45 AM" steps={335} />
+            <StepsCard lastUpdated="10:45 AM" steps={335} />
+          </View>
+        </View>
+
         {/* <LocationWeather city={weather?.city as string} lastUpdated='10:45 AM' temperature={Math.round(Number(weather?.temperature))} /> */}
       </View>
 
@@ -151,5 +165,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
+  },
+  column: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    width: '50%',
   },
 });

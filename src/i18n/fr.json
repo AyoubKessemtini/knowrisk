@@ -8,7 +8,9 @@
     "connect": "Connect",
     "logout": "Logout",
     "questions_header" : "Q&A",
-    "submit": "Submit"
+    "submit": "Submit",
+    "past_days": "Past {{number}} days",
+    "latest": "Latest"
   },
   "home": {
     "foo": "French Home Screen"
@@ -102,6 +104,13 @@
     "steps" : "Steps",
     "steps_number" : "{{steps}} steps",
     "wearability" : "Wearability"
+  },
+  "heart":{
+    "heart": "Heart",
+    "beat": "beat",
+    "bpm": "BPM",
+    "heartRate": "heartRate",
+    "restingHeartRate": "Resting Heart Rate"
   }
 
 }
