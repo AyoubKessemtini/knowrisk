@@ -1,48 +1,48 @@
 import { CText } from '@components/CText';
 import { Header } from '@components/Headers/Header';
 import { Screen } from '@components/Screen';
-import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
 import { I18nKeyPath } from '../../../../i18n/types';
+import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 
 export const SettingsInformationScreen =
-  ({}: OnboardingStackScreenProps<'SettingsInformationScreen'>): JSX.Element => {
+  ({}: RootStackScreenProps<'SettingsInformationScreen'>): JSX.Element => {
     const permissionsData: Array<{
       title: I18nKeyPath;
       description: I18nKeyPath;
       icon: string;
     }> = [
       {
-        title: 'informations.app_usage' as I18nKeyPath,
-        description: 'informations.app_usage_description' as I18nKeyPath,
+        title: 'informations.app_usage',
+        description: 'informations.app_usage_description',
         icon: ImageAssets.REFRESH_ICON,
       },
       {
-        title: 'informations.notification' as I18nKeyPath,
-        description: 'informations.notification_description' as I18nKeyPath,
+        title: 'informations.notification',
+        description: 'informations.notification_description',
         icon: ImageAssets.NOTIFICATION_ICON,
       },
       {
-        title: 'informations.location' as I18nKeyPath,
-        description: 'informations.location_description' as I18nKeyPath,
+        title: 'informations.location',
+        description: 'informations.location_description',
         icon: ImageAssets.PIN_ICON,
       },
       {
-        title: 'informations.bluetooth' as I18nKeyPath,
-        description: 'informations.bluetooth_description' as I18nKeyPath,
+        title: 'informations.bluetooth',
+        description: 'informations.bluetooth_description',
         icon: ImageAssets.BLUETOOTH_ICON,
       },
       {
-        title: 'informations.battery' as I18nKeyPath,
-        description: 'informations.battery_description' as I18nKeyPath,
+        title: 'informations.battery',
+        description: 'informations.battery_description',
         icon: ImageAssets.BATTERY_ICON,
       },
       {
-        title: 'segment.sleep' as I18nKeyPath,
-        description: 'informations.sleep_description' as I18nKeyPath,
+        title: 'segment.sleep',
+        description: 'informations.sleep_description',
         icon: ImageAssets.MOON_ICON,
       },
     ];

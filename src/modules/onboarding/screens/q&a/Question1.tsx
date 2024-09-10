@@ -84,7 +84,7 @@ export const Question1 =
             text="common.continue"
             onPress={handleSubmit(() => {
               navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.PROFILE_SCREEN,
+                screen: OnboardingStackRoutes.QUESTION_TWO_SCREEN,
               });
             })}
           />

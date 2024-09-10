@@ -63,9 +63,7 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
           buttonType="primary"
           buttonVersion={2}
           onPress={() => {
-            navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              screen: OnboardingStackRoutes.SETTINGS_INFORMATION_SCREEN,
-            });
+            navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
           }}
         />
         <CButton
