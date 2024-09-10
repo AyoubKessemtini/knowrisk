@@ -59,9 +59,7 @@ export const Question6 =
           <CText size="xl_medium" color="purple">
             6.
           </CText>
-          <CText mt={5} size="xl_medium" color="purple">
-            Please provide your phone number.This question is required.
-          </CText>
+          <CText mt={5} size="xl_medium" color="purple" text="qa.question6" />
           <View style={styles.row}>
             <SelectBox
               options={['US', 'FR', 'LT']}

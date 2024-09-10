@@ -4,47 +4,46 @@ import { Screen } from '@components/Screen';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { CImage } from '../../../../components/CImage';
+import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
+import { I18nKeyPath } from '../../../../i18n/types';
 
 export const SettingsInformationScreen =
   ({}: OnboardingStackScreenProps<'SettingsInformationScreen'>): JSX.Element => {
-    const permissionsData = [
+    const permissionsData: Array<{
+      title: I18nKeyPath;
+      description: I18nKeyPath;
+      icon: string;
+    }> = [
       {
-        title: 'App usage',
-        description:
-          'Ensure uninterrupted data flow by keeping the app running. Closing the app may result in data loss.',
+        title: 'informations.app_usage' as I18nKeyPath,
+        description: 'informations.app_usage_description' as I18nKeyPath,
         icon: ImageAssets.REFRESH_ICON,
       },
       {
-        title: 'Notification',
-        description:
-          'Stay informed! Enable notification permissions to receive timely updates and alerts from the app.',
-        icon: ImageAssets.REFRESH_ICON,
+        title: 'informations.notification' as I18nKeyPath,
+        description: 'informations.notification_description' as I18nKeyPath,
+        icon: ImageAssets.NOTIFICATION_ICON,
       },
       {
-        title: 'Location',
-        description:
-          'Enhance your experience! Grant GPS permission to unlock location-based features and personalized content.',
-        icon: ImageAssets.REFRESH_ICON,
+        title: 'informations.location' as I18nKeyPath,
+        description: 'informations.location_description' as I18nKeyPath,
+        icon: ImageAssets.PIN_ICON,
       },
       {
-        title: 'Bluetooth',
-        description:
-          'Connect seamlessly! Authorize Bluetooth permissions to enable effortless communication with compatible devices.',
+        title: 'informations.bluetooth' as I18nKeyPath,
+        description: 'informations.bluetooth_description' as I18nKeyPath,
         icon: ImageAssets.BLUETOOTH_ICON,
       },
       {
-        title: 'Battery',
-        description:
-          'Extend app longevity! Adjust battery permissions to prevent automatic closure by your device, ensuring continuous functionality and uninterrupted user experience.',
-        icon: ImageAssets.REFRESH_ICON,
+        title: 'informations.battery' as I18nKeyPath,
+        description: 'informations.battery_description' as I18nKeyPath,
+        icon: ImageAssets.BATTERY_ICON,
       },
       {
-        title: 'Sleep',
-        description:
-          'Optimize your sleep tracking! Keep the app active during sleep to ensure accurate and insightful analysis of your sleep patterns and quality.',
-        icon: ImageAssets.REFRESH_ICON,
+        title: 'segment.sleep' as I18nKeyPath,
+        description: 'informations.sleep_description' as I18nKeyPath,
+        icon: ImageAssets.MOON_ICON,
       },
     ];
 
@@ -56,12 +55,12 @@ export const SettingsInformationScreen =
             <View key={index} style={styles.permissionItem}>
               <CImage source={item.icon} height={18} width={18} />
               <View style={styles.textContainer}>
-                <CText size="sm_medium" color="purple1">
-                  {item.title}
-                </CText>
-                <CText size="xm_medium" color="purpleGrey">
-                  {item.description}
-                </CText>
+                <CText size="sm_medium" color="purple1" text={item.title} />
+                <CText
+                  size="xm_medium"
+                  color="purpleGrey"
+                  text={item.description}
+                />
               </View>
             </View>
           ))}

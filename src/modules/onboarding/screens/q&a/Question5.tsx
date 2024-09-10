@@ -55,9 +55,7 @@ export const Question5 =
           <CText size="xl_medium" color="purple">
             5.
           </CText>
-          <CText mt={5} size="xl_medium" color="purple">
-            If yes, please specify your triggers. If no, please type "N/A".
-          </CText>
+          <CText mt={5} size="xl_medium" color="purple" text="qa.question5" />
           <LineInput
             placeholderText="onboarding.questions_placeholder.type_your_answer"
             inputType="qa"

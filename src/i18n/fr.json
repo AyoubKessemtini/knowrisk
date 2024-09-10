@@ -9,13 +9,16 @@
     "logout": "Log out",
     "questions_header" : "Q&A",
     "submit": "Submit",
-    "contact_email": "Contact@knowlepsy.com"
+    "contact_email": "Contact@knowlepsy.com",
+    "thank_you": "Thank you!"
   },
   "home": {
     "foo": "French Home Screen"
   },
   "profile": {
     "foo": "French Profile Screen",
+    "application_settings": "Application Settings",
+    "user_account": "User Account",
     "edit_profile": "Edit Profile",
     "information": "Information",
     "change_password": "Change Password",
@@ -109,6 +112,34 @@
     "steps" : "Steps",
     "steps_number" : "{{steps}} steps",
     "wearability" : "Wearability"
+  },
+
+  "informations":{
+    "app_usage": "App usage",
+    "app_usage_description": "Ensure uninterrupted data flow by keeping the app running. Closing the app may result in data loss.",
+    "notification": "Notification",
+    "notification_description": "Stay informed! Enable notification permissions to receive timely updates and alerts from the app.",
+    "location": "Location",
+    "location_description": "Enhance your experience! Grant GPS permission to unlock location-based features and personalized content.",
+    "bluetooth": "Bluetooth",
+    "bluetooth_description": "Connect seamlessly! Authorize Bluetooth permissions to enable effortless communication with compatible devices.",
+    "battery": "Battery",
+    "battery_description": "Extend app longevity! Adjust battery permissions to prevent automatic closure by your device, ensuring continuous functionality and uninterrupted user experience.",
+    "sleep_description": "Optimize your sleep tracking! Keep the app active during sleep to ensure accurate and insightful analysis of your sleep patterns and quality."
+  },
+
+  "qa":{
+    "intro": "Ally is designed to help you forecast your potential risk of Seizure!",
+    "let_us_know_you_better": "Let us know you better",
+    "question1": "How long ago were you diagnosed with Epilepsy? This question is required.",
+    "question2": "How many seizures do you experience per day/month/year?",
+    "question3": "How frequent are your seizures?This question is required.",
+    "question4": "Do you know your triggers?",
+    "question5": "If yes, please specify your triggers. If no, please type \"N/A\".",
+    "question6": "Please provide your phone number.This question is required.",
+    "question7": "Please provide your email address.",
+    "outro1": "Our team will be in touch for a personalised assistance",
+    "outro2": "Let's turn fear into preparedness with Ally."
   }
 
 }

@@ -46,9 +46,7 @@ export const Question3 =
           <CText size="xl_medium" color="purple">
             3.
           </CText>
-          <CText mt={5} size="xl_medium" color="purple">
-            How frequent are your seizures?This question is required.
-          </CText>
+          <CText mt={5} size="xl_medium" color="purple" text="qa.question3" />
           <ChoiceBox options={options} onSelect={handleChoiceSelect} />
         </View>
         <View style={styles.button}>

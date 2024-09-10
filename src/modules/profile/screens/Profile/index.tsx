@@ -36,9 +36,7 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
 
       {/* User Account Section */}
       <View style={styles.section}>
-        <CText size="lg_medium" color="purple1">
-          User Account
-        </CText>
+        <CText size="lg_medium" color="purple1" text="profile.user_account" />
         <CButton
           mt={10}
           text="profile.edit_profile"
@@ -54,9 +52,11 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
 
       {/* Application Settings Section */}
       <View style={styles.section}>
-        <CText size="lg_medium" color="purple1">
-          Application Settings
-        </CText>
+        <CText
+          size="lg_medium"
+          color="purple1"
+          text="profile.application_settings"
+        />
         <CButton
           mt={10}
           text="profile.information"

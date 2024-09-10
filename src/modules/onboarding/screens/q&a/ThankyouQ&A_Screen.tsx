@@ -27,15 +27,27 @@ export const ThankyouScreen =
             height={280}
             width={280}
           />
-          <CText mt={40} size="xxl_bold" color="purple1" isCentered>
-            Thank you!
-          </CText>
-          <CText mt={20} size="lg_medium" color="purpleGrey" isCentered>
-            Our team will be in touch for a personalised assistance
-          </CText>
-          <CText mt={20} size="sm_medium" color="purpleGrey" isCentered>
-            Let's turn fear into preparedness with Ally.
-          </CText>
+          <CText
+            mt={40}
+            size="xxl_bold"
+            color="purple1"
+            isCentered
+            text="common.thank_you"
+          />
+          <CText
+            mt={20}
+            size="lg_medium"
+            color="purpleGrey"
+            isCentered
+            text="qa.outro1"
+          />
+          <CText
+            mt={20}
+            size="sm_medium"
+            color="purpleGrey"
+            isCentered
+            text="qa.outro2"
+          />
         </View>
         <View style={styles.button}>
           <CButton

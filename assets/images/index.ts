@@ -10,6 +10,10 @@ const ImageAssets = {
   WEARABLE_ICON: require('./wearable_icon.png'),
   REFRESH_ICON: require('./refresh.png'),
   BLUETOOTH_ICON: require('./bluetooth.png'),
+  BATTERY_ICON: require('./battery_icon.png'),
+  MOON_ICON: require('./moon_icon.png'),
+  NOTIFICATION_ICON: require('./notification_icon.png'),
+  PIN_ICON: require('./pin_icon.png'),
 };
 
 export default ImageAssets;
