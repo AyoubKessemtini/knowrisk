@@ -38,7 +38,7 @@ export const IntroQuestionScreen =
             text="common.continue"
             onPress={() => {
               navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
+                screen: OnboardingStackRoutes.PROFILE_SCREEN,
               });
             }}
           />

@@ -6,15 +6,22 @@
     "mail": "Email",
     "pass": "Password",
     "connect": "Connect",
-    "logout": "Logout",
+    "logout": "Log out",
     "questions_header" : "Q&A",
-    "submit": "Submit"
+    "submit": "Submit",
+    "contact_email": "Contact@knowlepsy.com"
   },
   "home": {
     "foo": "French Home Screen"
   },
   "profile": {
-    "foo": "French Profile Screen"
+    "foo": "French Profile Screen",
+    "edit_profile": "Edit Profile",
+    "information": "Information",
+    "change_password": "Change Password",
+    "emergency_call": "Emergency Call",
+    "profile": "Profile",
+    "help_center": "Help Center"
   },
   "language": {
     "english": "English",

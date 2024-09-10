@@ -19,6 +19,8 @@ import { Question3 } from '../../modules/onboarding/screens/q&a/Question3';
 import { Question4 } from '../../modules/onboarding/screens/q&a/Question4';
 import { Question6 } from '../../modules/onboarding/screens/q&a/Question6';
 import { ThankyouScreen } from '../../modules/onboarding/screens/q&a/ThankyouQ&A_Screen';
+import { Profile } from '../../modules/profile/screens/Profile/index';
+import { SettingsInformationScreen } from '../../modules/profile/screens/Settings/Information_Screen';
 
 export type OnboardingStackParamList = {
   [OnboardingStackRoutes.LOGIN_SCREEN]: undefined;
@@ -33,6 +35,8 @@ export type OnboardingStackParamList = {
   [OnboardingStackRoutes.QUESTION_SIX_SCREEN]: undefined;
   [OnboardingStackRoutes.QUESTION_SEVEN_SCREEN]: undefined;
   [OnboardingStackRoutes.THANKYOU_QA_SCREEN]: undefined;
+  [OnboardingStackRoutes.PROFILE_SCREEN]: undefined;
+  [OnboardingStackRoutes.SETTINGS_INFORMATION_SCREEN]: undefined;
 };
 
 export type OnboardingStackScreenProps<
@@ -99,6 +103,14 @@ export function OnboardingNavigator() {
       <Stack.Screen
         name={OnboardingStackRoutes.THANKYOU_QA_SCREEN}
         component={ThankyouScreen}
+      />
+      <Stack.Screen
+        name={OnboardingStackRoutes.PROFILE_SCREEN}
+        component={Profile}
+      />
+      <Stack.Screen
+        name={OnboardingStackRoutes.SETTINGS_INFORMATION_SCREEN}
+        component={SettingsInformationScreen}
       />
     </Stack.Navigator>
   );

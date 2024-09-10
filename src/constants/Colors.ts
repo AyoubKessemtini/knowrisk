@@ -30,6 +30,10 @@ const pallete = {
   yellow: '#FFA224',
   lightYellow: '#FCEFD8',
   deepYellow: '#914421',
+  magnolia: '#FAF8FF',
+  cosmos: '#FFD8D6',
+  brick: '#B42318',
+  fog: '#e4d4ff',
 } as const;
 
 export const Colors = {
@@ -65,6 +69,11 @@ export const Colors = {
       lightGreen: pallete.lightGreen,
       yellow: pallete.yellow,
       deepYellow: pallete.deepYellow,
+
+      magnolia: pallete.magnolia,
+      cosmos: pallete.cosmos,
+      brick: pallete.brick,
+      fog: pallete.fog,
     },
 
     dark: {
@@ -84,6 +93,11 @@ export const Colors = {
       lightGreen: pallete.lightGreen,
       yellow: pallete.yellow,
       deepYellow: pallete.deepYellow,
+
+      magnolia: pallete.magnolia,
+      cosmos: pallete.cosmos,
+      brick: pallete.brick,
+      fog: pallete.fog,
     },
   },
 
@@ -93,12 +107,22 @@ export const Colors = {
       secondary: pallete.primaryWhite,
       success: pallete.primaryWhite,
       danger: pallete.primaryWhite,
+      magnolia: pallete.magnolia,
+      cosmos: pallete.cosmos,
+      brick: pallete.brick,
+      fog: pallete.fog,
+      purple: pallete.purple,
     },
     dark: {
       primary: pallete.deepPurple,
       secondary: pallete.primaryBlack,
       success: pallete.primaryBlack,
       danger: pallete.primaryBlack,
+      magnolia: pallete.magnolia,
+      cosmos: pallete.cosmos,
+      brick: pallete.brick,
+      fog: pallete.fog,
+      purple: pallete.purple,
     },
   },
 };
