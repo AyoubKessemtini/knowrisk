@@ -74,6 +74,7 @@ export const Colors = {
       cosmos: pallete.cosmos,
       brick: pallete.brick,
       fog: pallete.fog,
+      fadedPurple: pallete.fadedPurple,
     },
 
     dark: {
@@ -98,6 +99,7 @@ export const Colors = {
       cosmos: pallete.cosmos,
       brick: pallete.brick,
       fog: pallete.fog,
+      fadedPurple: pallete.fadedPurple,
     },
   },
 

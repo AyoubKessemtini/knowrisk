@@ -24,7 +24,10 @@
     "change_password": "Change Password",
     "emergency_call": "Emergency Call",
     "profile": "Profile",
-    "help_center": "Help Center"
+    "help_center": "Help Center",
+    "save_changes": "Save Changes",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password"
   },
   "language": {
     "english": "English",
@@ -73,7 +76,10 @@
       "hospital_clinic_name_placeholder": "Enter your hospital/clinic name",
       "create_password_placeholder": "Create a password",
       "confirm_password_placeholder": "Confirm your password",
-      "already_have_account" :"Already have an account? "
+      "already_have_account" :"Already have an account? ",
+      "birth_date": "Birth date",
+      "sex": "Sex",
+      "country": "Country"
     },
     "questions_placeholder": {
       "type_your_answer": "Type your answer here...",
@@ -141,5 +147,4 @@
     "outro1": "Our team will be in touch for a personalised assistance",
     "outro2": "Let's turn fear into preparedness with Ally."
   }
-
 }

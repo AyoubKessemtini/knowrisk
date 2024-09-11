@@ -4,6 +4,7 @@ export const passwordScheme = z.object({
   password: z.string().min(8),
 });
 const baseChangePasswordScheme = z.object({
+  password: passwordScheme.shape.password,
   newPassword: passwordScheme.shape.password,
   confirmPassword: passwordScheme.shape.password,
 });

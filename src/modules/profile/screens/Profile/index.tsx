@@ -10,6 +10,9 @@ import { CImage } from '../../../../components/CImage';
 import ImageAssets from '@assets/images';
 import { Header } from '@components/Headers/Header';
 import { CText } from '@components/CText';
+import Icon from 'react-native-easy-icon';
+import { Colors } from '@constants/Colors';
+import HelpCenterButton from '../../../../components/Buttons/HelpCenterButton';
 
 export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const { logout } = useAuth();
@@ -23,7 +26,16 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
     >
       <Header hasBackButton text="profile.profile" />
       <View style={styles.profileHeader}>
-        <CImage source={ImageAssets.PICCOLO} height={55} width={55} />
+        <CImage
+          source={ImageAssets.PICCOLO}
+          height={55}
+          width={55}
+          containerStyle={{
+            borderRadius: 27,
+            borderColor: Colors.fog,
+            borderWidth: 3,
+          }}
+        />
         <View style={styles.profileInfo}>
           <CText size="lg_medium" color="purple">
             George Frank
@@ -40,12 +52,18 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
         <CButton
           mt={10}
           text="profile.edit_profile"
-          buttonType="primary"
+          buttonType="magnolia"
           buttonVersion={2}
+          rightAccessory={
+            <Icon
+              type="material"
+              name="chevron-right"
+              size={21}
+              color={Colors.fog}
+            />
+          }
           onPress={() => {
-            navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
-            });
+            navigation.navigate(RootStackRoutes.EDIT_PROFILE_SCREEN);
           }}
         />
       </View>
@@ -60,36 +78,64 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
         <CButton
           mt={10}
           text="profile.information"
-          buttonType="primary"
+          buttonType="magnolia"
           buttonVersion={2}
+          rightAccessory={
+            <Icon
+              type="material"
+              name="chevron-right"
+              size={21}
+              color={Colors.fog}
+            />
+          }
           onPress={() => {
             navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
           }}
         />
         <CButton
           text="profile.change_password"
-          buttonType="primary"
+          buttonType="magnolia"
           buttonVersion={2}
+          rightAccessory={
+            <Icon
+              type="material"
+              name="chevron-right"
+              size={21}
+              color={Colors.fog}
+            />
+          }
           onPress={() => {
-            navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
-            });
+            navigation.navigate(RootStackRoutes.CHANGE_PASSWORD_SCREEN);
           }}
         />
         <CButton
           text="profile.emergency_call"
-          buttonType="primary"
+          buttonType="magnolia"
           buttonVersion={2}
+          rightAccessory={
+            <Icon
+              type="material"
+              name="chevron-right"
+              size={21}
+              color={Colors.fog}
+            />
+          }
           onPress={() => {
-            navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
-            });
+            navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
           }}
         />
         <CButton
           text="onboarding.terms_and_conditions"
-          buttonType="primary"
+          buttonType="magnolia"
           buttonVersion={2}
+          rightAccessory={
+            <Icon
+              type="material"
+              name="chevron-right"
+              size={21}
+              color={Colors.fog}
+            />
+          }
           onPress={() => {
             navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
               screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
@@ -99,26 +145,17 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
       </View>
 
       {/* Help Center Section */}
-
-      <CButton
-        mt={20}
-        text="profile.help_center"
-        buttonType="primary"
-        buttonVersion={2}
-        onPress={async () => {
-          await logout();
-          await navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-            screen: OnboardingStackRoutes.LOGIN_SCREEN,
-          });
-        }}
-      />
+      <HelpCenterButton onPress={() => {}} />
 
       {/* Logout Button */}
       <CButton
         mt={20}
         buttonVersion={3}
-        buttonType="primary"
+        buttonType="cosmos"
         text="common.logout"
+        leftAccessory={
+          <Icon type="material" name="logout" size={21} color={Colors.brick} />
+        }
         onPress={async () => {
           await logout();
           await navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
