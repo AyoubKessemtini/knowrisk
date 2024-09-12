@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import { Colors } from '../../constants/Colors';
 import { I18nKeyPath } from '../../i18n/types';
-import { CText } from '../CText';
+import { CText } from '@components/CText';
 
 interface ChoiceBoxProps {
   options: I18nKeyPath[];

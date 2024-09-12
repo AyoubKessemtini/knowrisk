@@ -8,20 +8,22 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'; // Example icon library
+import Icon from 'react-native-vector-icons/Ionicons';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
-import { BackButton } from '@components/BackButton';
 import { RootStackScreenProps } from '../../../../navigators/stacks/RootNavigator';
 import {
   editProfileScheme,
   EditProfileScheme,
 } from '../../../../schemes/editProfile.scheme.ts';
-import { DateSelector } from '@components/DatePicker/BirthdayDatePicker';
+import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
+import { DropdownSelector } from '../../../../components/Dropdowns/DropdownSelector';
+import { Header } from '../../../../components/Headers/Header';
+import { PhoneNumberInput } from '../../../../components/Inputs/PhoneNumberInput';
 
 export const EditProfileScreen =
   ({}: RootStackScreenProps<'EditProfileScreen'>): JSX.Element => {
     const navigation = useNavigation();
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date()); //fetch profile birthday
     const { control, handleSubmit } = useForm<EditProfileScheme>({
       defaultValues: {
         firstname: '',
@@ -34,6 +36,11 @@ export const EditProfileScreen =
       },
       resolver: zodResolver(editProfileScheme),
     });
+    const countryCodes = ['+33', '+1', '+44', '+91', '+61'];
+
+    const handleSelect = (option: string) => {
+      console.log('Selected option:', option);
+    };
 
     const [isFocused, setIsFocused] = useState<{ [key: string]: boolean }>({});
     const handleFocus = (name: string) => {
@@ -49,170 +56,145 @@ export const EditProfileScreen =
     };
 
     return (
-      <Screen fullscreen containerStyles={styles.container}>
-        <View style={{ width: 35 }}>
-          <BackButton />
+      <Screen withoutTopEdge noHorizontalPadding>
+        <Header hasBackButton text="profile.edit_profile" />
+        <View style={styles.container}>
+          <CText
+            mt={10}
+            color="grey3"
+            size="sm_medium"
+            text="onboarding.signup.first_name"
+          />
+          <ControlledInput
+            control={control}
+            name="firstname"
+            verticalPadding={10}
+            borderColor={isFocused.firstname ? Colors.deepPurple : Colors.grey1}
+            backgroundColor={Colors.white}
+            textStyle={{
+              color: Colors.black,
+              fontWeight: 'normal',
+              fontSize: 14,
+            }}
+            onFocus={() => handleFocus('firstname')}
+            onBlur={() => handleBlur('firstname')}
+            RightAccessory={() => (
+              <Icon name="person-outline" size={21} color={Colors.deepPurple} />
+            )}
+          />
+          <CText
+            color="grey3"
+            size="sm_medium"
+            mt={10}
+            text="onboarding.signup.last_name"
+          />
+
+          <ControlledInput
+            placeholderText="onboarding.signup.last_name"
+            control={control}
+            name="lastname"
+            verticalPadding={10}
+            borderColor={isFocused.lastname ? Colors.deepPurple : Colors.grey1}
+            backgroundColor={Colors.white}
+            textStyle={{
+              color: Colors.black,
+              fontWeight: 'normal',
+              fontSize: 14,
+            }}
+            onFocus={() => handleFocus('lastname')}
+            onBlur={() => handleBlur('lastname')}
+            RightAccessory={() => (
+              <Icon name="person-outline" size={21} color={Colors.deepPurple} />
+            )}
+          />
+
+          <CText
+            color="grey3"
+            size="sm_medium"
+            mt={10}
+            text="onboarding.signup.birth_date"
+          />
+          <BirthDateSelector
+            initialDate={selectedDate}
+            onDateChange={handleDateChange}
+          />
+
+          <CText color="grey3" size="sm_medium" mt={10} text="common.mail" />
+          <ControlledInput
+            control={control}
+            name="email"
+            verticalPadding={10}
+            borderColor={isFocused.email ? Colors.deepPurple : Colors.grey1}
+            backgroundColor={Colors.white}
+            textStyle={{
+              color: Colors.black,
+              fontWeight: 'normal',
+              fontSize: 14,
+            }}
+            onFocus={() => handleFocus('email')}
+            onBlur={() => handleBlur('email')}
+            RightAccessory={() => (
+              <Icon name="mail-outline" size={21} color={Colors.deepPurple} />
+            )}
+          />
+
+          <CText
+            color="grey3"
+            size="sm_medium"
+            mt={10}
+            text="onboarding.signup.sex"
+          />
+          <DropdownSelector
+            options={['Male', 'Female']}
+            onSelect={handleSelect}
+          />
+          <CText
+            color="grey3"
+            size="sm_medium"
+            mt={10}
+            text="onboarding.signup.country"
+          />
+          <DropdownSelector
+            options={['France', 'Lithuania']}
+            onSelect={handleSelect}
+          />
+
+          <CText
+            color="grey3"
+            size="sm_medium"
+            mt={10}
+            text="onboarding.signup.phone_number"
+          />
+          <View style={{ zIndex: 1000 }}>
+            <PhoneNumberInput
+              control={control}
+              name="phoneNumber"
+              options={countryCodes}
+              verticalPadding={10}
+              borderColor={Colors.grey1}
+              backgroundColor={Colors.white}
+              textStyle={{
+                color: Colors.black,
+                fontWeight: 'normal',
+                fontSize: 14,
+              }}
+              onFocus={() => console.log('Input Focused')}
+              onBlur={() => console.log('Input Blurred')}
+            />
+          </View>
+
+          <CButton
+            mt={25}
+            style={{ zIndex: 1 }}
+            text="profile.save_changes"
+            textSize="md_medium"
+            onPress={handleSubmit(() => {
+              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+                screen: OnboardingStackRoutes.INTRO_QUESTION_SCREEN,
+              });
+            })}
+          />
         </View>
-        <CText
-          mt={10}
-          color="grey3"
-          size="sm_medium"
-          text="onboarding.signup.first_name"
-        />
-        <ControlledInput
-          control={control}
-          name="firstname"
-          verticalPadding={10}
-          borderColor={isFocused.firstname ? Colors.deepPurple : Colors.grey1}
-          backgroundColor={Colors.white}
-          textStyle={{
-            color: Colors.black,
-            fontWeight: 'normal',
-            fontSize: 14,
-          }}
-          onFocus={() => handleFocus('firstname')}
-          onBlur={() => handleBlur('firstname')}
-          RightAccessory={() => (
-            <Icon name="person-outline" size={21} color={Colors.deepPurple} />
-          )}
-        />
-        <CText
-          color="grey3"
-          size="sm_medium"
-          mt={10}
-          text="onboarding.signup.last_name"
-        />
-
-        <ControlledInput
-          placeholderText="onboarding.signup.last_name"
-          control={control}
-          name="lastname"
-          verticalPadding={10}
-          borderColor={isFocused.lastname ? Colors.deepPurple : Colors.grey1}
-          backgroundColor={Colors.white}
-          textStyle={{
-            color: Colors.black,
-            fontWeight: 'normal',
-            fontSize: 14,
-          }}
-          onFocus={() => handleFocus('lastname')}
-          onBlur={() => handleBlur('lastname')}
-          RightAccessory={() => (
-            <Icon name="person-outline" size={21} color={Colors.deepPurple} />
-          )}
-        />
-
-        <CText
-          color="grey3"
-          size="sm_medium"
-          mt={10}
-          text="onboarding.signup.birth_date"
-        />
-        <DateSelector
-          initialDate={selectedDate}
-          onDateChange={handleDateChange}
-        />
-
-        <CText color="grey3" size="sm_medium" mt={10} text="common.mail" />
-        <ControlledInput
-          control={control}
-          name="email"
-          verticalPadding={10}
-          borderColor={isFocused.email ? Colors.deepPurple : Colors.grey1}
-          backgroundColor={Colors.white}
-          textStyle={{
-            color: Colors.black,
-            fontWeight: 'normal',
-            fontSize: 14,
-          }}
-          onFocus={() => handleFocus('email')}
-          onBlur={() => handleBlur('email')}
-          RightAccessory={() => (
-            <Icon name="mail-outline" size={21} color={Colors.deepPurple} />
-          )}
-        />
-
-        <CText
-          color="grey3"
-          size="sm_medium"
-          mt={10}
-          text="onboarding.signup.sex"
-        />
-        <ControlledInput
-          control={control}
-          name="sex"
-          verticalPadding={10}
-          borderColor={isFocused.phoneNumber ? Colors.deepPurple : Colors.grey1}
-          backgroundColor={Colors.white}
-          textStyle={{
-            color: Colors.black,
-            fontWeight: 'normal',
-            fontSize: 14,
-          }}
-          onFocus={() => handleFocus('sex')}
-          onBlur={() => handleBlur('sex')}
-          RightAccessory={() => (
-            <Icon name="call-outline" size={21} color={Colors.deepPurple} />
-          )}
-        />
-
-        <CText
-          color="grey3"
-          size="sm_medium"
-          mt={10}
-          text="onboarding.signup.country"
-        />
-        <ControlledInput
-          control={control}
-          name="country"
-          verticalPadding={10}
-          borderColor={isFocused.phoneNumber ? Colors.deepPurple : Colors.grey1}
-          backgroundColor={Colors.white}
-          textStyle={{
-            color: Colors.black,
-            fontWeight: 'normal',
-            fontSize: 14,
-          }}
-          onFocus={() => handleFocus('country')}
-          onBlur={() => handleBlur('country')}
-          RightAccessory={() => (
-            <Icon name="call-outline" size={21} color={Colors.deepPurple} />
-          )}
-        />
-        <CText
-          color="grey3"
-          size="sm_medium"
-          mt={10}
-          text="onboarding.signup.phone_number"
-        />
-        <ControlledInput
-          control={control}
-          name="phoneNumber"
-          verticalPadding={10}
-          borderColor={isFocused.phoneNumber ? Colors.deepPurple : Colors.grey1}
-          backgroundColor={Colors.white}
-          textStyle={{
-            color: Colors.black,
-            fontWeight: 'normal',
-            fontSize: 14,
-          }}
-          onFocus={() => handleFocus('phoneNumber')}
-          onBlur={() => handleBlur('phoneNumber')}
-          RightAccessory={() => (
-            <Icon name="call-outline" size={21} color={Colors.deepPurple} />
-          )}
-        />
-
-        <CButton
-          mt={25}
-          text="profile.save_changes"
-          textSize="md_medium"
-          onPress={handleSubmit(() => {
-            navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              screen: OnboardingStackRoutes.INTRO_QUESTION_SCREEN,
-            });
-          })}
-        />
       </Screen>
     );
   };
@@ -220,6 +202,7 @@ export const EditProfileScreen =
 const styles = StyleSheet.create({
   container: {
     gap: 5,
-    paddingVertical: 50,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
   },
 });

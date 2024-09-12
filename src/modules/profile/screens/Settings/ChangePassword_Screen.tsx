@@ -26,6 +26,7 @@ export const ChangePasswordScreen =
       },
       resolver: zodResolver(changePasswordScheme),
     });
+    const [isSecureEnabled] = useState(true);
 
     const [isFocused, setIsFocused] = useState<{ [key: string]: boolean }>({});
     const handleFocus = (name: string) => {
@@ -42,6 +43,7 @@ export const ChangePasswordScreen =
         <View style={styles.wrapper}>
           <ControlledInput
             control={control}
+            secureTextEntry={isSecureEnabled}
             placeholderText="onboarding.password"
             placeholderColor={Colors.black}
             name="password"
@@ -60,6 +62,7 @@ export const ChangePasswordScreen =
           />
           <ControlledInput
             control={control}
+            secureTextEntry={isSecureEnabled}
             placeholderText="profile.new_password"
             placeholderColor={Colors.black}
             name="newPassword"
@@ -78,6 +81,7 @@ export const ChangePasswordScreen =
           />
           <ControlledInput
             control={control}
+            secureTextEntry={isSecureEnabled}
             placeholderText="profile.confirm_password"
             placeholderColor={Colors.black}
             name="confirmPassword"

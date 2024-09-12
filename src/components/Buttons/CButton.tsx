@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import { I18nKeyPath } from 'src/i18n/types';
-import { CText, TextColors, TextSizes } from '../CText';
+import { CText, TextColors, TextSizes } from '@components/CText';
 
 type PRH<T extends string, K> = Partial<Record<T, K>> | undefined;
 type ButtonTypes = keyof typeof $buttonTypesColors.light;

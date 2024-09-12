@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { Colors } from '../../constants/Colors';
-import { CText } from '../CText';
+import { CText } from '@components/CText';
 
 interface HelpCenterButtonProps {
   onPress: () => void;

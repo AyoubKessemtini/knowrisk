@@ -5,15 +5,15 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import Feather from 'react-native-vector-icons/Feather';
 
-type DateSelectorProps = {
+type BirthDateSelectorProps = {
   initialDate: Date;
   onDateChange: (newDate: Date) => void;
 };
 
-export const DateSelector = ({
+export const BirthDateSelector = ({
   initialDate,
   onDateChange,
-}: DateSelectorProps) => {
+}: BirthDateSelectorProps) => {
   const [date, setDate] = useState(initialDate);
   const [open, setOpen] = useState(false);
 
