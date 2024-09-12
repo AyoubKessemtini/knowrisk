@@ -19,6 +19,7 @@ import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
 import { DropdownSelector } from '../../../../components/Dropdowns/DropdownSelector';
 import { Header } from '../../../../components/Headers/Header';
 import { PhoneNumberInput } from '../../../../components/Inputs/PhoneNumberInput';
+import { I18nKeyPath } from '../../../../i18n/types';
 
 export const EditProfileScreen =
   ({}: RootStackScreenProps<'EditProfileScreen'>): JSX.Element => {
@@ -36,7 +37,16 @@ export const EditProfileScreen =
       },
       resolver: zodResolver(editProfileScheme),
     });
-    const countryCodes = ['+33', '+1', '+44', '+91', '+61'];
+    const countryCodes = ['+33', '+370', '+44', '+91', '+61'];
+    const sexOptions: I18nKeyPath[] = [
+      'profile.genders.male',
+      'profile.genders.female',
+    ];
+
+    const countryOptions: I18nKeyPath[] = [
+      'profile.countries.fr',
+      'profile.countries.lt',
+    ];
 
     const handleSelect = (option: string) => {
       console.log('Selected option:', option);
@@ -144,20 +154,14 @@ export const EditProfileScreen =
             mt={10}
             text="onboarding.signup.sex"
           />
-          <DropdownSelector
-            options={['Male', 'Female']}
-            onSelect={handleSelect}
-          />
+          <DropdownSelector options={sexOptions} onSelect={handleSelect} />
           <CText
             color="grey3"
             size="sm_medium"
             mt={10}
             text="onboarding.signup.country"
           />
-          <DropdownSelector
-            options={['France', 'Lithuania']}
-            onSelect={handleSelect}
-          />
+          <DropdownSelector options={countryOptions} onSelect={handleSelect} />
 
           <CText
             color="grey3"

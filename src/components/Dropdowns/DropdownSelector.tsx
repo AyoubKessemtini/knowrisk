@@ -3,20 +3,23 @@ import { View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { Colors } from '@constants/Colors';
 import Icon from 'react-native-easy-icon';
 import { CText } from '@components/CText';
+import { I18nKeyPath } from '../../i18n/types';
 
 interface DropdownSelectorProps {
-  options: string[];
-  onSelect: (option: string) => void;
+  options: I18nKeyPath[];
+  onSelect: (option: I18nKeyPath) => void;
 }
 
 export const DropdownSelector = ({
   options,
   onSelect,
 }: DropdownSelectorProps) => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<I18nKeyPath | null>(
+    null,
+  );
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
-  const handleSelect = (option: string) => {
+  const handleSelect = (option: I18nKeyPath) => {
     setSelectedOption(option);
     onSelect(option);
     setDropdownVisible(false);
@@ -34,7 +37,7 @@ export const DropdownSelector = ({
         <Icon
           type="feather"
           name={isDropdownVisible ? 'chevron-up' : 'chevron-down'}
-          size={24}
+          size={21}
           color={Colors.fog}
         />
       </TouchableOpacity>
@@ -48,7 +51,7 @@ export const DropdownSelector = ({
                 style={styles.optionItem}
                 onPress={() => handleSelect(item)}
               >
-                <CText>{item}</CText>
+                <CText text={item} />
               </TouchableOpacity>
             )}
           />

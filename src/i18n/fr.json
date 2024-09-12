@@ -27,7 +27,15 @@
     "help_center": "Help Center",
     "save_changes": "Save Changes",
     "new_password": "New Password",
-    "confirm_password": "Confirm Password"
+    "confirm_password": "Confirm Password",
+    "genders":{
+      "male": "Male",
+      "female": "Female"
+    },
+    "countries":{
+      "fr": "France",
+      "lt": "Lithuania"
+    }
   },
   "language": {
     "english": "English",
