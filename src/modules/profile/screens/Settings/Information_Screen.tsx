@@ -1,5 +1,4 @@
 import { CText } from '@components/CText';
-import { Header } from '@components/Headers/Header';
 import { Screen } from '@components/Screen';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -7,6 +6,8 @@ import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
 import { I18nKeyPath } from '../../../../i18n/types';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
+import { ProfileHeader } from '../../../../components/Headers/ProfileHeader';
+import { Colors } from '@constants/Colors';
 
 export const SettingsInformationScreen =
   ({}: RootStackScreenProps<'SettingsInformationScreen'>): JSX.Element => {
@@ -49,7 +50,12 @@ export const SettingsInformationScreen =
 
     return (
       <Screen withoutTopEdge noHorizontalPadding>
-        <Header hasBackButton text="profile.information" />
+        <ProfileHeader
+          hasBackButton
+          text="profile.information"
+          backgroundColor={Colors.magnolia}
+        />
+        <View style={styles.line}></View>
         <View style={styles.container}>
           {permissionsData.map((item, index) => (
             <View key={index} style={styles.permissionItem}>
@@ -83,5 +89,10 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
     marginLeft: 8,
+  },
+  line: {
+    height: 1,
+    borderBottomWidth: 0.2,
+    borderColor: Colors.fog,
   },
 });

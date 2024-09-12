@@ -14,7 +14,8 @@ import {
   changePasswordScheme,
   ChangePasswordScheme,
 } from '../../../../schemes/password.scheme';
-import { Header } from '../../../../components/Headers/Header';
+
+import { ProfileHeader } from '../../../../components/Headers/ProfileHeader';
 
 export const ChangePasswordScreen =
   ({}: RootStackScreenProps<'ChangePasswordScreen'>): JSX.Element => {
@@ -38,77 +39,90 @@ export const ChangePasswordScreen =
     };
 
     return (
-      <Screen fullscreen containerStyles={styles.container}>
-        <Header hasBackButton text="profile.change_password" />
-        <View style={styles.wrapper}>
-          <ControlledInput
-            control={control}
-            secureTextEntry={isSecureEnabled}
-            placeholderText="onboarding.password"
-            placeholderColor={Colors.black}
-            name="password"
-            borderColor={isFocused.firstname ? Colors.deepPurple : Colors.grey1}
-            backgroundColor={Colors.white}
-            textStyle={{
-              color: Colors.black,
-              fontWeight: 'normal',
-              fontSize: 14,
-            }}
-            onFocus={() => handleFocus('password')}
-            onBlur={() => handleBlur('password')}
-            RightAccessory={() => (
-              <AntDesign name="lock1" size={21} color={Colors.deepPurple} />
-            )}
-          />
-          <ControlledInput
-            control={control}
-            secureTextEntry={isSecureEnabled}
-            placeholderText="profile.new_password"
-            placeholderColor={Colors.black}
-            name="newPassword"
-            borderColor={isFocused.firstname ? Colors.deepPurple : Colors.grey1}
-            backgroundColor={Colors.white}
-            textStyle={{
-              color: Colors.black,
-              fontWeight: 'normal',
-              fontSize: 14,
-            }}
-            onFocus={() => handleFocus('newPassword')}
-            onBlur={() => handleBlur('newPassword')}
-            RightAccessory={() => (
-              <AntDesign name="lock1" size={21} color={Colors.deepPurple} />
-            )}
-          />
-          <ControlledInput
-            control={control}
-            secureTextEntry={isSecureEnabled}
-            placeholderText="profile.confirm_password"
-            placeholderColor={Colors.black}
-            name="confirmPassword"
-            borderColor={isFocused.firstname ? Colors.deepPurple : Colors.grey1}
-            backgroundColor={Colors.white}
-            textStyle={{
-              color: Colors.black,
-              fontWeight: 'normal',
-              fontSize: 14,
-            }}
-            onFocus={() => handleFocus('confirmPassword')}
-            onBlur={() => handleBlur('confirmPassword')}
-            RightAccessory={() => (
-              <AntDesign name="lock1" size={21} color={Colors.deepPurple} />
-            )}
-          />
+      <Screen withoutTopEdge noHorizontalPadding>
+        <ProfileHeader
+          hasBackButton
+          text="profile.change_password"
+          backgroundColor={Colors.magnolia}
+        />
+        <View style={styles.line}></View>
+        <View style={styles.container}>
+          <View style={styles.wrapper}>
+            <ControlledInput
+              control={control}
+              secureTextEntry={isSecureEnabled}
+              placeholderText="onboarding.password"
+              placeholderColor={Colors.black}
+              name="password"
+              borderColor={
+                isFocused.firstname ? Colors.deepPurple : Colors.grey1
+              }
+              backgroundColor={Colors.white}
+              textStyle={{
+                color: Colors.black,
+                fontWeight: 'normal',
+                fontSize: 14,
+              }}
+              onFocus={() => handleFocus('password')}
+              onBlur={() => handleBlur('password')}
+              RightAccessory={() => (
+                <AntDesign name="lock1" size={21} color={Colors.deepPurple} />
+              )}
+            />
+            <ControlledInput
+              control={control}
+              secureTextEntry={isSecureEnabled}
+              placeholderText="profile.new_password"
+              placeholderColor={Colors.black}
+              name="newPassword"
+              borderColor={
+                isFocused.firstname ? Colors.deepPurple : Colors.grey1
+              }
+              backgroundColor={Colors.white}
+              textStyle={{
+                color: Colors.black,
+                fontWeight: 'normal',
+                fontSize: 14,
+              }}
+              onFocus={() => handleFocus('newPassword')}
+              onBlur={() => handleBlur('newPassword')}
+              RightAccessory={() => (
+                <AntDesign name="lock1" size={21} color={Colors.deepPurple} />
+              )}
+            />
+            <ControlledInput
+              control={control}
+              secureTextEntry={isSecureEnabled}
+              placeholderText="profile.confirm_password"
+              placeholderColor={Colors.black}
+              name="confirmPassword"
+              borderColor={
+                isFocused.firstname ? Colors.deepPurple : Colors.grey1
+              }
+              backgroundColor={Colors.white}
+              textStyle={{
+                color: Colors.black,
+                fontWeight: 'normal',
+                fontSize: 14,
+              }}
+              onFocus={() => handleFocus('confirmPassword')}
+              onBlur={() => handleBlur('confirmPassword')}
+              RightAccessory={() => (
+                <AntDesign name="lock1" size={21} color={Colors.deepPurple} />
+              )}
+            />
 
-          <CButton
-            mt={12}
-            text="profile.save_changes"
-            textSize="md_medium"
-            onPress={handleSubmit(() => {
-              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.INTRO_QUESTION_SCREEN,
-              });
-            })}
-          />
+            <CButton
+              mt={12}
+              text="profile.save_changes"
+              textSize="md_medium"
+              onPress={handleSubmit(() => {
+                navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+                  screen: OnboardingStackRoutes.INTRO_QUESTION_SCREEN,
+                });
+              })}
+            />
+          </View>
         </View>
       </Screen>
     );
@@ -117,10 +131,18 @@ export const ChangePasswordScreen =
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
+    paddingVertical: 20,
+    paddingHorizontal: 20,
   },
   wrapper: {
     flex: 1,
     gap: 15,
     justifyContent: 'center',
+  },
+  line: {
+    height: 1,
+    borderBottomWidth: 0.2,
+    borderColor: Colors.fog,
   },
 });

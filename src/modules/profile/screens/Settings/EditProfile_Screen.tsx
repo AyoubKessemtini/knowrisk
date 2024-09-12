@@ -17,9 +17,9 @@ import {
 } from '../../../../schemes/editProfile.scheme.ts';
 import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
 import { DropdownSelector } from '../../../../components/Dropdowns/DropdownSelector';
-import { Header } from '../../../../components/Headers/Header';
 import { PhoneNumberInput } from '../../../../components/Inputs/PhoneNumberInput';
 import { I18nKeyPath } from '../../../../i18n/types';
+import { ProfileHeader } from '../../../../components/Headers/ProfileHeader';
 
 export const EditProfileScreen =
   ({}: RootStackScreenProps<'EditProfileScreen'>): JSX.Element => {
@@ -67,7 +67,12 @@ export const EditProfileScreen =
 
     return (
       <Screen withoutTopEdge noHorizontalPadding>
-        <Header hasBackButton text="profile.edit_profile" />
+        <ProfileHeader
+          hasBackButton
+          text="profile.edit_profile"
+          backgroundColor={Colors.magnolia}
+        />
+        <View style={styles.line}></View>
         <View style={styles.container}>
           <CText
             mt={10}
@@ -208,5 +213,10 @@ const styles = StyleSheet.create({
     gap: 5,
     paddingVertical: 20,
     paddingHorizontal: 20,
+  },
+  line: {
+    height: 1,
+    borderBottomWidth: 0.2,
+    borderColor: Colors.fog,
   },
 });
