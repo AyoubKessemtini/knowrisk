@@ -38,7 +38,7 @@ export const ProfileHeader = ({
       {hasBackButton && <ProfileHeaderBackButton />}
 
       <View style={styles.textContainer}>
-        {text && <CText size="lg_medium" color="deepPurple" text={text} />}
+        {text && <CText size="lg_medium" color="purple" text={text} />}
       </View>
     </View>
   );
@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 40,
+    paddingTop: 50,
     ...Platform.select({
       ios: {
-        paddingVertical: 10,
-        paddingHorizontal: 10,
+        paddingVertical: 15,
+        paddingHorizontal: 15,
       },
       android: {
-        paddingVertical: 10,
-        paddingHorizontal: 10,
+        paddingVertical: 15,
+        paddingHorizontal: 15,
       },
     }),
   },
