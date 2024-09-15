@@ -1,4 +1,4 @@
-import { CButton } from '@components/Buttons/CButton'; // version 3 of CButton
+import { CButton } from '@components/Buttons/CButton';
 import { Screen } from '@components/Screen';
 import { useAuth } from '@hooks/useAuth';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
@@ -6,20 +6,20 @@ import { TabStackScreenProps } from '@navigators/stacks/TabNavigator';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { CImage } from '../../../../components/CImage';
+import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
 import { CText } from '@components/CText';
 import Icon from 'react-native-easy-icon';
 import { Colors } from '@constants/Colors';
-import HelpCenterButton from '../../../../components/Buttons/HelpCenterButton';
-import { ProfileHeader } from '../../../../components/Headers/ProfileHeader';
+import HelpCenterButton from '@components/Buttons/HelpCenterButton';
+import { ProfileHeader } from '@components/Headers/ProfileHeader';
 
 export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const { logout } = useAuth();
   const navigation = useNavigation();
 
   return (
-    <Screen withoutTopEdge noHorizontalPadding>
+    <Screen fullscreen withoutTopEdge noHorizontalPadding>
       <ProfileHeader hasBackButton text="profile.profile" />
       <View style={styles.line} />
       <View style={styles.container}>
@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   profileHeader: {
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 30,

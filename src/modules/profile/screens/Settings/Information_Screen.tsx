@@ -6,7 +6,7 @@ import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
 import { I18nKeyPath } from '../../../../i18n/types';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
-import { ProfileHeader } from '../../../../components/Headers/ProfileHeader';
+import { ProfileHeader } from '@components/Headers/ProfileHeader';
 import { Colors } from '@constants/Colors';
 
 export const SettingsInformationScreen =

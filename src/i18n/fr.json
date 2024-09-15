@@ -30,7 +30,8 @@
     "confirm_password": "Confirm Password",
     "genders":{
       "male": "Male",
-      "female": "Female"
+      "female": "Female",
+      "other": "Other"
     },
     "countries":{
       "fr": "France",

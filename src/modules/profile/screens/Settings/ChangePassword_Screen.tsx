@@ -9,13 +9,13 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
-import { RootStackScreenProps } from '../../../../navigators/stacks/RootNavigator';
+import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 import {
   changePasswordScheme,
   ChangePasswordScheme,
 } from '../../../../schemes/password.scheme';
 
-import { ProfileHeader } from '../../../../components/Headers/ProfileHeader';
+import { ProfileHeader } from '@components/Headers/ProfileHeader';
 
 export const ChangePasswordScreen =
   ({}: RootStackScreenProps<'ChangePasswordScreen'>): JSX.Element => {

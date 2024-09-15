@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     borderRadius: 8,
+    opacity: 0.95,
   },
   tabIconContainer: {
     justifyContent: 'center',

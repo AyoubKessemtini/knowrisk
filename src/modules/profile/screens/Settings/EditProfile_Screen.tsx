@@ -10,16 +10,16 @@ import { useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
-import { RootStackScreenProps } from '../../../../navigators/stacks/RootNavigator';
+import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 import {
   editProfileScheme,
   EditProfileScheme,
 } from '../../../../schemes/editProfile.scheme.ts';
 import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
-import { DropdownSelector } from '../../../../components/Dropdowns/DropdownSelector';
-import { PhoneNumberInput } from '../../../../components/Inputs/PhoneNumberInput';
+import { DropdownSelector } from '@components/Dropdowns/DropdownSelector';
+import { PhoneNumberInput } from '@components/Inputs/PhoneNumberInput';
 import { I18nKeyPath } from '../../../../i18n/types';
-import { ProfileHeader } from '../../../../components/Headers/ProfileHeader';
+import { ProfileHeader } from '@components/Headers/ProfileHeader';
 
 export const EditProfileScreen =
   ({}: RootStackScreenProps<'EditProfileScreen'>): JSX.Element => {
@@ -41,6 +41,7 @@ export const EditProfileScreen =
     const sexOptions: I18nKeyPath[] = [
       'profile.genders.male',
       'profile.genders.female',
+      'profile.genders.other',
     ];
 
     const countryOptions: I18nKeyPath[] = [
