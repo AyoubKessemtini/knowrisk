@@ -111,6 +111,10 @@
     "bpm": "BPM",
     "heartRate": "heartRate",
     "restingHeartRate": "Resting Heart Rate"
+  },
+  "wearable":{
+    "click_to_connect": "Click to connect",
+    "connected":"Device is Paired"
   }
 
 }

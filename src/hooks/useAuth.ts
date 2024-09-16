@@ -13,7 +13,7 @@ export const useAuth = () => {
   const [authInit, setAuthInit] = useState(false);
   const { refetch: fetchMe } = useGetMeQuery(false);
 
-  useGetMeQuery(!!token);
+  // useGetMeQuery(!!token);
 
   const logout = () => {
     PersistenceStorage.removeItem(KEYS.ACCESS_TOKEN);

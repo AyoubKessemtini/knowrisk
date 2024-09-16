@@ -7,6 +7,7 @@ export const RootStackRoutes = {
 export const TabBarStackRoutes = {
   HOME: 'home',
   PROFILE: 'profile',
+  DEVICE_LIST: 'device_list',
 } as const;
 
 export const FooStackRoutes = {
