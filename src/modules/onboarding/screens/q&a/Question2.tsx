@@ -55,9 +55,7 @@ export const Question2 =
           <CText size="xl_medium" color="purple">
             2.
           </CText>
-          <CText mt={5} size="xl_medium" color="purple">
-            How many seizures do you experience per day/month/year?
-          </CText>
+          <CText mt={5} size="xl_medium" color="purple" text="qa.question2" />
           <LineInput
             placeholderText="onboarding.questions_placeholder.type_your_answer"
             inputType="qa"

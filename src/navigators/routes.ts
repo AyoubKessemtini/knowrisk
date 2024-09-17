@@ -2,6 +2,10 @@ export const RootStackRoutes = {
   TAB_STACK: 'TabStack',
   FOO_STACK: 'FooStack',
   ONBOARDING_STACK: 'OnboardingStack',
+  PROFILE_SCREEN: 'profile',
+  SETTINGS_INFORMATION_SCREEN: 'SettingsInformationScreen',
+  EDIT_PROFILE_SCREEN: 'EditProfileScreen',
+  CHANGE_PASSWORD_SCREEN: 'ChangePasswordScreen',
 } as const;
 
 export const TabBarStackRoutes = {

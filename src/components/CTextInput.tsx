@@ -43,6 +43,7 @@ export type CustomTextInputProps = {
   textSize?: number;
   borderColor?: string;
   backgroundColor?: string;
+  verticalPadding?: number;
 
   RightAccessory?: ComponentType<RightAccessoryProps>;
 } & Omit<TextInputProps, 'placeholder'> &
@@ -62,7 +63,9 @@ export const CTextInput = ({
   bottomText,
   bottomTextColor = Colors.deepRed,
   borderColor = Colors.primaryWhite,
+  verticalPadding = 12,
   backgroundColor = Colors.textInput.light.main,
+
   ...textInputProps
 }: CustomTextInputProps) => {
   const input = useRef<TextInput>(null);
@@ -78,8 +81,11 @@ export const CTextInput = ({
   const generateInputWrapperStyle = useMemo(
     () => [
       inputType === 'qa'
-        ? [styles.inputWrapper, { borderRadius: 0 }]
-        : styles.inputWrapper,
+        ? [
+            styles.inputWrapper,
+            { borderRadius: 0, paddingVertical: verticalPadding },
+          ]
+        : [styles.inputWrapper, { paddingVertical: verticalPadding }],
       inputType === 'qa'
         ? styles.qaInputWrapper
         : { borderColor, backgroundColor },
@@ -147,7 +153,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
+    // paddingVertical: 12,
     paddingRight: 16,
     paddingLeft: 24,
   },

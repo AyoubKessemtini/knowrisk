@@ -55,10 +55,7 @@ export const Question1 =
           <CText size="xl_medium" color="purple">
             1.
           </CText>
-          <CText mt={5} size="xl_medium" color="purple">
-            How long ago were you diagnosed with Epilepsy? This question is
-            required.
-          </CText>
+          <CText mt={5} size="xl_medium" color="purple" text="qa.question1" />
           <LineInput
             placeholderText="onboarding.questions_placeholder.type_your_answer"
             control={control}

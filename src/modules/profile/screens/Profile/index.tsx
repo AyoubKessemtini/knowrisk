@@ -1,43 +1,197 @@
 import { CButton } from '@components/Buttons/CButton';
 import { Screen } from '@components/Screen';
-import { Colors } from '@constants/Colors';
 import { useAuth } from '@hooks/useAuth';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { TabStackScreenProps } from '@navigators/stacks/TabNavigator';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { CImage } from '@components/CImage';
+import ImageAssets from '@assets/images';
+import { CText } from '@components/CText';
+import Icon from 'react-native-easy-icon';
+import { Colors } from '@constants/Colors';
+import HelpCenterButton from '@components/Buttons/HelpCenterButton';
+import { ProfileHeader } from '@components/Headers/ProfileHeader';
 
 export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const { logout } = useAuth();
   const navigation = useNavigation();
+
   return (
-    <Screen containerStyles={styles.container}>
-      <Text style={styles.textStyle}>PROFILE</Text>
-      <CButton
-        mt={50}
-        text="common.logout"
-        onPress={async () => {
-          await logout();
-          await navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-            screen: OnboardingStackRoutes.LOGIN_SCREEN,
-          });
-        }}
-      />
+    <Screen fullscreen withoutTopEdge noHorizontalPadding>
+      <ProfileHeader hasBackButton text="profile.profile" />
+      <View style={styles.line} />
+      <View style={styles.container}>
+        <View style={styles.profileHeader}>
+          <CImage
+            source={ImageAssets.PICCOLO}
+            height={55}
+            width={55}
+            containerStyle={{
+              borderRadius: 27,
+              borderColor: Colors.fog,
+              borderWidth: 3,
+            }}
+          />
+          <View style={styles.profileInfo}>
+            <CText size="lg_medium" color="purple">
+              George Frank
+            </CText>
+            <CText size="sm_medium" color="purpleGrey">
+              Georgefrank@gmail.com
+            </CText>
+          </View>
+        </View>
+
+        {/* User Account Section */}
+        <View style={styles.section}>
+          <CText size="lg_medium" color="purple1" text="profile.user_account" />
+          <CButton
+            mt={10}
+            text="profile.edit_profile"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.EDIT_PROFILE_SCREEN);
+            }}
+          />
+        </View>
+
+        {/* Application Settings Section */}
+        <View style={styles.section}>
+          <CText
+            size="lg_medium"
+            color="purple1"
+            text="profile.application_settings"
+          />
+          <CButton
+            mt={10}
+            text="profile.information"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
+            }}
+          />
+          <CButton
+            text="profile.change_password"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.CHANGE_PASSWORD_SCREEN);
+            }}
+          />
+          <CButton
+            text="profile.emergency_call"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
+            }}
+          />
+          <CButton
+            text="onboarding.terms_and_conditions"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+                screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
+              });
+            }}
+          />
+        </View>
+
+        {/* Help Center Section */}
+        <HelpCenterButton onPress={() => {}} />
+
+        {/* Logout Button */}
+        <CButton
+          mt={20}
+          buttonVersion={3}
+          buttonType="cosmos"
+          text="common.logout"
+          leftAccessory={
+            <Icon
+              type="material"
+              name="logout"
+              size={21}
+              color={Colors.brick}
+            />
+          }
+          onPress={async () => {
+            await logout();
+            await navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+              screen: OnboardingStackRoutes.LOGIN_SCREEN,
+            });
+          }}
+        />
+      </View>
     </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  textStyle: {
-    color: Colors.black,
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    gap: 20,
+    padding: 20,
+  },
+  profileHeader: {
+    marginTop: 10,
+    flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 30,
+  },
+  profileInfo: {
+    flex: 1,
+    marginLeft: 15,
+  },
+  section: {
+    marginBottom: 25,
+  },
+  line: {
+    height: 1,
+    borderBottomWidth: 0.2,
+    borderColor: Colors.fog,
   },
 });

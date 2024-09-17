@@ -25,13 +25,13 @@ export const IntroQuestionScreen =
           text="common.questions_header"
         />
         <View style={styles.wrapper}>
-          <CText size="xl_medium" color="purple">
-            Ally is designed to help you forecast your potential risk of Seizure
-            !
-          </CText>
-          <CText mt={20} size="sm_medium" color="purple">
-            Let us know you better
-          </CText>
+          <CText size="xl_medium" color="purple" text="qa.intro" />
+          <CText
+            mt={20}
+            size="sm_medium"
+            color="purple"
+            text="qa.let_us_know_you_better"
+          />
         </View>
         <View style={styles.button}>
           <CButton

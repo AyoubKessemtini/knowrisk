@@ -19,12 +19,12 @@ export const RegisterScreen =
     const navigation = useNavigation();
     const { control, handleSubmit } = useForm<RegisterScheme>({
       defaultValues: {
-        firstname: 'd',
-        lastname: 'd',
-        email: 'd@dd.com',
-        phoneNumber: '2',
-        medicalEntity: '2',
-        referenceMedicalAssociationId: '2',
+        firstname: '',
+        lastname: '',
+        email: '',
+        phoneNumber: '',
+        medicalEntity: '',
+        referenceMedicalAssociationId: '',
         isHospitalOrClinic: false,
         hospitalClinicName: '',
       },
@@ -60,6 +60,7 @@ export const RegisterScreen =
 
         <ControlledInput
           placeholderText="onboarding.signup.first_name"
+          placeholderColor={Colors.grey5}
           control={control}
           name="firstname"
           borderColor={isFocused.firstname ? Colors.deepPurple : Colors.grey1}
@@ -74,6 +75,7 @@ export const RegisterScreen =
 
         <ControlledInput
           placeholderText="onboarding.signup.last_name"
+          placeholderColor={Colors.grey5}
           control={control}
           name="lastname"
           borderColor={isFocused.lastname ? Colors.deepPurple : Colors.grey1}
@@ -88,6 +90,7 @@ export const RegisterScreen =
 
         <ControlledInput
           placeholderText="onboarding.signup.email_placeholder"
+          placeholderColor={Colors.grey5}
           control={control}
           name="email"
           borderColor={isFocused.email ? Colors.deepPurple : Colors.grey1}
@@ -102,6 +105,7 @@ export const RegisterScreen =
 
         <ControlledInput
           placeholderText="onboarding.signup.phone_number"
+          placeholderColor={Colors.grey5}
           control={control}
           name="phoneNumber"
           borderColor={isFocused.phoneNumber ? Colors.deepPurple : Colors.grey1}
@@ -116,6 +120,7 @@ export const RegisterScreen =
 
         <ControlledInput
           placeholderText="onboarding.signup.medical_entity"
+          placeholderColor={Colors.grey5}
           control={control}
           name="medicalEntity"
           borderColor={
@@ -132,6 +137,7 @@ export const RegisterScreen =
 
         <ControlledInput
           placeholderText="onboarding.signup.reference_medical_association_id"
+          placeholderColor={Colors.grey5}
           control={control}
           name="referenceMedicalAssociationId"
           borderColor={
@@ -165,6 +171,7 @@ export const RegisterScreen =
         {isHospitalOrClinic && (
           <ControlledInput
             placeholderText="onboarding.signup.hospital_clinic_name"
+            placeholderColor={Colors.grey5}
             control={control}
             name="hospitalClinicName"
             borderColor={

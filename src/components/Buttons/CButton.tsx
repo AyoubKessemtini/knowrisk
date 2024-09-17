@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import { I18nKeyPath } from 'src/i18n/types';
-import { CText, TextColors, TextSizes } from '../CText';
+import { CText, TextColors, TextSizes } from '@components/CText';
 
 type PRH<T extends string, K> = Partial<Record<T, K>> | undefined;
 type ButtonTypes = keyof typeof $buttonTypesColors.light;
@@ -24,10 +24,10 @@ interface CustomButtonProps extends PressableProps {
   mb?: number;
   mt?: number;
   style?: StyleProp<ViewStyle>;
-
   textSize?: TextSizes;
-
   rightAccessory?: JSX.Element;
+  leftAccessory?: JSX.Element;
+  buttonVersion?: 1 | 2 | 3;
 }
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -39,10 +39,10 @@ export const CButton = ({
   mb,
   mt,
   style,
-
   textSize = 'md_bold',
-
   rightAccessory,
+  leftAccessory,
+  buttonVersion = 1,
   ...pressableProps
 }: CustomButtonProps): JSX.Element => {
   const { animatedStyle } = useThemeInterpolation(
@@ -68,13 +68,17 @@ export const CButton = ({
       !!mt && { marginTop: mt },
       style,
       { opacity },
+      buttonVersion === 2 && styles.version2Container,
+      buttonVersion === 3 && styles.version3Container,
     ];
-  }, [animatedStyle, mb, mt, style, opacity]);
+  }, [animatedStyle, mb, mt, style, opacity, buttonVersion]);
 
   const buttonStyles = [
     styles.baseButton,
     !!pressableProps.disabled && styles.disabledButton,
     buttonsTypesStyles?.[buttonType] ?? {},
+    buttonVersion === 2 && styles.version2Button,
+    buttonVersion === 3 && styles.version3Button,
   ];
 
   return (
@@ -86,12 +90,25 @@ export const CButton = ({
         {...pressableProps}
         style={buttonStyles}
       >
+        {leftAccessory && (
+          <View style={styles.leftAccessory}>{leftAccessory}</View>
+        )}
         <CText
-          isCentered
-          size={textSize}
+          isCentered={buttonVersion === 1}
+          size={
+            buttonVersion === 3
+              ? 'lg_medium'
+              : buttonVersion === 2
+                ? 'md_medium'
+                : textSize
+          }
           text={text}
           color={$textsData[buttonType].color}
-          style={styles.baseText}
+          style={[
+            styles.baseText,
+            buttonVersion === 2 && styles.version2Text,
+            buttonVersion === 3 && styles.version3Text,
+          ]}
           textOptions={textOptions}
         />
         {rightAccessory && (
@@ -124,10 +141,33 @@ const $textsData: Record<ButtonTypes, { color: TextColors; size: TextSizes }> =
       color: 'white',
       size: 'sm',
     },
+    magnolia: {
+      color: 'magnolia',
+      size: 'md_medium',
+    },
+    cosmos: {
+      color: 'cosmos',
+      size: 'lg_medium',
+    },
+    brick: {
+      color: 'brick',
+      size: 'md_medium',
+    },
+    fog: {
+      color: 'fog',
+      size: 'md_medium',
+    },
+    purple: {
+      color: 'purple',
+      size: 'md_medium',
+    },
   };
 
 const styles = StyleSheet.create({
-  container: { width: '100%', borderRadius: 16 },
+  container: {
+    width: '100%',
+    borderRadius: 16,
+  },
   baseButton: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -144,10 +184,42 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   rightAccessory: {
-    marginLeft: 8, // Adjust the margin for spacing between text and accessory
+    marginLeft: 8,
   },
   disabledButton: {
     opacity: 0.4,
+  },
+  version2Container: {
+    width: '100%',
+    minHeight: 51,
+    borderRadius: 5,
+  },
+  version2Button: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    minHeight: 51,
+    padding: 12,
+  },
+  version2Text: {
+    marginLeft: 5,
+    color: Colors.purple,
+  },
+  version3Container: {
+    width: '100%',
+    minHeight: 61,
+    borderRadius: 8,
+  },
+  version3Button: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    padding: 16,
+  },
+  version3Text: {
+    color: Colors.brick,
+  },
+  leftAccessory: {
+    marginRight: 8,
   },
 });
 

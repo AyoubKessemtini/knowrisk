@@ -6,17 +6,42 @@
     "mail": "Email",
     "pass": "Password",
     "connect": "Connect",
-    "logout": "Logout",
+    "logout": "Log out",
     "questions_header" : "Q&A",
     "submit": "Submit",
+
+    "contact_email": "Contact@knowlepsy.com",
+    "thank_you": "Thank you!"
+
     "past_days": "Past {{number}} days",
     "latest": "Latest"
+
   },
   "home": {
     "foo": "French Home Screen"
   },
   "profile": {
-    "foo": "French Profile Screen"
+    "foo": "French Profile Screen",
+    "application_settings": "Application Settings",
+    "user_account": "User Account",
+    "edit_profile": "Edit Profile",
+    "information": "Information",
+    "change_password": "Change Password",
+    "emergency_call": "Emergency Call",
+    "profile": "Profile",
+    "help_center": "Help Center",
+    "save_changes": "Save Changes",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password",
+    "genders":{
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "countries":{
+      "fr": "France",
+      "lt": "Lithuania"
+    }
   },
   "language": {
     "english": "English",
@@ -65,7 +90,10 @@
       "hospital_clinic_name_placeholder": "Enter your hospital/clinic name",
       "create_password_placeholder": "Create a password",
       "confirm_password_placeholder": "Confirm your password",
-      "already_have_account" :"Already have an account? "
+      "already_have_account" :"Already have an account? ",
+      "birth_date": "Birth date",
+      "sex": "Sex",
+      "country": "Country"
     },
     "questions_placeholder": {
       "type_your_answer": "Type your answer here...",
@@ -105,6 +133,7 @@
     "steps_number" : "{{steps}} steps",
     "wearability" : "Wearability"
   },
+
   "heart":{
     "heart": "Heart",
     "beat": "beat",
@@ -113,4 +142,32 @@
     "restingHeartRate": "Resting Heart Rate"
   }
 
+
+  "informations":{
+    "app_usage": "App usage",
+    "app_usage_description": "Ensure uninterrupted data flow by keeping the app running. Closing the app may result in data loss.",
+    "notification": "Notification",
+    "notification_description": "Stay informed! Enable notification permissions to receive timely updates and alerts from the app.",
+    "location": "Location",
+    "location_description": "Enhance your experience! Grant GPS permission to unlock location-based features and personalized content.",
+    "bluetooth": "Bluetooth",
+    "bluetooth_description": "Connect seamlessly! Authorize Bluetooth permissions to enable effortless communication with compatible devices.",
+    "battery": "Battery",
+    "battery_description": "Extend app longevity! Adjust battery permissions to prevent automatic closure by your device, ensuring continuous functionality and uninterrupted user experience.",
+    "sleep_description": "Optimize your sleep tracking! Keep the app active during sleep to ensure accurate and insightful analysis of your sleep patterns and quality."
+  },
+
+  "qa":{
+    "intro": "Ally is designed to help you forecast your potential risk of Seizure!",
+    "let_us_know_you_better": "Let us know you better",
+    "question1": "How long ago were you diagnosed with Epilepsy? This question is required.",
+    "question2": "How many seizures do you experience per day/month/year?",
+    "question3": "How frequent are your seizures?This question is required.",
+    "question4": "Do you know your triggers?",
+    "question5": "If yes, please specify your triggers. If no, please type \"N/A\".",
+    "question6": "Please provide your phone number.This question is required.",
+    "question7": "Please provide your email address.",
+    "outro1": "Our team will be in touch for a personalised assistance",
+    "outro2": "Let's turn fear into preparedness with Ally."
+  }
 }

@@ -41,9 +41,7 @@ export const Question4 =
           <CText size="xl_medium" color="purple">
             4.
           </CText>
-          <CText mt={5} size="xl_medium" color="purple">
-            Do you know your triggers?
-          </CText>
+          <CText mt={5} size="xl_medium" color="purple" text="qa.question4" />
           <ChoiceBox options={options} onSelect={handleChoiceSelect} />
         </View>
         <View style={styles.button}>

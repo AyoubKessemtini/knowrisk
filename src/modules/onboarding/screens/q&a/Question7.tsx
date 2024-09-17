@@ -52,9 +52,7 @@ export const Question7 =
           <CText size="xl_medium" color="purple">
             7.
           </CText>
-          <CText mt={5} size="xl_medium" color="purple">
-            Please provide your email address.
-          </CText>
+          <CText mt={5} size="xl_medium" color="purple" text="qa.question7" />
           <LineInput
             placeholderText="onboarding.questions_placeholder.email"
             inputType="qa"

@@ -21,15 +21,20 @@ const pallete = {
   grey1: '#e3e3e3',
   grey2: '#424242',
   grey3: '#475467',
+  grey4: '#47546799',
+  grey5: 'rgba(27, 27, 27, 0.34)',
   purpleGrey: '#9589A8',
   purple1: '#5619B8',
   purple2: '#8754FE',
-  grey4: '#47546799',
   green: '#027A48',
   lightGreen: '#D1FADF',
   yellow: '#FFA224',
   lightYellow: '#FCEFD8',
   deepYellow: '#914421',
+  magnolia: '#FAF8FF',
+  cosmos: '#FFD8D6',
+  brick: '#B42318',
+  fog: '#e4d4ff',
 } as const;
 
 export const Colors = {
@@ -65,6 +70,12 @@ export const Colors = {
       lightGreen: pallete.lightGreen,
       yellow: pallete.yellow,
       deepYellow: pallete.deepYellow,
+
+      magnolia: pallete.magnolia,
+      cosmos: pallete.cosmos,
+      brick: pallete.brick,
+      fog: pallete.fog,
+      fadedPurple: pallete.fadedPurple,
     },
 
     dark: {
@@ -84,6 +95,12 @@ export const Colors = {
       lightGreen: pallete.lightGreen,
       yellow: pallete.yellow,
       deepYellow: pallete.deepYellow,
+
+      magnolia: pallete.magnolia,
+      cosmos: pallete.cosmos,
+      brick: pallete.brick,
+      fog: pallete.fog,
+      fadedPurple: pallete.fadedPurple,
     },
   },
 
@@ -93,12 +110,22 @@ export const Colors = {
       secondary: pallete.primaryWhite,
       success: pallete.primaryWhite,
       danger: pallete.primaryWhite,
+      magnolia: pallete.magnolia,
+      cosmos: pallete.cosmos,
+      brick: pallete.brick,
+      fog: pallete.fog,
+      purple: pallete.purple,
     },
     dark: {
       primary: pallete.deepPurple,
       secondary: pallete.primaryBlack,
       success: pallete.primaryBlack,
       danger: pallete.primaryBlack,
+      magnolia: pallete.magnolia,
+      cosmos: pallete.cosmos,
+      brick: pallete.brick,
+      fog: pallete.fog,
+      purple: pallete.purple,
     },
   },
 };
