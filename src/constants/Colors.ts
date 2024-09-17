@@ -16,6 +16,7 @@ const pallete = {
   blue: '#124E78',
   orange: '#FE5F55',
   lightRed: '#FCCCCC',
+  lightRed2: '#F97066',
   lightPink: '#F5F2FFDE',
   black1: '#202020',
   grey1: '#e3e3e3',

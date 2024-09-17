@@ -14,10 +14,12 @@ import Animated from 'react-native-reanimated';
 import { tabConfig } from '../navigatorConfigs';
 import { TabBarStackRoutes } from '../routes';
 import { RootStackParamList, RootStackScreenProps } from './RootNavigator';
+import { DeviceList } from '@modules/wearable/screens/DeviceList/DeviceList';
 
 export type TabStackParamList = {
   [TabBarStackRoutes.HOME]: undefined;
   [TabBarStackRoutes.PROFILE]: undefined;
+  [TabBarStackRoutes.DEVICE_LIST]: undefined;
 };
 
 export type TabStackScreenProps<T extends keyof TabStackParamList> =
@@ -82,6 +84,24 @@ export function TabNavigator() {
               }}
             />
           )}
+          <Tab.Screen
+            name={TabBarStackRoutes.DEVICE_LIST}
+            component={DeviceList}
+            options={{
+              tabBarIcon: ({ color, focused }) => (
+                <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
+                  <View style={focused && styles.activeTabStyle}>
+                    <Icon
+                      type="ionicon"
+                      name="watch-outline"
+                      size={24}
+                      color={color}
+                    />
+                  </View>
+                </Animated.View>
+              ),
+            }}
+          />
           <Tab.Screen
             name={TabBarStackRoutes.PROFILE}
             component={Profile}
