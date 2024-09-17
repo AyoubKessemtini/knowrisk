@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import { CText, TextColors, TextSizes } from '@components/CText';
+import { CText } from '@components/CText';
 import { Colors } from '@constants/Colors';
 import Icon from 'react-native-easy-icon';
 
@@ -72,14 +72,5 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     paddingHorizontal: 5,
     paddingVertical: 5,
-  },
-  centered: {
-    alignSelf: 'center',
-  },
-  notCentered: {
-    alignSelf: 'flex-start',
-  },
-  accessory: {
-    marginHorizontal: 5,
   },
 });
