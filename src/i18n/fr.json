@@ -9,8 +9,13 @@
     "logout": "Log out",
     "questions_header" : "Q&A",
     "submit": "Submit",
+
     "contact_email": "Contact@knowlepsy.com",
     "thank_you": "Thank you!"
+
+    "past_days": "Past {{number}} days",
+    "latest": "Latest"
+
   },
   "home": {
     "foo": "French Home Screen"
@@ -128,6 +133,15 @@
     "steps_number" : "{{steps}} steps",
     "wearability" : "Wearability"
   },
+
+  "heart":{
+    "heart": "Heart",
+    "beat": "beat",
+    "bpm": "BPM",
+    "heartRate": "heartRate",
+    "restingHeartRate": "Resting Heart Rate"
+  }
+
 
   "informations":{
     "app_usage": "App usage",

@@ -14,6 +14,10 @@ const ImageAssets = {
   MOON_ICON: require('./moon_icon.png'),
   NOTIFICATION_ICON: require('./notification_icon.png'),
   PIN_ICON: require('./pin_icon.png'),
+
+  BAR_CHART_ICON: require('./bar_Chart_Icon.png'),
+  LINE_CHART_ICON: require('./line_Chart_Icon.png'),
+
 };
 
 export default ImageAssets;
