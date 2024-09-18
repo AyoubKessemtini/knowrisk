@@ -21,6 +21,7 @@ import { LocationWeather } from '@components/Cards/LocationWeatherCard';
 import { useWeather } from '@hooks/weather';
 import { WearableCard } from '@components/Cards/WearableCard';
 import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard';
+import { useGetMerchantByIdQuery } from '@query/queries/fitBit/fitBitMutations';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -43,7 +44,9 @@ export const Home: React.FC = () => {
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
   };
+  const { data: hrvData } = useGetMerchantByIdQuery({ date: '2024-09-14' });
 
+  console.log(hrvData);
   return (
     <Screen
       fullscreen
