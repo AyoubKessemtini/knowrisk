@@ -51,9 +51,12 @@ export const Question6 =
       >
         <Header
           hasBackButton
+          useCustomBackButton
           currentStep={6}
           totalSteps={7}
           text="common.questions_header"
+          backgroundColor={Colors.lightPurple}
+          textColor="purple1"
         />
         <View style={styles.wrapper}>
           <CText size="xl_medium" color="purple">

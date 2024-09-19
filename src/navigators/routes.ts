@@ -31,4 +31,5 @@ export const OnboardingStackRoutes = {
   QUESTION_SIX_SCREEN: 'Question6',
   QUESTION_SEVEN_SCREEN: 'Question7',
   THANKYOU_QA_SCREEN: 'ThankyouScreen',
+  FORGOT_PASSWORD_SCREEN: 'ForgotPasswordScreen',
 } as const;

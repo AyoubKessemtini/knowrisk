@@ -71,13 +71,21 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
         text="onboarding.login"
         onPress={handleSubmit(onPressHandler)}
       />
-      <CText
-        isCentered
-        text="onboarding.forgotPass"
-        color="deepPurple"
-        size="md"
-        mt={10}
-      />
+      <Pressable
+        onPress={() => {
+          navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+            screen: OnboardingStackRoutes.FORGOT_PASSWORD_SCREEN,
+          });
+        }}
+      >
+        <CText
+          isCentered
+          text="onboarding.forgotPass"
+          color="deepPurple"
+          size="md"
+          mt={10}
+        />
+      </Pressable>
       <CText isCentered size="md">
         <CText text="onboarding.not_member" color="white" size="md" mb={30} />
         <Pressable

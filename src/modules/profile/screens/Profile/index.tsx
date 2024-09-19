@@ -12,7 +12,7 @@ import { CText } from '@components/CText';
 import Icon from 'react-native-easy-icon';
 import { Colors } from '@constants/Colors';
 import HelpCenterButton from '@components/Buttons/HelpCenterButton';
-import { ProfileHeader } from '@components/Headers/ProfileHeader';
+import { Header } from '@components/Headers/Header';
 
 export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const { logout } = useAuth();
@@ -20,7 +20,7 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
 
   return (
     <Screen fullscreen withoutTopEdge noHorizontalPadding>
-      <ProfileHeader hasBackButton text="profile.profile" />
+      <Header hasBackButton text="profile.profile" />
       <View style={styles.line} />
       <View style={styles.container}>
         <View style={styles.profileHeader}>
@@ -66,7 +66,6 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
           />
         </View>
 
-        {/* Application Settings Section */}
         <View style={styles.section}>
           <CText
             size="lg_medium"
@@ -142,10 +141,8 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
           />
         </View>
 
-        {/* Help Center Section */}
         <HelpCenterButton onPress={() => {}} />
 
-        {/* Logout Button */}
         <CButton
           mt={20}
           buttonVersion={3}
