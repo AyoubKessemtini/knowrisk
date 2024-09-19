@@ -3,16 +3,14 @@ import { CText } from '@components/CText';
 import { Header } from '@components/Headers/Header';
 import { Screen } from '@components/Screen';
 import { RootStackRoutes } from '@navigators/routes';
-import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { CImage } from '@components/CImage';
-import ImageAssets from '@assets/images';
 import { Colors } from '@constants/Colors';
+import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 
-export const ThankyouScreen =
-  ({}: OnboardingStackScreenProps<'ThankyouScreen'>): JSX.Element => {
+export const ReportSeizureIntro =
+  ({}: RootStackScreenProps<'ReportSeizureIntro'>): JSX.Element => {
     const navigation = useNavigation();
 
     return (
@@ -24,44 +22,32 @@ export const ThankyouScreen =
         <Header
           hasBackButton
           useCustomBackButton
-          text="common.questions_header"
+          text="report_seizure.report_seizure"
           backgroundColor={Colors.lightPurple}
-          textColor="black"
+          textColor="purple1"
         />
-        <View style={styles.line}></View>
         <View style={styles.wrapper}>
-          <CImage
-            source={ImageAssets.THANKYOU_HEART}
-            height={280}
-            width={280}
-          />
           <CText
-            mt={40}
-            size="xxl_bold"
+            size="xl_medium"
             color="purple1"
+            text="report_seizure.intro_question"
             isCentered
-            text="common.thank_you"
-          />
-          <CText
-            mt={20}
-            size="lg_medium"
-            color="purpleGrey"
-            isCentered
-            text="qa.outro1"
           />
           <CText
             mt={20}
             size="sm_medium"
-            color="purpleGrey"
+            color="grey4"
+            text="report_seizure.help_us"
             isCentered
-            text="qa.outro2"
           />
         </View>
         <View style={styles.button}>
           <CButton
-            text="common.submit"
+            text="common.continue"
             onPress={() => {
-              navigation.navigate(RootStackRoutes.PROFILE_SCREEN);
+              navigation.navigate(
+                RootStackRoutes.REPORT_SEIZURE_QUESTION_ONE_SCREEN,
+              );
             }}
           />
         </View>
@@ -76,15 +62,10 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    paddingHorizontal: 29,
   },
   button: {
     paddingHorizontal: 20,
     paddingBottom: 30,
-  },
-  line: {
-    height: 1,
-    borderBottomWidth: 0.2,
-    borderColor: Colors.fadedPurple,
   },
 });

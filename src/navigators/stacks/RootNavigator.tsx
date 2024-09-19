@@ -19,6 +19,11 @@ import { KEYS } from '@storage/Keys';
 import { SettingsInformationScreen } from '@modules/profile/screens/Settings/Information_Screen';
 import { EditProfileScreen } from '../../modules/profile/screens/Settings/EditProfile_Screen';
 import { ChangePasswordScreen } from '../../modules/profile/screens/Settings/ChangePassword_Screen';
+import { ReportSeizureIntro } from '../../modules/home/screens/ReportSeizureScreen/ReportSeizureIntro';
+import { ReportSeizureQuestion1 } from '../../modules/home/screens/ReportSeizureScreen/ReportSeizureQuestion1';
+import { ReportSeizureQuestion2 } from '../../modules/home/screens/ReportSeizureScreen/ReportSeizureQuestion2';
+import { ReportSeizureQuestion3 } from '../../modules/home/screens/ReportSeizureScreen/ReportSeizureQuestion3';
+import { ReportSeizureQuestion4 } from '../../modules/home/screens/ReportSeizureScreen/ReportSeizureQuestion4';
 /* import { useAppSelector } from '@store/index'; */
 
 export type RootStackParamList = {
@@ -29,6 +34,11 @@ export type RootStackParamList = {
   [RootStackRoutes.SETTINGS_INFORMATION_SCREEN]: undefined;
   [RootStackRoutes.EDIT_PROFILE_SCREEN]: undefined;
   [RootStackRoutes.CHANGE_PASSWORD_SCREEN]: undefined;
+  [RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN]: undefined;
+  [RootStackRoutes.REPORT_SEIZURE_QUESTION_ONE_SCREEN]: undefined;
+  [RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN]: undefined;
+  [RootStackRoutes.REPORT_SEIZURE_QUESTION_THREE_SCREEN]: undefined;
+  [RootStackRoutes.REPORT_SEIZURE_QUESTION_FOUR_SCREEN]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -76,6 +86,27 @@ export function RootNavigator() {
       <Stack.Screen
         name={RootStackRoutes.CHANGE_PASSWORD_SCREEN}
         component={ChangePasswordScreen}
+      />
+
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN}
+        component={ReportSeizureIntro}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_QUESTION_ONE_SCREEN}
+        component={ReportSeizureQuestion1}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN}
+        component={ReportSeizureQuestion2}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_QUESTION_THREE_SCREEN}
+        component={ReportSeizureQuestion3}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_QUESTION_FOUR_SCREEN}
+        component={ReportSeizureQuestion4}
       />
     </Stack.Navigator>
   );

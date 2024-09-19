@@ -175,5 +175,16 @@
     "question7": "Please provide your email address.",
     "outro1": "Our team will be in touch for a personalised assistance",
     "outro2": "Let's turn fear into preparedness with Ally."
+  },
+
+
+  "report_seizure": {
+    "report_seizure": "Report seizure",
+    "intro_question": "Did you recently have a seizure?",
+    "help_us": "Help us better understand how it happened",
+    "last_seizure_time_question": "Give us a time frame of your last seizure",
+    "question2": "Did you drink any alcohol before ?",
+    "question3": "Did you exercice before ?",
+    "question4": "What did you eat before ?"
   }
 }

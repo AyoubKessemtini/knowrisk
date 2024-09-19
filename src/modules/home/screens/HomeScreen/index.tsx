@@ -21,10 +21,12 @@ import { LocationWeather } from '@components/Cards/LocationWeatherCard';
 import { useWeather } from '@hooks/weather';
 import { WearableCard } from '@components/Cards/WearableCard';
 import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard';
+import { RootStackRoutes } from '../../../../navigators/routes';
+import { useNavigation } from '@react-navigation/native';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  const navigation = useNavigation();
   // const {
   //   healthData,
   //   loading: healthDataLoading,
@@ -62,7 +64,11 @@ export const Home: React.FC = () => {
           seizureForecast="Moderate"
           isDevicePaired={true}
         />
-        <ReportSeizureCard onPress={() => {}} />
+        <ReportSeizureCard
+          onPress={() => {
+            navigation.navigate(RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN);
+          }}
+        />
         <DateSelector
           initialDate={selectedDate}
           onDateChange={handleDateChange}
