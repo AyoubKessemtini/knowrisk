@@ -7,6 +7,7 @@ import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigat
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Colors } from '@constants/Colors';
 
 export const IntroQuestionScreen =
   ({}: OnboardingStackScreenProps<'IntroQuestionScreen'>): JSX.Element => {
@@ -20,9 +21,10 @@ export const IntroQuestionScreen =
       >
         <Header
           hasBackButton
-          currentStep={1}
-          totalSteps={7}
+          useCustomBackButton
           text="common.questions_header"
+          backgroundColor={Colors.lightPurple}
+          textColor="purple1"
         />
         <View style={styles.wrapper}>
           <CText size="xl_medium" color="purple" text="qa.intro" />

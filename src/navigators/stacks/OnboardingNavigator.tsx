@@ -19,6 +19,7 @@ import { Question3 } from '@modules/onboarding/screens/q&a/Question3';
 import { Question4 } from '@modules/onboarding/screens/q&a/Question4';
 import { Question6 } from '@modules/onboarding/screens/q&a/Question6';
 import { ThankyouScreen } from '@modules/onboarding/screens/q&a/ThankyouQ&A_Screen';
+import { ForgotPasswordScreen } from '../../modules/onboarding/screens/forget_password/ForgetPasswordScreen';
 
 export type OnboardingStackParamList = {
   [OnboardingStackRoutes.LOGIN_SCREEN]: undefined;
@@ -33,6 +34,7 @@ export type OnboardingStackParamList = {
   [OnboardingStackRoutes.QUESTION_SIX_SCREEN]: undefined;
   [OnboardingStackRoutes.QUESTION_SEVEN_SCREEN]: undefined;
   [OnboardingStackRoutes.THANKYOU_QA_SCREEN]: undefined;
+  [OnboardingStackRoutes.FORGOT_PASSWORD_SCREEN]: undefined;
 };
 
 export type OnboardingStackScreenProps<
@@ -99,6 +101,11 @@ export function OnboardingNavigator() {
       <Stack.Screen
         name={OnboardingStackRoutes.THANKYOU_QA_SCREEN}
         component={ThankyouScreen}
+      />
+
+      <Stack.Screen
+        name={OnboardingStackRoutes.FORGOT_PASSWORD_SCREEN}
+        component={ForgotPasswordScreen}
       />
     </Stack.Navigator>
   );

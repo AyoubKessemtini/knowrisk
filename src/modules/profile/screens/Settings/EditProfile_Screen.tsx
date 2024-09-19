@@ -19,7 +19,7 @@ import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
 import { DropdownSelector } from '@components/Dropdowns/DropdownSelector';
 import { PhoneNumberInput } from '@components/Inputs/PhoneNumberInput';
 import { I18nKeyPath } from '../../../../i18n/types';
-import { ProfileHeader } from '@components/Headers/ProfileHeader';
+import { Header } from '@components/Headers/Header';
 
 export const EditProfileScreen =
   ({}: RootStackScreenProps<'EditProfileScreen'>): JSX.Element => {
@@ -68,10 +68,10 @@ export const EditProfileScreen =
 
     return (
       <Screen withoutTopEdge noHorizontalPadding>
-        <ProfileHeader
+        <Header
           hasBackButton
           text="profile.edit_profile"
-          backgroundColor={Colors.magnolia}
+          backgroundColor={Colors.lightPurple}
         />
         <View style={styles.line}></View>
         <View style={styles.container}>

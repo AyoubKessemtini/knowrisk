@@ -6,8 +6,8 @@ import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
 import { I18nKeyPath } from '../../../../i18n/types';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
-import { ProfileHeader } from '@components/Headers/ProfileHeader';
 import { Colors } from '@constants/Colors';
+import { Header } from '@components/Headers/Header';
 
 export const SettingsInformationScreen =
   ({}: RootStackScreenProps<'SettingsInformationScreen'>): JSX.Element => {
@@ -50,10 +50,10 @@ export const SettingsInformationScreen =
 
     return (
       <Screen withoutTopEdge noHorizontalPadding>
-        <ProfileHeader
+        <Header
           hasBackButton
-          text="profile.information"
-          backgroundColor={Colors.magnolia}
+          text="profile.edit_profile"
+          backgroundColor={Colors.lightPurple}
         />
         <View style={styles.line}></View>
         <View style={styles.container}>
