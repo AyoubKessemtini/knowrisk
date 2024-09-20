@@ -1,25 +1,40 @@
 import React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import { Colors } from '@constants/Colors';
 import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
 
 interface MainHeaderProps {
-  profilePicture: string;
+  firstName: string;
+  lastName: string;
 }
 
-export const MainHeader = ({ profilePicture }: MainHeaderProps) => {
+const getInitials = (firstName: string, lastName: string) => {
+  return `${firstName[0] || ''}${lastName[0] || ''}`.toUpperCase();
+};
+
+const getBackgroundColor = (name: string) => {
+  // Simple hash function to generate a color based on the name
+  const hash = Array.from(name).reduce(
+    (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
+    0,
+  );
+  const color = `hsl(${hash % 360}, 70%, 80%)`;
+  return color;
+};
+
+export const MainHeader = ({ firstName, lastName }: MainHeaderProps) => {
+  const initials = getInitials(firstName, lastName);
+  const backgroundColor = getBackgroundColor(firstName + lastName);
+
   return (
     <View style={styles.container}>
       <CImage source={ImageAssets.APP_ICON} width={151} height={26} />
-      {profilePicture && (
-        <CImage
-          source={profilePicture}
-          width={43}
-          height={43}
-          containerStyle={{ borderRadius: 22 }}
-        />
-      )}
+      {initials ? (
+        <View style={[styles.initialsContainer, { backgroundColor }]}>
+          <Text style={styles.initialsText}>{initials}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -41,5 +56,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
       },
     }),
+  },
+  initialsContainer: {
+    width: 43,
+    height: 43,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  initialsText: {
+    color: Colors.primaryWhite,
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });
