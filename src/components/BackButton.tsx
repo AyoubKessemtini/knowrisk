@@ -16,7 +16,7 @@ export const BackButton = () => {
 
   return (
     <Pressable onPress={goBack} style={styles.pressableStyle}>
-      <CImage source={ImageAssets.LEFT_ARROW} height={16} width={16} />
+      <CImage source={ImageAssets.LEFT_ARROW} height={13} width={13} />
     </Pressable>
   );
 };
@@ -24,7 +24,7 @@ export const BackButton = () => {
 const styles = StyleSheet.create({
   pressableStyle: {
     backgroundColor: Colors.deepPurple,
-    padding: 9,
-    borderRadius: 12,
+    padding: 7,
+    borderRadius: 10,
   },
 });

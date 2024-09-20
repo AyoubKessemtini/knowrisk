@@ -2,13 +2,14 @@ import { CButton } from '@components/Buttons/CButton';
 import { CText } from '@components/CText';
 import { Header } from '@components/Headers/Header';
 import { Screen } from '@components/Screen';
-import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
+import { RootStackRoutes } from '@navigators/routes';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
+import { Colors } from '@constants/Colors';
 
 export const ThankyouScreen =
   ({}: OnboardingStackScreenProps<'ThankyouScreen'>): JSX.Element => {
@@ -20,7 +21,14 @@ export const ThankyouScreen =
         noHorizontalPadding
         containerStyles={styles.container}
       >
-        <Header hasBackButton text="common.questions_header" />
+        <Header
+          hasBackButton
+          useCustomBackButton
+          text="common.questions_header"
+          backgroundColor={Colors.lightPurple}
+          textColor="black"
+        />
+        <View style={styles.line}></View>
         <View style={styles.wrapper}>
           <CImage
             source={ImageAssets.THANKYOU_HEART}
@@ -53,9 +61,7 @@ export const ThankyouScreen =
           <CButton
             text="common.submit"
             onPress={() => {
-              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
-              });
+              navigation.navigate(RootStackRoutes.EDIT_PROFILE_SCREEN);
             }}
           />
         </View>
@@ -75,5 +81,10 @@ const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 20,
     paddingBottom: 30,
+  },
+  line: {
+    height: 1,
+    borderBottomWidth: 0.2,
+    borderColor: Colors.fadedPurple,
   },
 });

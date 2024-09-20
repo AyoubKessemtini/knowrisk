@@ -10,6 +10,7 @@ import { View } from 'react-native';
 import { styles } from './styles';
 import { ChoiceBox } from '@components/ChoiceBoxs/ChoiceBox';
 import { I18nKeyPath } from '../../../../i18n/types';
+import { Colors } from '@constants/Colors';
 
 export const Question3 =
   ({}: OnboardingStackScreenProps<'Question3'>): JSX.Element => {
@@ -38,9 +39,12 @@ export const Question3 =
       >
         <Header
           hasBackButton
+          useCustomBackButton
           currentStep={3}
           totalSteps={7}
           text="common.questions_header"
+          backgroundColor={Colors.lightPurple}
+          textColor="purple1"
         />
         <View style={styles.wrapper}>
           <CText size="xl_medium" color="purple">

@@ -14,8 +14,7 @@ import {
   changePasswordScheme,
   ChangePasswordScheme,
 } from '../../../../schemes/password.scheme';
-
-import { ProfileHeader } from '@components/Headers/ProfileHeader';
+import { Header } from '@components/Headers/Header';
 
 export const ChangePasswordScreen =
   ({}: RootStackScreenProps<'ChangePasswordScreen'>): JSX.Element => {
@@ -40,10 +39,10 @@ export const ChangePasswordScreen =
 
     return (
       <Screen withoutTopEdge noHorizontalPadding>
-        <ProfileHeader
+        <Header
           hasBackButton
-          text="profile.change_password"
-          backgroundColor={Colors.magnolia}
+          text="profile.edit_profile"
+          backgroundColor={Colors.lightPurple}
         />
         <View style={styles.line}></View>
         <View style={styles.container}>
