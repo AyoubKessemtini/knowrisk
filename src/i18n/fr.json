@@ -9,6 +9,7 @@
     "logout": "Log out",
     "questions_header" : "Q&A",
     "submit": "Submit",
+    "date": "Date",
 
     "contact_email": "Contact@knowlepsy.com",
     "thank_you": "Thank you!",
@@ -185,6 +186,8 @@
     "last_seizure_time_question": "Give us a time frame of your last seizure",
     "question2": "Did you drink any alcohol before ?",
     "question3": "Did you exercice before ?",
-    "question4": "What did you eat before ?"
+    "question4": "What did you eat before ?",
+    "it_happened": "It happened",
+    "between": "Between"
   }
 }

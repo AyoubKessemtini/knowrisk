@@ -73,9 +73,10 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
       />
       <Pressable
         onPress={() => {
-          navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-            screen: OnboardingStackRoutes.FORGOT_PASSWORD_SCREEN,
-          });
+          // navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+          //   screen: OnboardingStackRoutes.FORGOT_PASSWORD_SCREEN,
+          // });
+          navigation.navigate(RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN);
         }}
       >
         <CText

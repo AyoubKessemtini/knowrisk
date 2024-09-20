@@ -5,13 +5,19 @@ import { Screen } from '@components/Screen';
 import { RootStackRoutes } from '@navigators/routes';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@constants/Colors';
+import { BirthDateSelector } from '../../../../components/DatePicker/BirthdayDatePicker';
+import { HourPicker } from '../../components/HourPicker';
 
 export const ReportSeizureQuestion1 =
   ({}: RootStackScreenProps<'ReportSeizureQuestion1'>): JSX.Element => {
     const navigation = useNavigation();
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const handleDateChange = (newDate: Date) => {
+      setSelectedDate(newDate);
+    };
 
     return (
       <Screen
@@ -35,7 +41,21 @@ export const ReportSeizureQuestion1 =
           />
 
           {/* Date Picker Component with inputs */}
+          <View style={styles.square}>
+            <CText text="common.date" />
+            <BirthDateSelector
+              initialDate={selectedDate}
+              onDateChange={handleDateChange}
+            />
 
+            <CText text="report_seizure.it_happened" />
+
+            <View style={styles.horizontalContainer}>
+              <HourPicker />
+              <CText text="report_seizure.between" />
+              <HourPicker />
+            </View>
+          </View>
           <CButton
             mt={20}
             text="common.continue"
@@ -58,5 +78,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 29,
+  },
+  square: {
+    borderRadius: 8,
+    padding: 10,
+    backgroundColor: '#fff',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  horizontalContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
   },
 });
