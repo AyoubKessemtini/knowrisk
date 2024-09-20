@@ -8,6 +8,10 @@ import { RDAuthRepo } from './adapters/real/repositories/RDAuthRepo';
 import { LoginWithEmail } from './usecases/authRepository/Login_With_Email';
 import { RDFitBit } from './adapters/real/repositories/RDFitBitRepo';
 import { GetHrvByDate } from './usecases/fitBitRepository/GetHrvByDate';
+import { GetSleepByDate } from '@core/usecases/fitBitRepository/GetSleepByDate.ts';
+import { GetStressByDate } from '@core/usecases/fitBitRepository/GetStressByDate.ts';
+import { GetSpo2ByDate } from '@core/usecases/fitBitRepository/GetSpo2DataByDate.ts';
+import { GetActivitiesByDate } from '@core/usecases/fitBitRepository/GetActivitiesByDate.ts';
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -44,8 +48,21 @@ export const Core = (configuration: CoreConfiguration) => {
   const getConversations = new GetConversations(conversationsRepository);
   const sendIOSHealthData = new SendIOSHealthData(iosHealthDataRepo);
   const getHrvByDate = new GetHrvByDate(fitBitRepo);
+  const getSleepByDate = new GetSleepByDate(fitBitRepo);
+  const getStressByDate = new GetStressByDate(fitBitRepo);
+  const getSpo2ByDate = new GetSpo2ByDate(fitBitRepo);
+  const getActivities2ByDate = new GetActivitiesByDate(fitBitRepo);
 
   // fitbit
 
-  return { getConversations, sendIOSHealthData, loginWithEmail, getHrvByDate };
+  return {
+    getConversations,
+    sendIOSHealthData,
+    loginWithEmail,
+    getHrvByDate,
+    getSleepByDate,
+    getStressByDate,
+    getSpo2ByDate,
+    getActivities2ByDate,
+  };
 };
