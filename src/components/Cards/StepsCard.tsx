@@ -20,7 +20,7 @@ export const StepsCard = ({ steps, lastUpdated }: StepsCardProps) => {
 
       <View style={styles.row}>
         <CText color="deepPurple" size="lg_semiBold">
-          {steps}
+          {steps ? steps : 0}
         </CText>
         <CText text="home_screen.steps" size="sm_light" color="grey3" />
       </View>
