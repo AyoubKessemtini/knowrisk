@@ -21,6 +21,13 @@ import { LocationWeather } from '@components/Cards/LocationWeatherCard';
 import { useWeather } from '@hooks/weather';
 import { WearableCard } from '@components/Cards/WearableCard';
 import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard';
+import {
+  useGetActivitiesByDate,
+  useGetMerchantByIdQuery,
+  useGetSleepByDate,
+  useGetSpo2ByDate,
+  useGetStressByDate,
+} from '@query/queries/fitBit/fitBitMutations';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -43,7 +50,19 @@ export const Home: React.FC = () => {
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
   };
+  const { data: hrvData } = useGetMerchantByIdQuery({ date: '2024-09-14' });
+  const { data: sleepData } = useGetSleepByDate({ date: '2024-09-16' });
+  const { data: stressData } = useGetStressByDate({ date: '2024-09-16' });
+  const { data: spo2Data } = useGetSpo2ByDate({ date: '2024-09-16' });
+  const { data: activitiesData } = useGetActivitiesByDate({
+    date: '2024-09-16',
+  });
 
+  console.log('hrv data', hrvData);
+  console.log('sleep data :', sleepData);
+  console.log('stress data :', stressData);
+  console.log('spo2 data :', spo2Data);
+  console.log('activities data :', activitiesData);
   return (
     <Screen
       fullscreen
