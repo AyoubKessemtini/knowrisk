@@ -8,8 +8,9 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@constants/Colors';
-import { BirthDateSelector } from '../../../../components/DatePicker/BirthdayDatePicker';
+import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
 import { HourPicker } from '../../components/HourPicker';
+import { styles } from './styles';
 
 export const ReportSeizureQuestion1 =
   ({}: RootStackScreenProps<'ReportSeizureQuestion1'>): JSX.Element => {
@@ -40,8 +41,7 @@ export const ReportSeizureQuestion1 =
             isCentered
           />
 
-          {/* Date Picker Component with inputs */}
-          <View style={styles.square}>
+          <View style={style.square}>
             <CText text="common.date" />
             <BirthDateSelector
               initialDate={selectedDate}
@@ -50,12 +50,14 @@ export const ReportSeizureQuestion1 =
 
             <CText text="report_seizure.it_happened" />
 
-            <View style={styles.horizontalContainer}>
+            <View style={style.horizontalContainer}>
               <HourPicker />
               <CText text="report_seizure.between" />
               <HourPicker />
             </View>
           </View>
+        </View>
+        <View style={styles.button}>
           <CButton
             mt={20}
             text="common.continue"
@@ -70,18 +72,11 @@ export const ReportSeizureQuestion1 =
     );
   };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  wrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 29,
-  },
+const style = StyleSheet.create({
   square: {
+    marginTop: 20,
     borderRadius: 8,
-    padding: 10,
+    padding: 12,
     backgroundColor: '#fff',
     elevation: 3,
     shadowColor: '#000',
