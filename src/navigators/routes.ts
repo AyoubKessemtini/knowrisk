@@ -11,6 +11,7 @@ export const RootStackRoutes = {
   REPORT_SEIZURE_QUESTION_TWO_SCREEN: 'ReportSeizureQuestion2',
   REPORT_SEIZURE_QUESTION_THREE_SCREEN: 'ReportSeizureQuestion3',
   REPORT_SEIZURE_QUESTION_FOUR_SCREEN: 'ReportSeizureQuestion4',
+  SEIZURE_FORCAST_SCREEN: 'SeizureForecastScreen',
 } as const;
 
 export const TabBarStackRoutes = {

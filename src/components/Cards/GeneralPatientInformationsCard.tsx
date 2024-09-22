@@ -1,8 +1,10 @@
 import { CText } from '@components/CText';
 import TextChip from '@components/TextChip';
 import { Colors } from '@constants/Colors';
+import { RootStackRoutes } from '@navigators/routes';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 import Icon from 'react-native-easy-icon';
 
 interface PatientInfoCardProps {
@@ -26,6 +28,7 @@ export const PatientInfoCard = ({
   weather,
   isDevicePaired,
 }: PatientInfoCardProps) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.card}>
       {/* Header Section */}
@@ -97,7 +100,12 @@ export const PatientInfoCard = ({
           </CText>
         </View>
 
-        <View style={styles.detailItem}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate(RootStackRoutes.SEIZURE_FORCAST_SCREEN);
+          }}
+          style={styles.detailItem}
+        >
           <CText color="darkPurple" size="xm_medium">
             Seizure Forecast Calendar :
           </CText>
@@ -107,7 +115,7 @@ export const PatientInfoCard = ({
             size={20}
             color={Colors.grey4}
           />
-        </View>
+        </Pressable>
 
         <View style={styles.detailItem}>
           <CText color="darkPurple" size="xm_medium">
