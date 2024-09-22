@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.deepPurple, // Assuming Colors.deepPurple matches the image
+    backgroundColor: Colors.deepPurple,
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,

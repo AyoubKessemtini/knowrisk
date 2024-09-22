@@ -7,6 +7,8 @@ import { WeatherCard } from '@components/Cards/WeatherCard';
 import { StepsCard } from '@components/Cards/StepsCard';
 import { LocationWeather } from '@components/Cards/LocationWeatherCard';
 import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard';
+import { RootStackRoutes } from '../../../../navigators/routes';
+import { useNavigation } from '@react-navigation/native';
 
 import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
 import { DateSelector } from '@components/DatePicker/DatePicker';
@@ -27,8 +29,23 @@ import { ReportSeizureCard } from '@components/Cards/ReportSeizureCard';
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const navigation = useNavigation();
+  // const {
+  //   healthData,
+  //   loading: healthDataLoading,
+  //   error: healthDataError,
+  // } = useFetchHealthData(selectedDate);
+  const {
+    weather,
+    // loading: weatherLoading,
+    // error: weatherError,
+  } = useWeather();
+  // const [currentSegment, setCurrentSegment] = useState<SegmentType>('overview');
+
+
   // Fetch health data for the selected date
   const { healthData } = useFetchHealthData(selectedDate);
+
 
   // Fetch weather data
   const { weather } = useWeather();
@@ -81,7 +98,11 @@ export const Home: React.FC = () => {
           seizureForecast="Moderate"
           isDevicePaired={true}
         />
-        <ReportSeizureCard onPress={() => {}} />
+        <ReportSeizureCard
+          onPress={() => {
+            navigation.navigate(RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN);
+          }}
+        />
         <DateSelector
           initialDate={selectedDate}
           onDateChange={handleDateChange}

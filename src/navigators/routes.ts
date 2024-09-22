@@ -6,6 +6,11 @@ export const RootStackRoutes = {
   SETTINGS_INFORMATION_SCREEN: 'SettingsInformationScreen',
   EDIT_PROFILE_SCREEN: 'EditProfileScreen',
   CHANGE_PASSWORD_SCREEN: 'ChangePasswordScreen',
+  REPORT_SEIZURE_INTRO_SCREEN: 'ReportSeizureIntro',
+  REPORT_SEIZURE_QUESTION_ONE_SCREEN: 'ReportSeizureQuestion1',
+  REPORT_SEIZURE_QUESTION_TWO_SCREEN: 'ReportSeizureQuestion2',
+  REPORT_SEIZURE_QUESTION_THREE_SCREEN: 'ReportSeizureQuestion3',
+  REPORT_SEIZURE_QUESTION_FOUR_SCREEN: 'ReportSeizureQuestion4',
 } as const;
 
 export const TabBarStackRoutes = {

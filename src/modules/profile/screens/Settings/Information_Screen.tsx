@@ -52,7 +52,7 @@ export const SettingsInformationScreen =
       <Screen withoutTopEdge noHorizontalPadding>
         <Header
           hasBackButton
-          text="profile.edit_profile"
+          text="profile.information"
           backgroundColor={Colors.lightPurple}
         />
         <View style={styles.line}></View>

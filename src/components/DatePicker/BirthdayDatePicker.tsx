@@ -38,11 +38,9 @@ export const BirthDateSelector = ({
         style={styles.dateContainer}
         onPress={() => setOpen(true)}
       >
-        {/* Date text on the left */}
         <CText size="sm_medium" color="black" style={styles.dateText}>
           {formatDate(date)}
         </CText>
-        {/* Calendar icon on the right */}
         <Feather
           name="calendar"
           size={21}
