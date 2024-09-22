@@ -26,7 +26,7 @@ export const StepsCard = ({ steps, lastUpdated }: StepsCardProps) => {
       </View>
 
       <CText
-        size="sm"
+        size="xs"
         color="grey4"
         text="home_screen.last_updated"
         textOptions={{ date: lastUpdated }}

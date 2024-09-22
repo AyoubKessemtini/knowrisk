@@ -4936,7 +4936,7 @@ hermes-profile-transformer@^0.0.6:
   dependencies:
     source-map "^0.7.3"
 
-hoist-non-react-statics@^3.3.0:
+hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1:
   version "3.3.2"
   resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -6015,7 +6015,7 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz"
   integrity sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==
 
-lodash@*, lodash@^4.17.13, lodash@^4.17.21:
+lodash@*, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -6115,7 +6115,7 @@ mdn-data@2.0.30:
   resolved "https://registry.npmjs.org/mdn-data/-/mdn-data-2.0.30.tgz"
   integrity sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==
 
-memoize-one@^5.0.0:
+memoize-one@^5.0.0, memoize-one@^5.2.1:
   version "5.2.1"
   resolved "https://registry.npmjs.org/memoize-one/-/memoize-one-5.2.1.tgz"
   integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
@@ -6433,6 +6433,11 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+moment@^2.29.4:
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
 
 ms@2.0.0:
   version "2.0.0"
@@ -7010,7 +7015,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@15.8.1, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@15.8.1, prop-types@^15.5.10, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -7145,6 +7150,21 @@ react-native-bootsplash@^5.1.3:
     sharp "^0.32.6"
     ts-dedent "^2.2.0"
     xml-formatter "^3.6.0"
+
+react-native-calendars@^1.1307.0:
+  version "1.1307.0"
+  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.1307.0.tgz#2cb8c5abd322037e9b3ef5605afa86f25347068f"
+  integrity sha512-Fl9NxPgkXw6aboGOifER8Np+p8im753IUGh1sOy7eMuDAP+x5fSDw1K5GnChdVAKWAdLfsNWFIyYehHChf5vmw==
+  dependencies:
+    hoist-non-react-statics "^3.3.1"
+    lodash "^4.17.15"
+    memoize-one "^5.2.1"
+    prop-types "^15.5.10"
+    react-native-swipe-gestures "^1.0.5"
+    recyclerlistview "^4.0.0"
+    xdate "^0.8.0"
+  optionalDependencies:
+    moment "^2.29.4"
 
 react-native-chart-kit@^6.12.0:
   version "6.12.0"
@@ -7287,6 +7307,11 @@ react-native-svg@^15.7.1:
     css-select "^5.1.0"
     css-tree "^1.1.3"
     warn-once "0.1.1"
+
+react-native-swipe-gestures@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz#a172cb0f3e7478ccd681fd36b8bfbcdd098bde7c"
+  integrity sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw==
 
 react-native-vector-icons@^10.0.2:
   version "10.1.0"
@@ -7436,7 +7461,7 @@ recast@^0.21.0:
     source-map "~0.6.1"
     tslib "^2.0.1"
 
-recyclerlistview@4.2.1:
+recyclerlistview@4.2.1, recyclerlistview@^4.0.0:
   version "4.2.1"
   resolved "https://registry.npmjs.org/recyclerlistview/-/recyclerlistview-4.2.1.tgz"
   integrity sha512-NtVYjofwgUCt1rEsTp6jHQg/47TWjnO92TU2kTVgJ9wsc/ely4HnizHHa+f/dI7qaw4+zcSogElrLjhMltN2/g==
@@ -8763,6 +8788,11 @@ xcode@^3.0.1:
   dependencies:
     simple-plist "^1.1.0"
     uuid "^7.0.3"
+
+xdate@^0.8.0:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/xdate/-/xdate-0.8.3.tgz#422068681eeac81f68acffa1a38cd287bb179b85"
+  integrity sha512-1NhJWPJwN+VjbkACT9XHbQK4o6exeSVtS2CxhMPwUE7xQakoEFTlwra9YcqV/uHQVyeEUYoYC46VGDJ+etnIiw==
 
 xml-formatter@^3.6.0:
   version "3.6.3"

@@ -93,13 +93,13 @@ export const StressLevelCard = ({
         />
       </View>
 
-      <View style={styles.infoBox}>
+      {/* <View style={styles.infoBox}>
         <CText size="xs_medium" color="black">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.
         </CText>
         <Icon type="antdesign" name="right" size={25} color={Colors.purple1} />
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -122,16 +122,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 10,
   },
-  infoBox: {
-    backgroundColor: Colors.midPurple,
-    borderRadius: 8,
-    padding: 10,
-    marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 5,
-    width: '100%',
-    paddingVertical: 10,
-  },
+  // infoBox: {
+  //   backgroundColor: Colors.midPurple,
+  //   borderRadius: 8,
+  //   padding: 10,
+  //   marginTop: 10,
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   paddingHorizontal: 5,
+  //   width: '100%',
+  //   paddingVertical: 10,
+  // },
 });

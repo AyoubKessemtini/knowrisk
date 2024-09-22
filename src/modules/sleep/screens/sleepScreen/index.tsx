@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { Screen } from '@components/Screen';
+
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
 import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
@@ -22,52 +23,15 @@ import { ProgressCard } from '@components/Cards/ProgressCard';
 import { NotesList } from '@components/Notes/NotesList';
 import { NotesListReader } from '@components/Notes/NoteListReader';
 
+
 export const SleepScreen: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-
-  // Fetch health data for the selected date
-  const { healthData } = useFetchHealthData(selectedDate);
-
-  // Fetch weather data
-
-  const handleDateChange = (newDate: Date) => {
-    setSelectedDate(newDate);
-  };
-  const { data: hrvData } = useGetMerchantByIdQuery({ date: '2024-09-14' });
-  const { data: sleepData } = useGetSleepByDate({ date: '2024-09-16' });
-  const { data: stressData } = useGetStressByDate({ date: '2024-09-16' });
-  const { data: spo2Data } = useGetSpo2ByDate({ date: '2024-09-16' });
-  const { data: activitiesData } = useGetActivitiesByDate({
-    date: '2024-09-16',
-  });
-
-  // Use the latest health data directly from the hook
-  // const heartRateData = {
-  //   data: healthData?.heartRate?.[0]?.value || 'N/A',
-  //   lastUpdated: formatTime(healthData?.heartRate?.[0]?.endDate || ''),
-  // };
-  // const restingHeartRateData =
-  //   healthData?.restingHeartRate?.[0]?.value || 'N/A';
-  // const stepsData = {
-  //   data: healthData?.stepCount?.[0]?.value || 0,
-  //   lastUpdated: formatTime(healthData?.stepCount?.[0]?.endDate || ''),
-  // };
-
-  console.log('hrv data', hrvData);
-  console.log('sleep data :', sleepData);
-  console.log('stress data :', stressData);
-  console.log('spo2 data :', spo2Data);
-  console.log('activities data :', activitiesData);
-  console.log(healthData.oxygen);
-  const bloodOxygenData = healthData?.oxygen?.[0] || null;
-  const respiratoryRateData = healthData?.respiratoryRate?.[0] || null;
-
   return (
     <Screen
       fullscreen
       withoutTopEdge
       noHorizontalPadding
       containerStyles={styles.container}
+
     >
       <MainHeader firstName="Aziz" lastName="Sassi" />
       <View style={styles.wrapper}>
@@ -156,6 +120,7 @@ export const SleepScreen: React.FC = () => {
         </View>
       </View>
     </Screen>
+
   );
 };
 
@@ -165,13 +130,5 @@ const styles = StyleSheet.create({
     gap: 12,
     paddingTop: 40,
     paddingHorizontal: 20,
-  },
-  wrapper: {
-    gap: 20,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
   },
 });

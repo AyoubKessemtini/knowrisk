@@ -6,7 +6,7 @@ import { I18nKeyPath } from 'src/i18n/types';
 
 type SleepCardProps = {
   sleepData: string;
-  unit: string;
+  unit?: string;
   lastUpdated: string;
   title: I18nKeyPath;
 };
@@ -27,11 +27,11 @@ export const SleepCard = ({
       />
 
       <View style={styles.row}>
-        <CText color="deepPurple" size="xxxl_bold">
+        <CText color="deepPurple" size="xl_bold">
           {sleepData ? sleepData : ''}
         </CText>
 
-        <CText size="sm_light" color="grey3">
+        <CText mt={3} size="sm_light" color="grey3">
           {unit}
         </CText>
       </View>

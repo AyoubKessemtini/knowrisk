@@ -3,7 +3,6 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { CText } from '@components/CText';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Colors } from '@constants/Colors';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type RecoveryComponentProps = {
   title: string;
@@ -13,6 +12,7 @@ type RecoveryComponentProps = {
   onPress?: () => void;
   activeStrokeColor?: string;
   inActiveStrokeColor?: string;
+  unit: string;
 };
 
 export const RecoveryComponent = ({
@@ -20,6 +20,7 @@ export const RecoveryComponent = ({
   value,
   maxValue = 100,
   description,
+  unit,
   onPress,
   activeStrokeColor = Colors.orange,
   inActiveStrokeColor = Colors.purple,
@@ -41,7 +42,7 @@ export const RecoveryComponent = ({
           activeStrokeWidth={10}
           inActiveStrokeWidth={10}
           duration={1500}
-          title={`${value}%`}
+          title={`${value} ${unit}`}
           titleColor={Colors.yellow2}
           titleStyle={styles.progressTitle}
         />
@@ -51,11 +52,14 @@ export const RecoveryComponent = ({
           activeOpacity={0.8}
         >
           <View style={styles.textContainer}>
+            <CText size="xs" color="black" mb={5}>
+              last updated at :
+            </CText>
             <CText size="xm" color={'deepPurple'} mb={5} numberOfLines={2}>
               {description}
             </CText>
           </View>
-          <Icon name="chevron-right" size={29} color={Colors.deepPurple} />
+          {/* <Icon name="chevron-right" size={29} color={Colors.deepPurple} /> */}
         </TouchableOpacity>
       </View>
     </View>
