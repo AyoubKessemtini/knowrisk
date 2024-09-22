@@ -3,18 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
-import { WeatherCard } from '@components/Cards/WeatherCard';
-import { StepsCard } from '@components/Cards/StepsCard';
-import { LocationWeather } from '@components/Cards/LocationWeatherCard';
-import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard';
-
 import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
 import { DateSelector } from '@components/DatePicker/DatePicker';
-import { useWeather } from '@hooks/weather';
-import { formatTime } from '@hooks/useDateFormatter';
-import { Journal } from '@components/Cards/JournalCard';
-import { MoodCard } from '@components/Cards/MoodCard';
-
 import {
   useGetActivitiesByDate,
   useGetMerchantByIdQuery,
@@ -22,16 +12,20 @@ import {
   useGetSpo2ByDate,
   useGetStressByDate,
 } from '@query/queries/fitBit/fitBitMutations';
-import { ReportSeizureCard } from '@components/Cards/ReportSeizureCard';
+import { SleepCard } from '@components/Cards/SleepCard';
+import { CText } from '@components/CText';
+import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
+import { RecoveryComponent } from '@components/Cards/RecoveryCard';
+import { Colors } from '@constants/Colors';
+import { ProgressCard } from '@components/Cards/ProgressCard';
 
-export const Home: React.FC = () => {
+export const SleepScreen: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   // Fetch health data for the selected date
   const { healthData } = useFetchHealthData(selectedDate);
 
   // Fetch weather data
-  const { weather } = useWeather();
 
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
@@ -45,16 +39,16 @@ export const Home: React.FC = () => {
   });
 
   // Use the latest health data directly from the hook
-  const heartRateData = {
-    data: healthData?.heartRate?.[0]?.value || 'N/A',
-    lastUpdated: formatTime(healthData?.heartRate?.[0]?.endDate || ''),
-  };
-  const restingHeartRateData =
-    healthData?.restingHeartRate?.[0]?.value || 'N/A';
-  const stepsData = {
-    data: healthData?.stepCount?.[0]?.value || 0,
-    lastUpdated: formatTime(healthData?.stepCount?.[0]?.endDate || ''),
-  };
+  // const heartRateData = {
+  //   data: healthData?.heartRate?.[0]?.value || 'N/A',
+  //   lastUpdated: formatTime(healthData?.heartRate?.[0]?.endDate || ''),
+  // };
+  // const restingHeartRateData =
+  //   healthData?.restingHeartRate?.[0]?.value || 'N/A';
+  // const stepsData = {
+  //   data: healthData?.stepCount?.[0]?.value || 0,
+  //   lastUpdated: formatTime(healthData?.stepCount?.[0]?.endDate || ''),
+  // };
 
   console.log('hrv data', hrvData);
   console.log('sleep data :', sleepData);
@@ -81,47 +75,70 @@ export const Home: React.FC = () => {
           seizureForecast="Moderate"
           isDevicePaired={true}
         />
-        <ReportSeizureCard onPress={() => {}} />
+        {/* <ReportSeizureCard onPress={() => {}} /> */}
         <DateSelector
           initialDate={selectedDate}
           onDateChange={handleDateChange}
         />
+        <CText size="lg_semiBold" color="black">
+          Last Sleep Statistic
+        </CText>
         <View style={styles.row}>
-          <WeatherCard
-            lastUpdated={formatTime(new Date().toISOString())}
-            temperature={Math.round(Number(weather?.temperature))}
+          <SleepCard
+            lastUpdated={'10:33AM'}
+            sleepData="67"
+            title="common.quality"
+            unit="%"
           />
-          <StepsCard
-            lastUpdated={stepsData.lastUpdated}
-            steps={stepsData.data}
+          <SleepCard
+            lastUpdated={'10:33AM'}
+            sleepData="2.390"
+            title="common.quality"
+            unit="Sec"
           />
         </View>
         <View style={styles.row}>
-          <Journal />
+          <StressLevelCard
+            date="10/10/2013"
+            stressLevels={{ low: '22:23', good: '11:00', high: '3:14' }}
+            progress={{ low: 33, good: 33, high: 33 }}
+            comparison={{ low: 10, good: 50, high: 90 }}
+          />
+          {/* <Journal /> */}
 
           {/* <WearableCard lastConnection={formatTime(new Date().toISOString())} minutesDuration={750} /> */}
         </View>
         <View style={styles.row}>
-          <WeeklyHeartInfosCard
-            lastUpdated={heartRateData?.lastUpdated}
-            heartRateData={heartRateData?.data as string}
-            restingHeartRateData={restingHeartRateData as string}
-            date={heartRateData?.lastUpdated}
+          <RecoveryComponent
+            title="Rest and Recovery Status"
+            value={46}
+            maxValue={100}
+            description="Lorem Ipsum is simply dummy text of the printing "
+            onPress={() => {}}
+            activeStrokeColor={Colors.yellow2}
+            inActiveStrokeColor={Colors.lightPurple}
           />
-          <View style={styles.column}>
-            <LocationWeather
-              description={weather?.description as string}
-              city={weather?.city as string}
-              lastUpdated={formatTime(new Date().toISOString())}
-              temperature={Math.round(Number(weather?.temperature))}
-            />
-            <MoodCard
-              mood="Happy"
-              percentage={80}
-              lastUpdated={formatTime(new Date().toISOString())}
-              icon="https://w7.pngwing.com/pngs/296/845/png-transparent-smiley-happiness-icon-happy-miscellaneous-text-emoticon.png"
-            />
-          </View>
+        </View>
+
+        <View style={styles.row}>
+          <ProgressCard
+            title="Blood oxygen"
+            value={33}
+            unit="%"
+            maxValue={100}
+            lastUpdated="12:44 AM"
+            activeStrokeColor={Colors.green2}
+            inActiveStrokeColor={Colors.grey1}
+          />
+          <ProgressCard
+            title="Respiratory rate"
+            value={33}
+            unit="RPM"
+            maxValue={50}
+            lastUpdated="12:44 AM"
+            activeStrokeColor={Colors.green2}
+            inActiveStrokeColor={Colors.grey1}
+          />
         </View>
       </View>
     </Screen>
@@ -142,10 +159,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-  },
-  column: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    width: '50%',
   },
 });

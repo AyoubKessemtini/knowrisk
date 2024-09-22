@@ -44,7 +44,6 @@ export class RDFitBit implements FitBitRepo {
       `https://api.fitbit.com/1.2/user/-/sleep/date/${date}.json`,
       config,
     );
-    console.log('sleep result api', result);
     return result;
   }
 
@@ -61,7 +60,6 @@ export class RDFitBit implements FitBitRepo {
       `https://api.fitbit.com/1/user/-/ecg/list.json?afterDate=${date}&sort=asc&limit=1&offset=0`,
       config,
     );
-    console.log('stress result api', result);
     return result;
   }
 
@@ -78,7 +76,6 @@ export class RDFitBit implements FitBitRepo {
       `https://api.fitbit.com/1/user/-/spo2/date/${date}`,
       config,
     );
-    console.log('spo2 result api', result);
     return result;
   }
 
@@ -97,7 +94,6 @@ export class RDFitBit implements FitBitRepo {
       `https://api.fitbit.com/1/user/-/activities/date/${date}`,
       config,
     );
-    console.log('activities result api', result);
     return result;
   }
 }

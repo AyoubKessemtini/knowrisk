@@ -12,6 +12,7 @@ export const TabBarStackRoutes = {
   HOME: 'home',
   PROFILE: 'profile',
   DEVICE_LIST: 'device_list',
+  SLEEP_SCREEN: 'SleepScreen',
 } as const;
 
 export const FooStackRoutes = {

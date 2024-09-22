@@ -64,8 +64,9 @@ export const useFetchHealthData = (
         setLoading(false);
         return;
       }
-      const interval = setInterval(fetchData, 1000); // Fetch every second
-      return () => clearInterval(interval); // Cleanup on unmount
+      console.log(fetchData);
+      // const interval = setInterval(fetchData, 100000); // Fetch every second
+      // return () => clearInterval(interval); // Cleanup on unmount
     });
   }, [date]);
   const fetchData = () => {

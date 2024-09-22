@@ -9,6 +9,8 @@
     "logout": "Log out",
     "questions_header" : "Q&A",
     "submit": "Submit",
+    "quality" : "Quality",
+    "duration": "Duration",
 
     "contact_email": "Contact@knowlepsy.com",
     "thank_you": "Thank you!",
@@ -126,7 +128,7 @@
   "buttons":{
     "tap_to_report":"Tap this button if you had a seizure",
     "report":"Report a seizure",
-    "send_new_password": "Send New Password",
+    "send_new_password": "Send New Password"
   },
   "home_screen":{
     "last_updated": "Last updated {{date}}",
@@ -175,5 +177,8 @@
     "question7": "Please provide your email address.",
     "outro1": "Our team will be in touch for a personalised assistance",
     "outro2": "Let's turn fear into preparedness with Ally."
+  },
+  "sleep_screen": {
+    "stressLevel":"Stress Level"
   }
 }

@@ -14,12 +14,13 @@ import Animated from 'react-native-reanimated';
 import { tabConfig } from '../navigatorConfigs';
 import { TabBarStackRoutes } from '../routes';
 import { RootStackParamList, RootStackScreenProps } from './RootNavigator';
-import { DeviceList } from '@modules/wearable/screens/DeviceList/DeviceList';
+import { SleepScreen } from '@modules/sleep/screens/sleepScreen';
 
 export type TabStackParamList = {
   [TabBarStackRoutes.HOME]: undefined;
   [TabBarStackRoutes.PROFILE]: undefined;
   [TabBarStackRoutes.DEVICE_LIST]: undefined;
+  [TabBarStackRoutes.SLEEP_SCREEN]: undefined;
 };
 
 export type TabStackScreenProps<T extends keyof TabStackParamList> =
@@ -85,15 +86,15 @@ export function TabNavigator() {
             />
           )}
           <Tab.Screen
-            name={TabBarStackRoutes.DEVICE_LIST}
-            component={DeviceList}
+            name={TabBarStackRoutes.SLEEP_SCREEN}
+            component={SleepScreen}
             options={{
               tabBarIcon: ({ color, focused }) => (
                 <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
                   <View style={focused && styles.activeTabStyle}>
                     <Icon
-                      type="ionicon"
-                      name="watch-outline"
+                      type="material-community"
+                      name="power-sleep"
                       size={24}
                       color={color}
                     />
@@ -111,7 +112,7 @@ export function TabNavigator() {
                   <View style={focused && styles.activeTabStyle}>
                     <Icon
                       type="antdesign"
-                      name="wallet"
+                      name="profile"
                       size={24}
                       color={color}
                     />
