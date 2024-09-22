@@ -93,8 +93,8 @@ export function TabNavigator() {
                 <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
                   <View style={focused && styles.activeTabStyle}>
                     <Icon
-                      type="material-community"
-                      name="power-sleep"
+                      type="antdesign"
+                      name="profile"
                       size={24}
                       color={color}
                     />
@@ -111,8 +111,8 @@ export function TabNavigator() {
                 <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
                   <View style={focused && styles.activeTabStyle}>
                     <Icon
-                      type="antdesign"
-                      name="profile"
+                      type="ionicon"
+                      name="person"
                       size={24}
                       color={color}
                     />

@@ -5,8 +5,6 @@ import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
 import { WeatherCard } from '@components/Cards/WeatherCard';
 import { StepsCard } from '@components/Cards/StepsCard';
-import { LocationWeather } from '@components/Cards/LocationWeatherCard';
-import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard';
 import { RootStackRoutes } from '../../../../navigators/routes';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,29 +12,26 @@ import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
 import { DateSelector } from '@components/DatePicker/DatePicker';
 import { useWeather } from '@hooks/weather';
 import { formatTime } from '@hooks/useDateFormatter';
-import { Journal } from '@components/Cards/JournalCard';
-import { MoodCard } from '@components/Cards/MoodCard';
 
-import {
-  useGetActivitiesByDate,
-  useGetMerchantByIdQuery,
-  useGetSleepByDate,
-  useGetSpo2ByDate,
-  useGetStressByDate,
-} from '@query/queries/fitBit/fitBitMutations';
+// import {
+//   useGetActivitiesByDate,
+//   useGetMerchantByIdQuery,
+//   useGetSleepByDate,
+//   useGetSpo2ByDate,
+//   useGetStressByDate,
+// } from '@query/queries/fitBit/fitBitMutations';
 import { ReportSeizureCard } from '@components/Cards/ReportSeizureCard';
+import { CText } from '@components/CText';
+import { SleepCard } from '@components/Cards/SleepCard';
+import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
+import { RecoveryComponent } from '@components/Cards/RecoveryCard';
+import { Colors } from '@constants/Colors';
+// import { ProgressCard } from '@components/Cards/ProgressCard';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const navigation = useNavigation();
-  // const {
-  //   healthData,
-  //   loading: healthDataLoading,
-  //   error: healthDataError,
-  // } = useFetchHealthData(selectedDate);
-
-  // const [currentSegment, setCurrentSegment] = useState<SegmentType>('overview');
 
   // Fetch health data for the selected date
   const { healthData } = useFetchHealthData(selectedDate);
@@ -47,31 +42,47 @@ export const Home: React.FC = () => {
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
   };
-  const { data: hrvData } = useGetMerchantByIdQuery({ date: '2024-09-14' });
-  const { data: sleepData } = useGetSleepByDate({ date: '2024-09-16' });
-  const { data: stressData } = useGetStressByDate({ date: '2024-09-16' });
-  const { data: spo2Data } = useGetSpo2ByDate({ date: '2024-09-16' });
-  const { data: activitiesData } = useGetActivitiesByDate({
-    date: '2024-09-16',
-  });
 
-  // Use the latest health data directly from the hook
+  // Mock data from queries for display fallback
+  // const { data: hrvData } = useGetMerchantByIdQuery({ date: '2024-09-14' }) || {
+  //   data: { hrv: '50 ms' },
+  // };
+  // const { data: sleepData } = useGetSleepByDate({ date: '2024-09-16' }) || {
+  //   data: { quality: 70, duration: '7h 30m' },
+  // };
+  // const { data: stressData } = useGetStressByDate({ date: '2024-09-16' }) || {
+  //   data: { low: '10h', good: '5h', high: '9h' },
+  // };
+  // const { data: spo2Data } = useGetSpo2ByDate({ date: '2024-09-16' }) || {
+  //   data: { spo2: 98 },
+  // };
+  // const { data: activitiesData } = useGetActivitiesByDate({
+  //   date: '2024-09-16',
+  // }) || { data: { steps: 4500 } };
+
+  // Fallback for health data
   const heartRateData = {
     data: healthData?.heartRate?.[0]?.value || '73',
-    lastUpdated: formatTime(healthData?.heartRate?.[0]?.endDate || '10:00'),
+    lastUpdated: formatTime(
+      healthData?.heartRate?.[0]?.endDate || new Date().toISOString(),
+    ),
   };
-  const restingHeartRateData = healthData?.restingHeartRate?.[0]?.value || '64';
+  // const restingHeartRateData = healthData?.restingHeartRate?.[0]?.value || '64';
   const stepsData = {
-    data: healthData?.stepCount?.[0]?.value || 0,
-    lastUpdated: formatTime(healthData?.stepCount?.[0]?.endDate || '10:00'),
+    data: healthData?.stepCount?.[0]?.value || 4000,
+    lastUpdated:
+      healthData?.stepCount?.length > 0
+        ? formatTime(healthData?.stepCount?.[0]?.endDate)
+        : formatTime(new Date().toISOString()),
   };
-
-  console.log('hrv data', hrvData);
-  console.log('sleep data :', sleepData);
-  console.log('stress data :', stressData);
-  console.log('spo2 data :', spo2Data);
-  console.log('activities data :', activitiesData);
-  console.log(healthData);
+  // const bloodOxygenData = healthData?.oxygen?.[0] || {
+  //   value: 98,
+  //   endDate: new Date().toISOString(),
+  // };
+  const respiratoryRateData = healthData?.respiratoryRate?.[0] || {
+    value: 17,
+    endDate: new Date().toISOString(),
+  };
 
   return (
     <Screen
@@ -80,16 +91,17 @@ export const Home: React.FC = () => {
       noHorizontalPadding
       containerStyles={styles.container}
     >
-      <MainHeader firstName="Aziz" lastName="Sassi" />
+      <MainHeader firstName="Firas" lastName="R" />
       <View style={styles.wrapper}>
         <PatientInfoCard
-          name="George Frank"
+          name="Firas Rhaeim"
           id="ID5434A533"
           lastSeizure="Sun, Apr 07, 22:54"
           seizureFrequency="Weekly"
           seizureRisk="Moderate"
-          seizureForecast="Moderate"
           isDevicePaired={true}
+          weather={Math.round(Number(weather?.temperature) || 25)}
+          heartRate={heartRateData?.data}
         />
         <ReportSeizureCard
           onPress={() => {
@@ -103,39 +115,52 @@ export const Home: React.FC = () => {
         <View style={styles.row}>
           <WeatherCard
             lastUpdated={formatTime(new Date().toISOString())}
-            temperature={Math.round(Number(weather?.temperature))}
+            temperature={Math.round(Number(weather?.temperature) || 26)}
           />
           <StepsCard
             lastUpdated={stepsData.lastUpdated}
-            steps={stepsData.data.toFixed(0) || 400}
+            steps={stepsData.data.toFixed(0) || 4000}
           />
         </View>
         <View style={styles.row}>
-          <Journal />
-
-          {/* <WearableCard lastConnection={formatTime(new Date().toISOString())} minutesDuration={750} /> */}
+          <RecoveryComponent
+            title="Respiratory rate"
+            value={respiratoryRateData.value}
+            maxValue={30}
+            unit="RPM"
+            onPress={() => {}}
+            activeStrokeColor={Colors.yellow2}
+            inActiveStrokeColor={Colors.lightPurple}
+            description={
+              respiratoryRateData.endDate
+                ? formatTime(respiratoryRateData.endDate)
+                : formatTime(new Date().toISOString())
+            }
+          />
         </View>
         <View style={styles.row}>
-          <WeeklyHeartInfosCard
-            lastUpdated={heartRateData?.lastUpdated}
-            heartRateData={heartRateData?.data as string}
-            restingHeartRateData={restingHeartRateData as string}
-            date={heartRateData?.lastUpdated}
+          <StressLevelCard
+            date={formatTime(new Date().toISOString())}
+            stressLevels={{ low: '10h', good: '5h', high: '9h' }}
+            progress={{ low: 42, good: 33, high: 25 }}
+            comparison={{ low: 30, good: 40, high: 30 }}
           />
-          <View style={styles.column}>
-            <LocationWeather
-              description={weather?.description as string}
-              city={weather?.city as string}
-              lastUpdated={formatTime(new Date().toISOString())}
-              temperature={Math.round(Number(weather?.temperature))}
-            />
-            <MoodCard
-              mood="Happy"
-              percentage={80}
-              lastUpdated={formatTime(new Date().toISOString())}
-              icon="https://w7.pngwing.com/pngs/296/845/png-transparent-smiley-happiness-icon-happy-miscellaneous-text-emoticon.png"
-            />
-          </View>
+        </View>
+        <CText size="lg_semiBold" color="black">
+          Last Sleep Statistic
+        </CText>
+        <View style={styles.row}>
+          <SleepCard
+            lastUpdated="10:33 AM"
+            sleepData={'67'}
+            title="common.quality"
+            unit="%"
+          />
+          <SleepCard
+            lastUpdated="10:33 AM"
+            sleepData={'2h 30m'}
+            title="common.average"
+          />
         </View>
       </View>
     </Screen>
@@ -148,6 +173,7 @@ const styles = StyleSheet.create({
     gap: 12,
     paddingTop: 40,
     paddingHorizontal: 20,
+    paddingBottom: 40,
   },
   wrapper: {
     gap: 20,
@@ -157,9 +183,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
-  column: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    width: '50%',
-  },
+  // column: {
+  //   flexDirection: 'column',
+  //   justifyContent: 'space-between',
+  //   width: '50%',
+  // },
 });

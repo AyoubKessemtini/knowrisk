@@ -32,7 +32,7 @@ export const WeatherCard = ({ temperature, lastUpdated }: WeatherCardProps) => {
         duration={1000}
       />
 
-      <CText mb={100} size="sm" color="grey4">
+      <CText mb={100} size="xs" color="grey4">
         Last Update {lastUpdated}
       </CText>
     </View>
