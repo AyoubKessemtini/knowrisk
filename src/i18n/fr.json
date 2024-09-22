@@ -184,5 +184,12 @@
   },
   "sleep_screen": {
     "stressLevel": "Stress Level"
+  },
+  "notes":{
+    "add": "Add Journal",
+    "notes": "Notes",
+    "empty": "No notes available.",
+    "delete": "Are you sure you want to delete this note?",
+    "doctor_notes": "Doctor Notes"
   }
 }

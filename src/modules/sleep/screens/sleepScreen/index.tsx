@@ -19,6 +19,8 @@ import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
 import { RecoveryComponent } from '@components/Cards/RecoveryCard';
 import { Colors } from '@constants/Colors';
 import { ProgressCard } from '@components/Cards/ProgressCard';
+import { NotesList } from '@components/Notes/NotesList';
+import { NotesListReader } from '@components/Notes/NoteListReader';
 
 export const SleepScreen: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -69,6 +71,8 @@ export const SleepScreen: React.FC = () => {
     >
       <MainHeader firstName="Aziz" lastName="Sassi" />
       <View style={styles.wrapper}>
+        <NotesList />
+        <NotesListReader />
         <PatientInfoCard
           name="George Frank"
           id="ID5434A533"

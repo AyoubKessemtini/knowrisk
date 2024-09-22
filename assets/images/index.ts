@@ -17,6 +17,8 @@ const ImageAssets = {
 
   BAR_CHART_ICON: require('./bar_Chart_Icon.png'),
   LINE_CHART_ICON: require('./line_Chart_Icon.png'),
+
+  NOTES_ICON: require('./notes_icon.png'),
 };
 
 export default ImageAssets;
