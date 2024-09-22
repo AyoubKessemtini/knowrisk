@@ -1,4 +1,4 @@
-const pallete = {
+export const pallete = {
   white: '#FFFFFF',
   black: '#000000',
 
@@ -8,6 +8,8 @@ const pallete = {
   deepRed: '#FF0000',
   darkRed: '#942020',
   deepPurple: '#7B35DA',
+  lowDeepPurple: '#rgba(143, 60, 237, 0.8)',
+  lowOpacityBlack: 'rgba(0, 0, 0, 0.5)',
   purple: '#270B53',
   fadedPurple: 'rgba(39, 11, 83, 0.47)',
   darkPurple: '#230F69',
@@ -40,6 +42,7 @@ const pallete = {
   brick: '#B42318',
   fog: '#e4d4ff',
 } as const;
+export type PalleteColors = keyof typeof pallete;
 
 export const Colors = {
   ...pallete,
