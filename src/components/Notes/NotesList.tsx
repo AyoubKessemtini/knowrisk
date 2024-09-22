@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { Colors, pallete, PalleteColors } from '@constants/Colors';
 import { CText } from '../CText';
-import { Note, Notes } from './Notes';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { CImage } from '../CImage';
@@ -19,21 +18,37 @@ import ImageAssets from '@assets/images';
 
 const { height } = Dimensions.get('window');
 
+interface Note {
+  title: string;
+  time: string;
+  description: string;
+  type: 'patient' | 'doctor';
+}
+
 interface NotesListProps {
   color?: PalleteColors;
 }
 
-export const NotesList: React.FC = ({
+export const NotesList: React.FC<NotesListProps> = ({
   color = 'deepPurple',
-}: NotesListProps) => {
-  const [notes, setNotes] = useState<Note[]>([]);
+}) => {
+  const [notes, setNotes] = useState<Note[]>([
+    {
+      title: 'Doctor Visit Summary',
+      time: '10:30 AM',
+      description: 'The patient is responding well to the treatment.',
+      type: 'doctor',
+    },
+    {
+      title: 'Follow-up Required',
+      time: '1:00 PM',
+      description: 'Check blood pressure in one week.',
+      type: 'doctor',
+    },
+  ]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [selectedNoteIndex, setSelectedNoteIndex] = useState<number | null>(
-    null,
-  );
 
   const getCurrentTime = () => {
     const date = new Date();
@@ -45,11 +60,12 @@ export const NotesList: React.FC = ({
     return `${hours}:${minutes} ${ampm}`;
   };
 
-  const addJournal = () => {
+  const addPatientNote = () => {
     const newNote: Note = {
       title: newTitle,
       time: getCurrentTime(),
       description: newDescription,
+      type: 'patient',
     };
 
     setNotes([...notes, newNote]);
@@ -58,21 +74,8 @@ export const NotesList: React.FC = ({
     setNewDescription('');
   };
 
-  const deleteNote = () => {
-    if (selectedNoteIndex !== null) {
-      const updatedNotes = [...notes];
-      updatedNotes.splice(selectedNoteIndex, 1);
-      setNotes(updatedNotes);
-      setDeleteModalVisible(false);
-    }
-  };
-
-  const handleNotePress = (index: number) => {
-    setSelectedNoteIndex(index);
-    setDeleteModalVisible(true);
-  };
-
   const backgroundColor = pallete[color];
+
   return (
     <View style={[styles.container, { backgroundColor }]}>
       <View style={styles.header}>
@@ -96,16 +99,22 @@ export const NotesList: React.FC = ({
           <CText text="notes.empty" size="md_bold" color="white" isCentered />
         ) : (
           notes.map((note, index) => (
-            <TouchableOpacity
+            <View
               key={index}
-              onPress={() => handleNotePress(index)}
+              style={
+                note.type === 'patient' ? styles.patientNote : styles.doctorNote
+              }
             >
-              <Notes
-                title={note.title}
-                time={note.time}
-                description={note.description}
-              />
-            </TouchableOpacity>
+              <CText size="md_bold" color="white">
+                {note.title}
+              </CText>
+              <CText size="sm" color="white">
+                {note.time}
+              </CText>
+              <CText size="sm" color="white">
+                {note.description}
+              </CText>
+            </View>
           ))
         )}
       </ScrollView>
@@ -118,6 +127,7 @@ export const NotesList: React.FC = ({
         <AntIcon name="plus" color="white" size={16} />
       </TouchableOpacity>
 
+      {/* Add Note Modal */}
       <Modal
         visible={modalVisible}
         transparent={true}
@@ -129,7 +139,7 @@ export const NotesList: React.FC = ({
             <CText text="notes.add" isCentered size="md_bold" mb={15} />
             <TextInput
               style={styles.input}
-              placeholder="Journal Title"
+              placeholder="Title"
               value={newTitle}
               onChangeText={setNewTitle}
             />
@@ -141,31 +151,11 @@ export const NotesList: React.FC = ({
               multiline={true}
             />
             <View style={styles.buttonContainer}>
-              <Button title="Add" onPress={addJournal} />
+              <Button title="Add Note" onPress={addPatientNote} />
               <Button
                 title="Cancel"
                 onPress={() => setModalVisible(false)}
                 color="red"
-              />
-            </View>
-          </View>
-        </View>
-      </Modal>
-
-      <Modal
-        visible={deleteModalVisible}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setDeleteModalVisible(false)}
-      >
-        <View style={styles.modalBackground}>
-          <View style={styles.modalContainer}>
-            <CText text="notes.delete" isCentered size="md_bold" mb={15} />
-            <View style={styles.buttonContainer}>
-              <Button title="Delete" onPress={deleteNote} color="red" />
-              <Button
-                title="Cancel"
-                onPress={() => setDeleteModalVisible(false)}
               />
             </View>
           </View>
@@ -187,7 +177,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   scrollView: {
-    maxHeight: height * 0.216,
+    minHeight: height * 0.216,
   },
   notesContainer: {
     paddingBottom: 10,
@@ -214,13 +204,25 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: Colors.black,
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
   },
   descriptionInput: {
     height: 80,
+  },
+  patientNote: {
+    backgroundColor: Colors.purpleGrey,
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 5,
+  },
+  doctorNote: {
+    backgroundColor: Colors.fadedPurple,
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 5,
   },
   buttonContainer: {
     flexDirection: 'row',
