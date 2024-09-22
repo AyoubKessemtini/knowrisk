@@ -14,7 +14,7 @@ interface PatientInfoCardProps {
   seizureFrequency: string;
   seizureRisk: string;
   isDevicePaired: boolean;
-  weather: number;
+  mood: string;
   heartRate: number | string;
 }
 
@@ -25,7 +25,7 @@ export const PatientInfoCard = ({
   seizureFrequency,
   seizureRisk,
   heartRate,
-  weather,
+  mood,
   isDevicePaired,
 }: PatientInfoCardProps) => {
   const navigation = useNavigation();
@@ -127,11 +127,24 @@ export const PatientInfoCard = ({
         </View>
         <View style={styles.detailItem}>
           <CText color="darkPurple" size="xm_medium">
-            weather :
+            mood :
           </CText>
-          <CText size="xm_medium" color="grey4">
-            {weather}°C
-          </CText>
+          <TextChip
+            isCentred={false}
+            paddingVertical={5}
+            text={mood}
+            textSize="xm_medium"
+            backgroundColor={Colors.lightGreen}
+            textColor="green"
+            leftAccessory={
+              <Icon
+                type="font-awesome"
+                name="smile-o"
+                size={16}
+                color={Colors.green2}
+              />
+            }
+          />
         </View>
       </View>
     </View>

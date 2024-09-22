@@ -14,8 +14,6 @@ type StressLevelBoxProps = {
 export const StressLevelBox = ({
   level,
   value,
-  comparison,
-  color,
   dotColor,
 }: StressLevelBoxProps) => {
   return (
@@ -24,11 +22,11 @@ export const StressLevelBox = ({
         <CText size="xm_bold" color="black">
           {value}
         </CText>
-        <View style={styles.percentageBox}>
+        {/* <View style={styles.percentageBox}>
           <CText size="xs_medium" color={color}>
             {comparison > 0 ? `↑${comparison}%` : `↓${Math.abs(comparison)}%`}
           </CText>
-        </View>
+        </View> */}
       </View>
       <View style={[styles.row, { gap: 5, paddingTop: 5 }]}>
         <View style={[styles.dot, { backgroundColor: dotColor }]} />
@@ -52,14 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  percentageBox: {
-    backgroundColor: Colors.lightPurple,
-    borderRadius: 4,
-    width: 40,
-    height: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   dot: {
     padding: 3,
     borderRadius: 5,

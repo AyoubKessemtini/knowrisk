@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: Colors.lightPurple,
-    padding: 10,
+    padding: 7,
     borderRadius: 16,
     width: '49%',
     justifyContent: 'space-between',

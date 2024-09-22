@@ -100,7 +100,7 @@ export const Home: React.FC = () => {
           seizureFrequency="Weekly"
           seizureRisk="Moderate"
           isDevicePaired={true}
-          weather={Math.round(Number(weather?.temperature) || 25)}
+          mood="happy"
           heartRate={heartRateData?.data}
         />
         <ReportSeizureCard
@@ -141,9 +141,9 @@ export const Home: React.FC = () => {
         <View style={styles.row}>
           <StressLevelCard
             date={formatTime(new Date().toISOString())}
-            stressLevels={{ low: '10h', good: '5h', high: '9h' }}
-            progress={{ low: 42, good: 33, high: 25 }}
-            comparison={{ low: 30, good: 40, high: 30 }}
+            stressLevels={{ low: '10h', good: '7h', high: '5h' }} // Hours spent in each stress category
+            progress={{ low: 42, good: 33, high: 25 }} // Percentage of time spent in each category relative to the total monitored time
+            comparison={{ low: 30, good: 40, high: 30 }} // Comparison data: previous day or average time spent in each category
           />
         </View>
         <CText size="lg_semiBold" color="black">
@@ -151,13 +151,13 @@ export const Home: React.FC = () => {
         </CText>
         <View style={styles.row}>
           <SleepCard
-            lastUpdated="10:33 AM"
+            lastUpdated={formatTime(new Date().toISOString())}
             sleepData={'67'}
             title="common.quality"
             unit="%"
           />
           <SleepCard
-            lastUpdated="10:33 AM"
+            lastUpdated={formatTime(new Date().toISOString())}
             sleepData={'2h 30m'}
             title="common.average"
           />
