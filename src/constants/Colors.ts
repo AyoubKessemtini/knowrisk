@@ -41,6 +41,8 @@ export const pallete = {
   cosmos: '#FFD8D6',
   brick: '#B42318',
   fog: '#e4d4ff',
+  lotion: '#fafafa',
+  independence: 'rgba(71, 84, 103, 0.6)',
 } as const;
 export type PalleteColors = keyof typeof pallete;
 

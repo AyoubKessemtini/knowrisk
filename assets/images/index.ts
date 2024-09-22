@@ -19,6 +19,8 @@ const ImageAssets = {
   LINE_CHART_ICON: require('./line_Chart_Icon.png'),
 
   NOTES_ICON: require('./notes_icon.png'),
+
+  KEPPRA: require('./keppra.png'),
 };
 
 export default ImageAssets;

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { NotesList } from '@components/Notes/NotesList';
+import { MedicationsList } from '@components/Medication/MedicationsList';
 
 export const SleepScreen: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ export const SleepScreen: React.FC = () => {
       <View style={styles.wrapper}>
         <NotesList />
         {/* <NotesListReader /> */}
+        <MedicationsList />
 
         {/* <ReportSeizureCard onPress={() => {}} /> */}
       </View>
