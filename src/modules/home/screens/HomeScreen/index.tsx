@@ -35,17 +35,11 @@ export const Home: React.FC = () => {
   //   loading: healthDataLoading,
   //   error: healthDataError,
   // } = useFetchHealthData(selectedDate);
-  const {
-    weather,
-    // loading: weatherLoading,
-    // error: weatherError,
-  } = useWeather();
-  // const [currentSegment, setCurrentSegment] = useState<SegmentType>('overview');
 
+  // const [currentSegment, setCurrentSegment] = useState<SegmentType>('overview');
 
   // Fetch health data for the selected date
   const { healthData } = useFetchHealthData(selectedDate);
-
 
   // Fetch weather data
   const { weather } = useWeather();

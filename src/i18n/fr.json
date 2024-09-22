@@ -7,21 +7,15 @@
     "pass": "Password",
     "connect": "Connect",
     "logout": "Log out",
-    "questions_header" : "Q&A",
+    "questions_header": "Q&A",
     "submit": "Submit",
-
     "date": "Date",
-
-    "quality" : "Quality",
+    "quality": "Quality",
     "duration": "Duration",
-
-
     "contact_email": "Contact@knowlepsy.com",
     "thank_you": "Thank you!",
-
     "past_days": "Past {{number}} days",
     "latest": "Latest"
-
   },
   "home": {
     "foo": "French Home Screen"
@@ -39,12 +33,12 @@
     "save_changes": "Save Changes",
     "new_password": "New Password",
     "confirm_password": "Confirm Password",
-    "genders":{
+    "genders": {
       "male": "Male",
       "female": "Female",
       "other": "Other"
     },
-    "countries":{
+    "countries": {
       "fr": "France",
       "lt": "Lithuania"
     }
@@ -97,7 +91,7 @@
       "hospital_clinic_name_placeholder": "Enter your hospital/clinic name",
       "create_password_placeholder": "Create a password",
       "confirm_password_placeholder": "Confirm your password",
-      "already_have_account" :"Already have an account? ",
+      "already_have_account": "Already have an account? ",
       "birth_date": "Birth date",
       "sex": "Sex",
       "country": "Country"
@@ -108,15 +102,14 @@
       "phone": "(201) 555-33223"
     }
   },
-  "questions":{
+  "questions": {
     "q1": "What is the best way to prevent the spread of COVID-19?",
     "a1": "Stay at home, avoid touching your face, and wear a mask when needed.",
     "q2": "How can I help protect myself from getting sick?",
     "a2": "Regularly clean your hands, avoid touching your face, and stay informed about the latest COVID-19 updates.",
     "q3": "Can I get sick from a person who is sick?",
-
     "a3": "Yes, you can get sick from a person who is sick. It is important to practice social distancing and follow the guidelines set by health officials.",
-    "choices":{
+    "choices": {
       "yes": "Yes",
       "no": "No",
       "once_a_year": "Once a year",
@@ -127,40 +120,32 @@
       "multiple_times_a_week": "Multiple times a week",
       "daily": "Daily"
     }
-
   },
-  "buttons":{
-    "tap_to_report":"Tap this button if you had a seizure",
-    "report":"Report a seizure",
-
+  "buttons": {
+    "tap_to_report": "Tap this button if you had a seizure",
+    "report": "Report a seizure",
     "send_new_password": "Send New Password",
-    "confirm": "Confirm",
-
-    "send_new_password": "Send New Password"
-
+    "confirm": "Confirm"
   },
-  "home_screen":{
+  "home_screen": {
     "last_updated": "Last updated {{date}}",
-    "temperature" : "Temperature",
-    "steps" : "Steps",
-    "steps_number" : "{{steps}} steps",
-    "wearability" : "Wearability"
+    "temperature": "Temperature",
+    "steps": "Steps",
+    "steps_number": "{{steps}} steps",
+    "wearability": "Wearability"
   },
-
-  "heart":{
+  "heart": {
     "heart": "Heart",
     "beat": "beat",
     "bpm": "BPM",
     "heartRate": "heartRate",
     "restingHeartRate": "Resting Heart Rate"
   },
-  "wearable":{
+  "wearable": {
     "click_to_connect": "Click to connect",
-    "connected":"Device is Paired"
+    "connected": "Device is Paired"
   },
-
-
-  "informations":{
+  "informations": {
     "app_usage": "App usage",
     "app_usage_description": "Ensure uninterrupted data flow by keeping the app running. Closing the app may result in data loss.",
     "notification": "Notification",
@@ -173,36 +158,31 @@
     "battery_description": "Extend app longevity! Adjust battery permissions to prevent automatic closure by your device, ensuring continuous functionality and uninterrupted user experience.",
     "sleep_description": "Optimize your sleep tracking! Keep the app active during sleep to ensure accurate and insightful analysis of your sleep patterns and quality."
   },
-
-  "qa":{
+  "qa": {
     "intro": "Ally is designed to help you forecast your potential risk of Seizure!",
     "let_us_know_you_better": "Let us know you better",
     "question1": "How long ago were you diagnosed with Epilepsy? This question is required.",
     "question2": "How many seizures do you experience per day/month/year?",
-    "question3": "How frequent are your seizures?This question is required.",
+    "question3": "How frequent are your seizures? This question is required.",
     "question4": "Do you know your triggers?",
     "question5": "If yes, please specify your triggers. If no, please type \"N/A\".",
-    "question6": "Please provide your phone number.This question is required.",
+    "question6": "Please provide your phone number. This question is required.",
     "question7": "Please provide your email address.",
     "outro1": "Our team will be in touch for a personalised assistance",
     "outro2": "Let's turn fear into preparedness with Ally."
   },
-
-
-
   "report_seizure": {
     "report_seizure": "Report seizure",
     "intro_question": "Did you recently have a seizure?",
     "help_us": "Help us better understand how it happened",
     "last_seizure_time_question": "Give us a time frame of your last seizure",
-    "question2": "Did you drink any alcohol before ?",
-    "question3": "Did you exercice before ?",
-    "question4": "What did you eat before ?",
+    "question2": "Did you drink any alcohol before?",
+    "question3": "Did you exercise before?",
+    "question4": "What did you eat before?",
     "it_happened": "It happened",
-    "between": "Between",
-
+    "between": "Between"
+  },
   "sleep_screen": {
-    "stressLevel":"Stress Level"
-
+    "stressLevel": "Stress Level"
   }
 }
