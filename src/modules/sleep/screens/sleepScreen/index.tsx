@@ -5,6 +5,8 @@ import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
 import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
 import { DateSelector } from '@components/DatePicker/DatePicker';
+import { format } from 'date-fns';
+
 import {
   useGetActivitiesByDate,
   useGetMerchantByIdQuery,
@@ -55,7 +57,9 @@ export const SleepScreen: React.FC = () => {
   console.log('stress data :', stressData);
   console.log('spo2 data :', spo2Data);
   console.log('activities data :', activitiesData);
-  console.log(healthData);
+  console.log(healthData.oxygen);
+  const bloodOxygenData = healthData?.oxygen?.[0] || null;
+  const respiratoryRateData = healthData?.respiratoryRate?.[0] || null;
 
   return (
     <Screen
@@ -123,19 +127,28 @@ export const SleepScreen: React.FC = () => {
         <View style={styles.row}>
           <ProgressCard
             title="Blood oxygen"
-            value={33}
+            value={bloodOxygenData?.value ? bloodOxygenData.value : 0}
             unit="%"
             maxValue={100}
-            lastUpdated="12:44 AM"
+            lastUpdated={
+              bloodOxygenData?.endDate
+                ? format(new Date(bloodOxygenData?.endDate), 'hh:mm A')
+                : 'N/A'
+            }
             activeStrokeColor={Colors.green2}
             inActiveStrokeColor={Colors.grey1}
           />
+
           <ProgressCard
             title="Respiratory rate"
-            value={33}
+            value={respiratoryRateData?.value ? respiratoryRateData.value : 0}
             unit="RPM"
             maxValue={50}
-            lastUpdated="12:44 AM"
+            lastUpdated={
+              respiratoryRateData?.endDate
+                ? format(new Date(respiratoryRateData?.endDate), 'hh:mm A')
+                : 'N/A'
+            }
             activeStrokeColor={Colors.green2}
             inActiveStrokeColor={Colors.grey1}
           />
