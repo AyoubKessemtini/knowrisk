@@ -61,7 +61,7 @@ export function RootNavigator() {
         navigationBarColor: Colors.deepRed,
       }}
     >
-      {!isLoggedIn ? (
+      {isLoggedIn ? (
         <Stack.Screen
           name={RootStackRoutes.ONBOARDING_STACK}
           component={OnboardingNavigator}

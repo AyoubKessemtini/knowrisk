@@ -41,7 +41,7 @@ export const ChangePasswordScreen =
       <Screen withoutTopEdge noHorizontalPadding>
         <Header
           hasBackButton
-          text="profile.edit_profile"
+          text="profile.change_password"
           backgroundColor={Colors.lightPurple}
         />
         <View style={styles.line}></View>

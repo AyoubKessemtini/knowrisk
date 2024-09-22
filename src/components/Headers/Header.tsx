@@ -80,11 +80,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 40,
+    paddingTop: 50,
     ...Platform.select({
       ios: {
         paddingVertical: 15,
-        paddingHorizontal: 15,
+        paddingHorizontal: 20,
       },
       android: {
         paddingVertical: 20,
