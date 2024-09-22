@@ -15,7 +15,7 @@ interface PatientInfoCardProps {
   isDevicePaired: boolean;
 }
 
-export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({
+export const PatientInfoCard = ({
   name,
   id,
   lastSeizure,
@@ -23,7 +23,7 @@ export const PatientInfoCard: React.FC<PatientInfoCardProps> = ({
   seizureRisk,
   seizureForecast,
   isDevicePaired,
-}) => {
+}: PatientInfoCardProps) => {
   return (
     <View style={styles.card}>
       {/* Header Section */}

@@ -9,7 +9,12 @@
     "logout": "Log out",
     "questions_header" : "Q&A",
     "submit": "Submit",
+
     "date": "Date",
+
+    "quality" : "Quality",
+    "duration": "Duration",
+
 
     "contact_email": "Contact@knowlepsy.com",
     "thank_you": "Thank you!",
@@ -127,8 +132,12 @@
   "buttons":{
     "tap_to_report":"Tap this button if you had a seizure",
     "report":"Report a seizure",
+
     "send_new_password": "Send New Password",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+
+    "send_new_password": "Send New Password"
+
   },
   "home_screen":{
     "last_updated": "Last updated {{date}}",
@@ -180,6 +189,7 @@
   },
 
 
+
   "report_seizure": {
     "report_seizure": "Report seizure",
     "intro_question": "Did you recently have a seizure?",
@@ -189,6 +199,10 @@
     "question3": "Did you exercice before ?",
     "question4": "What did you eat before ?",
     "it_happened": "It happened",
-    "between": "Between"
+    "between": "Between",
+
+  "sleep_screen": {
+    "stressLevel":"Stress Level"
+
   }
 }

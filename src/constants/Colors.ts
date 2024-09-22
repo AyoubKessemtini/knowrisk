@@ -28,8 +28,11 @@ const pallete = {
   purple1: '#5619B8',
   purple2: '#8754FE',
   green: '#027A48',
+  green2: '#2AC686',
+  red: '#E95050',
   lightGreen: '#D1FADF',
   yellow: '#FFA224',
+  yellow2: '#FFA224',
   lightYellow: '#FCEFD8',
   deepYellow: '#914421',
   magnolia: '#FAF8FF',
@@ -77,6 +80,7 @@ export const Colors = {
       brick: pallete.brick,
       fog: pallete.fog,
       fadedPurple: pallete.fadedPurple,
+      deepRed: pallete.deepRed,
     },
 
     dark: {
@@ -102,6 +106,7 @@ export const Colors = {
       brick: pallete.brick,
       fog: pallete.fog,
       fadedPurple: pallete.fadedPurple,
+      deepRed: pallete.deepRed,
     },
   },
 

@@ -2,31 +2,42 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { CText } from '@components/CText';
 import { Colors } from '@constants/Colors';
+import { I18nKeyPath } from 'src/i18n/types';
 
-type StepsCardProps = {
-  steps: number;
+type SleepCardProps = {
+  sleepData: string;
+  unit: string;
   lastUpdated: string;
+  title: I18nKeyPath;
 };
 
-export const StepsCard = ({ steps, lastUpdated }: StepsCardProps) => {
+export const SleepCard = ({
+  sleepData,
+  unit,
+  title,
+  lastUpdated,
+}: SleepCardProps) => {
   return (
     <View style={styles.container}>
       <CText
         mb={10}
         size="sm_semiBold"
         color="black"
-        text="home_screen.steps"
+        text={title as I18nKeyPath}
       />
 
       <View style={styles.row}>
-        <CText color="deepPurple" size="lg_semiBold">
-          {steps ? steps : 0}
+        <CText color="deepPurple" size="xxxl_bold">
+          {sleepData ? sleepData : ''}
         </CText>
-        <CText text="home_screen.steps" size="sm_light" color="grey3" />
+
+        <CText size="sm_light" color="grey3">
+          {unit}
+        </CText>
       </View>
 
       <CText
-        size="sm"
+        size="xs"
         color="grey4"
         text="home_screen.last_updated"
         textOptions={{ date: lastUpdated }}
@@ -43,6 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     width: '49%',
     justifyContent: 'space-between',
+    minHeight: 150,
   },
 
   row: {
