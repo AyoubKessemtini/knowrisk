@@ -16,7 +16,8 @@
     "contact_email": "Contact@knowlepsy.com",
     "thank_you": "Thank you!",
     "past_days": "Past {{number}} days",
-    "latest": "Latest"
+    "latest": "Latest",
+    "seizure":"Seizure Calendar"
   },
   "home": {
     "foo": "French Home Screen"
