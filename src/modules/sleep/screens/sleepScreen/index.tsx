@@ -5,7 +5,6 @@ import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
 import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
 import { DateSelector } from '@components/DatePicker/DatePicker';
-import { format } from 'date-fns';
 
 import {
   useGetActivitiesByDate,
@@ -131,9 +130,7 @@ export const SleepScreen: React.FC = () => {
             unit="%"
             maxValue={100}
             lastUpdated={
-              bloodOxygenData?.endDate
-                ? format(new Date(bloodOxygenData?.endDate), 'hh:mm A')
-                : 'N/A'
+              bloodOxygenData?.endDate ? bloodOxygenData?.endDate : 'N/A'
             }
             activeStrokeColor={Colors.green2}
             inActiveStrokeColor={Colors.grey1}
@@ -146,7 +143,7 @@ export const SleepScreen: React.FC = () => {
             maxValue={50}
             lastUpdated={
               respiratoryRateData?.endDate
-                ? format(new Date(respiratoryRateData?.endDate), 'hh:mm A')
+                ? respiratoryRateData?.endDate
                 : 'N/A'
             }
             activeStrokeColor={Colors.green2}

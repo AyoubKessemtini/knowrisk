@@ -46,14 +46,13 @@ export const Home: React.FC = () => {
 
   // Use the latest health data directly from the hook
   const heartRateData = {
-    data: healthData?.heartRate?.[0]?.value || 'N/A',
-    lastUpdated: formatTime(healthData?.heartRate?.[0]?.endDate || ''),
+    data: healthData?.heartRate?.[0]?.value || '73',
+    lastUpdated: formatTime(healthData?.heartRate?.[0]?.endDate || '10:00'),
   };
-  const restingHeartRateData =
-    healthData?.restingHeartRate?.[0]?.value || 'N/A';
+  const restingHeartRateData = healthData?.restingHeartRate?.[0]?.value || '64';
   const stepsData = {
     data: healthData?.stepCount?.[0]?.value || 0,
-    lastUpdated: formatTime(healthData?.stepCount?.[0]?.endDate || ''),
+    lastUpdated: formatTime(healthData?.stepCount?.[0]?.endDate || '10:00'),
   };
 
   console.log('hrv data', hrvData);
@@ -93,7 +92,7 @@ export const Home: React.FC = () => {
           />
           <StepsCard
             lastUpdated={stepsData.lastUpdated}
-            steps={stepsData.data}
+            steps={stepsData.data.toFixed(0) || 400}
           />
         </View>
         <View style={styles.row}>

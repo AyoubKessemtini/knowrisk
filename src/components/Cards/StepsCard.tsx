@@ -4,7 +4,7 @@ import { CText } from '@components/CText';
 import { Colors } from '@constants/Colors';
 
 type StepsCardProps = {
-  steps: number;
+  steps: number | string;
   lastUpdated: string;
 };
 
