@@ -141,9 +141,9 @@ export const Home: React.FC = () => {
         <View style={styles.row}>
           <StressLevelCard
             date={formatTime(new Date().toISOString())}
-            stressLevels={{ low: '10h', good: '7h', high: '5h' }} // Hours spent in each stress category
-            progress={{ low: 42, good: 33, high: 25 }} // Percentage of time spent in each category relative to the total monitored time
-            comparison={{ low: 30, good: 40, high: 30 }} // Comparison data: previous day or average time spent in each category
+            stressLevels={{ low: '10h', good: '7h', high: '5h' }}
+            progress={{ low: 42, good: 33, high: 25 }}
+            comparison={{ low: 30, good: 40, high: 30 }}
           />
         </View>
         <CText size="lg_semiBold" color="black">

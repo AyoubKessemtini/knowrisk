@@ -13,25 +13,27 @@ const getInitials = (firstName: string, lastName: string) => {
   return `${firstName[0] || ''}${lastName[0] || ''}`.toUpperCase();
 };
 
-const getBackgroundColor = (name: string) => {
-  // Simple hash function to generate a color based on the name
-  const hash = Array.from(name).reduce(
-    (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
-    0,
-  );
-  const color = `hsl(${hash % 360}, 70%, 80%)`;
-  return color;
-};
+// const getBackgroundColor = (name: string) => {
+//   // Simple hash function to generate a color based on the name
+//   const hash = Array.from(name).reduce(
+//     (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
+//     0,
+//   );
+//   const color = `hsl(${hash % 360}, 70%, 80%)`;
+//   return color;
+// };
 
 export const MainHeader = ({ firstName, lastName }: MainHeaderProps) => {
   const initials = getInitials(firstName, lastName);
-  const backgroundColor = getBackgroundColor(firstName + lastName);
+  // const backgroundColor = getBackgroundColor(firstName + lastName);
 
   return (
     <View style={styles.container}>
       <CImage source={ImageAssets.APP_ICON} width={151} height={26} />
       {initials ? (
-        <View style={[styles.initialsContainer, { backgroundColor }]}>
+        <View
+          style={[styles.initialsContainer, { backgroundColor: Colors.cosmos }]}
+        >
           <Text style={styles.initialsText}>{initials}</Text>
         </View>
       ) : null}

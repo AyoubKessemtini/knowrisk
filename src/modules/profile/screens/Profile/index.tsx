@@ -1,22 +1,34 @@
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { CText } from '@components/CText';
+import Icon from 'react-native-easy-icon';
+import { Colors } from '@constants/Colors';
+import HelpCenterButton from '@components/Buttons/HelpCenterButton';
 import { CButton } from '@components/Buttons/CButton';
 import { Screen } from '@components/Screen';
 import { useAuth } from '@hooks/useAuth';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { TabStackScreenProps } from '@navigators/stacks/TabNavigator';
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { CImage } from '@components/CImage';
-import ImageAssets from '@assets/images';
-import { CText } from '@components/CText';
-import Icon from 'react-native-easy-icon';
-import { Colors } from '@constants/Colors';
-import HelpCenterButton from '@components/Buttons/HelpCenterButton';
 import { Header } from '@components/Headers/Header';
+import { useNavigation } from '@react-navigation/native';
+
+// const getBackgroundColor = (name: string) => {
+//   const hash = Array.from(name).reduce(
+//     (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
+//     0,
+//   );
+//   return `hsl(${hash % 360}, 70%, 80%)`;
+// };
 
 export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const { logout } = useAuth();
   const navigation = useNavigation();
+
+  // User's name
+  const firstName = 'Firas'; // Replace with actual user data
+  const lastName = 'Rhaeim'; // Replace with actual user data
+  const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
+  // const backgroundColor = getBackgroundColor(firstName + lastName);
 
   return (
     <Screen fullscreen withoutTopEdge noHorizontalPadding>
@@ -24,22 +36,22 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
       <View style={styles.line} />
       <View style={styles.container}>
         <View style={styles.profileHeader}>
-          <CImage
-            source={ImageAssets.PICCOLO}
-            height={55}
-            width={55}
-            containerStyle={{
-              borderRadius: 27,
-              borderColor: Colors.fog,
-              borderWidth: 3,
-            }}
-          />
+          <View
+            style={[
+              styles.initialsContainer,
+              { backgroundColor: Colors.cosmos },
+            ]}
+          >
+            <CText size="xl_bold" color="white">
+              {initials}
+            </CText>
+          </View>
           <View style={styles.profileInfo}>
             <CText size="lg_medium" color="purple">
-              George Frank
+              {firstName} {lastName}
             </CText>
             <CText size="sm_medium" color="purpleGrey">
-              Georgefrank@gmail.com
+              firasrhaeim@gmail.com
             </CText>
           </View>
         </View>
@@ -178,6 +190,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 30,
+  },
+  initialsContainer: {
+    width: 43,
+    height: 43,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   profileInfo: {
     flex: 1,
