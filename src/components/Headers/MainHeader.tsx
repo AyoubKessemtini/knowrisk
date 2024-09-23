@@ -29,7 +29,7 @@ export const MainHeader = ({ firstName, lastName }: MainHeaderProps) => {
 
   return (
     <View style={styles.container}>
-      <CImage source={ImageAssets.APP_ICON} width={151} height={26} />
+      <CImage source={ImageAssets.LOGO_BANNER} width={151} height={26} />
       {initials ? (
         <View
           style={[styles.initialsContainer, { backgroundColor: Colors.cosmos }]}
