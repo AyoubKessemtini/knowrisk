@@ -15,7 +15,7 @@ interface PatientInfoCardProps {
   seizureRisk: string;
   isDevicePaired: boolean;
   mood: string;
-  heartRate: number | string;
+  temp: number | string;
 }
 
 export const PatientInfoCard = ({
@@ -24,7 +24,7 @@ export const PatientInfoCard = ({
   lastSeizure,
   seizureFrequency,
   seizureRisk,
-  heartRate,
+  temp,
   mood,
   isDevicePaired,
 }: PatientInfoCardProps) => {
@@ -119,10 +119,10 @@ export const PatientInfoCard = ({
 
         <View style={styles.detailItem}>
           <CText color="darkPurple" size="xm_medium">
-            Heart Rates :
+            Body temperature :
           </CText>
           <CText size="xm_medium" color="grey4">
-            {heartRate} BPM
+            {temp} °C
           </CText>
         </View>
         <View style={styles.detailItem}>

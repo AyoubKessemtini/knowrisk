@@ -3,62 +3,30 @@ import { StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
-import { WeatherCard } from '@components/Cards/WeatherCard';
-import { StepsCard } from '@components/Cards/StepsCard';
-import { RootStackRoutes } from '../../../../navigators/routes';
-import { useNavigation } from '@react-navigation/native';
-
-import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
-import { DateSelector } from '@components/DatePicker/DatePicker';
-import { useWeather } from '@hooks/weather';
-import { formatTime } from '@hooks/useDateFormatter';
-
-// import {
-//   useGetActivitiesByDate,
-//   useGetMerchantByIdQuery,
-//   useGetSleepByDate,
-//   useGetSpo2ByDate,
-//   useGetStressByDate,
-// } from '@query/queries/fitBit/fitBitMutations';
 import { ReportSeizureCard } from '@components/Cards/ReportSeizureCard';
 import { CText } from '@components/CText';
 import { SleepCard } from '@components/Cards/SleepCard';
 import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
 import { RecoveryComponent } from '@components/Cards/RecoveryCard';
 import { Colors } from '@constants/Colors';
-// import { ProgressCard } from '@components/Cards/ProgressCard';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackRoutes } from '../../../../navigators/routes';
+import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
+import { DateSelector } from '@components/DatePicker/DatePicker';
+import { formatTime } from '@hooks/useDateFormatter';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
-
   const navigation = useNavigation();
 
   // Fetch health data for the selected date
   const { healthData } = useFetchHealthData(selectedDate);
 
   // Fetch weather data
-  const { weather } = useWeather();
 
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
   };
-
-  // Mock data from queries for display fallback
-  // const { data: hrvData } = useGetMerchantByIdQuery({ date: '2024-09-14' }) || {
-  //   data: { hrv: '50 ms' },
-  // };
-  // const { data: sleepData } = useGetSleepByDate({ date: '2024-09-16' }) || {
-  //   data: { quality: 70, duration: '7h 30m' },
-  // };
-  // const { data: stressData } = useGetStressByDate({ date: '2024-09-16' }) || {
-  //   data: { low: '10h', good: '5h', high: '9h' },
-  // };
-  // const { data: spo2Data } = useGetSpo2ByDate({ date: '2024-09-16' }) || {
-  //   data: { spo2: 98 },
-  // };
-  // const { data: activitiesData } = useGetActivitiesByDate({
-  //   date: '2024-09-16',
-  // }) || { data: { steps: 4500 } };
 
   // Fallback for health data
   const heartRateData = {
@@ -67,18 +35,14 @@ export const Home: React.FC = () => {
       healthData?.heartRate?.[0]?.endDate || new Date().toISOString(),
     ),
   };
-  // const restingHeartRateData = healthData?.restingHeartRate?.[0]?.value || '64';
-  const stepsData = {
-    data: healthData?.stepCount?.[0]?.value || 4000,
-    lastUpdated:
-      healthData?.stepCount?.length > 0
-        ? formatTime(healthData?.stepCount?.[0]?.endDate)
-        : formatTime(new Date().toISOString()),
+
+  const restingHeartRateData = {
+    data: healthData?.restingHeartRate?.[0]?.value || '64',
+    lastUpdated: formatTime(
+      healthData?.restingHeartRate?.[0]?.endDate || new Date().toISOString(),
+    ),
   };
-  // const bloodOxygenData = healthData?.oxygen?.[0] || {
-  //   value: 98,
-  //   endDate: new Date().toISOString(),
-  // };
+
   const respiratoryRateData = healthData?.respiratoryRate?.[0] || {
     value: 17,
     endDate: new Date().toISOString(),
@@ -101,7 +65,7 @@ export const Home: React.FC = () => {
           seizureRisk="Moderate"
           isDevicePaired={true}
           mood="happy"
-          heartRate={heartRateData?.data}
+          temp={'36'}
         />
         <ReportSeizureCard
           onPress={() => {
@@ -113,13 +77,17 @@ export const Home: React.FC = () => {
           onDateChange={handleDateChange}
         />
         <View style={styles.row}>
-          <WeatherCard
-            lastUpdated={formatTime(new Date().toISOString())}
-            temperature={Math.round(Number(weather?.temperature) || 26)}
+          <SleepCard
+            lastUpdated={heartRateData.lastUpdated}
+            sleepData={heartRateData.data as string}
+            title="common.heartRate"
+            unit="bpm"
           />
-          <StepsCard
-            lastUpdated={stepsData.lastUpdated}
-            steps={stepsData.data.toFixed(0) || 4000}
+          <SleepCard
+            lastUpdated={restingHeartRateData.lastUpdated}
+            sleepData={restingHeartRateData.data as string}
+            title="common.restingHeartRate"
+            unit="bpm"
           />
         </View>
         <View style={styles.row}>
@@ -183,9 +151,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
-  // column: {
-  //   flexDirection: 'column',
-  //   justifyContent: 'space-between',
-  //   width: '50%',
-  // },
 });
+
+export default Home;

@@ -17,7 +17,9 @@
     "thank_you": "Thank you!",
     "past_days": "Past {{number}} days",
     "latest": "Latest",
-    "seizure":"Seizure Calendar"
+    "seizure":"Seizure Calendar",
+    "heartRate": "Heart Rate",
+    "restingHeartRate": "Resting Heart Rate"
   },
   "home": {
     "foo": "French Home Screen"
