@@ -126,7 +126,7 @@ export const Home: React.FC = () => {
           />
           <SleepCard
             lastUpdated={formatTime(new Date().toISOString())}
-            sleepData={'2h 30m'}
+            sleepData={'7h 30m'}
             title="common.average"
           />
         </View>
