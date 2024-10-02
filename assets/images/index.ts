@@ -22,6 +22,9 @@ const ImageAssets = {
 
   KEPPRA: require('./keppra.png'),
   LOGO_BANNER: require('./logo_banner.jpeg'),
+
+  DISCONNECTED_DEVICE: require('./disconected_device.png'),
+  SCAN_IN_PROGRESS: require('./scanInProgress.png'),
 };
 
 export default ImageAssets;

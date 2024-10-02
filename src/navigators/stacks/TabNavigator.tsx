@@ -15,11 +15,12 @@ import { tabConfig } from '../navigatorConfigs';
 import { TabBarStackRoutes } from '../routes';
 import { RootStackParamList, RootStackScreenProps } from './RootNavigator';
 import { SleepScreen } from '@modules/sleep/screens/sleepScreen';
+import { DeviceSettings } from '@modules/wearable/screens/DeviceSettings.tsx';
 
 export type TabStackParamList = {
   [TabBarStackRoutes.HOME]: undefined;
   [TabBarStackRoutes.PROFILE]: undefined;
-  [TabBarStackRoutes.DEVICE_LIST]: undefined;
+  [TabBarStackRoutes.DEVICE_SETTINGS]: undefined;
   [TabBarStackRoutes.SLEEP_SCREEN]: undefined;
 };
 
@@ -95,6 +96,24 @@ export function TabNavigator() {
                     <Icon
                       type="antdesign"
                       name="profile"
+                      size={24}
+                      color={color}
+                    />
+                  </View>
+                </Animated.View>
+              ),
+            }}
+          />
+          <Tab.Screen
+            name={TabBarStackRoutes.DEVICE_SETTINGS}
+            component={DeviceSettings}
+            options={{
+              tabBarIcon: ({ color, focused }) => (
+                <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
+                  <View style={focused && styles.activeTabStyle}>
+                    <Icon
+                      type="ionicon"
+                      name="watch-outline"
                       size={24}
                       color={color}
                     />

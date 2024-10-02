@@ -12,12 +12,13 @@ export const RootStackRoutes = {
   REPORT_SEIZURE_QUESTION_THREE_SCREEN: 'ReportSeizureQuestion3',
   REPORT_SEIZURE_QUESTION_FOUR_SCREEN: 'ReportSeizureQuestion4',
   SEIZURE_FORCAST_SCREEN: 'SeizureForecastScreen',
+  SCAN_SCREEN: 'scanScreen',
 } as const;
 
 export const TabBarStackRoutes = {
   HOME: 'home',
   PROFILE: 'profile',
-  DEVICE_LIST: 'device_list',
+  DEVICE_SETTINGS: 'device_settings',
   SLEEP_SCREEN: 'SleepScreen',
 } as const;
 

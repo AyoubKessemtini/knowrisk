@@ -147,7 +147,11 @@
   },
   "wearable": {
     "click_to_connect": "Click to connect",
-    "connected": "Device is Paired"
+    "connected": "Device is Paired",
+    "disconnected": "disconnected",
+    "scan_device_to_connect": "Scan device to connect",
+    "scan_device": "Scan device",
+    "scanning": "Scanning devices ..."
   },
   "informations": {
     "app_usage": "App usage",
@@ -200,5 +204,5 @@
     "medication": "Medications",
     "empty": "No medications available.",
     "add": "Add Medication"
-  }
+  },
 }
