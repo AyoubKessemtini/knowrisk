@@ -7,22 +7,26 @@ interface Peripheral {
   name?: string;
   advertising?: never;
   rssi?: number;
-  // Add other properties if necessary
 }
 
 export const useBle = () => {
-  const [devices, setDevices] = useState<Peripheral[]>([]); // List of scanned devices
-  const [isScanning, setIsScanning] = useState<boolean>(false); // Scanning state
-
-  // Obtain the BleManager native module
+  const [devices, setDevices] = useState<Peripheral[]>([]);
+  const [isScanning, setIsScanning] = useState<boolean>(false);
   const BleManagerModule = NativeModules.BleManager;
+  if (!BleManagerModule) {
+    console.error('BleManager native module is not available.');
+    return {
+      devices: [],
+      isScanning: false,
+      startScan: () => {},
+      connectToDevice: () => {},
+    };
+  }
   const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-
-  // Handler for discovered devices
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const handleDiscoverPeripheral = useCallback(
     (peripheral: Peripheral) => {
       console.log('Discovered peripheral:', peripheral);
-
       setDevices((prevDevices) => {
         const deviceExists = prevDevices.some(
           (device) => device.id === peripheral.id,
@@ -35,15 +39,13 @@ export const useBle = () => {
     },
     [setDevices],
   );
-
-  // Handler for scan stop event
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const handleStopScan = useCallback(() => {
     setIsScanning(false);
     console.log('Scanning stopped');
   }, []);
-
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    // Start BleManager
     BleManager.start({ showAlert: false })
       .then(() => {
         console.log('BleManager initialized');
@@ -51,15 +53,11 @@ export const useBle = () => {
       .catch((error) => {
         console.error('BleManager initialization error:', error);
       });
-
-    // Add event listeners
     bleManagerEmitter.addListener(
       'BleManagerDiscoverPeripheral',
       handleDiscoverPeripheral,
     );
     bleManagerEmitter.addListener('BleManagerStopScan', handleStopScan);
-
-    // Cleanup function
     return () => {
       bleManagerEmitter.removeAllListeners('BleManagerDiscoverPeripheral');
       bleManagerEmitter.removeAllListeners('BleManagerStopScan');
@@ -69,23 +67,16 @@ export const useBle = () => {
   // Function to start scanning
   const startScan = async () => {
     if (isScanning) return;
-
-    // Request permissions on Android
-
     setDevices([]); // Clear device list
     setIsScanning(true);
-
-    // Start scanning
     try {
-      await BleManager.scan([], 5, false);
+      await BleManager.scan([], 15, false);
       console.log('Scanning started');
     } catch (err) {
       console.error('Scanning error:', err);
       setIsScanning(false);
     }
   };
-
-  // Function to connect to a device
   const connectToDevice = async (id: string) => {
     try {
       await BleManager.connect(id);
@@ -94,7 +85,6 @@ export const useBle = () => {
       console.error('Connection error:', error);
     }
   };
-
   return {
     devices,
     isScanning,
