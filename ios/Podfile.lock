@@ -957,6 +957,8 @@ PODS:
   - React-Mapbuffer (0.73.7):
     - glog
     - React-debug
+  - react-native-ble-manager (11.5.6):
+    - React-Core
   - react-native-date-picker (5.0.4):
     - React-Core
   - react-native-geolocation (3.3.0):
@@ -1239,6 +1241,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector-modern`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
+  - react-native-ble-manager (from `../node_modules/react-native-ble-manager`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-mmkv (from `../node_modules/react-native-mmkv`)
@@ -1358,6 +1361,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
+  react-native-ble-manager:
+    :path: "../node_modules/react-native-ble-manager"
   react-native-date-picker:
     :path: "../node_modules/react-native-date-picker"
   react-native-geolocation:
@@ -1481,6 +1486,7 @@ SPEC CHECKSUMS:
   React-jsinspector: f356e49aa086380d3a4892708ca173ad31ac69c1
   React-logger: 7b19bdfb254772a0332d6cd4d66eceb0678b6730
   React-Mapbuffer: 6f392912435adb8fbf4c3eee0e79a0a0b4e4b717
+  react-native-ble-manager: 3a9e5edf9dbf7fe076807edcd45e46d62a37ca72
   react-native-date-picker: 6891317e850deae5b53d51355226e07a495aba61
   react-native-geolocation: 4b12da636bf33b15b537fe8de141942b63101ee1
   react-native-mmkv: 1fdc81aa70c1aba09370718e6a63a09cbbbac8d2
@@ -1513,7 +1519,7 @@ SPEC CHECKSUMS:
   RNDateTimePicker: 40ffda97d071a98a10fdca4fa97e3977102ccd14
   RNFlashList: 68224225541895f0fb0de98b4d8be0cbe1c577df
   RNGestureHandler: 67d3f1f69d4d0c98d6e83f4229e3bbf997d1dc72
-  RNPermissions: 88cb833d70198c254e3ea7ccc4179fde91670700
+  RNPermissions: 655678c54391137c08a833d54f7adbcfc13f0f27
   RNReactNativeHapticFeedback: bf604f2da947838513394d411364300d6e62e878
   RNReanimated: f1ce27e7d23e6f941024b862ad76a7fdae93dea9
   RNScreens: e842cdccb23c0a084bd6307f6fa83fd1c1738029
@@ -1523,6 +1529,6 @@ SPEC CHECKSUMS:
   Yoga: 47d399a73c0c0caa9ff824e5c657eae31215bfee
   ZIPFoundation: b8c29ea7ae353b309bc810586181fd073cb3312c
 
-PODFILE CHECKSUM: d424c43e075ba94058cbbf3b4ee223eef55d47a5
+PODFILE CHECKSUM: 938148e7cd9428df7ab9959cee3ce925002f8078
 
 COCOAPODS: 1.15.2

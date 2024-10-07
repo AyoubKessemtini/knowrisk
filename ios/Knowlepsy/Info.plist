@@ -3,11 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>NSBluetoothAlwaysUsageDescription</key>
-    <string>This app requires Bluetooth access to scan for devices.</string>
+    <string>This app uses Bluetooth to connect to nearby devices.</string>
     <key>NSBluetoothPeripheralUsageDescription</key>
-    <string>This app needs Bluetooth access to interact with devices.</string>
+    <string>This app needs Bluetooth access to communicate with devices.</string>
+    <key>NSBluetoothWhileInUseUsageDescription</key>
+    <string>This app uses Bluetooth to connect to devices while you are using the app.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs access to your location to scan for Bluetooth devices.</string>
+    <string>This app requires location access to scan for Bluetooth devices.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
