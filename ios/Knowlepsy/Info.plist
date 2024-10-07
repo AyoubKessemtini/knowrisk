@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSBluetoothAlwaysUsageDescription</key>
-    <string>This app uses Bluetooth to connect to nearby devices.</string>
-    <key>NSBluetoothPeripheralUsageDescription</key>
-    <string>This app needs Bluetooth access to communicate with devices.</string>
-    <key>NSBluetoothWhileInUseUsageDescription</key>
-    <string>This app uses Bluetooth to connect to devices while you are using the app.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app requires location access to scan for Bluetooth devices.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -39,6 +31,12 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app uses Bluetooth to connect to nearby devices.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This app needs Bluetooth access to communicate with devices.</string>
+	<key>NSBluetoothWhileInUseUsageDescription</key>
+	<string>This app uses Bluetooth to connect to devices while you are using the app.</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>Read and understand clinical health data.</string>
 	<key>NSHealthShareUsageDescription</key>
@@ -82,6 +80,11 @@
 		<string>Poppins Light.ttf</string>
 		<string>Poppins Regular.ttf</string>
 		<string>Poppins SemiBold.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash</string>

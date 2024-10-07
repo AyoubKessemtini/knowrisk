@@ -16,14 +16,14 @@ prepare_react_native_project!
 #uncomment wanted permissions (don't forget to remove the last comma)
 setup_permissions([
   'LocationWhenInUse',
+  'LocationAlways',
+  'BluetoothPeripheral'
   #'AppTrackingTransparency',
-   'BluetoothPeripheral',
   # 'Calendars',
   # 'Camera',
   # 'Contacts',
   # 'FaceID',
   # 'LocationAccuracy',
-  # 'LocationAlways',
   # 'MediaLibrary',
   # 'Microphone',
   # 'Motion',
