@@ -32,11 +32,9 @@
 		<true/>
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>This app uses Bluetooth to connect to nearby devices.</string>
+	<string>We need Bluetooth access to connect to devices and gather data.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>This app needs Bluetooth access to communicate with devices.</string>
-	<key>NSBluetoothWhileInUseUsageDescription</key>
-	<string>This app uses Bluetooth to connect to devices while you are using the app.</string>
+	<string>We use Bluetooth to scan and connect to devices for data transmission.</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>Read and understand clinical health data.</string>
 	<key>NSHealthShareUsageDescription</key>
@@ -85,6 +83,9 @@
 	<array>
 		<string>bluetooth-central</string>
 		<string>bluetooth-peripheral</string>
+		<string>fetch</string>
+		<string>nearby-interaction</string>
+		<string>processing</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash</string>
