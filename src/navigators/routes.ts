@@ -13,6 +13,7 @@ export const RootStackRoutes = {
   REPORT_SEIZURE_QUESTION_FOUR_SCREEN: 'ReportSeizureQuestion4',
   SEIZURE_FORCAST_SCREEN: 'SeizureForecastScreen',
   SCAN_SCREEN: 'scanScreen',
+  HOME: 'home',
 } as const;
 
 export const TabBarStackRoutes = {

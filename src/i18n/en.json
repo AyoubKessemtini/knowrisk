@@ -81,6 +81,7 @@
     "disconnected": "disconnected",
     "scan_device_to_connect": "Scan device to connect",
     "scan_device": "Scan device",
-    "scanning": "Scanning devices ..."
+    "scanning": "Scanning devices ...",
+    "available_devices": "Available devices"
   }
 }

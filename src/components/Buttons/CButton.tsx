@@ -18,7 +18,8 @@ type PRH<T extends string, K> = Partial<Record<T, K>> | undefined;
 type ButtonTypes = keyof typeof $buttonTypesColors.light;
 
 interface CustomButtonProps extends PressableProps {
-  text: I18nKeyPath;
+  text?: I18nKeyPath;
+  stringText?: string;
   textOptions?: lang.TranslateOptions;
   buttonType?: ButtonTypes;
   mb?: number;
@@ -34,6 +35,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export const CButton = ({
   text,
+  stringText,
   textOptions,
   buttonType = 'primary',
   mb,
@@ -110,7 +112,9 @@ export const CButton = ({
             buttonVersion === 3 && styles.version3Text,
           ]}
           textOptions={textOptions}
-        />
+        >
+          {stringText}
+        </CText>
         {rightAccessory && (
           <View style={styles.rightAccessory}>{rightAccessory}</View>
         )}

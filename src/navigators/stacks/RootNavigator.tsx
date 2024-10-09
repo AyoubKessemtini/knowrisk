@@ -43,6 +43,7 @@ export type RootStackParamList = {
   [RootStackRoutes.REPORT_SEIZURE_QUESTION_FOUR_SCREEN]: undefined;
   [RootStackRoutes.SEIZURE_FORCAST_SCREEN]: undefined;
   [RootStackRoutes.SCAN_SCREEN]: undefined;
+  [RootStackRoutes.HOME]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

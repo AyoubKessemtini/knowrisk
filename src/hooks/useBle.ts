@@ -1,66 +1,14 @@
-import { useState } from 'react';
-import { BleManager, Device } from 'react-native-ble-plx';
-
-const bleManager = new BleManager();
-
-interface BluetoothLowEnergyApi {
-  scanForPeripherals(): void;
-  connectToDevice: (deviceId: Device) => Promise<void>;
-  allDevices: Device[];
-  connectedDevice: Device | null;
-}
-
-export function useBle(): BluetoothLowEnergyApi {
-  const [allDevices, setAllDevices] = useState<Device[]>([]);
-  const [connectedDevice, setConnectedDevice] = useState<Device | null>(null);
-
-  // Function to check for duplicate devices
-  const isDuplicteDevice = (devices: Device[], nextDevice: Device) =>
-    devices.findIndex((device) => nextDevice.id === device.id) > -1;
-
-  // Function to scan for BLE devices
-  const scanForPeripherals = () => {
-    bleManager.startDeviceScan(null, null, (error, device) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-
-      if (device) {
-        setAllDevices((prevState: Device[]) => {
-          if (!isDuplicteDevice(prevState, device)) {
-            return [...prevState, device];
-          }
-          return prevState;
-        });
-      }
-    });
-  };
-
-  // Function to connect to a selected BLE device
-  const connectToDevice = async (device: Device) => {
-    try {
-      const deviceConnection = await bleManager.connectToDevice(device.id);
-      setConnectedDevice(deviceConnection);
-      await deviceConnection.discoverAllServicesAndCharacteristics();
-      await bleManager.stopDeviceScan();
-    } catch (e) {
-      console.log('FAILED TO CONNECT', e);
-    }
-  };
-
-  return {
-    scanForPeripherals,
-    connectToDevice,
-    allDevices,
-    connectedDevice,
-  };
-}
-
-/*
 import { useState, useEffect } from 'react';
-import { NativeEventEmitter, NativeModules, Alert, Platform, PermissionsAndroid } from 'react-native';
+import {
+  NativeEventEmitter,
+  NativeModules,
+  Alert,
+  Platform,
+  // eslint-disable-next-line react-native/split-platform-components
+  PermissionsAndroid,
+} from 'react-native';
 import BleManager from 'react-native-ble-manager';
+import { setTimeOnDevice } from '@utils/wearable/SetTimeOnDevice.ts';
 
 interface Peripheral {
   id: string;
@@ -71,6 +19,10 @@ interface Peripheral {
 
 export const useBle = () => {
   const [devices, setDevices] = useState<Peripheral[]>([]);
+  const [connectedDevice, setConnectedDevice] = useState<Peripheral>(
+    {} as Peripheral,
+  );
+  console.log(connectedDevice);
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const [isBluetoothOn, setIsBluetoothOn] = useState<boolean>(true); // Track Bluetooth state
 
@@ -85,7 +37,6 @@ export const useBle = () => {
       connectToDevice: () => {},
     };
   }
-
 
   const handleDiscoverPeripheral = (peripheral: Peripheral) => {
     console.log('Discovered peripheral:', peripheral);
@@ -118,19 +69,50 @@ export const useBle = () => {
     } else if (state === 'on') {
       setIsBluetoothOn(true);
     } else if (state === 'unknown') {
-      console.log('Bluetooth state is unknown, waiting for a valid state...');
+      console.log('Bluetooth state is unknown, retrying in 2 seconds...');
+      // Retry checking the Bluetooth state after 2 seconds if it's unknown
+      setTimeout(() => BleManager.checkState(), 2000);
     }
   };
 
+  const requestPermissions = async () => {
+    if (Platform.OS === 'android' && Platform.Version >= 23) {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message: 'Bluetooth Low Energy requires location permission',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+        console.error('Location permission denied');
+        return false;
+      }
+    }
+    return true;
+  };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    BleManager.start({ showAlert: false })
-      .then(() => {
-        console.log('BleManager initialized');
-        BleManager.checkState(); // Check initial Bluetooth state
-      })
-      .catch((error) => {
-        console.error('BleManager initialization error:', error);
-      });
+    const initializeBleManager = async () => {
+      const hasPermissions = await requestPermissions();
+      console.log('Location permission granted:', hasPermissions);
+      if (hasPermissions) {
+        BleManager.start({ showAlert: false })
+          .then(() => {
+            console.log('BleManager initialized');
+            BleManager.checkState(); // Check initial Bluetooth state
+          })
+          .catch((error) => {
+            console.error('BleManager initialization error:', error);
+          });
+      }
+    };
+
+    initializeBleManager();
 
     // Listen for Bluetooth state changes
     bleManagerEmitter.addListener(
@@ -151,26 +133,6 @@ export const useBle = () => {
     };
   }, []);
 
-  const requestPermissions = async () => {
-    if (Platform.OS === 'android' && Platform.Version >= 23) {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Location Permission',
-          message: 'Bluetooth Low Energy requires location permission',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        }
-      );
-      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-        console.error('Location permission denied');
-        return false;
-      }
-    }
-    return true;
-  };
-
   const startScan = async () => {
     if (isScanning) return;
     if (!isBluetoothOn) {
@@ -183,23 +145,36 @@ export const useBle = () => {
       return;
     }
     const hasPermissions = await requestPermissions();
+    console.log('Scanning permission granted:', hasPermissions);
     if (!hasPermissions) return;
 
     setDevices([]); // Clear device list
-    setIsScanning(true);
-    try {
-      await BleManager.scan([], 35, false);
-      console.log('Scanning started');
-    } catch (err) {
-      console.error('Scanning error:', err);
-      setIsScanning(false);
-    }
+
+    // Add a slight delay before starting the scan
+    setTimeout(async () => {
+      setIsScanning(true);
+      try {
+        await BleManager.scan([], 5, false);
+        console.log('Scanning started');
+      } catch (err) {
+        console.error('Scanning error:', err);
+        setIsScanning(false);
+      }
+    }, 1000); // 1-second delay
   };
 
   const connectToDevice = async (id: string) => {
     try {
       await BleManager.connect(id);
+      setConnectedDevice(devices.filter((d) => d.id === id)[0]);
       console.log('Connected to device:', id);
+      setTimeout(async () => {
+        await setTimeOnDevice(id, 'fff0', 'fff6');
+      }, 3000);
+      console.log('await BleManager.retrieveServices(id)');
+      console.log(
+        JSON.stringify(await BleManager.retrieveServices(id), null, 2),
+      );
     } catch (error) {
       console.error('Connection error:', error);
     }
@@ -212,4 +187,3 @@ export const useBle = () => {
     connectToDevice,
   };
 };
- */

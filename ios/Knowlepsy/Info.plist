@@ -43,10 +43,6 @@
 	<string>Share workout data with other apps.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We need your location to provide weather information based on your current position.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need your location to provide weather information based on your current position, even when the app is in the background.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to provide weather information based on your current position.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
