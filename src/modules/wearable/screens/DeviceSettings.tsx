@@ -30,6 +30,14 @@ export const DeviceSettings = ({}: TabStackScreenProps<'device_settings'>) => {
           await navigation.navigate(RootStackRoutes.SCAN_SCREEN);
         }}
       />
+      <CButton
+        mt={10}
+        onPress={async () => {
+          console.log('get data');
+        }}
+      >
+        Get data
+      </CButton>
     </Screen>
   );
 };

@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import { setTimeOnDevice } from '@utils/wearable/SetTimeOnDevice.ts';
+import { enableRealtimeMode } from '@utils/wearable/enableRealtimeMode.ts';
+import { readRealTimeData } from '@utils/wearable/readRealtimeData.ts';
 
 interface Peripheral {
   id: string;
@@ -28,6 +30,7 @@ export const useBle = () => {
 
   const BleManagerModule = NativeModules.BleManager;
   const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+
   if (!BleManagerModule) {
     console.error('BleManager native module is not available.');
     return {
@@ -170,6 +173,8 @@ export const useBle = () => {
       console.log('Connected to device:', id);
       setTimeout(async () => {
         await setTimeOnDevice(id, 'fff0', 'fff6');
+        await enableRealtimeMode(id, 'fff0', 'fff6');
+        await readRealTimeData(id, 'fff0', 'fff7');
       }, 3000);
       console.log('await BleManager.retrieveServices(id)');
       console.log(

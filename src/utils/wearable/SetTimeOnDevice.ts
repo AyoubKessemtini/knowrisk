@@ -1,14 +1,5 @@
 import BleManager from 'react-native-ble-manager';
-
-const toBCD = (value: number) => {
-  // eslint-disable-next-line no-bitwise
-  return ((value / 10) << 4) | value % 10;
-};
-
-const calculateCRC = (data: number[]) => {
-  // eslint-disable-next-line no-bitwise
-  return data.reduce((acc, byte) => acc + byte, 0) & 0xff;
-};
+import { calculateCRC, toBCD } from '@utils/wearable/shared/shredUtils.ts';
 
 export const setTimeOnDevice = async (
   deviceId: string,
