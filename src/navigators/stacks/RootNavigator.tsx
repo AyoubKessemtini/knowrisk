@@ -14,8 +14,8 @@ import {
   OnboardingNavigator,
   OnboardingStackParamList,
 } from './OnboardingNavigator';
-import { PersistenceStorage } from '@storage/index';
-import { KEYS } from '@storage/Keys';
+// import { PersistenceStorage } from '@storage/index';
+// import { KEYS } from '@storage/Keys';
 import { SettingsInformationScreen } from '@modules/profile/screens/Settings/Information_Screen';
 import { EditProfileScreen } from '../../modules/profile/screens/Settings/EditProfile_Screen';
 import { ChangePasswordScreen } from '../../modules/profile/screens/Settings/ChangePassword_Screen';
@@ -53,7 +53,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
   const { login } = useAuth();
-  const isLoggedIn = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
+  // const isLoggedIn = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
 
   useEffect(() => {
     login();
@@ -66,19 +66,19 @@ export function RootNavigator() {
         navigationBarColor: Colors.deepRed,
       }}
     >
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? ( */}
+      <Stack.Screen
+        name={RootStackRoutes.ONBOARDING_STACK}
+        component={OnboardingNavigator}
+      />
+      {/* ) : ( */}
+      <>
         <Stack.Screen
-          name={RootStackRoutes.ONBOARDING_STACK}
-          component={OnboardingNavigator}
+          name={RootStackRoutes.TAB_STACK}
+          component={TabNavigator}
         />
-      ) : (
-        <>
-          <Stack.Screen
-            name={RootStackRoutes.TAB_STACK}
-            component={TabNavigator}
-          />
-        </>
-      )}
+      </>
+      {/* )} */}
 
       <Stack.Screen
         name={RootStackRoutes.SETTINGS_INFORMATION_SCREEN}

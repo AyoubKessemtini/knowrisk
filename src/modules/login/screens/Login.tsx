@@ -12,7 +12,11 @@ import { CText } from '@components/CText';
 import ImageAssets from '@assets/images';
 import { Colors } from '@constants/Colors';
 import { useNavigation } from '@react-navigation/native';
-import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
+import {
+  OnboardingStackRoutes,
+  RootStackRoutes,
+  TabBarStackRoutes,
+} from '@navigators/routes';
 
 export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
   const navigation = useNavigation();
@@ -23,6 +27,9 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
   });
 
   const onPressHandler = (formData: LoginScheme) => {
+    navigation.navigate(RootStackRoutes.TAB_STACK, {
+      screen: TabBarStackRoutes.HOME,
+    });
     loginWithEmailMutate(formData, {
       onError: (error) => {
         console.log(error);
