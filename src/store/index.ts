@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { homeSlice } from './homeSlice';
 import { localeSlice } from './localeSlice';
 import { authSlice } from './authSlice';
+import { bleDataSlice } from '@store/bleDataSlice.ts';
 
 const rootReducer = combineReducers({
   [homeSlice.name]: homeSlice.reducer,
   [localeSlice.name]: localeSlice.reducer,
   [authSlice.name]: authSlice.reducer,
+  [bleDataSlice.name]: bleDataSlice.reducer,
 });
 
 const store = configureStore({

@@ -1,6 +1,11 @@
 import BleManager, { BleEventType } from 'react-native-ble-manager';
 import { Buffer } from 'buffer';
 import { NativeEventEmitter, NativeModules } from 'react-native';
+import { DataType } from '@utils/wearable/requestData.ts';
+import { parseHRVData } from '@utils/wearable/dataParser/parseHRVData.ts';
+import { parseRealTimeActivities } from '@utils/wearable/dataParser/parseRealTimeActivities.ts';
+import { parseSleepData } from '@utils/wearable/dataParser/parseSleepData.ts';
+import { parseHeartRateData } from '@utils/wearable/dataParser/parseHeartRateData.ts';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -8,6 +13,8 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 if (!BleManagerModule) {
   console.error('BleManager native module is not available.');
 }
+
+// Main function to read real-time data
 export const readRealTimeData = async (
   deviceId: string,
   serviceUUID: string,
@@ -22,78 +29,54 @@ export const readRealTimeData = async (
     bleManagerEmitter.addListener(
       BleEventType.BleManagerDidUpdateValueForCharacteristic,
       ({ value }) => {
-        try {
-          const decodedData = Buffer.from(value, 'base64');
-          parseRealTimeData(decodedData);
-        } catch (error) {
-          console.error('Error decoding Base64 data:', error);
-        }
+        (async () => {
+          try {
+            if (value.length > 16) {
+              const decodedData = Buffer.from(value, 'base64');
+              await parseRealTimeData(decodedData, deviceId);
+              console.log(value);
+            }
+          } catch (error) {
+            console.error('Error in listener:', error);
+          }
+        })();
       },
     );
+
     console.log('Subscribed to real-time data!');
   } catch (error) {
     console.error('Error subscribing to real-time data:', error);
   }
 };
 
-const parseRealTimeData = (data: Buffer) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //@ts-ignore
-  const dataView = new DataView(data.buffer);
-  let offset = 0;
+// Main data parser function
+const parseRealTimeData = (data: Buffer | Uint8Array, deviceId: string) => {
+  try {
+    const dataView: DataView = new DataView(data.buffer);
+    const startByte = dataView.getUint8(0);
 
-  const startByte = dataView.getUint8(offset);
-  offset += 1;
+    switch (startByte) {
+      case DataType.HRV:
+        parseHRVData(dataView, deviceId);
+        break;
 
-  if (startByte !== 0x09) {
-    console.error('Verification error or execution failed.');
-    return;
+      case DataType.ACTIVITIES:
+        parseRealTimeActivities(dataView);
+        break;
+
+      case DataType.SLEEP:
+        parseSleepData(dataView, deviceId);
+        break;
+
+      case DataType.HR:
+        parseHeartRateData(dataView);
+        break;
+
+      default:
+        console.warn(`Unknown start byte: ${startByte}`);
+        break;
+    }
+  } catch (error) {
+    console.error('Error in parseRealTimeData:', error);
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  const getUint32LE = (offset: number) => {
-    const value = dataView.getUint32(offset, true); // true for little-endian
-    return value;
-  };
-  const totalSteps = getUint32LE(offset);
-  offset += 4;
-
-  const calorieValueRaw = getUint32LE(offset);
-  const calorieValue = (calorieValueRaw / 100).toFixed(2); // Keep two decimal places
-  offset += 4;
-
-  const distanceRaw = getUint32LE(offset);
-  const walkingDistance = (distanceRaw / 100).toFixed(2); // Keep two decimal places
-  offset += 4;
-
-  const movementTimeRaw = getUint32LE(offset);
-  const movementMinutes = Math.floor(movementTimeRaw / 60);
-  const movementSeconds = movementTimeRaw % 60;
-  offset += 4;
-
-  const fastMotionTimeRaw = getUint32LE(offset);
-  const fastMotionMinutes = fastMotionTimeRaw;
-  offset += 4;
-
-  const heartRate = dataView.getUint8(offset);
-  offset += 1;
-
-  const temperatureRaw = dataView.getUint16(offset, true);
-  const temperature = (temperatureRaw / 100).toFixed(2);
-  offset += 2;
-
-  const bloodOxygen = dataView.getUint8(offset);
-  offset += 1;
-
-  console.log('Total Steps:', totalSteps);
-  console.log('Calorie Value (KCAL):', calorieValue);
-  console.log('Walking Distance (KM):', walkingDistance);
-  console.log(
-    'Movement Time:',
-    `${movementMinutes} minutes and ${movementSeconds} seconds`,
-  );
-  console.log('Fast Motion Time (minutes):', fastMotionMinutes);
-  console.log('Heart Rate:', heartRate);
-  console.log('Temperature (°C):', temperature);
-  console.log('Blood Oxygen Value (%):', bloodOxygen);
 };

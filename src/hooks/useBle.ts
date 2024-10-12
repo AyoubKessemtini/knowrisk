@@ -1,16 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
+  Alert,
   NativeEventEmitter,
   NativeModules,
-  Alert,
-  Platform,
   // eslint-disable-next-line react-native/split-platform-components
   PermissionsAndroid,
+  Platform,
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
-import { setTimeOnDevice } from '@utils/wearable/SetTimeOnDevice.ts';
+import { setTimeOnDevice } from '@utils/wearable/time/setTimeOnDevice.ts';
 import { enableRealtimeMode } from '@utils/wearable/enableRealtimeMode.ts';
 import { readRealTimeData } from '@utils/wearable/readRealtimeData.ts';
+import {
+  DataType,
+  sendRequestDataCommand,
+} from '@utils/wearable/requestData.ts';
+import { useAppDispatch } from '@store/index.ts';
+import { BleDataActions } from '@store/bleDataSlice.ts';
 
 interface Peripheral {
   id: string;
@@ -24,6 +30,7 @@ export const useBle = () => {
   const [connectedDevice, setConnectedDevice] = useState<Peripheral>(
     {} as Peripheral,
   );
+  const dispatch = useAppDispatch();
   console.log(connectedDevice);
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const [isBluetoothOn, setIsBluetoothOn] = useState<boolean>(true); // Track Bluetooth state
@@ -171,15 +178,22 @@ export const useBle = () => {
       await BleManager.connect(id);
       setConnectedDevice(devices.filter((d) => d.id === id)[0]);
       console.log('Connected to device:', id);
+      await BleManager.retrieveServices(id);
+      dispatch(BleDataActions.updateDeviceConnection(true));
       setTimeout(async () => {
         await setTimeOnDevice(id, 'fff0', 'fff6');
+        //await
         await enableRealtimeMode(id, 'fff0', 'fff6');
         await readRealTimeData(id, 'fff0', 'fff7');
+        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.SLEEP);
+        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.HRV);
+        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.HR);
+        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.TEMP);
+        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.SPO2);
       }, 3000);
-      console.log('await BleManager.retrieveServices(id)');
-      console.log(
-        JSON.stringify(await BleManager.retrieveServices(id), null, 2),
-      );
+      setInterval(async () => {
+        await enableRealtimeMode(id, 'fff0', 'fff6');
+      }, 20000);
     } catch (error) {
       console.error('Connection error:', error);
     }
