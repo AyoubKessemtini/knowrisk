@@ -19,7 +19,9 @@
     "latest": "Latest",
     "seizure":"Seizure Calendar",
     "heartRate": "Heart Rate",
-    "restingHeartRate": "Resting Heart Rate"
+    "restingHeartRate": "Resting Heart Rate",
+    "steps": "Steps",
+    "temperature": "Temperature"
   },
   "home": {
     "foo": "French Home Screen"
@@ -147,7 +149,15 @@
   },
   "wearable": {
     "click_to_connect": "Click to connect",
-    "connected": "Device is Paired"
+    "connected": "Device is Paired",
+    "disconnected": "disconnected",
+    "scan_device_to_connect": "Scan device to connect",
+    "scan_device": "Scan device",
+    "scanning": "Scanning devices ...",
+    "available_devices": "Available devices",
+    "connected_to_device": "Connected to device :",
+    "reset_device": "Reset device",
+    "unpair_device": "Unpair device"
   },
   "informations": {
     "app_usage": "App usage",
@@ -200,5 +210,5 @@
     "medication": "Medications",
     "empty": "No medications available.",
     "add": "Add Medication"
-  }
+  },
 }

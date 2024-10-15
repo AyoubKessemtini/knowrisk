@@ -12,6 +12,8 @@ import { GetSleepByDate } from '@core/usecases/fitBitRepository/GetSleepByDate.t
 import { GetStressByDate } from '@core/usecases/fitBitRepository/GetStressByDate.ts';
 import { GetSpo2ByDate } from '@core/usecases/fitBitRepository/GetSpo2DataByDate.ts';
 import { GetActivitiesByDate } from '@core/usecases/fitBitRepository/GetActivitiesByDate.ts';
+import { StoreDeviceHealthData } from '@core/usecases/deviceRepository/StoreDeviceHealthData.ts';
+import { RDDeviceHealthDataRepo } from './adapters/real/repositories/RDDeviceHealthDataRepo.ts';
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -35,6 +37,7 @@ export const Core = (configuration: CoreConfiguration) => {
 
   //REPOSITORIES
   const iosHealthDataRepo = new RDIOSHealthDataRepo(httpClient);
+  const deviceHealthDataRepo = new RDDeviceHealthDataRepo(httpClient);
   const authRepo = new RDAuthRepo(httpClient);
   //fitbit
   const fitBitRepo = new RDFitBit(httpClient);
@@ -52,6 +55,7 @@ export const Core = (configuration: CoreConfiguration) => {
   const getStressByDate = new GetStressByDate(fitBitRepo);
   const getSpo2ByDate = new GetSpo2ByDate(fitBitRepo);
   const getActivities2ByDate = new GetActivitiesByDate(fitBitRepo);
+  const storeDeviceHealthData = new StoreDeviceHealthData(deviceHealthDataRepo);
 
   // fitbit
 
@@ -64,5 +68,6 @@ export const Core = (configuration: CoreConfiguration) => {
     getStressByDate,
     getSpo2ByDate,
     getActivities2ByDate,
+    storeDeviceHealthData,
   };
 };

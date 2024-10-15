@@ -70,6 +70,7 @@ export const Colors = {
       darkPurple: pallete.darkPurple,
       purple: pallete.purple,
       grey3: pallete.grey3,
+      grey2: pallete.grey2,
       darkRed: pallete.darkRed,
       purpleGrey: pallete.purpleGrey,
       purple1: pallete.purple1,
@@ -95,6 +96,7 @@ export const Colors = {
       purple: pallete.purple,
       darkPurple: pallete.darkPurple,
       grey3: pallete.grey3,
+      grey2: pallete.grey2,
 
       darkRed: pallete.darkRed,
       purpleGrey: pallete.purpleGrey,

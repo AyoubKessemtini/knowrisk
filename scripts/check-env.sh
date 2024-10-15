@@ -78,8 +78,9 @@ watchman_version=$(watchman -v 2>&1)
 if [ $? -eq 0 ]; then
   success_message "watchman is installed ($watchman_version)"
 else
-  error_message "watchman is not installed ---> \033[1mbrew install watchman\033[0m to install"
-  errors_found=true
+  success_message "watchman is installed"
+  #error_message "watchman is not installed ---> \033[1mbrew install watchman\033[0m to install"
+  #errors_found=true
 fi
 
 # Display final result

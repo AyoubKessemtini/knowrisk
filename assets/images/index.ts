@@ -21,7 +21,11 @@ const ImageAssets = {
   NOTES_ICON: require('./notes_icon.png'),
 
   KEPPRA: require('./keppra.png'),
-  LOGO_BANNER: require('./logo_banner.jpeg'),
+  LOGO_BANNER: require('./logo_banner.png'),
+
+  DISCONNECTED_DEVICE: require('./disconected_device.png'),
+  CONNECTED_DEVICE: require('./connectedDevice.png'),
+  SCAN_IN_PROGRESS: require('./scanInProgress.png'),
 };
 
 export default ImageAssets;

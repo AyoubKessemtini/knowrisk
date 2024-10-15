@@ -25,6 +25,7 @@ import { ReportSeizureQuestion2 } from '../../modules/home/screens/ReportSeizure
 import { ReportSeizureQuestion3 } from '../../modules/home/screens/ReportSeizureScreen/ReportSeizureQuestion3';
 import { ReportSeizureQuestion4 } from '../../modules/home/screens/ReportSeizureScreen/ReportSeizureQuestion4';
 import { SeizureForecastScreen } from '@modules/seizure/screens/SeizureCalendar';
+import { ScanScreen } from '@modules/wearable/screens/ScanScreen.tsx';
 /* import { useAppSelector } from '@store/index'; */
 
 export type RootStackParamList = {
@@ -41,6 +42,8 @@ export type RootStackParamList = {
   [RootStackRoutes.REPORT_SEIZURE_QUESTION_THREE_SCREEN]: undefined;
   [RootStackRoutes.REPORT_SEIZURE_QUESTION_FOUR_SCREEN]: undefined;
   [RootStackRoutes.SEIZURE_FORCAST_SCREEN]: undefined;
+  [RootStackRoutes.SCAN_SCREEN]: undefined;
+  [RootStackRoutes.HOME]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -114,6 +117,7 @@ export function RootNavigator() {
         name={RootStackRoutes.SEIZURE_FORCAST_SCREEN}
         component={SeizureForecastScreen}
       />
+      <Stack.Screen name={RootStackRoutes.SCAN_SCREEN} component={ScanScreen} />
     </Stack.Navigator>
   );
 }

@@ -14,6 +14,7 @@ import { RootStackRoutes } from '../../../../navigators/routes';
 import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
 import { DateSelector } from '@components/DatePicker/DatePicker';
 import { formatTime } from '@hooks/useDateFormatter';
+import { useAppSelector } from '@store/index.ts';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -28,25 +29,29 @@ export const Home: React.FC = () => {
     setSelectedDate(newDate);
   };
 
-  // Fallback for health data
+  /*
   const heartRateData = {
     data: healthData?.heartRate?.[0]?.value || '73',
     lastUpdated: formatTime(
       healthData?.heartRate?.[0]?.endDate || new Date().toISOString(),
     ),
   };
-
   const restingHeartRateData = {
     data: healthData?.restingHeartRate?.[0]?.value || '64',
     lastUpdated: formatTime(
       healthData?.restingHeartRate?.[0]?.endDate || new Date().toISOString(),
     ),
   };
+   */
 
   const respiratoryRateData = healthData?.respiratoryRate?.[0] || {
     value: 17,
     endDate: new Date().toISOString(),
   };
+
+  const { isDeviceConnectedBLE, hr, steps, temperature } = useAppSelector(
+    (state) => state.bleData,
+  );
 
   return (
     <Screen
@@ -63,9 +68,15 @@ export const Home: React.FC = () => {
           lastSeizure="Sun, Apr 07, 22:54"
           seizureFrequency="Weekly"
           seizureRisk="Moderate"
-          isDevicePaired={true}
+          isDevicePaired={isDeviceConnectedBLE}
           mood="happy"
-          temp={'36'}
+          temp={
+            temperature === '--'
+              ? '--'
+              : parseInt(temperature, 10) > 30 && parseInt(temperature, 10) < 41
+                ? temperature
+                : '36.4'
+          }
         />
         <ReportSeizureCard
           onPress={() => {
@@ -78,16 +89,16 @@ export const Home: React.FC = () => {
         />
         <View style={styles.row}>
           <SleepCard
-            lastUpdated={heartRateData.lastUpdated}
-            sleepData={heartRateData.data as string}
+            lastUpdated={isDeviceConnectedBLE ? 'Now' : '--'}
+            sleepData={hr as string}
             title="common.heartRate"
             unit="bpm"
           />
           <SleepCard
-            lastUpdated={restingHeartRateData.lastUpdated}
-            sleepData={restingHeartRateData.data as string}
-            title="common.restingHeartRate"
-            unit="bpm"
+            lastUpdated={isDeviceConnectedBLE ? 'Now' : '  --'}
+            sleepData={steps as string}
+            title="common.steps"
+            unit="step"
           />
         </View>
         <View style={styles.row}>

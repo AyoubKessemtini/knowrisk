@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>dev.flutter.background.refresh</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -31,6 +35,10 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>We need Bluetooth access to connect to devices and gather data.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>We use Bluetooth to scan and connect to devices for data transmission.</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>Read and understand clinical health data.</string>
 	<key>NSHealthShareUsageDescription</key>
@@ -38,10 +46,6 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Share workout data with other apps.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need your location to provide weather information based on your current position.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need your location to provide weather information based on your current position, even when the app is in the background.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to provide weather information based on your current position.</string>
 	<key>UIAppFonts</key>
 	<array>
@@ -74,6 +78,14 @@
 		<string>Poppins Light.ttf</string>
 		<string>Poppins Regular.ttf</string>
 		<string>Poppins SemiBold.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
+		<string>fetch</string>
+		<string>nearby-interaction</string>
+		<string>processing</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash</string>

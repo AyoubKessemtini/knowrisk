@@ -22,18 +22,13 @@ export const BleutoothStateButton = ({
       ]}
     >
       {connected ? (
-        <Icon
-          type="material"
-          name="bluetooth"
-          size={17}
-          color={Colors.deepPurple}
-        />
+        <Icon type="material" name="bluetooth" size={20} color={Colors.green} />
       ) : (
         <Icon
           type="material"
           name="bluetooth-disabled"
-          size={17}
-          color={Colors.deepPurple}
+          size={20}
+          color={Colors.red}
         />
       )}
 

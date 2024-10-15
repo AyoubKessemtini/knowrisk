@@ -42,14 +42,14 @@ export const PatientInfoCard = ({
           paddingVertical={3}
           text={isDevicePaired ? 'Device is Paired' : 'Device not Paired'}
           textSize="xm_medium"
-          backgroundColor={Colors.lightGreen}
-          textColor="green"
+          backgroundColor={isDevicePaired ? Colors.lightGreen : Colors.lightRed}
+          textColor={isDevicePaired ? 'green' : 'deepRed'}
           leftAccessory={
             <Icon
               type="material"
-              name="wifi"
+              name={isDevicePaired ? 'bluetooth' : 'bluetooth-disabled'}
               size={18}
-              color={isDevicePaired ? Colors.green : Colors.deepPurple}
+              color={isDevicePaired ? Colors.green : Colors.red}
             />
           }
         />
