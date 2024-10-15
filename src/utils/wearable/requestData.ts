@@ -9,7 +9,11 @@ export enum DataType {
   SPO2 = 0x66,
   TEMP = 0x62,
   ACTIVITIES = 0x09,
+  //settings
+  BATTERY = 0x13,
+  //RESET = 0x01,
 }
+
 const getDataCommand = (dataType: DataType) => {
   const data = [
     dataType,

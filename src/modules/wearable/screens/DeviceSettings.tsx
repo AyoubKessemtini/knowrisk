@@ -5,15 +5,20 @@ import { RootStackRoutes } from '@navigators/routes.ts';
 import { TabStackScreenProps } from '@navigators/stacks/TabNavigator.tsx';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { DisconnectedCard } from '@modules/wearable/components/DisconnectedCard.tsx';
 import Icon from 'react-native-easy-icon';
-//import { requestSleepData } from '@utils/wearable/requestData.ts';
 import { useAppSelector } from '@store/index.ts';
+import { ConnectedCard } from '@modules/wearable/components/ConnectedCard.tsx';
+import { useBle } from '@hooks/useBle.ts';
 
 export const DeviceSettings = ({}: TabStackScreenProps<'device_settings'>) => {
   const navigation = useNavigation();
-  const { isDeviceConnectedBLE } = useAppSelector((state) => state.bleData);
+  const { isDeviceConnectedBLE, deviceId, deviceName } = useAppSelector(
+    (state) => state.bleData,
+  );
+  const { disconnectFromDevice } = useBle();
+
   if (!isDeviceConnectedBLE) {
     return (
       <Screen containerStyles={styles.container}>
@@ -45,6 +50,33 @@ export const DeviceSettings = ({}: TabStackScreenProps<'device_settings'>) => {
             console.log('switched');
           }}
         />
+        <ConnectedCard deviceName={deviceName} />
+
+        <View style={styles.buttonsContainer}>
+          <CButton
+            text="wearable.reset_device"
+            rightAccessory={
+              <Icon
+                type="ionicon"
+                name="refresh-outline"
+                size={24}
+                color="white"
+              />
+            }
+          />
+          <CButton
+            text="wearable.unpair_device"
+            rightAccessory={
+              <Icon
+                type="ionicon"
+                name="log-out-outline"
+                size={24}
+                color="white"
+              />
+            }
+            onPress={() => disconnectFromDevice(deviceId)}
+          />
+        </View>
       </Screen>
     );
   }
@@ -56,5 +88,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     gap: 20,
     alignItems: 'center',
+  },
+  buttonsContainer: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    gap: 10,
   },
 });

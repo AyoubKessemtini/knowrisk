@@ -1,7 +1,7 @@
 import { format as formatDate } from 'date-fns';
 import { core } from '@config/Configuration.ts';
-//import { deleteData } from "@utils/wearable/deleteData.ts";
-//import { DataType } from "@utils/wearable/requestData.ts";
+import { deleteData } from '@utils/wearable/deleteData.ts';
+import { DataType } from '@utils/wearable/requestData.ts';
 
 export const parseSleepData = (dataView: DataView, deviceId: string) => {
   console.log(deviceId);
@@ -51,13 +51,11 @@ export const parseSleepData = (dataView: DataView, deviceId: string) => {
     sleepData: sleepIntervals,
   };
 
-  console.log('Parsed Sleep Data:', parsedSleepData);
-
   core.storeDeviceHealthData
     .execute({ sleep: parsedSleepData })
     .then((result) => {
       if (result.type === 'success') {
-        // deleteData(deviceId, DataType.SLEEP);
+        deleteData(deviceId, DataType.SLEEP);
       }
     });
 };

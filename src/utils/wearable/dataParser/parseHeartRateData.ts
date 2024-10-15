@@ -26,6 +26,5 @@ export const parseHeartRateData = (dataView: DataView) => {
 
     heartRateRecords.push({ dataNumber, baseTime, heartRateMeasurements });
   }
-
   console.log('Heart Rate Records:', heartRateRecords);
 };

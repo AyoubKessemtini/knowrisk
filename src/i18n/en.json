@@ -7,7 +7,9 @@
     "pass": "Password",
     "connect": "Connect",
     "logout": "Logout",
-    "questions_header" : "Q&A"
+    "questions_header" : "Q&A",
+    "steps": "Steps",
+    "temperature": "Temperature"
   },
   "home": {
     "foo": "French Home Screen"
@@ -79,6 +81,9 @@
   },
   "wearable": {
     "disconnected": "disconnected",
+    "connected_to_device": "Connected to device :",
+    "reset_device": "Reset device",
+    "unpair_device": "Unpair device",
     "scan_device_to_connect": "Scan device to connect",
     "scan_device": "Scan device",
     "scanning": "Scanning devices ...",

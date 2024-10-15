@@ -24,6 +24,7 @@ const ImageAssets = {
   LOGO_BANNER: require('./logo_banner.png'),
 
   DISCONNECTED_DEVICE: require('./disconected_device.png'),
+  CONNECTED_DEVICE: require('./connectedDevice.png'),
   SCAN_IN_PROGRESS: require('./scanInProgress.png'),
 };
 

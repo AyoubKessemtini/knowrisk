@@ -1,10 +1,9 @@
 import { format as formatDate } from 'date-fns';
 import { core } from '@config/Configuration.ts';
-//import { deleteData } from '@utils/wearable/deleteData.ts';
-//import { DataType } from '@utils/wearable/requestData.ts';
+import { deleteData } from '@utils/wearable/deleteData.ts';
+import { DataType } from '@utils/wearable/requestData.ts';
 
 export const parseHRVData = (dataView: DataView, deviceId: string) => {
-  console.log(deviceId);
   const MIN_RECORD_LENGTH = 15;
   const hrvRecords = [];
 
@@ -55,7 +54,7 @@ export const parseHRVData = (dataView: DataView, deviceId: string) => {
 
   core.storeDeviceHealthData.execute({ hrv: hrvRecords }).then((result) => {
     if (result.type === 'success') {
-      // deleteData(deviceId, DataType.HRV);
+      deleteData(deviceId, DataType.HRV);
     }
   });
 };

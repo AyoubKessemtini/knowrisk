@@ -15,7 +15,7 @@ import {
   DataType,
   sendRequestDataCommand,
 } from '@utils/wearable/requestData.ts';
-import { useAppDispatch } from '@store/index.ts';
+import { useAppDispatch, useAppSelector } from '@store/index.ts';
 import { BleDataActions } from '@store/bleDataSlice.ts';
 
 interface Peripheral {
@@ -33,10 +33,12 @@ export const useBle = () => {
   const dispatch = useAppDispatch();
   console.log(connectedDevice);
   const [isScanning, setIsScanning] = useState<boolean>(false);
-  const [isBluetoothOn, setIsBluetoothOn] = useState<boolean>(true); // Track Bluetooth state
+  const [isBluetoothOn, setIsBluetoothOn] = useState<boolean>(true);
+  const [hadFirstConnection, setHadFirstConnection] = useState<boolean>(false);
 
   const BleManagerModule = NativeModules.BleManager;
   const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+  const { isDeviceConnectedBLE } = useAppSelector((state) => state.bleData);
 
   if (!BleManagerModule) {
     console.error('BleManager native module is not available.');
@@ -45,9 +47,9 @@ export const useBle = () => {
       isScanning: false,
       startScan: () => {},
       connectToDevice: () => {},
+      disconnectFromDevice: () => {},
     };
   }
-
   const handleDiscoverPeripheral = (peripheral: Peripheral) => {
     console.log('Discovered peripheral:', peripheral);
     setDevices((prevDevices) => {
@@ -180,23 +182,43 @@ export const useBle = () => {
       console.log('Connected to device:', id);
       await BleManager.retrieveServices(id);
       dispatch(BleDataActions.updateDeviceConnection(true));
+      dispatch(BleDataActions.updateDeviceId(id));
+      if (devices.filter((d) => d.id === id)[0].name != null) {
+        dispatch(
+          BleDataActions.updateDeviceName(
+            devices.filter((d) => d.id === id)[0].name ?? 'Knowlepsy device',
+          ),
+        );
+      }
+      setHadFirstConnection(true);
       setTimeout(async () => {
         await setTimeOnDevice(id, 'fff0', 'fff6');
         //await
         await enableRealtimeMode(id, 'fff0', 'fff6');
-        await readRealTimeData(id, 'fff0', 'fff7');
-        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.SLEEP);
-        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.HRV);
+        await readRealTimeData(id, 'fff0', 'fff7', dispatch);
         await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.HR);
+        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.HRV);
         await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.TEMP);
         await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.SPO2);
+        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.SLEEP);
+        await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.BATTERY);
       }, 3000);
-      setInterval(async () => {
-        await enableRealtimeMode(id, 'fff0', 'fff6');
-      }, 20000);
+      if (!hadFirstConnection) {
+        setInterval(async () => {
+          if (isDeviceConnectedBLE) {
+            await enableRealtimeMode(id, 'fff0', 'fff6');
+            await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.BATTERY);
+          }
+        }, 30000);
+      }
     } catch (error) {
       console.error('Connection error:', error);
     }
+  };
+
+  const disconnectFromDevice = async (id: string) => {
+    await BleManager.disconnect(id);
+    dispatch(BleDataActions.updateDeviceConnection(false));
   };
 
   return {
@@ -204,5 +226,6 @@ export const useBle = () => {
     isScanning,
     startScan,
     connectToDevice,
+    disconnectFromDevice,
   };
 };

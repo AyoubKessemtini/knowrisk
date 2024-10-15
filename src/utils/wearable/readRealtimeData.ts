@@ -6,6 +6,10 @@ import { parseHRVData } from '@utils/wearable/dataParser/parseHRVData.ts';
 import { parseRealTimeActivities } from '@utils/wearable/dataParser/parseRealTimeActivities.ts';
 import { parseSleepData } from '@utils/wearable/dataParser/parseSleepData.ts';
 import { parseHeartRateData } from '@utils/wearable/dataParser/parseHeartRateData.ts';
+import { parseSPO2Data } from '@utils/wearable/dataParser/parseSPO2Data.ts';
+import { parseTemperatureData } from '@utils/wearable/dataParser/parseTemperatureData.ts';
+import { parseBatteryData } from '@utils/wearable/dataParser/parseBatteryData.ts';
+import { AppDispatch } from '@store/index.ts';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -19,6 +23,7 @@ export const readRealTimeData = async (
   deviceId: string,
   serviceUUID: string,
   characteristicUUID: string,
+  dispatch: AppDispatch,
 ) => {
   try {
     await BleManager.startNotification(
@@ -33,8 +38,7 @@ export const readRealTimeData = async (
           try {
             if (value.length > 16) {
               const decodedData = Buffer.from(value, 'base64');
-              await parseRealTimeData(decodedData, deviceId);
-              console.log(value);
+              await parseRealTimeData(decodedData, deviceId, dispatch);
             }
           } catch (error) {
             console.error('Error in listener:', error);
@@ -50,7 +54,11 @@ export const readRealTimeData = async (
 };
 
 // Main data parser function
-const parseRealTimeData = (data: Buffer | Uint8Array, deviceId: string) => {
+const parseRealTimeData = (
+  data: Buffer | Uint8Array,
+  deviceId: string,
+  dispatch: AppDispatch,
+) => {
   try {
     const dataView: DataView = new DataView(data.buffer);
     const startByte = dataView.getUint8(0);
@@ -61,7 +69,7 @@ const parseRealTimeData = (data: Buffer | Uint8Array, deviceId: string) => {
         break;
 
       case DataType.ACTIVITIES:
-        parseRealTimeActivities(dataView);
+        parseRealTimeActivities(dataView, dispatch);
         break;
 
       case DataType.SLEEP:
@@ -70,6 +78,18 @@ const parseRealTimeData = (data: Buffer | Uint8Array, deviceId: string) => {
 
       case DataType.HR:
         parseHeartRateData(dataView);
+        break;
+
+      case DataType.SPO2:
+        parseSPO2Data(dataView, deviceId);
+        break;
+
+      case DataType.TEMP:
+        parseTemperatureData(dataView, deviceId);
+        break;
+
+      case DataType.BATTERY:
+        parseBatteryData(dataView);
         break;
 
       default:

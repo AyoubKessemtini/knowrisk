@@ -1,7 +1,12 @@
 import { formatDate } from 'date-fns';
 import { core } from '@config/Configuration.ts';
+import { AppDispatch } from '@store/index.ts';
+import { BleDataActions } from '@store/bleDataSlice.ts';
 
-export const parseRealTimeActivities = (dataView: DataView) => {
+export const parseRealTimeActivities = (
+  dataView: DataView,
+  dispatch: AppDispatch,
+) => {
   let offset = 1; // Skip the start byte
   const totalSteps = dataView.getUint32(offset, true);
   offset += 4;
@@ -19,7 +24,7 @@ export const parseRealTimeActivities = (dataView: DataView) => {
   offset += 4;
 
   const heartRate = dataView.getUint8(offset++);
-  const temperature = dataView.getUint16(offset, true) / 100;
+  const temperature = dataView.getUint16(offset, true);
   offset += 2;
   const bloodOxygen = dataView.getUint8(offset);
 
@@ -35,6 +40,15 @@ export const parseRealTimeActivities = (dataView: DataView) => {
     date: formatDate(new Date().toISOString(), 'yyyy-MM-dd HH:mm:ss'),
   };
 
-  console.log('Activities data :', activitiesData);
-  core.storeDeviceHealthData.execute({ activitiesData });
+  dispatch(BleDataActions.updateHr(activitiesData.heartRate.toString()));
+  dispatch(BleDataActions.updateSteps(activitiesData.totalSteps.toString()));
+  dispatch(
+    BleDataActions.updateTemperature(activitiesData.temperature.toString()),
+  );
+
+  const date = new Date();
+  if (date.getSeconds() % 5 === 0) {
+    console.log('activities sent');
+    core.storeDeviceHealthData.execute({ activitiesData });
+  }
 };
