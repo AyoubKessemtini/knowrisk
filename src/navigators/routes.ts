@@ -14,6 +14,7 @@ export const RootStackRoutes = {
   SEIZURE_FORCAST_SCREEN: 'SeizureForecastScreen',
   SCAN_SCREEN: 'scanScreen',
   HOME: 'home',
+  CHATBOT: 'chatbot',
 } as const;
 
 export const TabBarStackRoutes = {

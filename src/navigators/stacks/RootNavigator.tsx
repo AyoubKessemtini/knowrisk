@@ -26,6 +26,7 @@ import { ReportSeizureQuestion3 } from '../../modules/home/screens/ReportSeizure
 import { ReportSeizureQuestion4 } from '../../modules/home/screens/ReportSeizureScreen/ReportSeizureQuestion4';
 import { SeizureForecastScreen } from '@modules/seizure/screens/SeizureCalendar';
 import { ScanScreen } from '@modules/wearable/screens/ScanScreen.tsx';
+import { ChatBotScreen } from '@modules/chatbot/ChatBotScreen';
 /* import { useAppSelector } from '@store/index'; */
 
 export type RootStackParamList = {
@@ -44,6 +45,7 @@ export type RootStackParamList = {
   [RootStackRoutes.SEIZURE_FORCAST_SCREEN]: undefined;
   [RootStackRoutes.SCAN_SCREEN]: undefined;
   [RootStackRoutes.HOME]: undefined;
+  [RootStackRoutes.CHATBOT]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -54,6 +56,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export function RootNavigator() {
   const { login } = useAuth();
   // const isLoggedIn = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
+ const isLoggedIn = false;
 
   useEffect(() => {
     login();
@@ -66,19 +69,19 @@ export function RootNavigator() {
         navigationBarColor: Colors.deepRed,
       }}
     >
-      {/* {isLoggedIn ? ( */}
+       {isLoggedIn ? (
       <Stack.Screen
         name={RootStackRoutes.ONBOARDING_STACK}
         component={OnboardingNavigator}
       />
-      {/* ) : ( */}
+       ) : ( 
       <>
         <Stack.Screen
           name={RootStackRoutes.TAB_STACK}
           component={TabNavigator}
         />
       </>
-      {/* )} */}
+       )} 
 
       <Stack.Screen
         name={RootStackRoutes.SETTINGS_INFORMATION_SCREEN}
@@ -118,6 +121,7 @@ export function RootNavigator() {
         component={SeizureForecastScreen}
       />
       <Stack.Screen name={RootStackRoutes.SCAN_SCREEN} component={ScanScreen} />
-    </Stack.Navigator>
+      <Stack.Screen name={RootStackRoutes.CHATBOT} component={ChatBotScreen} />
+      </Stack.Navigator>
   );
 }
