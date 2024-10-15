@@ -40,6 +40,15 @@ export const bleDataSlice = createSlice({
     updateDeviceName: (state, { payload }: PayloadAction<string>) => {
       state.deviceName = payload;
     },
+    //reset all
+    reset: (state) => {
+      state.isDeviceConnectedBLE = false;
+      state.deviceId = '--';
+      state.deviceName = 'Knowlepsy device';
+      state.hr = '--';
+      state.steps = '--';
+      state.temperature = '--';
+    },
   },
 });
 

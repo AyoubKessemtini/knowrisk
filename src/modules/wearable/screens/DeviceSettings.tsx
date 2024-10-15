@@ -8,16 +8,16 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { DisconnectedCard } from '@modules/wearable/components/DisconnectedCard.tsx';
 import Icon from 'react-native-easy-icon';
-import { useAppSelector } from '@store/index.ts';
+import { useAppDispatch, useAppSelector } from '@store/index.ts';
 import { ConnectedCard } from '@modules/wearable/components/ConnectedCard.tsx';
-import { useBle } from '@hooks/useBle.ts';
+import { disconnectFromDevice } from '@utils/wearable/disconnectFromDevice.ts';
 
 export const DeviceSettings = ({}: TabStackScreenProps<'device_settings'>) => {
   const navigation = useNavigation();
   const { isDeviceConnectedBLE, deviceId, deviceName } = useAppSelector(
     (state) => state.bleData,
   );
-  const { disconnectFromDevice } = useBle();
+  const dispatch = useAppDispatch();
 
   if (!isDeviceConnectedBLE) {
     return (
@@ -74,7 +74,7 @@ export const DeviceSettings = ({}: TabStackScreenProps<'device_settings'>) => {
                 color="white"
               />
             }
-            onPress={() => disconnectFromDevice(deviceId)}
+            onPress={() => disconnectFromDevice(deviceId, dispatch)}
           />
         </View>
       </Screen>

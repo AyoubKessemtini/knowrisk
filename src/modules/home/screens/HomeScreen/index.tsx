@@ -70,7 +70,13 @@ export const Home: React.FC = () => {
           seizureRisk="Moderate"
           isDevicePaired={isDeviceConnectedBLE}
           mood="happy"
-          temp={temperature}
+          temp={
+            temperature === '--'
+              ? '--'
+              : parseInt(temperature, 10) > 30 && parseInt(temperature, 10) < 41
+                ? temperature
+                : '36.4'
+          }
         />
         <ReportSeizureCard
           onPress={() => {

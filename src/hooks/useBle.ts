@@ -47,7 +47,6 @@ export const useBle = () => {
       isScanning: false,
       startScan: () => {},
       connectToDevice: () => {},
-      disconnectFromDevice: () => {},
     };
   }
   const handleDiscoverPeripheral = (peripheral: Peripheral) => {
@@ -72,6 +71,7 @@ export const useBle = () => {
     console.log('Bluetooth state changed:', state);
     if (state === 'off') {
       setIsBluetoothOn(false);
+      dispatch(BleDataActions.reset());
       Alert.alert(
         'Bluetooth Required',
         'Please turn on Bluetooth to use this feature.',
@@ -216,16 +216,10 @@ export const useBle = () => {
     }
   };
 
-  const disconnectFromDevice = async (id: string) => {
-    await BleManager.disconnect(id);
-    dispatch(BleDataActions.updateDeviceConnection(false));
-  };
-
   return {
     devices,
     isScanning,
     startScan,
     connectToDevice,
-    disconnectFromDevice,
   };
 };
