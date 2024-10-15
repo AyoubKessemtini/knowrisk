@@ -21,7 +21,8 @@
     "heartRate": "Heart Rate",
     "restingHeartRate": "Resting Heart Rate",
     "steps": "Steps",
-    "temperature": "Temperature"
+    "temperature": "Temperature",
+    "chatbot":"Chat with Knowlepsy"
   },
   "home": {
     "foo": "French Home Screen"
@@ -210,5 +211,5 @@
     "medication": "Medications",
     "empty": "No medications available.",
     "add": "Add Medication"
-  },
+  }
 }
