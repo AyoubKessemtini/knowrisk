@@ -1,4 +1,8 @@
-export const parseHeartRateData = (dataView: DataView) => {
+import { core } from '@config/Configuration.ts';
+import { deleteData } from '@utils/wearable/deleteData.ts';
+import { DataType } from '@utils/wearable/requestData.ts';
+
+export const parseHeartRateData = (dataView: DataView, deviceId: string) => {
   const heartRateRecords = [];
   let offset = 1; // Skip the start byte
 
@@ -21,10 +25,16 @@ export const parseHeartRateData = (dataView: DataView) => {
 
     const heartRateMeasurements = heartRateValues.map((hrValue, index) => ({
       time: new Date(baseTime.getTime() + index * 10 * 1000),
-      heartRate: hrValue,
+      hr: hrValue,
     }));
 
     heartRateRecords.push({ dataNumber, baseTime, heartRateMeasurements });
   }
-  console.log('Heart Rate Records:', heartRateRecords);
+  core.storeDeviceHealthData
+    .execute({ hr: heartRateRecords })
+    .then((result) => {
+      if (result.type === 'success') {
+        deleteData(deviceId, DataType.HR);
+      }
+    });
 };

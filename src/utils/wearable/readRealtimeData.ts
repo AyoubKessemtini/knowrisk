@@ -77,7 +77,7 @@ const parseRealTimeData = (
         break;
 
       case DataType.HR:
-        parseHeartRateData(dataView);
+        parseHeartRateData(dataView, deviceId);
         break;
 
       case DataType.SPO2:
