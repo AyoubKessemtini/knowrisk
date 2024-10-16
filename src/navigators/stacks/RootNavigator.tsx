@@ -56,7 +56,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export function RootNavigator() {
   const { login } = useAuth();
   // const isLoggedIn = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
- const isLoggedIn = false;
+  const isLoggedIn = false;
 
   useEffect(() => {
     login();
@@ -69,19 +69,19 @@ export function RootNavigator() {
         navigationBarColor: Colors.deepRed,
       }}
     >
-       {isLoggedIn ? (
-      <Stack.Screen
-        name={RootStackRoutes.ONBOARDING_STACK}
-        component={OnboardingNavigator}
-      />
-       ) : ( 
-      <>
+      {isLoggedIn ? (
         <Stack.Screen
-          name={RootStackRoutes.TAB_STACK}
-          component={TabNavigator}
+          name={RootStackRoutes.ONBOARDING_STACK}
+          component={OnboardingNavigator}
         />
-      </>
-       )} 
+      ) : (
+        <>
+          <Stack.Screen
+            name={RootStackRoutes.TAB_STACK}
+            component={TabNavigator}
+          />
+        </>
+      )}
 
       <Stack.Screen
         name={RootStackRoutes.SETTINGS_INFORMATION_SCREEN}
@@ -122,6 +122,6 @@ export function RootNavigator() {
       />
       <Stack.Screen name={RootStackRoutes.SCAN_SCREEN} component={ScanScreen} />
       <Stack.Screen name={RootStackRoutes.CHATBOT} component={ChatBotScreen} />
-      </Stack.Navigator>
+    </Stack.Navigator>
   );
 }
