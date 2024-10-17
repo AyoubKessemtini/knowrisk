@@ -8,14 +8,14 @@ import { I18nKeyPath } from 'src/i18n/types';
 
 type HeartRateCardProps = {
   heartRateData: string;
-  date: string;
+  //date: string;
   tittle: I18nKeyPath;
   icon: string;
 };
 
 export const HeartRateCard = ({
   heartRateData,
-  date,
+  //date,
   tittle,
   icon,
 }: HeartRateCardProps) => {
@@ -24,13 +24,18 @@ export const HeartRateCard = ({
       <View style={[styles.row, { gap: 5 }]}>
         <Icon type="entypo" name="heart" size={15} color={Colors.purple1} />
         <CText size="xm_semiBold" color="purple1" text={tittle} />
+        <CText size="xs" color="grey3" style={styles.ml_10}>
+          yesterday
+        </CText>
+        <Icon
+          type="ionicon"
+          name="chevron-forward-outline"
+          size={14}
+          color={Colors.grey1}
+        />
       </View>
-      <CText size="xs_medium" color="grey3">
-        {date}
-      </CText>
-
       <View style={styles.heartRateRow}>
-        <CText size="lg_semiBold" color="purple1">
+        <CText size="lg_bold" color="purple1">
           {heartRateData}
         </CText>
         <CText size="xs_medium" color="grey3" text="heart.bpm" />
@@ -45,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 12,
     padding: 15,
-    width: '90%',
+    width: '80%',
     alignSelf: 'center',
     paddingVertical: 5,
   },
@@ -53,11 +58,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
   heartRateRow: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-between',
-    marginVertical: 10,
+    alignItems: 'center',
+    marginVertical: 20,
+    gap: 10,
+  },
+  ml_10: {
+    marginLeft: 15,
   },
 });

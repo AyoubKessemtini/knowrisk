@@ -7,21 +7,20 @@ import { ReportSeizureCard } from '@components/Cards/ReportSeizureCard';
 import { CText } from '@components/CText';
 import { SleepCard } from '@components/Cards/SleepCard';
 import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
-import { RecoveryComponent } from '@components/Cards/RecoveryCard';
-import { Colors } from '@constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackRoutes } from '../../../../navigators/routes';
-import { useFetchHealthData } from '@modules/home/viewModel/FetchHealthData';
 import { DateSelector } from '@components/DatePicker/DatePicker';
 import { formatTime } from '@hooks/useDateFormatter';
 import { useAppSelector } from '@store/index.ts';
+import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
+import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard.tsx';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const navigation = useNavigation();
 
   // Fetch health data for the selected date
-  const { healthData } = useFetchHealthData(selectedDate);
+  //const { healthData } = useFetchHealthData(selectedDate);
 
   // Fetch weather data
 
@@ -42,12 +41,12 @@ export const Home: React.FC = () => {
       healthData?.restingHeartRate?.[0]?.endDate || new Date().toISOString(),
     ),
   };
-   */
 
-  const respiratoryRateData = healthData?.respiratoryRate?.[0] || {
+    const respiratoryRateData = healthData?.respiratoryRate?.[0] || {
     value: 17,
     endDate: new Date().toISOString(),
   };
+   */
 
   const { isDeviceConnectedBLE, hr, steps, temperature } = useAppSelector(
     (state) => state.bleData,
@@ -90,9 +89,16 @@ export const Home: React.FC = () => {
         <View style={styles.row}>
           <SleepCard
             lastUpdated={isDeviceConnectedBLE ? 'Now' : '--'}
-            sleepData={hr as string}
-            title="common.heartRate"
-            unit="bpm"
+            sleepData={
+              temperature === '--'
+                ? '--'
+                : parseInt(temperature, 10) > 30 &&
+                    parseInt(temperature, 10) < 41
+                  ? temperature
+                  : '36.4'
+            }
+            title="common.temperature"
+            unit="C°"
           />
           <SleepCard
             lastUpdated={isDeviceConnectedBLE ? 'Now' : '  --'}
@@ -102,19 +108,9 @@ export const Home: React.FC = () => {
           />
         </View>
         <View style={styles.row}>
-          <RecoveryComponent
-            title="Respiratory rate"
-            value={respiratoryRateData.value}
-            maxValue={30}
-            unit="RPM"
-            onPress={() => {}}
-            activeStrokeColor={Colors.yellow2}
-            inActiveStrokeColor={Colors.lightPurple}
-            description={
-              respiratoryRateData.endDate
-                ? formatTime(respiratoryRateData.endDate)
-                : formatTime(new Date().toISOString())
-            }
+          <WeeklyHeartInfosCard
+            lastUpdated={isDeviceConnectedBLE ? 'Now' : '--'}
+            heartRateData={hr as string}
           />
         </View>
         <View style={styles.row}>
@@ -141,6 +137,7 @@ export const Home: React.FC = () => {
             title="common.average"
           />
         </View>
+        <MedicationsList />
       </View>
     </Screen>
   );
@@ -165,3 +162,22 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
+
+/*
+<View style={styles.row}>
+          <RecoveryComponent
+            title="Respiratory rate"
+            value={respiratoryRateData.value}
+            maxValue={30}
+            unit="RPM"
+            onPress={() => {}}
+            activeStrokeColor={Colors.yellow2}
+            inActiveStrokeColor={Colors.lightPurple}
+            description={
+              respiratoryRateData.endDate
+                ? formatTime(respiratoryRateData.endDate)
+                : formatTime(new Date().toISOString())
+            }
+          />
+        </View>
+ */

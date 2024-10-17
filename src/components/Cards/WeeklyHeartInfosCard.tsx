@@ -8,15 +8,15 @@ import ImageAssets from '@assets/images';
 
 type WeeklyHeartInfosCardProps = {
   heartRateData: string;
-  restingHeartRateData: string;
-  date: string;
+  //restingHeartRateData: string;
+  //date: string;
   lastUpdated: string;
 };
 
 export const WeeklyHeartInfosCard = ({
   heartRateData,
-  restingHeartRateData,
-  date,
+  //restingHeartRateData,
+  //date,
   lastUpdated,
 }: WeeklyHeartInfosCardProps) => {
   return (
@@ -50,16 +50,8 @@ export const WeeklyHeartInfosCard = ({
       />
       <HeartRateCard
         heartRateData={heartRateData}
-        date={date}
         tittle="heart.heart"
         icon={ImageAssets.BAR_CHART_ICON}
-      />
-
-      <HeartRateCard
-        heartRateData={restingHeartRateData}
-        date={date}
-        tittle="heart.restingHeartRate"
-        icon={ImageAssets.LINE_CHART_ICON}
       />
       <CText
         size="xs_medium"
@@ -94,3 +86,12 @@ const styles = StyleSheet.create({
     gap: 5,
   },
 });
+
+/*
+<HeartRateCard
+            heartRateData={restingHeartRateData}
+            date={date}
+            tittle="heart.restingHeartRate"
+            icon={ImageAssets.LINE_CHART_ICON}
+        />
+ */
