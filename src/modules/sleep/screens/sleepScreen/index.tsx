@@ -1,26 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
-import { NotesList } from '@components/Notes/NotesList';
-import { QuestionComponent } from '@components/questioncard';
-import { CText } from '@components/CText';
-import { Colors } from '@constants/Colors';
+import { DateSelector } from '@components/DatePicker/DatePicker.tsx';
+import { formatTime } from '@hooks/useDateFormatter.ts';
+import { SleepCard } from '@components/Cards/SleepCard.tsx';
+import { CText } from '@components/CText.tsx';
+import { LineChart } from '@mui/x-charts/LineChart';
 
 export const SleepScreen: React.FC = () => {
-  const questionsData = [
-    {
-      category: 'Lifestyle',
-      questions: ['Have any alcoholic drinks?', 'Have any alcoholic drinks?'],
-    },
-    {
-      category: 'Nutrition',
-      questions: ['Have any alcoholic drinks?'],
-    },
-    {
-      category: 'Sleep',
-      questions: ['Have any alcoholic drinks?'],
-    },
-  ];
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const handleDateChange = (newDate: Date) => {
+    setSelectedDate(newDate);
+  };
   return (
     <Screen
       fullscreen
@@ -30,20 +21,32 @@ export const SleepScreen: React.FC = () => {
     >
       {/* <MainHeader firstName="Aziz" lastName="Sassi" /> */}
       <View style={styles.wrapper}>
-        <NotesList />
-        {/* <NotesListReader /> */}
-        {/* <MedicationsList /> */}
-        {questionsData.map((section, index) => (
-          <View key={index} style={styles.sectionContainer}>
-            <CText size="lg_bold" color="purple">
-              {section.category}
-            </CText>
-            {section.questions.map((question, idx) => (
-              <QuestionComponent key={idx} question={question} />
-            ))}
-          </View>
-        ))}
-        {/* <ReportSeizureCard onPress={() => {}} /> */}
+        <DateSelector
+          initialDate={selectedDate}
+          onDateChange={handleDateChange}
+        />
+        <CText size="lg_semiBold" color="black">
+          Last Sleep Statistic
+        </CText>
+        <View style={styles.row}>
+          <SleepCard
+            lastUpdated={formatTime(new Date().toISOString())}
+            sleepData={'67'}
+            title="common.quality"
+            unit="%"
+          />
+          <SleepCard
+            lastUpdated={formatTime(new Date().toISOString())}
+            sleepData={'7h 30m'}
+            title="common.average"
+          />
+        </View>
+        <LineChart
+          series={[
+            { curve: 'linear', data: [0, 5, 2, 6, 3, 9.3] },
+            { curve: 'linear', data: [6, 3, 7, 9.5, 4, 2] },
+          ]}
+        />
       </View>
     </Screen>
   );
@@ -61,11 +64,9 @@ const styles = StyleSheet.create({
     width: '100%',
     gap: 30,
   },
-  sectionContainer: {
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: Colors.lightPurple,
-    borderRadius: 10,
-    padding: 10,
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });

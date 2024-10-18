@@ -4,7 +4,6 @@ import { Screen } from '@components/Screen';
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
 import { ReportSeizureCard } from '@components/Cards/ReportSeizureCard';
-import { CText } from '@components/CText';
 import { SleepCard } from '@components/Cards/SleepCard';
 import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +13,7 @@ import { formatTime } from '@hooks/useDateFormatter';
 import { useAppSelector } from '@store/index.ts';
 import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
 import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard.tsx';
+import { Journal } from '@components/Cards/JournalCard.tsx';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -112,6 +112,7 @@ export const Home: React.FC = () => {
             lastUpdated={isDeviceConnectedBLE ? 'Now' : '--'}
             heartRateData={hr as string}
           />
+          <Journal />
         </View>
         <View style={styles.row}>
           <StressLevelCard
@@ -119,22 +120,6 @@ export const Home: React.FC = () => {
             stressLevels={{ low: '10h', good: '7h', high: '5h' }}
             progress={{ low: 42, good: 33, high: 25 }}
             comparison={{ low: 30, good: 40, high: 30 }}
-          />
-        </View>
-        <CText size="lg_semiBold" color="black">
-          Last Sleep Statistic
-        </CText>
-        <View style={styles.row}>
-          <SleepCard
-            lastUpdated={formatTime(new Date().toISOString())}
-            sleepData={'67'}
-            title="common.quality"
-            unit="%"
-          />
-          <SleepCard
-            lastUpdated={formatTime(new Date().toISOString())}
-            sleepData={'7h 30m'}
-            title="common.average"
           />
         </View>
         <MedicationsList />
@@ -180,4 +165,5 @@ export default Home;
             }
           />
         </View>
+
  */
