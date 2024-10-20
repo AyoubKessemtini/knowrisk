@@ -30,7 +30,6 @@
     "@candlefinance/faster-image": "^1.6.1",
     "@hookform/resolvers": "^3.3.4",
     "@jest/globals": "^29.7.0",
-    "@mui/x-charts": "^7.21.0",
     "@my01/react-native-ble-plx": "^2.1.1",
     "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-native-community/datetimepicker": "^8.2.0",

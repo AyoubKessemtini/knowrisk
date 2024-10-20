@@ -5,7 +5,6 @@ import { DateSelector } from '@components/DatePicker/DatePicker.tsx';
 import { formatTime } from '@hooks/useDateFormatter.ts';
 import { SleepCard } from '@components/Cards/SleepCard.tsx';
 import { CText } from '@components/CText.tsx';
-import { LineChart } from '@mui/x-charts/LineChart';
 
 export const SleepScreen: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -41,12 +40,6 @@ export const SleepScreen: React.FC = () => {
             title="common.average"
           />
         </View>
-        <LineChart
-          series={[
-            { curve: 'linear', data: [0, 5, 2, 6, 3, 9.3] },
-            { curve: 'linear', data: [6, 3, 7, 9.5, 4, 2] },
-          ]}
-        />
       </View>
     </Screen>
   );
