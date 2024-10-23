@@ -11,6 +11,13 @@
     "steps": "Steps",
     "temperature": "Temperature"
   },
+  "buttons": {
+    "tap_to_report": "Tap this button if you had a seizure",
+    "report": "Report a seizure",
+    "send_new_password": "Send New Password",
+    "confirm": "Confirm",
+    "save": "Save"
+  },
   "home": {
     "foo": "French Home Screen"
   },

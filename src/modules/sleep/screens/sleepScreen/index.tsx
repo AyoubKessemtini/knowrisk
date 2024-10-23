@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { DateSelector } from '@components/DatePicker/DatePicker.tsx';
@@ -6,12 +6,29 @@ import { formatTime } from '@hooks/useDateFormatter.ts';
 import { SleepCard } from '@components/Cards/SleepCard.tsx';
 import { CText } from '@components/CText.tsx';
 import { LineChart } from 'react-native-chart-kit';
+import { SleepQualityCard } from '@modules/sleep/screens/components/sleepQualityCard.tsx';
 
 export const SleepScreen: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [days, setDays] = useState<string[]>([]);
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
   };
+  const getPreviousDays = (): string[] => {
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const lastFourDays = [];
+    const today = selectedDate;
+    for (let i = 1; i <= 5; i++) {
+      const previousDay = new Date(today);
+      previousDay.setDate(today.getDate() - i);
+      const dayName = daysOfWeek[previousDay.getDay()];
+      lastFourDays.push(dayName);
+    }
+    return lastFourDays.reverse();
+  };
+  useEffect(() => {
+    setDays(getPreviousDays());
+  }, [selectedDate]);
   return (
     <Screen
       fullscreen
@@ -41,31 +58,34 @@ export const SleepScreen: React.FC = () => {
             title="common.average"
           />
         </View>
-      </View>
-      <View style={styles.wrapper}>
+        <CText size="lg_semiBold" color="black">
+          Last Nights Sleep Rate
+        </CText>
         <LineChart
           data={{
-            labels: ['2024-10-18', '2024-10-19', '2024-10-20', '2024-10-21'],
+            labels: days,
             datasets: [
               {
-                data: [87, 65, 49, 98],
+                data: [87, 65, 49, 98, 57],
               },
             ],
           }}
-          width={380}
-          height={300}
+          width={350}
+          height={250}
           fromZero={true}
-          //yAxisMax={100}
           yAxisSuffix="%"
           withHorizontalLines={true}
           withVerticalLines={false}
+          withShadow={false}
+          xLabelsOffset={3}
+          yLabelsOffset={20}
           chartConfig={{
             fillShadowGradientOpacity: 0,
             backgroundColor: '#ffffff', // White background color
             backgroundGradientFrom: '#ffffff',
             backgroundGradientTo: '#ffffff',
             decimalPlaces: 0, // optional, defaults to 2 decimal places
-            color: () => '#834bbe', // Blue line color
+            color: () => '#8753bd', // Blue line color
             labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // Black label color for better contrast
             propsForDots: {
               r: '4',
@@ -73,11 +93,11 @@ export const SleepScreen: React.FC = () => {
               stroke: '#834bbe',
             },
           }}
-          bezier
           style={{
             marginVertical: 12,
           }}
         />
+        <SleepQualityCard />
       </View>
     </Screen>
   );
@@ -87,7 +107,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     gap: 12,
-    paddingTop: 80,
+    paddingVertical: 80,
     paddingHorizontal: 20,
   },
   wrapper: {

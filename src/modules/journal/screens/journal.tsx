@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
-import { NotesList } from '@components/Notes/NotesList';
 import { QuestionComponent } from '@components/questioncard';
 import { CText } from '@components/CText';
 import { Colors } from '@constants/Colors';
+import { Header } from '@components/Headers/Header.tsx';
+import { CButton } from '@components/Buttons/CButton.tsx';
 
 export const JournalScreen: React.FC = () => {
   const questionsData = [
@@ -28,9 +29,14 @@ export const JournalScreen: React.FC = () => {
       noHorizontalPadding
       containerStyles={styles.container}
     >
-      {/* <MainHeader firstName="Aziz" lastName="Sassi" /> */}
+      <Header
+        hasBackButton
+        useCustomBackButton
+        text="common.journal"
+        textColor="black"
+      />
       <View style={styles.wrapper}>
-        <NotesList />
+        {/*<NotesList />*/}
         {/* <NotesListReader /> */}
         {/* <MedicationsList /> */}
         {questionsData.map((section, index) => (
@@ -45,6 +51,12 @@ export const JournalScreen: React.FC = () => {
         ))}
         {/* <ReportSeizureCard onPress={() => {}} /> */}
       </View>
+      <CButton
+        text="buttons.save"
+        onPress={() => {
+          console.log('save journal');
+        }}
+      />
     </Screen>
   );
 };
@@ -53,8 +65,9 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     gap: 12,
-    paddingTop: 80,
+    paddingTop: 20,
     paddingHorizontal: 20,
+    paddingBottom: 50,
   },
   wrapper: {
     justifyContent: 'center',

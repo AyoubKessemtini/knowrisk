@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     gap: 12,
     paddingTop: 40,
     paddingHorizontal: 20,
-    paddingBottom: 40,
+    paddingBottom: 120,
   },
   wrapper: {
     gap: 20,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import { Colors } from '@constants/Colors';
 import { useThemeInterpolation } from '@hooks/useThemeInterpolation';
 import { Home } from '@modules/home/screens/HomeScreen';
@@ -8,11 +8,11 @@ import {
   BottomTabScreenProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps } from '@react-navigation/native';
+import { CompositeScreenProps, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-easy-icon';
 import Animated from 'react-native-reanimated';
 import { tabConfig } from '../navigatorConfigs';
-import { TabBarStackRoutes } from '../routes';
+import { RootStackRoutes, TabBarStackRoutes } from '../routes';
 import { RootStackParamList, RootStackScreenProps } from './RootNavigator';
 import { SleepScreen } from '@modules/sleep/screens/sleepScreen';
 import { DeviceSettings } from '@modules/wearable/screens/DeviceSettings.tsx';
@@ -37,9 +37,22 @@ export function TabNavigator() {
     Colors.white,
     Colors.primaryBlack,
   );
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
+      <View style={styles.fabContainer}>
+        <TouchableOpacity
+          style={styles.fab} // Style for FAB
+          onPress={() => navigation.navigate(RootStackRoutes.CHATBOT)} // Navigate to chatbot page
+        >
+          <Icon
+            type="ionicon"
+            name="chatbox-ellipses-outline"
+            size={30}
+            color={Colors.white}
+          />
+        </TouchableOpacity>
+      </View>
       <View style={styles.tabWrapper}>
         <Tab.Navigator
           screenOptions={{
@@ -94,8 +107,8 @@ export function TabNavigator() {
                 <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
                   <View style={focused && styles.activeTabStyle}>
                     <Icon
-                      type="antdesign"
-                      name="profile"
+                      type="ionicon"
+                      name="moon-outline"
                       size={24}
                       color={color}
                     />
@@ -173,5 +186,24 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.purple2,
     borderRadius: 10,
     padding: 5,
+  },
+  fabContainer: {
+    position: 'absolute',
+    bottom: 120,
+    right: 25,
+    zIndex: 1000,
+  },
+  fab: {
+    backgroundColor: '#834bbe',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
 });

@@ -3,6 +3,8 @@ import { Colors } from '@constants/Colors';
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-easy-icon';
+import { RootStackRoutes } from '@navigators/routes.ts';
+import { useNavigation } from '@react-navigation/native';
 
 interface Journal {
   id: number;
@@ -12,6 +14,7 @@ interface Journal {
 }
 
 export const Journal: React.FC = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -29,7 +32,7 @@ export const Journal: React.FC = () => {
         <TouchableOpacity
           style={styles.card}
           onPress={() => {
-            console.log('go to journal');
+            navigation.navigate(RootStackRoutes.JOURNAL);
           }}
         >
           <CText size="sm_bold" color="white">
