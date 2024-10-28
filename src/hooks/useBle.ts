@@ -17,6 +17,7 @@ import {
 } from '@utils/wearable/requestData.ts';
 import { useAppDispatch, useAppSelector } from '@store/index.ts';
 import { BleDataActions } from '@store/bleDataSlice.ts';
+import { RootState } from '@store/index';
 
 interface Peripheral {
   id: string;
@@ -38,7 +39,7 @@ export const useBle = () => {
 
   const BleManagerModule = NativeModules.BleManager;
   const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-  const { isDeviceConnectedBLE } = useAppSelector((state) => state.bleData);
+  const { isDeviceConnectedBLE } = useAppSelector((state:RootState) => state.bleData);
 
   if (!BleManagerModule) {
     console.error('BleManager native module is not available.');

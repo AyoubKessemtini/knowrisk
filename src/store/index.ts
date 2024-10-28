@@ -1,11 +1,17 @@
 /* eslint-disable no-restricted-imports */
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
 import { useDispatch, useSelector } from 'react-redux';
 import { homeSlice } from './homeSlice';
 import { localeSlice } from './localeSlice';
 import { authSlice } from './authSlice';
 import { bleDataSlice } from '@store/bleDataSlice.ts';
+import rootSaga from './sagas'; // Import your root saga
 
+// Create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+// Combine all reducers
 const rootReducer = combineReducers({
   [homeSlice.name]: homeSlice.reducer,
   [localeSlice.name]: localeSlice.reducer,
@@ -13,14 +19,21 @@ const rootReducer = combineReducers({
   [bleDataSlice.name]: bleDataSlice.reducer,
 });
 
+// Create the Redux store and apply the saga middleware
 const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware().concat(sagaMiddleware), // Add saga middleware
 });
+
+// Run the root saga
+sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
-export const useAppSelector = useSelector.withTypes<RootState>();
+// Create typed hooks for dispatch and selector
+export const useAppDispatch = useDispatch; // Correct usage of useDispatch
+export const useAppSelector = useSelector; // Correct usage of useSelector
 
 export { store };

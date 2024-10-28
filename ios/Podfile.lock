@@ -963,9 +963,9 @@ PODS:
   - react-native-ble-plx (2.1.1):
     - MultiplatformBleAdapter (= 0.1.9)
     - React-Core
-  - react-native-date-picker (5.0.7):
+  - react-native-date-picker (5.0.4):
     - React-Core
-  - react-native-geolocation (3.4.0):
+  - react-native-geolocation (3.3.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -976,9 +976,9 @@ PODS:
     - MMKV (>= 1.3.3)
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - react-native-netinfo (11.4.1):
+  - react-native-netinfo (11.3.2):
     - React-Core
-  - react-native-safe-area-context (4.11.1):
+  - react-native-safe-area-context (4.10.8):
     - React-Core
   - React-nativeconfig (0.73.7)
   - React-NativeModulesApple (0.73.7):
@@ -1147,7 +1147,7 @@ PODS:
     - React-jsi (= 0.73.7)
     - React-logger (= 0.73.7)
     - React-perflogger (= 0.73.7)
-  - ReactNativeFileAccess (3.1.1):
+  - ReactNativeFileAccess (3.1.0):
     - React-Core
     - ZIPFoundation
   - RNAppleHealthKit (1.7.0):
@@ -1158,17 +1158,19 @@ PODS:
     - React-Core
   - RNDateTimePicker (8.2.0):
     - React-Core
-  - RNFlashList (1.7.1):
+  - RNDeviceInfo (13.2.0):
+    - React-Core
+  - RNFlashList (1.7.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - RNGestureHandler (2.20.0):
+  - RNGestureHandler (2.17.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
   - RNPermissions (4.1.5):
     - React-Core
-  - RNReactNativeHapticFeedback (2.3.3):
+  - RNReactNativeHapticFeedback (2.3.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1195,14 +1197,14 @@ PODS:
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
     - ReactCommon/turbomodule/core
-  - RNScreens (3.34.0):
+  - RNScreens (3.32.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
     - React-RCTImage
   - RNSVG (15.8.0):
     - React-Core
-  - RNVectorIcons (10.2.0):
+  - RNVectorIcons (10.1.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1298,6 +1300,7 @@ DEPENDENCIES:
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
@@ -1454,6 +1457,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFlashList:
     :path: "../node_modules/@shopify/flash-list"
   RNGestureHandler:
@@ -1520,12 +1525,12 @@ SPEC CHECKSUMS:
   React-Mapbuffer: 6f392912435adb8fbf4c3eee0e79a0a0b4e4b717
   react-native-ble-manager: 3a9e5edf9dbf7fe076807edcd45e46d62a37ca72
   react-native-ble-plx: 4b294d99f5670d9cd58e7e9ae7ecb995acb5edc7
-  react-native-date-picker: 06a4d96ab525a163c7a90bccd68833d136b0bb13
-  react-native-geolocation: 167798574694849024cb093222bd158e84ac8d21
+  react-native-date-picker: 6891317e850deae5b53d51355226e07a495aba61
+  react-native-geolocation: 4b12da636bf33b15b537fe8de141942b63101ee1
   react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
   react-native-mmkv: 1fdc81aa70c1aba09370718e6a63a09cbbbac8d2
-  react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
-  react-native-safe-area-context: 5141f11858b033636f1788b14f32eaba92cee810
+  react-native-netinfo: 076df4f9b07f6670acf4ce9a75aac8d34c2e2ccc
+  react-native-safe-area-context: b7daa1a8df36095a032dff095a1ea8963cb48371
   React-nativeconfig: 754233aac2a769578f828093b672b399355582e6
   React-NativeModulesApple: a03b2da2b8e127d5f5ee29c683e0deba7a9e1575
   React-perflogger: 68ec84e2f858a3e35009aef8866b55893e5e0a1f
@@ -1546,19 +1551,20 @@ SPEC CHECKSUMS:
   React-runtimescheduler: a884a55560e2a90caa1cbe0b9eaa24a5add4fa2c
   React-utils: d07d009101c7dabff68b710da5c4a47b7a850d98
   ReactCommon: 8cae78d3c3eceff20ee4bbca8bb73b675a45fd5d
-  ReactNativeFileAccess: 863c8952c05c0ea5f592ef3101169baaf66777bd
+  ReactNativeFileAccess: e3b1a0a36b919d20279947aac31c2e939827c93b
   RNAppleHealthKit: 60a6beefdd89a75811e9a8873a5e24f351dee681
   RNBootSplash: e025d4ee98d942ee6c8b495a6fe66339a6b5f6dd
   RNCAsyncStorage: ec53e44dc3e75b44aa2a9f37618a49c3bc080a7a
   RNDateTimePicker: 40ffda97d071a98a10fdca4fa97e3977102ccd14
-  RNFlashList: 83a272ae1c35b08a02490f4d1503631fb64b3dd8
-  RNGestureHandler: bb81850add626ddd265294323310fec6e861c96b
+  RNDeviceInfo: 29e01d5ae94bdb5a0f6c11a4c438132545b4df80
+  RNFlashList: 68224225541895f0fb0de98b4d8be0cbe1c577df
+  RNGestureHandler: 67d3f1f69d4d0c98d6e83f4229e3bbf997d1dc72
   RNPermissions: 88cb833d70198c254e3ea7ccc4179fde91670700
-  RNReactNativeHapticFeedback: a1ed613d86e678202fe8bb930b92afa06f601cc3
+  RNReactNativeHapticFeedback: bf604f2da947838513394d411364300d6e62e878
   RNReanimated: 0309547fc58018658fe9a750b7beca802b8f3784
-  RNScreens: 29418ceffb585b8f0ebd363de304288c3dce8323
+  RNScreens: e842cdccb23c0a084bd6307f6fa83fd1c1738029
   RNSVG: 8b1a777d54096b8c2a0fd38fc9d5a454332bbb4d
-  RNVectorIcons: 04d49881dab53fb3397b1129085271d9d21885c1
+  RNVectorIcons: 96e8c5c45609932bb2f8347e1c709bcca0e95654
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 47d399a73c0c0caa9ff824e5c657eae31215bfee
   ZIPFoundation: b8c29ea7ae353b309bc810586181fd073cb3312c

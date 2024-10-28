@@ -77,28 +77,25 @@ export function TabNavigator() {
             tabBarInactiveTintColor: Colors.grey1,
           }}
         >
-          {Platform.OS === 'ios' && (
-            <Tab.Screen
-              name={TabBarStackRoutes.HOME}
-              component={Home}
-              options={{
-                tabBarIcon: ({ color, focused }) => (
-                  <Animated.View
-                    style={[animatedStyle, styles.tabIconContainer]}
-                  >
-                    <View style={focused && styles.activeTabStyle}>
-                      <Icon
-                        type="antdesign"
-                        name="home"
-                        size={24}
-                        color={color}
-                      />
-                    </View>
-                  </Animated.View>
-                ),
-              }}
-            />
-          )}
+          <Tab.Screen
+            name={TabBarStackRoutes.HOME}
+            component={Home}
+            options={{
+              tabBarIcon: ({ color, focused }) => (
+                <Animated.View style={[animatedStyle, styles.tabIconContainer]}>
+                  <View style={focused && styles.activeTabStyle}>
+                    <Icon
+                      type="antdesign"
+                      name="home"
+                      size={24}
+                      color={color}
+                    />
+                  </View>
+                </Animated.View>
+              ),
+            }}
+          />
+
           <Tab.Screen
             name={TabBarStackRoutes.SLEEP_SCREEN}
             component={SleepScreen}

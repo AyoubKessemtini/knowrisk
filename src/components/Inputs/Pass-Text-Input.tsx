@@ -20,7 +20,7 @@ export const PassTextInput = <TFieldValues extends FieldValues>({
     <ControlledInput
       secureTextEntry={isSecureEnabled}
       placeholderText="common.pass"
-      placeholderColor="grey2"
+      placeholderTextColor={Colors.grey2}
       textStyle={{ color: Colors.deepPurple }}
       control={control}
       name={name}

@@ -29,7 +29,12 @@ import { ScanScreen } from '@modules/wearable/screens/ScanScreen.tsx';
 import { ChatBotScreen } from '@modules/chatbot/ChatBotScreen';
 import { JournalScreen } from '@modules/journal/screens/journal.tsx';
 import { HeartRateDetailsScreen } from '@modules/heartRateDetails/screens/heartRateDetails.tsx';
+import { PersistenceStorage } from '@storage/index';
+import { KEYS } from '@storage/Keys';
 /* import { useAppSelector } from '@store/index'; */
+import { RootState } from '@store/index'; // Adjust the import path as necessary
+import { AuthActions } from '@store/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -58,13 +63,27 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
-  const { login } = useAuth();
+  //const { login } = useAuth();
   // const isLoggedIn = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
-  const isLoggedIn = false;
+  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
+  //const isLoggedIn = false;
 
   useEffect(() => {
-    login();
-  }, []);
+    const checkLoginStatus = async () => {
+      const token = await PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
+
+      if (token) {
+        dispatch(AuthActions.loginSuccess()); // Automatically log in if the token exists
+      }
+
+      console.log('token root ', token);
+    };
+
+    checkLoginStatus();
+  }, [dispatch]);
 
   return (
     <Stack.Navigator
@@ -73,7 +92,7 @@ export function RootNavigator() {
         navigationBarColor: Colors.deepRed,
       }}
     >
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <Stack.Screen
           name={RootStackRoutes.ONBOARDING_STACK}
           component={OnboardingNavigator}

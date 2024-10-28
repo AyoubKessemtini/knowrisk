@@ -123,6 +123,7 @@ export const CTextInput = ({
             ref={input}
             placeholder={placeholder}
             placeholderTextColor={placeholderColor || Colors.backgroundWhite}
+            
             textAlignVertical="center"
             autoComplete="off"
             autoCapitalize="none"

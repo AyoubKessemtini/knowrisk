@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { MainHeader } from '@components/Headers/MainHeader';
@@ -10,9 +10,13 @@ import { useNavigation } from '@react-navigation/native';
 import { RootStackRoutes } from '../../../../navigators/routes';
 import { DateSelector } from '@components/DatePicker/DatePicker';
 import { formatTime } from '@hooks/useDateFormatter';
-import { useAppSelector } from '@store/index.ts';
+import { RootState, useAppSelector } from '@store/index.ts';
 import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
 import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard.tsx';
+import { PersistenceStorage } from '@storage/index';
+import { KEYS } from '@storage/Keys';
+import { AuthActions } from '@store/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { Journal } from '@components/Cards/JournalCard.tsx';
 import { TriggersCard } from '@modules/home/components/triggersCard.tsx';
 
@@ -50,9 +54,47 @@ export const Home: React.FC = () => {
    */
 
   const { isDeviceConnectedBLE, hr, steps, temperature } = useAppSelector(
-    (state) => state.bleData,
+    (state: RootState) => state.bleData,
+  );
+  const dispatch = useDispatch();
+
+  // User's name
+
+  // const backgroundColor = getBackgroundColor(firstName + lastName);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const getFirstNameAndLastName = (
+    username: string | null,
+  ): { firstName: string; lastName: string } => {
+    if (!username) {
+      return { firstName: 'Unknown', lastName: 'User' }; // Default values
+    }
+    const [firstName, lastName] = username.split('.');
+    return {
+      firstName: firstName.charAt(0).toUpperCase() + firstName.slice(1),
+      lastName: lastName.charAt(0).toUpperCase() + lastName.slice(1),
+    };
+  };
+  // Fallback values if user data is not available
+  const { firstName, lastName } = getFirstNameAndLastName(
+    user?.username || null,
   );
 
+  const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const userData = await PersistenceStorage.getItem(KEYS.USER_DATA);
+
+      if (userData) {
+        // Parse the user data and dispatch to Redux
+        const user = JSON.parse(userData);
+        dispatch(AuthActions.setUser(user)); // Store user data in Redux
+      }
+
+      console.log('USER_DATA root ', userData);
+    };
+
+    checkLoginStatus();
+  }, [dispatch]);
   return (
     <Screen
       fullscreen
@@ -60,11 +102,11 @@ export const Home: React.FC = () => {
       noHorizontalPadding
       containerStyles={styles.container}
     >
-      <MainHeader firstName="Firas" lastName="R" />
+      <MainHeader firstName={firstName} lastName={lastName} />
       <View style={styles.wrapper}>
         <PatientInfoCard
-          name="Firas Rhaeim"
-          id="ID5434A533"
+          name={`${firstName} ${lastName}`}
+          id={`ID ${user?.id}`}
           lastSeizure="Sun, Apr 07, 22:54"
           seizureFrequency="Weekly"
           seizureRisk="Moderate"
@@ -185,5 +227,4 @@ export default Home;
             }
           />
         </View>
-
  */
