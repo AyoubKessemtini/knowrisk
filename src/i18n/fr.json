@@ -22,7 +22,8 @@
     "restingHeartRate": "Resting Heart Rate",
     "steps": "Steps",
     "temperature": "Temperature",
-    "chatbot":"Chat with Knowlepsy"
+    "chatbot":"Chat with Knowlepsy",
+    "journal" : "Journal"
   },
   "home": {
     "foo": "French Home Screen"
@@ -132,7 +133,8 @@
     "tap_to_report": "Tap this button if you had a seizure",
     "report": "Report a seizure",
     "send_new_password": "Send New Password",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "save": "Save"
   },
   "home_screen": {
     "last_updated": "Last updated {{date}}",

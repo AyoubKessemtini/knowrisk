@@ -8,14 +8,14 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { DisconnectedCard } from '@modules/wearable/components/DisconnectedCard.tsx';
 import Icon from 'react-native-easy-icon';
-import { useAppDispatch, useAppSelector } from '@store/index.ts';
+import {RootState, useAppDispatch, useAppSelector} from '@store/index.ts';
 import { ConnectedCard } from '@modules/wearable/components/ConnectedCard.tsx';
 import { disconnectFromDevice } from '@utils/wearable/disconnectFromDevice.ts';
 
 export const DeviceSettings = ({}: TabStackScreenProps<'device_settings'>) => {
   const navigation = useNavigation();
   const { isDeviceConnectedBLE, deviceId, deviceName } = useAppSelector(
-    (state) => state.bleData,
+    (state:RootState) => state.bleData,
   );
   const dispatch = useAppDispatch();
 

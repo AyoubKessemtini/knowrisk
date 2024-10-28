@@ -51,7 +51,9 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
     };
   };
   // Fallback values if user data is not available
-  const { firstName, lastName } = getFirstNameAndLastName(user.username);
+  const { firstName, lastName } = getFirstNameAndLastName(
+    user ? user.username : 'Alex.Lo',
+  );
 
   const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
   useEffect(() => {

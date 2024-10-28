@@ -26,7 +26,14 @@ interface Medication {
 }
 
 export const MedicationsList: React.FC = () => {
-  const [medications, setMedications] = useState<Medication[]>([]);
+  const [medications, setMedications] = useState<Medication[]>([
+    {
+      title: 'Grippex',
+      dosage: '3/day',
+      frequency: 'Every day',
+      scheduleMessage: "Don't forget it",
+    },
+  ]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newDosage, setNewDosage] = useState('');

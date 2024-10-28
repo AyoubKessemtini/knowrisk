@@ -18,11 +18,11 @@ export const useAuth= () => {
   const logout = () => {
     PersistenceStorage.removeItem(KEYS.ACCESS_TOKEN);
     queryClient.clear();
-    dispatch(AuthActions.setLoggedIn(false));
+    //dispatch(AuthActions.setLoggedIn(false));
   };
   const newLogin = (newToken: string) => {
     PersistenceStorage.setItem(KEYS.ACCESS_TOKEN, newToken);
-    dispatch(AuthActions.setLoggedIn(true));
+    //dispatch(AuthActions.setLoggedIn(true));
     finalliseAuth();
   };
   const login = async (newToken?: string) => {
@@ -45,7 +45,7 @@ export const useAuth= () => {
     try {
       const { data } = await fetchMe();
       if (data) {
-        dispatch(AuthActions.setLoggedIn(true));
+        //dispatch(AuthActions.setLoggedIn(true));
       } else {
         // logout();
       }
