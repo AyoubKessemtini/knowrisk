@@ -29,12 +29,18 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<false/>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
+  <dict>
+      <key>NSExceptionDomains</key>
+      <dict>
+          <key>172.214.33.253</key>
+          <dict>
+              <key>NSExceptionAllowsInsecureHTTPLoads</key>
+              <true/>
+              <key>NSIncludesSubdomains</key>
+              <true/>
+          </dict>
+      </dict>
+  </dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>We need Bluetooth access to connect to devices and gather data.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
@@ -109,4 +115,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
+ 
+
 </plist>

@@ -6,12 +6,17 @@ import { Colors } from '@constants/Colors';
 import HelpCenterButton from '@components/Buttons/HelpCenterButton';
 import { CButton } from '@components/Buttons/CButton';
 import { Screen } from '@components/Screen';
-import { useAuth } from '@hooks/useAuth';
+
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { TabStackScreenProps } from '@navigators/stacks/TabNavigator';
 import { Header } from '@components/Headers/Header';
 import { useNavigation } from '@react-navigation/native';
-
+import { PersistenceStorage } from '@storage/index';
+import { KEYS } from '@storage/Keys';
+import { AuthActions } from '@store/authSlice';
+import { RootState } from '@store/index';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // const getBackgroundColor = (name: string) => {
 //   const hash = Array.from(name).reduce(
 //     (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
@@ -21,15 +26,49 @@ import { useNavigation } from '@react-navigation/native';
 // };
 
 export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
-  const { logout } = useAuth();
+  const handleLogout = async () => {
+    await PersistenceStorage.removeItem(KEYS.USER_DATA); // Clear user data
+    await PersistenceStorage.removeItem(KEYS.ACCESS_TOKEN);
+    dispatch(AuthActions.logout()); // Dispatch logout action
+    navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+      screen: OnboardingStackRoutes.LOGIN_SCREEN,
+    });
+  };
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   // User's name
-  const firstName = 'Firas'; // Replace with actual user data
-  const lastName = 'Rhaeim'; // Replace with actual user data
-  const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
-  // const backgroundColor = getBackgroundColor(firstName + lastName);
 
+  // const backgroundColor = getBackgroundColor(firstName + lastName);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const getFirstNameAndLastName = (
+    username: string,
+  ): { firstName: string; lastName: string } => {
+    const [firstName, lastName] = username.split('.');
+    return {
+      firstName: firstName.charAt(0).toUpperCase() + firstName.slice(1),
+      lastName: lastName.charAt(0).toUpperCase() + lastName.slice(1),
+    };
+  };
+  // Fallback values if user data is not available
+  const { firstName, lastName } = getFirstNameAndLastName(user.username);
+
+  const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const userData = await PersistenceStorage.getItem(KEYS.USER_DATA);
+
+      if (userData) {
+        // Parse the user data and dispatch to Redux
+        const user = JSON.parse(userData);
+        dispatch(AuthActions.setUser(user)); // Store user data in Redux
+      }
+
+      console.log('USER_DATA root ', userData);
+    };
+
+    checkLoginStatus();
+  }, [dispatch]);
   return (
     <Screen fullscreen withoutTopEdge noHorizontalPadding>
       <Header hasBackButton text="profile.profile" />
@@ -51,7 +90,7 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
               {firstName} {lastName}
             </CText>
             <CText size="sm_medium" color="purpleGrey">
-              firasrhaeim@gmail.com
+              {user?.email || 'Email not available'}
             </CText>
           </View>
         </View>
@@ -169,10 +208,7 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
             />
           }
           onPress={async () => {
-            await logout();
-            await navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              screen: OnboardingStackRoutes.LOGIN_SCREEN,
-            });
+            await handleLogout();
           }}
         />
       </View>

@@ -1,38 +1,42 @@
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Pressable, Alert } from 'react-native';
 import { CButton } from '@components/Buttons/CButton';
 import { ControlledInput } from '@components/ControlledInput';
 import { CText } from '@components/CText';
 import { Screen } from '@components/Screen';
-import { Colors } from '@constants/Colors';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
-import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleSheet, View, Switch, Pressable } from 'react-native';
 import { registerScheme, RegisterScheme } from 'src/schemes/register.scheme';
-import Icon from 'react-native-vector-icons/Ionicons'; // Example icon library
+import Icon from 'react-native-vector-icons/Ionicons';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { BackButton } from '@components/BackButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthActions } from '@store/authSlice';
+import { Colors } from '@constants/Colors';
+import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
+import { useNavigation } from '@react-navigation/native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export const RegisterScreen =
   ({}: OnboardingStackScreenProps<'SignUpScreen'>): JSX.Element => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
     const { control, handleSubmit } = useForm<RegisterScheme>({
       defaultValues: {
         firstname: '',
         lastname: '',
         email: '',
+        password: '',
+        confirmPassword: '',
         phoneNumber: '',
-        medicalEntity: '',
-        referenceMedicalAssociationId: '',
-        isHospitalOrClinic: false,
-        hospitalClinicName: '',
       },
       resolver: zodResolver(registerScheme),
     });
 
     const [isFocused, setIsFocused] = useState<{ [key: string]: boolean }>({});
-    const [isHospitalOrClinic, setIsHospitalOrClinic] = useState(false);
+    const [isSecureEnabled, setSecureEnabled] = useState(true); // State to handle password visibility
+    const [isSecureConfirmEnabled, setSecureConfirmEnabled] = useState(true); // State to handle password visibility
 
     const handleFocus = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: true }));
@@ -40,6 +44,61 @@ export const RegisterScreen =
 
     const handleBlur = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: false }));
+    };
+
+    const onSubmit = (data: RegisterScheme) => {
+      dispatch(AuthActions.resetErrorRegister()); // Reset error before submitting
+
+      const payload = {
+        first_name: data.firstname,
+        last_name: data.lastname,
+        email: data.email,
+        password: data.password,
+        confirmpassword: data.confirmPassword,
+        phone: data.phoneNumber,
+      };
+      dispatch(AuthActions.registerRequest(payload));
+    };
+
+    const loading = useSelector((state) => state.auth.loading);
+    const error = useSelector((state) => state.auth.errorRegister);
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    // Reset error on component mount
+    useEffect(() => {
+      dispatch(AuthActions.resetErrorRegister()); // Reset error when component mounts
+      return () => {
+        dispatch(AuthActions.resetErrorRegister()); // Reset on unmount
+      };
+    }, [dispatch]);
+    
+    // Handle error alerts
+    useEffect(() => {
+      if (error) {
+        Alert.alert('Registration Failed', error, [
+          {
+            text: 'OK',
+            onPress: () => {
+              // Reset the error after displaying it
+              dispatch(AuthActions.resetErrorRegister());
+            },
+          },
+        ]);
+      }
+    }, [error, dispatch]);
+
+    // Navigate on successful registration
+    useEffect(() => {
+      if (isLoggedIn) {
+        navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+          screen: OnboardingStackRoutes.INTRO_QUESTION_SCREEN,
+        });
+      }
+    }, [isLoggedIn]);
+    const togglePasswordConfirmVisibility = () => {
+      setSecureConfirmEnabled(!isSecureConfirmEnabled);
+    };
+    const togglePasswordVisibility = () => {
+      setSecureEnabled(!isSecureEnabled);
     };
 
     return (
@@ -119,83 +178,56 @@ export const RegisterScreen =
         />
 
         <ControlledInput
-          placeholderText="onboarding.signup.medical_entity"
-          placeholderColor={Colors.grey5}
           control={control}
-          name="medicalEntity"
-          borderColor={
-            isFocused.medicalEntity ? Colors.deepPurple : Colors.grey1
-          }
+          secureTextEntry={isSecureEnabled} // Use state to control visibility
+          placeholderText="onboarding.password"
+          placeholderColor={Colors.grey5}
+          name="password"
+          borderColor={isFocused.password ? Colors.deepPurple : Colors.grey1}
           backgroundColor={Colors.lightPink}
-          textStyle={{ color: Colors.deepPurple }}
-          onFocus={() => handleFocus('medicalEntity')}
-          onBlur={() => handleBlur('medicalEntity')}
+          onFocus={() => handleFocus('password')}
+          onBlur={() => handleBlur('password')}
           RightAccessory={() => (
-            <Icon name="business-outline" size={20} color={Colors.deepPurple} />
+            <Pressable onPress={togglePasswordVisibility}>
+              <AntDesign
+                name={isSecureEnabled ? 'eyeo' : 'eye'} // Change icon based on visibility
+                size={20}
+                color={Colors.deepPurple}
+              />
+            </Pressable>
           )}
         />
 
         <ControlledInput
-          placeholderText="onboarding.signup.reference_medical_association_id"
-          placeholderColor={Colors.grey5}
           control={control}
-          name="referenceMedicalAssociationId"
+          secureTextEntry={isSecureConfirmEnabled} // Use state to control visibility
+          placeholderText="profile.confirm_password"
+          placeholderColor={Colors.grey5}
+          name="confirmPassword"
           borderColor={
-            isFocused.referenceMedicalAssociationId
-              ? Colors.deepPurple
-              : Colors.grey1
+            isFocused.confirmPassword ? Colors.deepPurple : Colors.grey1
           }
           backgroundColor={Colors.lightPink}
-          textStyle={{ color: Colors.deepPurple }}
-          onFocus={() => handleFocus('referenceMedicalAssociationId')}
-          onBlur={() => handleBlur('referenceMedicalAssociationId')}
+          onFocus={() => handleFocus('confirmPassword')}
+          onBlur={() => handleBlur('confirmPassword')}
           RightAccessory={() => (
-            <Icon name="card-outline" size={20} color={Colors.deepPurple} />
+            <Pressable onPress={togglePasswordConfirmVisibility}>
+              <AntDesign
+                name={isSecureConfirmEnabled ? 'eyeo' : 'eye'} // Change icon based on visibility
+                size={20}
+                color={Colors.deepPurple}
+              />
+            </Pressable>
           )}
         />
-
-        <View style={styles.switchContainer}>
-          <CText
-            text="onboarding.signup.hospital_clinic_name"
-            size="lg_medium"
-            color="grey3"
-          />
-          <Switch
-            value={isHospitalOrClinic}
-            onValueChange={(value) => setIsHospitalOrClinic(value)}
-            thumbColor={isHospitalOrClinic ? Colors.deepPurple : Colors.grey1}
-            trackColor={{ false: Colors.grey1, true: Colors.lightPurple }}
-          />
-        </View>
-
-        {isHospitalOrClinic && (
-          <ControlledInput
-            placeholderText="onboarding.signup.hospital_clinic_name"
-            placeholderColor={Colors.grey5}
-            control={control}
-            name="hospitalClinicName"
-            borderColor={
-              isFocused.hospitalClinicName ? Colors.deepPurple : Colors.grey1
-            }
-            backgroundColor={Colors.lightPink}
-            textStyle={{ color: Colors.deepPurple }}
-            onFocus={() => handleFocus('hospitalClinicName')}
-            onBlur={() => handleBlur('hospitalClinicName')}
-            RightAccessory={() => (
-              <Icon name="home-outline" size={20} color={Colors.deepPurple} />
-            )}
-          />
-        )}
 
         <CButton
           mt={50}
           text="common.continue"
-          onPress={handleSubmit(() => {
-            navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              screen: OnboardingStackRoutes.INTRO_QUESTION_SCREEN,
-            });
-          })}
+          onPress={handleSubmit(onSubmit)}
+          loading={loading}
         />
+
         <CText isCentered size="md">
           <CText
             text="onboarding.signup.already_have_account"
@@ -213,7 +245,6 @@ export const RegisterScreen =
           >
             <CText size="md_bold" color="deepPurple" text="onboarding.login" />
           </Pressable>
-          {/* <CText text='onboarding.login' color='deepPurple' size='md'/> */}
         </CText>
       </Screen>
     );
@@ -224,10 +255,6 @@ const styles = StyleSheet.create({
     gap: 20,
     paddingVertical: 50,
   },
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 10,
-  },
 });
+
+export default RegisterScreen;

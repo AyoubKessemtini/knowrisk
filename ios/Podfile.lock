@@ -1158,6 +1158,8 @@ PODS:
     - React-Core
   - RNDateTimePicker (8.2.0):
     - React-Core
+  - RNDeviceInfo (13.2.0):
+    - React-Core
   - RNFlashList (1.7.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1182,7 +1184,7 @@ PODS:
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
     - React-RCTImage
-  - RNSVG (15.7.1):
+  - RNSVG (15.8.0):
     - React-Core
   - RNVectorIcons (10.1.0):
     - glog
@@ -1280,6 +1282,7 @@ DEPENDENCIES:
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
@@ -1436,6 +1439,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFlashList:
     :path: "../node_modules/@shopify/flash-list"
   RNGestureHandler:
@@ -1533,13 +1538,14 @@ SPEC CHECKSUMS:
   RNBootSplash: e025d4ee98d942ee6c8b495a6fe66339a6b5f6dd
   RNCAsyncStorage: ec53e44dc3e75b44aa2a9f37618a49c3bc080a7a
   RNDateTimePicker: 40ffda97d071a98a10fdca4fa97e3977102ccd14
+  RNDeviceInfo: 29e01d5ae94bdb5a0f6c11a4c438132545b4df80
   RNFlashList: 68224225541895f0fb0de98b4d8be0cbe1c577df
   RNGestureHandler: 67d3f1f69d4d0c98d6e83f4229e3bbf997d1dc72
   RNPermissions: 88cb833d70198c254e3ea7ccc4179fde91670700
   RNReactNativeHapticFeedback: bf604f2da947838513394d411364300d6e62e878
   RNReanimated: f1ce27e7d23e6f941024b862ad76a7fdae93dea9
   RNScreens: e842cdccb23c0a084bd6307f6fa83fd1c1738029
-  RNSVG: 4590aa95758149fa27c5c83e54a6a466349a1688
+  RNSVG: 8b1a777d54096b8c2a0fd38fc9d5a454332bbb4d
   RNVectorIcons: 96e8c5c45609932bb2f8347e1c709bcca0e95654
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 47d399a73c0c0caa9ff824e5c657eae31215bfee

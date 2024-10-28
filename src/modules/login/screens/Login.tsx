@@ -1,17 +1,25 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CButton } from '@components/Buttons/CButton';
 import { ControlledInput } from '@components/ControlledInput';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import { ImageBackground, Pressable, StyleSheet, View } from 'react-native';
+import {
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  View,
+  Alert,
+} from 'react-native';
 import { LoginScheme, loginScheme } from '../../../schemes/login.scheme';
 import { PassTextInput } from '@components/Inputs/Pass-Text-Input';
-import { useLoginWithEmailMutation } from '@query/queries/auth/authMutations';
 import { CText } from '@components/CText';
 import ImageAssets from '@assets/images';
 import { Colors } from '@constants/Colors';
 import { useNavigation } from '@react-navigation/native';
+
+import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
+import { AuthActions } from '@store/authSlice';
 import {
   OnboardingStackRoutes,
   RootStackRoutes,
@@ -20,31 +28,48 @@ import {
 
 export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
   const navigation = useNavigation();
-  const { mutate: loginWithEmailMutate } = useLoginWithEmailMutation();
+  const dispatch = useDispatch();
+
   const { control, handleSubmit } = useForm<LoginScheme>({
     defaultValues: { email: '', password: '' },
     resolver: zodResolver(loginScheme),
   });
 
   const onPressHandler = (formData: LoginScheme) => {
-    navigation.navigate(RootStackRoutes.TAB_STACK, {
-      screen: TabBarStackRoutes.HOME,
-    });
-    loginWithEmailMutate(formData, {
-      onError: (error) => {
-        console.log(error);
-        // setError('email');
-        // setError('password');
-      },
-      onSuccess: (data) => {
-        console.log(data);
-      },
-    });
+    dispatch(AuthActions.resetErrorLogin()); // Reset error before submitting
+
+    dispatch(AuthActions.loginRequest(formData)); // Dispatch login request
   };
+
+  const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.errorLogin);
+
+ 
+  useEffect(() => {
+    dispatch(AuthActions.resetErrorLogin()); // Reset error when component mounts
+    return () => {
+      dispatch(AuthActions.resetErrorLogin()); // Reset on unmount
+    };
+  }, [dispatch]);
+
+  // Handle error alerts
+  useEffect(() => {
+    if (error) {
+      Alert.alert('Login Failed', error, [
+        {
+          text: 'OK',
+          onPress: () => {
+            dispatch(AuthActions.resetErrorLogin()); // Reset error after displaying it
+          },
+        },
+      ]);
+    }
+  }, [error, dispatch]);
+  // Handle error alerts
 
   return (
     <ImageBackground source={ImageAssets.LOGIN_BG} style={styles.container}>
-      <View style={styles.flexed}></View>
+      <View style={styles.flexed} />
       <CText
         mt={38}
         text="onboarding.login_description"
@@ -55,27 +80,21 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
       <CText mt={15} text="onboarding.email_address" color="white" size="md" />
       <ControlledInput
         placeholderText="common.mail"
-        placeholderColor="grey2"
+        placeholderTextColor={Colors.grey2}
         control={control}
         name="email"
         borderColor="white"
         backgroundColor={Colors.lightPink}
         textStyle={{ color: Colors.deepPurple }}
-        //   LeftAccessory={({ state }: { state: string }) => (
-        //     <Icon
-        //       type="simple-line-icon"
-        //       name="lock"
-        //       size={24}
-        //       color={state === 'focused' ? Colors.deepPurple : Colors.orange}
-        //     />
-        //   )}
       />
       <CText mt={15} text="onboarding.password" color="white" size="md" />
+
       <PassTextInput name="password" control={control} />
       <CButton
         mt={15}
         buttonType="primary"
         text="onboarding.login"
+        loading={loading}
         onPress={handleSubmit(onPressHandler)}
       />
       <Pressable
