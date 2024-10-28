@@ -64,7 +64,8 @@
       "hospital_clinic_name_placeholder": "Enter your hospital/clinic name",
       "create_password_placeholder": "Create a password",
       "confirm_password_placeholder": "Confirm your password",
-      "already_have_account" :"Already have an account? "
+      "already_have_account" :"Already have an account? ",
+       "select_device_type": "Select device type"
     },
     "questions_placeholder": {
       "type_your_answer": "Type your answer here...",

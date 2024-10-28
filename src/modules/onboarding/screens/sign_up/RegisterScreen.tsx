@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Pressable, Alert } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Pressable,
+  Alert,
+  TouchableOpacity,
+  Text,
+  Modal,
+} from 'react-native';
 import { CButton } from '@components/Buttons/CButton';
 import { ControlledInput } from '@components/ControlledInput';
 import { CText } from '@components/CText';
@@ -11,11 +19,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { BackButton } from '@components/BackButton';
 import { useDispatch, useSelector } from 'react-redux';
+import { Picker } from '@react-native-picker/picker';
 import { AuthActions } from '@store/authSlice';
 import { Colors } from '@constants/Colors';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { DeviceType } from '@constants/DeviceTypes';
 
 export const RegisterScreen =
   ({}: OnboardingStackScreenProps<'SignUpScreen'>): JSX.Element => {
@@ -30,6 +40,7 @@ export const RegisterScreen =
         password: '',
         confirmPassword: '',
         phoneNumber: '',
+        device_type: DeviceType.Device,
       },
       resolver: zodResolver(registerScheme),
     });
@@ -45,8 +56,15 @@ export const RegisterScreen =
     const handleBlur = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: false }));
     };
+    const [selectedDeviceType, setSelectedDeviceType] = useState<
+      DeviceType | ''
+    >('');
+
+    const [isPickerVisible, setPickerVisible] = useState(false); // State for dropdown
 
     const onSubmit = (data: RegisterScheme) => {
+      console.log('Dispatching register eeee:');
+
       dispatch(AuthActions.resetErrorRegister()); // Reset error before submitting
 
       const payload = {
@@ -56,7 +74,10 @@ export const RegisterScreen =
         password: data.password,
         confirmpassword: data.confirmPassword,
         phone: data.phoneNumber,
+        device_type: selectedDeviceType, // Include selected device type
       };
+      console.log('Dispatching register request:', payload); // Debug: Check payload data
+
       dispatch(AuthActions.registerRequest(payload));
     };
 
@@ -70,7 +91,7 @@ export const RegisterScreen =
         dispatch(AuthActions.resetErrorRegister()); // Reset on unmount
       };
     }, [dispatch]);
-    
+
     // Handle error alerts
     useEffect(() => {
       if (error) {
@@ -221,8 +242,66 @@ export const RegisterScreen =
           )}
         />
 
+        {/* Dropdown for device selection using enum */}
+        <TouchableOpacity
+          style={[
+            styles.pickerButton,
+            {
+              borderColor: isFocused.deviceType
+                ? Colors.deepPurple
+                : Colors.grey1,
+              backgroundColor: Colors.lightPink,
+            },
+          ]}
+          onPress={() => setPickerVisible(true)}
+          onFocus={() => handleFocus('deviceType')}
+          onBlur={() => handleBlur('deviceType')}
+        >
+          <CText
+            size="md_bold"
+            color={selectedDeviceType ? 'deepPurple' : 'grey3'}
+          >
+            {selectedDeviceType || 'Select Device Type'}
+          </CText>
+        </TouchableOpacity>
+
+        <Modal
+          visible={isPickerVisible}
+          transparent
+          animationType="slide"
+          onRequestClose={() => setPickerVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View
+              style={[styles.pickerContainer, { borderColor: Colors.grey1 }]}
+            >
+              <Picker
+                selectedValue={selectedDeviceType}
+                onValueChange={(itemValue) => {
+                  setSelectedDeviceType(itemValue as DeviceType);
+                  setPickerVisible(false);
+                }}
+              >
+                <Picker.Item label="Select Device Type" value="" />
+                <Picker.Item
+                  label={DeviceType.Device}
+                  value={DeviceType.Device}
+                />
+                <Picker.Item
+                  label={DeviceType.Fitbit}
+                  value={DeviceType.Fitbit}
+                />
+                <Picker.Item
+                  label={DeviceType.Apple}
+                  value={DeviceType.Apple}
+                />
+              </Picker>
+            </View>
+          </View>
+        </Modal>
+
         <CButton
-          mt={50}
+          mt={20}
           text="common.continue"
           onPress={handleSubmit(onSubmit)}
           loading={loading}
@@ -254,6 +333,29 @@ const styles = StyleSheet.create({
   container: {
     gap: 20,
     paddingVertical: 50,
+  },
+  pickerButton: {
+    backgroundColor: Colors.lightPink,
+    padding: 20,
+    borderRadius: 14,
+    borderWidth: 1, // Adds border width to match `ControlledInput`
+    marginVertical: 10,
+  },
+  selectedValueText: {
+    fontSize: 16, // Matching font size with ControlledInput
+    color: Colors.deepPurple,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  pickerContainer: {
+    marginHorizontal: 20,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    overflow: 'hidden',
+    borderWidth: 1, // Border width to match ControlledInput
   },
 });
 

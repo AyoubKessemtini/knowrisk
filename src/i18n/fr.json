@@ -101,7 +101,7 @@
       "already_have_account": "Already have an account? ",
       "birth_date": "Birth date",
       "sex": "Sex",
-      "country": "Country"
+      "select_device_type": "Select device type"
     },
     "questions_placeholder": {
       "type_your_answer": "Type your answer here...",
