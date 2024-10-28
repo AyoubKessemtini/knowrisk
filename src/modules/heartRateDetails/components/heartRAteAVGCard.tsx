@@ -28,7 +28,7 @@ export const HeartRateAVGCard = ({
           {dateTime}
         </CText>
       </View>
-      <View style={[styles.row, { marginTop: 20, gap: 5 }]}>
+      <View style={[styles.row, { marginTop: 15, gap: 5 }]}>
         <CText size="lg_bold" color="deepPurple">
           {value}
         </CText>
@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     padding: 15,
     width: '100%',
     alignSelf: 'center',
-    paddingVertical: 10,
+    paddingVertical: 8,
+    marginBottom: 8,
   },
   row: {
     flexDirection: 'row',

@@ -8,3 +8,7 @@ export const formatTime = (dateString: string): string => {
 
   return `${day}/${month}/${year} ${hours}:${minutes}`;
 };
+
+export const formatStringDate = (date: Date): string => {
+  return date.toISOString().split('T')[0];
+};

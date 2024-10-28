@@ -14,6 +14,7 @@ import { useAppSelector } from '@store/index.ts';
 import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
 import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard.tsx';
 import { Journal } from '@components/Cards/JournalCard.tsx';
+import { TriggersCard } from '@modules/home/components/triggersCard.tsx';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -123,6 +124,25 @@ export const Home: React.FC = () => {
           />
         </View>
         <MedicationsList />
+        <TriggersCard
+          data={[
+            {
+              name: 'Fatigue',
+              color: '#E95050',
+              value: 27,
+            },
+            {
+              name: 'Sleep',
+              color: '#FFA224',
+              value: 33,
+            },
+            {
+              name: 'Stess',
+              color: '#2AC686',
+              value: 40,
+            },
+          ]}
+        />
       </View>
     </Screen>
   );

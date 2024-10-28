@@ -5,12 +5,22 @@ import { CText } from '@components/CText.tsx';
 import { SleepTimeCard } from '@modules/sleep/screens/components/sleepTimeCard.tsx';
 import { SleepQualityChart } from '@modules/sleep/screens/components/sleepQualityChart.tsx';
 
-interface NotesListReaderProps {
+interface SleepQualityCardProps {
   color?: PalleteColors;
+  startSleep: string;
+  sleepDuration: string;
+  endSleep: string;
+  sleepQuality: number;
+  date: string;
 }
 
-export const SleepQualityCard: React.FC<NotesListReaderProps> = ({
+export const SleepQualityCard: React.FC<SleepQualityCardProps> = ({
   color = 'lightPink',
+  endSleep,
+  sleepDuration,
+  startSleep,
+  sleepQuality,
+  date,
 }) => {
   const backgroundColor = pallete[color];
   return (
@@ -22,13 +32,16 @@ export const SleepQualityCard: React.FC<NotesListReaderProps> = ({
       </View>
       <View style={styles.row}>
         <View style={styles.leftView}>
-          <SleepTimeCard title={'Start sleep'} time={'22:49'} />
-          <SleepTimeCard title={'Sleep duration'} time={'9h 11min'} />
-          <SleepTimeCard title={'End sleep'} time={'08:00'} />
+          <SleepTimeCard title={'Start sleep'} time={startSleep} />
+          <SleepTimeCard title={'Sleep duration'} time={sleepDuration} />
+          <SleepTimeCard title={'End sleep'} time={endSleep} />
         </View>
         <View style={styles.rightView}>
           <View style={styles.chart}>
-            <SleepQualityChart />
+            <SleepQualityChart
+              sleepQuality={sleepQuality.toString()}
+              lastUpdate={date}
+            />
           </View>
         </View>
       </View>
