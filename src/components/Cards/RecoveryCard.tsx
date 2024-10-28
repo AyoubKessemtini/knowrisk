@@ -27,7 +27,7 @@ export const RecoveryComponent = ({
 }: RecoveryComponentProps) => {
   return (
     <View style={styles.container}>
-      <CText size="sm_semiBold" color={'deepPurple'} numberOfLines={1}>
+      <CText mb={5} size="md_medium" color="black">
         {title}
       </CText>
       <View style={styles.progressContainer}>

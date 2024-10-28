@@ -130,7 +130,7 @@ function* registerUser(action: any) {
 
       yield put(AuthActions.registerFailure(errorMessage)); // Dispatch failure action
     }
-  } catch (error) {
+  } catch (error: unknown) {
     const errorMessage = error.response?.data.message || error.message; // Handle network or other errors
 
     yield put(AuthActions.registerFailure(errorMessage)); // Dispatch failure action

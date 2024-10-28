@@ -25,6 +25,7 @@ import {
   RootStackRoutes,
   TabBarStackRoutes,
 } from '@navigators/routes';
+import {RootState} from "@store/index.ts";
 
 export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
   const navigation = useNavigation();
@@ -37,12 +38,11 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
 
   const onPressHandler = (formData: LoginScheme) => {
     dispatch(AuthActions.resetErrorLogin()); // Reset error before submitting
-
     dispatch(AuthActions.loginRequest(formData)); // Dispatch login request
   };
 
-  const loading = useSelector((state) => state.auth.loading);
-  const error = useSelector((state) => state.auth.errorLogin);
+  const loading = useSelector((state: RootState) => state.auth.loading);
+  const error = useSelector((state: RootState) => state.auth.errorLogin);
 
  
   useEffect(() => {
@@ -94,7 +94,7 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
         mt={15}
         buttonType="primary"
         text="onboarding.login"
-        loading={loading}
+        //loading={loading}
         onPress={handleSubmit(onPressHandler)}
       />
       <Pressable

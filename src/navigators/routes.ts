@@ -15,6 +15,8 @@ export const RootStackRoutes = {
   SCAN_SCREEN: 'scanScreen',
   HOME: 'home',
   CHATBOT: 'chatbot',
+  JOURNAL: 'journal',
+  HEART_RATE_DETAILS: 'heartRateDetails',
 } as const;
 
 export const TabBarStackRoutes = {

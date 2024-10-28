@@ -27,6 +27,8 @@ import { ReportSeizureQuestion4 } from '../../modules/home/screens/ReportSeizure
 import { SeizureForecastScreen } from '@modules/seizure/screens/SeizureCalendar';
 import { ScanScreen } from '@modules/wearable/screens/ScanScreen.tsx';
 import { ChatBotScreen } from '@modules/chatbot/ChatBotScreen';
+import { JournalScreen } from '@modules/journal/screens/journal.tsx';
+import { HeartRateDetailsScreen } from '@modules/heartRateDetails/screens/heartRateDetails.tsx';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
 /* import { useAppSelector } from '@store/index'; */
@@ -51,6 +53,8 @@ export type RootStackParamList = {
   [RootStackRoutes.SCAN_SCREEN]: undefined;
   [RootStackRoutes.HOME]: undefined;
   [RootStackRoutes.CHATBOT]: undefined;
+  [RootStackRoutes.JOURNAL]: undefined;
+  [RootStackRoutes.HEART_RATE_DETAILS]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -141,6 +145,11 @@ export function RootNavigator() {
       />
       <Stack.Screen name={RootStackRoutes.SCAN_SCREEN} component={ScanScreen} />
       <Stack.Screen name={RootStackRoutes.CHATBOT} component={ChatBotScreen} />
+      <Stack.Screen name={RootStackRoutes.JOURNAL} component={JournalScreen} />
+      <Stack.Screen
+        name={RootStackRoutes.HEART_RATE_DETAILS}
+        component={HeartRateDetailsScreen}
+      />
     </Stack.Navigator>
   );
 }

@@ -16,6 +16,7 @@ import { Colors } from '@constants/Colors';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {RootState} from "@store/index.ts";
 
 export const RegisterScreen =
   ({}: OnboardingStackScreenProps<'SignUpScreen'>): JSX.Element => {
@@ -60,9 +61,9 @@ export const RegisterScreen =
       dispatch(AuthActions.registerRequest(payload));
     };
 
-    const loading = useSelector((state) => state.auth.loading);
-    const error = useSelector((state) => state.auth.errorRegister);
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const loading = useSelector((state:RootState) => state.auth.loading);
+    const error = useSelector((state:RootState) => state.auth.errorRegister);
+    const isLoggedIn = useSelector((state:RootState) => state.auth.isLoggedIn);
     // Reset error on component mount
     useEffect(() => {
       dispatch(AuthActions.resetErrorRegister()); // Reset error when component mounts
@@ -225,7 +226,7 @@ export const RegisterScreen =
           mt={50}
           text="common.continue"
           onPress={handleSubmit(onSubmit)}
-          loading={loading}
+          //loading={loading}
         />
 
         <CText isCentered size="md">

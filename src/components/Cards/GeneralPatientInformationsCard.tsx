@@ -56,7 +56,7 @@ export const PatientInfoCard = ({
       </View>
 
       {/* ID Section */}
-      <CText color="grey4" size="md_small" style={styles.idText}>
+      <CText color="grey4" size="md_medium" style={styles.idText}>
         {id}
       </CText>
 

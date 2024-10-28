@@ -1,6 +1,6 @@
 import { Colors } from '@constants/Colors';
 import { useThemeInterpolation } from '@hooks/useThemeInterpolation';
-import { useAppSelector } from '@store/index';
+import {RootState, useAppSelector} from '@store/index';
 import lang from 'i18n-js';
 import React, { useMemo } from 'react';
 import { StyleSheet, TextProps } from 'react-native';
@@ -58,7 +58,7 @@ export const CText = ({
   flexed,
   ...textProps
 }: CustomTextProps): JSX.Element => {
-  const { selectedLocale } = useAppSelector((state) => state.locale);
+  const { selectedLocale } = useAppSelector((state: RootState) => state.locale);
   const { animatedStyle } = useThemeInterpolation(
     Colors.texts.light[color],
     Colors.texts.dark[color],
