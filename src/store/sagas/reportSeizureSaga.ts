@@ -11,7 +11,18 @@ import {
 } from '@store/reportSeizureFormSlice';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
+// Helper pour récupérer le token d'accès
+const getAccessToken = (): string | null => {
+  const tokenData = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
+  console.log('accessTokenaccessToken' + tokenData);
+  return tokenData ? JSON.parse(tokenData) : null;
+};
 
+// Helper pour récupérer l'ID utilisateur
+const getUserId = (): string | null => {
+  const userData = PersistenceStorage.getItem(KEYS.USER_DATA);
+  return userData ? JSON.parse(userData)?.id : null;
+};
 function* submitSeizureReportSaga(): SagaIterator {
   try {
     // Récupérer les données de l'état Redux
@@ -42,10 +53,13 @@ function* submitSeizureReportSaga(): SagaIterator {
     // }
 
     // Assurez-vous que l'ID utilisateur est disponible dans l'état auth
-    const userData = JSON.parse(
-      PersistenceStorage.getItem(KEYS.USER_DATA) || '{}',
-    );
-    const userId = userData?.id;
+
+    const userId = getUserId();
+
+    const accessToken = getAccessToken();
+
+
+
     if (!userId) {
       yield put(
         submitSeizureReportFailure("L'ID utilisateur est introuvable."),
@@ -72,14 +86,23 @@ function* submitSeizureReportSaga(): SagaIterator {
 
     console.log('url seizure' + url);
     // Appel de l'API pour envoyer les données de saisie
-    const response: AxiosResponse = yield call(axios.post, url, {
-      date,
-      time_from: timeFrom,
-      time_to: timeTo,
-      alcohol,
-      exercise,
-      eat,
-    });
+    const response: AxiosResponse = yield call(
+      axios.post,
+      url,
+      {
+        date,
+        time_from: timeFrom,
+        time_to: timeTo,
+        alcohol,
+        exercise,
+        eat,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Ajouter le token d'accès ici
+        },
+      },
+    );
 
     // Gérer le succès ou les erreurs de la requête
     if (response.status === 200) {
@@ -106,7 +129,7 @@ function* submitSeizureReportSaga(): SagaIterator {
     const errorMessage =
       error.response && error.response.data && error.response.data.message
         ? error.response.data.message
-        : 'Erreur réseau ou serveur. Veuillez vérifier votre connexion ou réessayer plus tard.';
+        : 'Network or server error. Please check your connection or try again later.';
     yield put(submitSeizureReportFailure(errorMessage));
   }
 }
