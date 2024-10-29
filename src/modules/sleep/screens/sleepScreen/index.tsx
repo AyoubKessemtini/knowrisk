@@ -26,14 +26,14 @@ export const SleepScreen: React.FC = () => {
   };
   const sleep: SleepData[] = [
     {
-      date: '2024-10-28',
+      date: '2024-10-30',
       quality: 57,
       sleepTime: '7h 20m',
       startSleep: '23:00',
       endSleep: '06:20',
     },
     {
-      date: '2024-10-27',
+      date: '2024-10-29',
       quality: 89,
       sleepTime: '8h 11m',
       startSleep: '22:49',

@@ -14,6 +14,8 @@ import { GetSpo2ByDate } from '@core/usecases/fitBitRepository/GetSpo2DataByDate
 import { GetActivitiesByDate } from '@core/usecases/fitBitRepository/GetActivitiesByDate.ts';
 import { StoreDeviceHealthData } from '@core/usecases/deviceRepository/StoreDeviceHealthData.ts';
 import { RDDeviceHealthDataRepo } from './adapters/real/repositories/RDDeviceHealthDataRepo.ts';
+import { GetHeartRateWeeklyData } from '@core/usecases/deviceFetchDataApisRepository/GetHeartRateWeeklyData.ts';
+import {RDDeviceDataApisRepo} from "./adapters/real/repositories/deviceDataApis/RDDeviceDataApisRepo.ts";
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -38,6 +40,7 @@ export const Core = (configuration: CoreConfiguration) => {
   //REPOSITORIES
   const iosHealthDataRepo = new RDIOSHealthDataRepo(httpClient);
   const deviceHealthDataRepo = new RDDeviceHealthDataRepo(httpClient);
+  const deviceDataApisRepo = new RDDeviceDataApisRepo(httpClient);
   const authRepo = new RDAuthRepo(httpClient);
   //fitbit
   const fitBitRepo = new RDFitBit(httpClient);
@@ -56,9 +59,8 @@ export const Core = (configuration: CoreConfiguration) => {
   const getSpo2ByDate = new GetSpo2ByDate(fitBitRepo);
   const getActivities2ByDate = new GetActivitiesByDate(fitBitRepo);
   const storeDeviceHealthData = new StoreDeviceHealthData(deviceHealthDataRepo);
-
-  // fitbit
-
+  //device
+  const getHeartRateWeeklyData = new GetHeartRateWeeklyData(deviceDataApisRepo);
   return {
     getConversations,
     sendIOSHealthData,
@@ -69,5 +71,6 @@ export const Core = (configuration: CoreConfiguration) => {
     getSpo2ByDate,
     getActivities2ByDate,
     storeDeviceHealthData,
+    getHeartRateWeeklyData,
   };
 };

@@ -125,6 +125,25 @@ export const Home: React.FC = () => {
             navigation.navigate(RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN);
           }}
         />
+        <TriggersCard
+            data={[
+              {
+                name: 'Fatigue',
+                color: '#E95050',
+                value: 27,
+              },
+              {
+                name: 'Sleep',
+                color: '#FFA224',
+                value: 33,
+              },
+              {
+                name: 'Stess',
+                color: '#2AC686',
+                value: 40,
+              },
+            ]}
+        />
         <DateSelector
           initialDate={selectedDate}
           onDateChange={handleDateChange}
@@ -166,25 +185,6 @@ export const Home: React.FC = () => {
           />
         </View>
         <MedicationsList />
-        <TriggersCard
-          data={[
-            {
-              name: 'Fatigue',
-              color: '#E95050',
-              value: 27,
-            },
-            {
-              name: 'Sleep',
-              color: '#FFA224',
-              value: 33,
-            },
-            {
-              name: 'Stess',
-              color: '#2AC686',
-              value: 40,
-            },
-          ]}
-        />
       </View>
     </Screen>
   );
