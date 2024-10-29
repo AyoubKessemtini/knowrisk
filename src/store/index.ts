@@ -7,7 +7,9 @@ import { localeSlice } from './localeSlice';
 import { authSlice } from './authSlice';
 import { bleDataSlice } from '@store/bleDataSlice.ts';
 import rootSaga from './sagas'; // Import your root saga
-
+import { reportSeizureFormSlice } from './reportSeizureFormSlice';
+     
+ 
 // Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -17,12 +19,13 @@ const rootReducer = combineReducers({
   [localeSlice.name]: localeSlice.reducer,
   [authSlice.name]: authSlice.reducer,
   [bleDataSlice.name]: bleDataSlice.reducer,
+  [reportSeizureFormSlice.name]: reportSeizureFormSlice.reducer, // Ajout du reducer reportSeizure
 });
 
 // Create the Redux store and apply the saga middleware
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => 
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware), // Add saga middleware
 });
 

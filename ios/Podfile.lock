@@ -1176,25 +1176,7 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - RNReanimated (3.16.0):
-    - glog
-    - RCT-Folly (= 2022.05.16.00)
-    - React-Core
-    - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated (= 3.16.0)
-    - RNReanimated/worklets (= 3.16.0)
-  - RNReanimated/reanimated (3.16.0):
-    - glog
-    - RCT-Folly (= 2022.05.16.00)
-    - React-Core
-    - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated/apple (= 3.16.0)
-  - RNReanimated/reanimated/apple (3.16.0):
-    - glog
-    - RCT-Folly (= 2022.05.16.00)
-    - React-Core
-    - ReactCommon/turbomodule/core
-  - RNReanimated/worklets (3.16.0):
+  - RNReanimated (3.14.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1567,7 +1549,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 67d3f1f69d4d0c98d6e83f4229e3bbf997d1dc72
   RNPermissions: 88cb833d70198c254e3ea7ccc4179fde91670700
   RNReactNativeHapticFeedback: bf604f2da947838513394d411364300d6e62e878
-  RNReanimated: 0309547fc58018658fe9a750b7beca802b8f3784
+  RNReanimated: f1ce27e7d23e6f941024b862ad76a7fdae93dea9
   RNScreens: e842cdccb23c0a084bd6307f6fa83fd1c1738029
   RNSVG: 8b1a777d54096b8c2a0fd38fc9d5a454332bbb4d
   RNVectorIcons: 96e8c5c45609932bb2f8347e1c709bcca0e95654

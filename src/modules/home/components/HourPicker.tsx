@@ -7,8 +7,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Colors } from '@constants/Colors';
 import { CText } from '@components/CText';
 
-export const HourPicker = () => {
-  const [selectedTime, setSelectedTime] = useState(new Date());
+interface HourPickerProps {
+  selectedTime: string;
+  onTimeChange: (time: string) => void;
+}
+
+export const HourPicker: React.FC<HourPickerProps> = ({
+  selectedTime,
+  onTimeChange,
+}) => {
   const [tempTime, setTempTime] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
 
@@ -23,18 +30,18 @@ export const HourPicker = () => {
   };
 
   const confirmTime = () => {
-    setSelectedTime(tempTime);
+    const formattedTime = tempTime.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    onTimeChange(formattedTime); // Envoie la chaîne formatée dans `onTimeChange`
     setShowPicker(false);
-  };
-
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.timeContainer} onPress={showTimePicker}>
-        <Text style={styles.timeText}>{formatTime(selectedTime)}</Text>
+        <Text style={styles.timeText}>{selectedTime || '00:00'}</Text>
         <Ionicons name="time-outline" size={21} color={Colors.purple2} />
       </TouchableOpacity>
 

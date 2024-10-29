@@ -5,7 +5,7 @@ import { Screen } from '@components/Screen';
 import { RootStackRoutes } from '@navigators/routes';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -16,10 +16,23 @@ import { LineInput } from '@components/Inputs/LineInput';
 import { Colors } from '@constants/Colors';
 import { styles } from './styles';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { RootState } from '@store/index';
+import {
+  setEat,
+  submitSeizureReportRequest,
+} from '@store/reportSeizureFormSlice';
 
 export const ReportSeizureQuestion4 =
   ({}: RootStackScreenProps<'ReportSeizureQuestion4'>): JSX.Element => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const { loading, error, date, timeFrom, timeTo, alcohol, exercise } =
+      useSelector((state: RootState) => state.reportSeizureForm);
+
+    const [isSubmitted, setIsSubmitted] = useState(false); // Ajout de l'état isSubmitted
+
     const {
       control,
       handleSubmit,
@@ -30,6 +43,7 @@ export const ReportSeizureQuestion4 =
       },
       resolver: zodResolver(answersScheme),
     });
+
     const [isFocused, setIsFocused] = useState<{ [key: string]: boolean }>({});
     const handleFocus = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: true }));
@@ -38,6 +52,39 @@ export const ReportSeizureQuestion4 =
     const handleBlur = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: false }));
     };
+
+    // Fonction de soumission du formulaire
+    const onSubmit = (data: AnswersScheme) => {
+      dispatch(setEat(data.answer)); // Enregistrer la réponse dans Redux
+      // Déclencher l'appel API si tous les champs sont définis
+      if (
+        date &&
+        timeFrom &&
+        timeTo &&
+        alcohol !== undefined &&
+        exercise !== undefined
+      ) {
+        dispatch(submitSeizureReportRequest()); // Déclencher l'appel API
+        setIsSubmitted(true); // Indiquer que la soumission a été initiée
+      } else {
+        Alert.alert(
+          'Erreur',
+          'Certains champs sont manquants. Veuillez les compléter avant de continuer.',
+        );
+      }
+    };
+
+    // Gestion de la réponse de l'API
+    React.useEffect(() => {
+      if (!loading && isSubmitted) {
+        if (error) {
+          Alert.alert('Erreur', error);
+          setIsSubmitted(false); // Réinitialiser après une erreur
+        } else {
+          navigation.navigate(RootStackRoutes.PROFILE_SCREEN);
+        }
+      }
+    }, [loading, error, navigation, isSubmitted]);
 
     return (
       <Screen
@@ -82,12 +129,7 @@ export const ReportSeizureQuestion4 =
           )}
         </View>
         <View style={styles.button}>
-          <CButton
-            text="common.continue"
-            onPress={handleSubmit(() => {
-              navigation.navigate(RootStackRoutes.PROFILE_SCREEN);
-            })}
-          />
+          <CButton text="common.continue" onPress={handleSubmit(onSubmit)} />
         </View>
       </Screen>
     );

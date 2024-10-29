@@ -10,17 +10,30 @@ import { styles } from './styles';
 import { ChoiceBox } from '@components/ChoiceBoxs/ChoiceBox';
 import { I18nKeyPath } from '../../../../i18n/types';
 import { Colors } from '@constants/Colors';
+import { useDispatch } from 'react-redux';
+import { setExercise } from '@store/reportSeizureFormSlice'; // Assurez-vous que l'action est bien importée
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 
 export const ReportSeizureQuestion3 =
   ({}: RootStackScreenProps<'ReportSeizureQuestion3'>): JSX.Element => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    // Utiliser `I18nKeyPath` pour stocker l'option sélectionnée
     const [selectedOption, setSelectedOption] = useState<I18nKeyPath | null>(
       null,
     );
+
+    // Gestion de la sélection avec conversion en booléen pour Redux
     const handleChoiceSelect = (selectedValue: I18nKeyPath) => {
       setSelectedOption(selectedValue);
+
+      // Conversion en booléen pour Redux
+      const isExercise = selectedValue === 'questions.choices.yes';
+      dispatch(setExercise(isExercise)); // Enregistre dans Redux comme booléen
     };
+
+    // Options de choix "Yes" et "No" en utilisant `I18nKeyPath`
     const options: I18nKeyPath[] = [
       'questions.choices.yes',
       'questions.choices.no',
