@@ -9,12 +9,16 @@ interface ReportSeizureFormState {
   exercise?: boolean;
   eat?: string;
   loading: boolean;
-  error?: string | null; // Ajout de la propriété `error` pour gérer les erreurs
+  error?: string | null; // Ajout de la propriété `error` pour gérer les erreurs,
+  successMessage?: string | null; // Ajout de la propriété `successMessage`
+
 }
 
 const initialState: ReportSeizureFormState = {
   loading: false,
   error: null,
+  successMessage: null, // Initialisation de `successMessage`
+
 };
 
 export const reportSeizureFormSlice = createSlice({
@@ -27,7 +31,7 @@ export const reportSeizureFormSlice = createSlice({
       state.date = action.payload;
     },
     setTimeFrom(state, action: PayloadAction<string>) {
-      // console.log("Mise à jour de 'timeFrom' :", action.payload); // Debugging log
+       console.log("Mise à jour de 'timeFrom' :", action.payload); // Debugging log
 
       state.timeFrom = action.payload;
     },
@@ -55,12 +59,13 @@ export const reportSeizureFormSlice = createSlice({
     },
     submitSeizureReportRequest(state) {
       state.loading = true;
-      state.error = null; // Réinitialiser l'erreur lors d'une nouvelle soumission
+      state.error = null;
+      state.successMessage = null; // Réinitialiser le message de succès
+      // Réinitialiser l'erreur lors d'une nouvelle soumission
     },
-    submitSeizureReportSuccess(state) {
+    submitSeizureReportSuccess(state, action: PayloadAction<string>) {
       state.loading = false;
-      // Réinitialiser l'état complet si souhaité après succès
-      return initialState;
+      state.successMessage = action.payload; // ou toute logique nécessaire
     },
     submitSeizureReportFailure(state, action: PayloadAction<string>) {
       state.loading = false;
@@ -81,5 +86,6 @@ export const {
   submitSeizureReportFailure,
 } = reportSeizureFormSlice.actions;
 // Export actions
-export const reportSeizureFormctions = reportSeizureFormSlice.actions;
+export const reportSeizureFormActions = reportSeizureFormSlice.actions;
+
 export default reportSeizureFormSlice.reducer;

@@ -1,127 +1,69 @@
-// reportSeizureSaga.ts
 import { call, put, takeLatest, select } from 'redux-saga/effects';
-import axios, { AxiosResponse } from 'axios';
-
 import { RootState } from '@store/index';
 import { SagaIterator } from 'redux-saga';
-import {
-  submitSeizureReportFailure,
-  submitSeizureReportSuccess,
-  submitSeizureReportRequest,
-} from '@store/reportSeizureFormSlice';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
+import axios, { AxiosResponse } from 'axios';
+import { reportSeizureFormActions } from '@store/reportSeizureFormSlice';
+
 // Helper pour récupérer le token d'accès
 const getAccessToken = (): string | null => {
   const tokenData = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
-  console.log('accessTokenaccessToken' + tokenData);
-  return tokenData ? JSON.parse(tokenData) : null;
+  console.log('Access Token:', tokenData);
+  return tokenData ? tokenData : null;
 };
 
-// Helper pour récupérer l'ID utilisateur
-const getUserId = (): string | null => {
-  const userData = PersistenceStorage.getItem(KEYS.USER_DATA);
-  return userData ? JSON.parse(userData)?.id : null;
-};
 function* submitSeizureReportSaga(): SagaIterator {
   try {
     // Récupérer les données de l'état Redux
-    // Récupérer les données de l'état `reportSeizureForm` depuis Redux
     const state = yield select((state: RootState) => state.reportSeizureForm);
     const { date, timeFrom, timeTo, alcohol, exercise, eat } = state;
 
-    // Afficher l'état complet de `reportSeizureForm` pour vérification
-    console.log(
-      "saga État complet de reportSeizureForm avant l'appel API :",
-      state,
-    );
-
-    // if (date === undefined) {
-    //   console.warn("Le champ 'date' est manquant ou indéfini.");
-    // }
-    // if (timeFrom === undefined) {
-    //   console.warn("Le champ 'timeFrom' est manquant ou indéfini.");
-    // }
-    // if (timeTo === undefined) {
-    //   console.warn("Le champ 'timeTo' est manquant ou indéfini.");
-    // }
-    // if (alcohol === undefined) {
-    //   console.warn("Le champ 'alcohol' est manquant ou indéfini.");
-    // }
-    // if (exercise === undefined) {
-    //   console.warn("Le champ 'exercise' est manquant ou indéfini.");
-    // }
-
-    // Assurez-vous que l'ID utilisateur est disponible dans l'état auth
-
-    const userId = getUserId();
-
     const accessToken = getAccessToken();
+    const url = `http://172.214.33.253:3001/api/patients/report-seizure`;
 
+    console.log('Data Seizure:', {
+      date,
+      time_from: timeFrom,
+      time_to: timeTo,
+      alcohol,
+      exercise,
+      eat,
+    });
 
-
-    if (!userId) {
-      yield put(
-        submitSeizureReportFailure("L'ID utilisateur est introuvable."),
-      );
-      return;
-    }
-
-    const url = `http://172.214.33.253:3001/api/patients/${userId}/report-seizure`;
-    // console.log(
-    //   'Data Seizure: ' +
-    //     JSON.stringify(
-    //       {
-    //         date,
-    //         time_from: timeFrom,
-    //         time_to: timeTo,
-    //         alcohol,
-    //         exercise,
-    //         eat,
-    //       },
-    //       null,
-    //       2, // Indente avec 2 espaces pour une meilleure lisibilité
-    //     ),
-    // );
-
-    console.log('url seizure' + url);
-    // Appel de l'API pour envoyer les données de saisie
+    // Appel de l'API avec les données sous forme d'objet
     const response: AxiosResponse = yield call(
       axios.post,
       url,
       {
         date,
-        time_from: timeFrom,
-        time_to: timeTo,
+        time_from: timeFrom + ':00',
+        time_to: timeTo + ':00',
         alcohol,
         exercise,
         eat,
       },
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`, // Ajouter le token d'accès ici
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
 
-    // Gérer le succès ou les erreurs de la requête
-    if (response.status === 200) {
-      yield put(submitSeizureReportSuccess());
-    } else if (response.status === 401) {
+    console.log('Response Status:', response.status);
+    console.log('Response Data:', response.data);
+
+    // Gérer le succès de la requête
+    if (response.status === 201) {
+      const successMessage = response.data?.message || 'Submission successful';
       yield put(
-        submitSeizureReportFailure(
-          'Non autorisé : l’utilisateur n’a pas les permissions nécessaires.',
-        ),
-      );
-    } else if (response.status === 500) {
-      yield put(
-        submitSeizureReportFailure(
-          'Erreur serveur : Veuillez réessayer plus tard.',
-        ),
+        reportSeizureFormActions.submitSeizureReportSuccess(successMessage),
       );
     } else {
+      const errorMessage = response.data?.message || 'Submission failed';
       yield put(
-        submitSeizureReportFailure('Erreur inattendue, veuillez réessayer.'),
+        reportSeizureFormActions.submitSeizureReportFailure(errorMessage),
       );
     }
   } catch (error: any) {
@@ -130,10 +72,15 @@ function* submitSeizureReportSaga(): SagaIterator {
       error.response && error.response.data && error.response.data.message
         ? error.response.data.message
         : 'Network or server error. Please check your connection or try again later.';
-    yield put(submitSeizureReportFailure(errorMessage));
+    yield put(
+      reportSeizureFormActions.submitSeizureReportFailure(errorMessage),
+    );
   }
 }
 
 export function* watchSubmitSeizureReport(): SagaIterator {
-  yield takeLatest(submitSeizureReportRequest.type, submitSeizureReportSaga);
+  yield takeLatest(
+    reportSeizureFormActions.submitSeizureReportRequest.type,
+    submitSeizureReportSaga,
+  );
 }

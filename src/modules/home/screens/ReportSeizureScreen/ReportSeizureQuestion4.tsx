@@ -68,20 +68,33 @@ export const ReportSeizureQuestion4 =
         setIsSubmitted(true); // Indiquer que la soumission a été initiée
       } else {
         Alert.alert(
-          'Erreur',
-          'Certains champs sont manquants. Veuillez les compléter avant de continuer.',
+          'Error',
+          'Some fields are missing. Please complete them before proceeding.',
         );
       }
     };
 
     // Gestion de la réponse de l'API
+    // Gestion de la réponse de l'API
     React.useEffect(() => {
       if (!loading && isSubmitted) {
         if (error) {
-          Alert.alert('Erreur', error);
+          Alert.alert('Error', error);
           setIsSubmitted(false); // Réinitialiser après une erreur
         } else {
-          navigation.navigate(RootStackRoutes.PROFILE_SCREEN);
+          Alert.alert(
+            'Success',
+            'The report has been submitted successfully!',
+            [
+              {
+                text: 'OK',
+                onPress: () =>
+                  navigation.navigate(RootStackRoutes.PROFILE_SCREEN),
+              },
+            ],
+            { cancelable: false },
+          );
+          setIsSubmitted(false); // Réinitialiser après le succès
         }
       }
     }, [loading, error, navigation, isSubmitted]);

@@ -13,6 +13,7 @@ import { HourPicker } from '../../components/HourPicker';
 import { styles } from './styles';
 import { useDispatch } from 'react-redux';
 import { setDate, setTimeFrom, setTimeTo } from '@store/reportSeizureFormSlice';
+import { Alert } from 'react-native';
 
 export const ReportSeizureQuestion1 =
   ({}: RootStackScreenProps<'ReportSeizureQuestion1'>): JSX.Element => {
@@ -53,23 +54,35 @@ export const ReportSeizureQuestion1 =
 
     // Gérer l'heure de début et enregistrer dans Redux
     const handleTimeFromChange = (time: string) => {
-      const formattedTimeFrom = formatTimeString(timeFrom); // Renvoie "HH:mm"
-
+      const formattedTimeFrom = formatTimeString(time); // Renvoie "HH:mm"
+      console.log('formattedTimeFrom' + formattedTimeFrom.toString);
       setTimeFromState(time);
+   
       dispatch(setTimeFrom(formattedTimeFrom.toString()));
     };
 
     // Gérer l'heure de fin et enregistrer dans Redux
     const handleTimeToChange = (time: string) => {
-      const formattedTimeTo = formatTimeString(timeFrom); // Renvoie "HH:mm"
+      const formattedTimeTo = formatTimeString(time); // Renvoie "HH:mm"
+      console.log('formattedTimeTo' + formattedTimeTo.toString);
 
       setTimeToState(time);
+      // Vérification si `timeTo` est postérieur à `timeFrom`
+  
       dispatch(setTimeTo(formattedTimeTo.toString()));
     };
 
     // Naviguer vers l'écran suivant après avoir défini les valeurs
     const handleContinue = () => {
-      navigation.navigate(RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN);
+      if (timeFrom && timeTo && timeFrom >= timeTo) {
+        Alert.alert(
+          'Time Error',
+          'The start time must be earlier than the end time.',
+          [{ text: 'OK' }],
+        );
+        return; // Arrête l'exécution si la condition n'est pas respectée
+      } else
+        navigation.navigate(RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN);
     };
 
     return (

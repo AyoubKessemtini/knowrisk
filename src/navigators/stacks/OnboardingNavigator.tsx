@@ -58,6 +58,7 @@ export function OnboardingNavigator() {
         name={OnboardingStackRoutes.WELCOME_SCREEN}
         component={WelcomeScreen}
       />
+      
       <Stack.Screen
         name={OnboardingStackRoutes.LOGIN_SCREEN}
         component={LoginScreen}
