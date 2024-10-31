@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import { Screen } from '@components/Screen';
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
@@ -106,7 +106,7 @@ export const Home: React.FC = () => {
       <View style={styles.wrapper}>
         <PatientInfoCard
           name={`${firstName} ${lastName}`}
-          id={`ID ${user?.id}`}
+          id={`ID: ${user?.id.split('-')[0]}`}
           lastSeizure="Sun, Apr 07, 22:54"
           seizureFrequency="Weekly"
           seizureRisk="Moderate"
@@ -176,14 +176,16 @@ export const Home: React.FC = () => {
           />
           <Journal />
         </View>
-        <View style={styles.row}>
-          <StressLevelCard
-            date={formatTime(new Date().toISOString())}
-            stressLevels={{ low: '10h', good: '7h', high: '5h' }}
-            progress={{ low: 42, good: 33, high: 25 }}
-            comparison={{ low: 30, good: 40, high: 30 }}
-          />
-        </View>
+        <TouchableOpacity onPress={()=>navigation.navigate(RootStackRoutes.STRESS_SCREEN)}>
+          <View style={styles.row}>
+            <StressLevelCard
+                date={formatTime(new Date().toISOString())}
+                stressLevels={{ low: '10h', good: '7h', high: '5h' }}
+                progress={{ low: 42, good: 33, high: 25 }}
+                comparison={{ low: 30, good: 40, high: 30 }}
+            />
+          </View>
+        </TouchableOpacity>
         <MedicationsList />
       </View>
     </Screen>

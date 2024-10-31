@@ -9,7 +9,8 @@
     "logout": "Logout",
     "questions_header" : "Q&A",
     "steps": "Steps",
-    "temperature": "Temperature"
+    "temperature": "Temperature",
+    "stress": "Stress"
   },
   "buttons": {
     "tap_to_report": "Tap this button if you had a seizure",
