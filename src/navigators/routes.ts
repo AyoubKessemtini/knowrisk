@@ -17,6 +17,7 @@ export const RootStackRoutes = {
   CHATBOT: 'chatbot',
   JOURNAL: 'journal',
   HEART_RATE_DETAILS: 'heartRateDetails',
+  STRESS_SCREEN: 'stressScreen',
 } as const;
 
 export const TabBarStackRoutes = {

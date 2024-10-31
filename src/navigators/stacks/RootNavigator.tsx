@@ -9,7 +9,6 @@ import { navigatorConfig } from '../navigatorConfigs';
 import { RootStackRoutes } from '../routes';
 import { FooStackParamList } from './FooNavigator';
 import { TabNavigator, TabStackParamList } from './TabNavigator';
-import { useAuth } from '@hooks/useAuth';
 import {
   OnboardingNavigator,
   OnboardingStackParamList,
@@ -35,6 +34,7 @@ import { KEYS } from '@storage/Keys';
 import { RootState } from '@store/index'; // Adjust the import path as necessary
 import { AuthActions } from '@store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { StressScreen } from '@modules/stress/screens/StressScreen.tsx';
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -55,6 +55,7 @@ export type RootStackParamList = {
   [RootStackRoutes.CHATBOT]: undefined;
   [RootStackRoutes.JOURNAL]: undefined;
   [RootStackRoutes.HEART_RATE_DETAILS]: undefined;
+  [RootStackRoutes.STRESS_SCREEN]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -146,6 +147,10 @@ export function RootNavigator() {
       <Stack.Screen name={RootStackRoutes.SCAN_SCREEN} component={ScanScreen} />
       <Stack.Screen name={RootStackRoutes.CHATBOT} component={ChatBotScreen} />
       <Stack.Screen name={RootStackRoutes.JOURNAL} component={JournalScreen} />
+      <Stack.Screen
+        name={RootStackRoutes.STRESS_SCREEN}
+        component={StressScreen}
+      />
       <Stack.Screen
         name={RootStackRoutes.HEART_RATE_DETAILS}
         component={HeartRateDetailsScreen}

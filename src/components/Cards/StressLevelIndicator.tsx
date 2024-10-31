@@ -45,19 +45,13 @@ export const StressLevelCard = ({
           color="purple1"
           text="sleep_screen.stressLevel"
         />
-        <CText
-          size="xs_medium"
-          color="grey3"
-          text="common.past_days"
-          textOptions={{ number: 7 }}
-        />
       </View>
       <CText
         size="xs_medium"
         color="grey3"
-        text="home_screen.last_updated"
-        textOptions={{ date: date }}
-      />
+      >
+        Date: {date}
+      </CText>
 
       {/* Custom segmented progress bar */}
       <ProgressBarSegment
