@@ -15,12 +15,12 @@ interface SleepQualityChartProps {
 
 export const SleepQualityChart: React.FC<SleepQualityChartProps> = ({
   color = 'white',
-  progress = 100,
+  //progress = 100,
   sleepQuality = '57',
   lastUpdate = 'today',
 }) => {
   const backgroundColor = pallete[color];
-  const angle = progress - 90;
+  //const angle = progress - 90;
 
   return (
     <View style={[styles.container, { backgroundColor }]}>
@@ -28,17 +28,17 @@ export const SleepQualityChart: React.FC<SleepQualityChartProps> = ({
         Quality percentage
       </CText>
       <View style={styles.chartContainer}>
-        <SleepCircleChart width={150} height={150} />
-        <View
+        <SleepCircleChart />
+          {/*<View
           style={[
             styles.arrowContainer,
             { transform: [{ rotate: `${angle}deg` }] },
           ]}
         >
           <Arrow size={90} />
-        </View>
+        </View>*/}
       </View>
-      <CText size={'md_semiBold'} mb={15} color={'deepPurple'}>
+      <CText size={'lg_bold'} mt={-50} mb={60} color={'deepPurple'}>
         {sleepQuality}%
       </CText>
       <SleepRates />
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   chartContainer: {
     position: 'relative',
     width: 150,
-    height: 150,
+    height: 130,
     alignItems: 'center',
     justifyContent: 'center',
   },
