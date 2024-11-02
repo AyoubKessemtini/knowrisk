@@ -16,6 +16,7 @@ import { StoreDeviceHealthData } from '@core/usecases/deviceRepository/StoreDevi
 import { RDDeviceHealthDataRepo } from './adapters/real/repositories/RDDeviceHealthDataRepo.ts';
 import { GetHeartRateWeeklyData } from '@core/usecases/deviceFetchDataApisRepository/GetHeartRateWeeklyData.ts';
 import {RDDeviceDataApisRepo} from "./adapters/real/repositories/deviceDataApis/RDDeviceDataApisRepo.ts";
+import {GetStressDailyData} from "@core/usecases/deviceFetchDataApisRepository/GetStressDailyData.ts";
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -61,6 +62,7 @@ export const Core = (configuration: CoreConfiguration) => {
   const storeDeviceHealthData = new StoreDeviceHealthData(deviceHealthDataRepo);
   //device
   const getHeartRateWeeklyData = new GetHeartRateWeeklyData(deviceDataApisRepo);
+  const getStressDailyData = new GetStressDailyData(deviceDataApisRepo);
   return {
     getConversations,
     sendIOSHealthData,
@@ -72,5 +74,6 @@ export const Core = (configuration: CoreConfiguration) => {
     getActivities2ByDate,
     storeDeviceHealthData,
     getHeartRateWeeklyData,
+    getStressDailyData,
   };
 };

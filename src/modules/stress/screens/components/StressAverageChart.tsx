@@ -26,7 +26,7 @@ export const StressAverageChart: React.FC<StressAverageChartProps> = ({
                 {stressQuality}
             </CText>
             <CText size={'xs'} mt={30} color={'grey4'}>
-                Last update {lastUpdate}
+                Date: {lastUpdate}
             </CText>
         </View>
     );

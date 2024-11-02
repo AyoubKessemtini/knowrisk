@@ -4,7 +4,7 @@ import { Screen } from '@components/Screen';
 import { Header } from '@components/Headers/Header.tsx';
 import { CText } from '@components/CText.tsx';
 import { HeartRateAVGCard } from '@modules/heartRateDetails/components/heartRAteAVGCard.tsx';
-import { core } from "@config/Configuration.ts";
+import { core } from '@config/Configuration.ts';
 
 interface HeartRateDetails {
   date: string;

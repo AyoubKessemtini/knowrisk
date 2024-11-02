@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Screen} from '@components/Screen';
 import {DateSelector} from '@components/DatePicker/DatePicker.tsx';
@@ -8,12 +8,38 @@ import {StressAverageChart} from "@modules/stress/screens/components/StressAvera
 import {Colors} from "@constants/Colors.ts";
 import {formatStringDate} from "@hooks/useDateFormatter.ts";
 import {StressLevelCard} from "@components/Cards/StressLevelIndicator.tsx";
+import {StressDeviceData} from "@core/entities/deviceDataApisEntity/StressDeviceData.ts";
+import {core} from "@config/Configuration.ts";
+import {fetch} from "@react-native-community/netinfo";
 
 export const StressScreen: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [stressData, setStressData] = useState<StressDeviceData[]>([]);
+    const [lowStressData, setLowStressData] = useState<StressDeviceData>(null);
+    const [mediumStressData, setMediumStressData] = useState<StressDeviceData>(null);
+    const [highStressData, setHighStressData] = useState<StressDeviceData>(null);
     const handleDateChange = (newDate: Date) => {
         setSelectedDate(newDate);
     };
+    useEffect(() => {
+        const fetchStressDailyData = async () => {
+            try {
+                const fetchedData = await core.getStressDailyData.execute(formatStringDate(selectedDate));
+                setStressData(fetchedData);
+                console.log('fetched stressData', fetchedData);
+                console.log('date', formatStringDate(selectedDate));
+
+                setHighStressData(fetchedData.find(s => s.stress_level === "High") || null);
+                setMediumStressData(fetchedData.find(s => s.stress_level === "Medium") || null);
+                setLowStressData(fetchedData.find(s => s.stress_level === "Low") || null);
+            } catch (error) {
+                console.error("Failed to fetch stress data:", error);
+            }
+        };
+
+        fetchStressDailyData();
+    }, [selectedDate]);
+
 
     return (
         <Screen
@@ -34,8 +60,8 @@ export const StressScreen: React.FC = () => {
                     onDateChange={handleDateChange}
                 />
                 <StressAverageChart
-                    stressQuality={'1,4'}
-                    lastUpdate={'12:45'}
+                    stressQuality={stressData.length>0 ?'1,4' : 'Calcul...'}
+                    lastUpdate={formatStringDate(selectedDate)}
                 />
                 <View style={styles.textContainer}>
                     <CText size={'sm_light'}>
@@ -43,9 +69,21 @@ export const StressScreen: React.FC = () => {
                     </CText>
                 </View>
                 <StressLevelCard
-                    date={formatStringDate(selectedDate)}
-                    stressLevels={{ low: '10h', good: '7h', high: '5h' }}
-                    progress={{ low: 42, good: 33, high: 25 }}
+                    date={
+                        stressData.length > 0
+                            ? formatStringDate(selectedDate)
+                            : `${formatStringDate(selectedDate)} (Calculating)`
+                    }
+                    stressLevels={{
+                        low: lowStressData ? lowStressData.time : 'Calculating',
+                        good: mediumStressData ? mediumStressData.time : 'Calculating',
+                        high: highStressData ? highStressData.time : 'Calculating',
+                    }}
+                    progress={{
+                        low: lowStressData ? Number(lowStressData.percentage) : 0,
+                        good: mediumStressData ? Number(mediumStressData.percentage) : 10,
+                        high: highStressData ? Number(highStressData.percentage) : 0,
+                    }}
                     comparison={{ low: 30, good: 40, high: 30 }}
                 />
             </View>

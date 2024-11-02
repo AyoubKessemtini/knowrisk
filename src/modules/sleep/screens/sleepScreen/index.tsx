@@ -9,7 +9,6 @@ import { LineChart } from 'react-native-chart-kit';
 import { SleepQualityCard } from '@modules/sleep/screens/components/sleepQualityCard.tsx';
 import { RecoveryComponent } from '@components/Cards/RecoveryCard.tsx';
 import { Colors } from '@constants/Colors.ts';
-import { CircularQualityCard } from '@modules/sleep/screens/components/circularQualityCard.tsx';
 
 interface SleepData {
   date: string;
@@ -24,52 +23,63 @@ export const SleepScreen: React.FC = () => {
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
   };
+  const getTargetDate = (date: Date, minusDay: number = 0) => {
+    const targetDate = new Date(date);
+    targetDate.setDate(targetDate.getDate() - minusDay);
+
+    const year = targetDate.getFullYear();
+    const month = (targetDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = targetDate.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  };
+
   const sleep: SleepData[] = [
     {
-      date: '2024-10-30',
+      date: getTargetDate(new Date(selectedDate), 0),
       quality: 57,
       sleepTime: '7h 20m',
       startSleep: '23:00',
       endSleep: '06:20',
     },
     {
-      date: '2024-10-29',
-      quality: 89,
+      date: getTargetDate(new Date(selectedDate), 1),
+      quality: 87,
+      sleepTime: '7h 20m',
+      startSleep: '23:00',
+      endSleep: '06:20',
+    },
+    {
+      date: getTargetDate(new Date(selectedDate), 2),
+      quality: 99,
+      sleepTime: '7h 20m',
+      startSleep: '23:00',
+      endSleep: '06:20',
+    },
+    {
+      date: getTargetDate(new Date(selectedDate), 3),
+      quality: 57,
+      sleepTime: '7h 20m',
+      startSleep: '23:00',
+      endSleep: '06:20',
+    },
+    {
+      date: getTargetDate(new Date(selectedDate), 4),
+      quality: 88,
+      sleepTime: '7h 20m',
+      startSleep: '23:00',
+      endSleep: '06:20',
+    },
+    {
+      date: getTargetDate(new Date(selectedDate), 5),
+      quality: 91,
       sleepTime: '8h 11m',
       startSleep: '22:49',
       endSleep: '07:00',
     },
     {
-      date: '2024-10-26',
+      date: getTargetDate(new Date(selectedDate), 6),
       quality: 45,
-      sleepTime: '9h 11m',
-      startSleep: '22:49',
-      endSleep: '08:00',
-    },
-    {
-      date: '2024-10-25',
-      quality: 88,
-      sleepTime: '10h 11m',
-      startSleep: '21:49',
-      endSleep: '08:00',
-    },
-    {
-      date: '2024-10-24',
-      quality: 78,
-      sleepTime: '11h 00mr',
-      startSleep: '22:00',
-      endSleep: '09:00',
-    },
-    {
-      date: '2024-10-23',
-      quality: 57,
-      sleepTime: '9h 11m',
-      startSleep: '22:49',
-      endSleep: '08:00',
-    },
-    {
-      date: '2024-10-22',
-      quality: 66,
       sleepTime: '9h 11m',
       startSleep: '22:49',
       endSleep: '08:00',
@@ -205,23 +215,6 @@ export const SleepScreen: React.FC = () => {
           description={formatStringDate(selectedDate)}
         />
       </View>
-      <View style={styles.qualityCardRatesContainer}>
-        <CText mb={15} size="md_medium" color="black">
-          Sleep quality
-        </CText>
-        <View style={styles.row}>
-          <CircularQualityCard
-            value={97}
-            title={'Blood oxygen'}
-            date={formatStringDate(selectedDate)}
-          />
-          <CircularQualityCard
-            value={76}
-            title={'Respiratory rate'}
-            date={formatStringDate(selectedDate)}
-          />
-        </View>
-      </View>
     </Screen>
   );
 };
@@ -241,18 +234,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
-  },
-  qualityCardRatesContainer: {
-    padding: 14,
-    borderRadius: 12,
-    backgroundColor: Colors.white,
-    marginVertical: 10,
-    marginHorizontal: 5,
-    shadowColor: Colors.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
     width: '100%',
   },
 });
