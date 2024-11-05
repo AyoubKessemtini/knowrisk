@@ -3,5 +3,7 @@ import { StressDeviceData } from '@core/entities/deviceDataApisEntity/StressDevi
 
 export interface DeviceDataApisRepo {
   getHeartRateWeeklyData(): Promise<HeartRateDeviceData[]>;
-  getStressDailyData(date: string): Promise<StressDeviceData[]>;
+  getStressDailyData(date: string): Promise<StressDeviceData>;
+  getSleepDailyData(date: string): Promise<SleepData>;
+  getSpo2DailyData(date: string): Promise<Spo2Data>;
 }

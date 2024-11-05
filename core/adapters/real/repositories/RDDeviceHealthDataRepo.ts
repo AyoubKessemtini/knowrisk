@@ -1,26 +1,30 @@
-import { AxiosInstance } from 'axios';
-import { DeviceHealthDataRepo } from '@core/domain/repositories/DeviceHealthDataRepo.ts';
+import {AxiosInstance} from 'axios';
+import {DeviceHealthDataRepo} from '@core/domain/repositories/DeviceHealthDataRepo.ts';
+import {PersistenceStorage} from "@storage/index.ts";
+import {KEYS} from "@storage/Keys.ts";
 
 export class RDDeviceHealthDataRepo implements DeviceHealthDataRepo {
-  constructor(private httpClient: AxiosInstance) {}
+    constructor(private httpClient: AxiosInstance) {
+    }
 
-  async SendDeviceHealthData(req: any): Promise<void> {
-    // Add the Ocp-Apim-Subscription-Key to the request headers
-    const config = {
-      headers: {
-        'Ocp-Apim-Subscription-Key': '9224774ccb564ecaa7be82cde6eec753',
-      },
-    };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const result: any = await this.httpClient.post(
-      'https://apim-dataworkflow-dev-us.azure-api.net/ReceiveData',
-      {
-        type: 'device',
-        userId: '9960bbca-ed0b-4cf9-9e74-a71dc7847333',
-        data: req,
-      },
-      config,
-    );
-    return result;
-  }
+    async SendDeviceHealthData(req: any): Promise<void> {
+        // Add the Ocp-Apim-Subscription-Key to the request headers
+        const config = {
+            headers: {
+                'Ocp-Apim-Subscription-Key': '9224774ccb564ecaa7be82cde6eec753',
+            },
+        };
+        const userData = await PersistenceStorage.getItem(KEYS.USER_DATA);
+        const user = JSON.parse(userData!);
+        const result: any = await this.httpClient.post(
+            'https://apim-dataworkflow-dev-us.azure-api.net/ReceiveData',
+            {
+                type: user.device_type,
+                userId: user.id,
+                data: req,
+            },
+            config,
+        );
+        return result;
+    }
 }
