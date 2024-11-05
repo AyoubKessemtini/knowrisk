@@ -10,7 +10,7 @@ interface SleepQualityCardProps {
   startSleep: string;
   sleepDuration: string;
   endSleep: string;
-  sleepQuality: number;
+  sleepQuality: string;
   date: string;
 }
 

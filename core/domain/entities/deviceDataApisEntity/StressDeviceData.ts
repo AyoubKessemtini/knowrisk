@@ -1,5 +1,9 @@
-export interface StressDeviceData {
-  stress_level: string;
+export interface stressRateData {
+  stressLevel: string;
   time: string;
   percentage: string;
+}
+export interface StressDeviceData {
+  data: stressRateData[];
+  stressAVG: number;
 }

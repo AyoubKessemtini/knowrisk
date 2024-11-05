@@ -8,10 +8,10 @@ import { SleepCard } from '@components/Cards/SleepCard';
 import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackRoutes } from '../../../../navigators/routes';
-import { DateSelector } from '@components/DatePicker/DatePicker';
-import {formatStringDate, formatTime} from '@hooks/useDateFormatter';
+//import { DateSelector } from '@components/DatePicker/DatePicker';
+import {formatStringDate} from '@hooks/useDateFormatter';
 import { RootState, useAppSelector } from '@store/index.ts';
-import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
+//import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
 import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard.tsx';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
@@ -23,15 +23,16 @@ import {CText} from "@components/CText.tsx";
 import {CircularQualityCard} from "@modules/sleep/screens/components/circularQualityCard.tsx";
 import {Colors} from "@constants/Colors.ts";
 import {core} from "@config/Configuration.ts";
-import {StressDeviceData} from "@core/entities/deviceDataApisEntity/StressDeviceData.ts";
+import {StressDeviceData, stressRateData} from "@core/entities/deviceDataApisEntity/StressDeviceData.ts";
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const navigation = useNavigation();
-  const [stressData, setStressData] = useState<StressDeviceData[]>([]);
-  const [lowStressData, setLowStressData] = useState<StressDeviceData>(null);
-  const [mediumStressData, setMediumStressData] = useState<StressDeviceData>(null);
-  const [highStressData, setHighStressData] = useState<StressDeviceData>(null);
+  const [stressData, setStressData] = useState<StressDeviceData>(null);
+  const [spo2Data, setSpo2Data] = useState<Spo2Data>(null);
+  const [lowStressData, setLowStressData] = useState<stressRateData>(null);
+  const [mediumStressData, setMediumStressData] = useState<stressRateData>(null);
+  const [highStressData, setHighStressData] = useState<stressRateData>(null);
 
 
   // Fetch health data for the selected date
@@ -100,32 +101,38 @@ export const Home: React.FC = () => {
         dispatch(AuthActions.setUser(user)); // Store user data in Redux
       }
 
+      //get daily stress
       const fetchStressDailyData = async () => {
         try {
           const fetchedData = await core.getStressDailyData.execute(formatStringDate(selectedDate));
           setStressData(fetchedData);
-          console.log('fetched stressData', fetchedData);
-          console.log('date', formatStringDate(selectedDate));
-
-          setHighStressData(
-            fetchedData.find((s) => s.stress_level === 'High') || null,
-          );
-          setMediumStressData(
-            fetchedData.find((s) => s.stress_level === 'Medium') || null,
-          );
-          setLowStressData(
-            fetchedData.find((s) => s.stress_level === 'Low') || null,
-          );
+          if(fetchedData !=null){
+            setHighStressData(
+              fetchedData.data.find((s) => s.stressLevel === 'High'),
+            );
+            setMediumStressData(fetchedData.data.find(s => s.stressLevel === "Medium"));
+            setLowStressData(fetchedData.data.find(s => s.stressLevel === "Low"));
+          }
         } catch (error) {
           console.error('Failed to fetch stress data:', error);
         }
       };
-
       fetchStressDailyData();
 
+      //get daily spo2
+      const fetchSpo2DailyData = async () => {
+        try {
+          const fetchedData = await core.getSpo2DailyData.execute(formatStringDate(selectedDate));
+          setSpo2Data(fetchedData);
+          console.log('fetchedData');
+          console.log(fetchedData);
+        } catch (error) {
+          console.error('Failed to fetch stress data:', error);
+        }
+      };
+      fetchSpo2DailyData();
       console.log('USER_DATA root ', userData);
     };
-
     checkLoginStatus();
   }, [dispatch]);
   return (
@@ -203,9 +210,12 @@ export const Home: React.FC = () => {
           />
         </View>
         <View style={styles.row}>
-          <WeeklyHeartInfosCard
-            lastUpdated={isDeviceConnectedBLE ? 'Now' : '--'}
-            heartRateData={hr as string}
+          <SleepCard
+              lastUpdated={isDeviceConnectedBLE ? 'Now' : '  --'}
+              sleepData={hr as string}
+              title="common.heartRate"
+              unit="BPM"
+              onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
           />
           <Journal />
         </View>
@@ -213,19 +223,19 @@ export const Home: React.FC = () => {
           <View style={styles.row}>
             <StressLevelCard
                 date={
-                  stressData.length > 0
+                  stressData
                       ? formatStringDate(selectedDate)
                       : `${formatStringDate(selectedDate)} (Calculating)`
                 }
                 stressLevels={{
-                  low: lowStressData ? lowStressData.time : 'Calculating',
-                  good: mediumStressData ? mediumStressData.time : 'Calculating',
-                  high: highStressData ? highStressData.time : 'Calculating',
+                  low: stressData ? lowStressData.time : 'Calculating',
+                  good: stressData ? mediumStressData.time : 'Calculating',
+                  high: stressData ? highStressData.time : 'Calculating',
                 }}
                 progress={{
-                  low: lowStressData ? Number(lowStressData.percentage) : 0,
-                  good: mediumStressData ? Number(mediumStressData.percentage) : 10,
-                  high: highStressData ? Number(highStressData.percentage) : 0,
+                  low: stressData ? Number(lowStressData.percentage) : 0,
+                  good: stressData ? Number(mediumStressData.percentage) : 10,
+                  high: stressData ? Number(highStressData.percentage) : 0,
                 }}
                 comparison={{ low: 30, good: 40, high: 30 }}
             />
@@ -238,14 +248,14 @@ export const Home: React.FC = () => {
           </CText>*/}
           <View style={styles.row}>
             <CircularQualityCard
-                value={97}
+                value={spo2Data ? spo2Data.averageOxygenSaturation*100 : 0}
                 title={'Blood oxygen'}
-                date={formatStringDate(selectedDate)}
+                date={spo2Data ?formatStringDate(selectedDate) : `${formatStringDate(selectedDate)} \n\t(Calculating)`}
             />
             <CircularQualityCard
-                value={76}
+                value={0}
                 title={'Respiratory rate'}
-                date={formatStringDate(selectedDate)}
+                date={`${formatStringDate(selectedDate)} \n\t(Calculating)`}
             />
           </View>
         </View>
@@ -260,7 +270,7 @@ const styles = StyleSheet.create({
     gap: 12,
     paddingTop: 40,
     paddingHorizontal: 20,
-    paddingBottom: 120,
+    paddingBottom: 50,
   },
   wrapper: {
     gap: 20,

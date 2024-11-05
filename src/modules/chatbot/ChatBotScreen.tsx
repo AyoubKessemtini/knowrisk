@@ -1,3 +1,225 @@
+import React, {useState, useEffect} from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    Keyboard,
+    FlatList,
+    Dimensions,
+    KeyboardAvoidingView
+} from 'react-native';
+import {RootStackScreenProps} from "@navigators/stacks/RootNavigator.tsx";
+import Icon from "react-native-easy-icon";
+import {Header} from "@components/Headers/Header.tsx";
+import {Colors} from "@constants/Colors.ts";
+import {core} from "@config/Configuration.ts";
+
+export const ChatBotScreen =
+    ({}: RootStackScreenProps<'chatbot'>): JSX.Element => {
+        const [chatUser] = useState({
+            name: 'epyChat',
+            profile_image: 'https://randomuser.me/api/portraits/men/0.jpg',
+            last_seen: 'online',
+        });
+
+
+        const [currentUser] = useState({
+            name: 'user',
+        });
+
+        const [messages, setMessages] = useState([
+            {
+                sender: chatUser.name,
+                message: 'Hello, I am EpyChat, how can I assit you today?',
+                time: '6:02 AM',
+            },
+        ]);
+
+        const [inputMessage, setInputMessage] = useState('');
+        const [isLoading, setIsLoading] = useState(false);
+
+        function getTime(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+        }
+
+        async function sendMessage() {
+            if (inputMessage === '') {
+                return setInputMessage('');
+            }
+            let t = getTime(new Date());
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                {
+                    sender: currentUser.name,
+                    message: inputMessage,
+                    time: t,
+                },
+            ]);
+            setInputMessage('');
+            setIsLoading(true);
+            const response = await core.sendMessage.execute(JSON.stringify(messages));
+            if (response != null) {
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    {
+                        sender: chatUser.name,
+                        message: response,
+                        time: t,
+                    },
+                ]);
+            }else {
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    {
+                        sender: chatUser.name,
+                        message: "I'm currently receiving too many requests. Please wait a moment and try again.",
+                        time: t,
+                    },
+                ]);
+            }
+            setIsLoading(false);
+        }
+
+
+        useEffect(() => {
+
+        }, []);
+
+        return (
+            <KeyboardAvoidingView
+                style={{ flex: 1 }}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 10 : 0} // Adjust this value based on your header height
+            >
+                <Header
+                    hasBackButton
+                    useCustomBackButton
+                    text="common.chatbot"
+                    backgroundColor={Colors.lightPurple}
+                    textColor="purple1"
+                />
+                <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                    <View style={styles.container}>
+                        <FlatList
+                            style={{ backgroundColor: '#f2f2ff' }}
+                            inverted={true}
+                            data={JSON.parse(JSON.stringify(messages)).reverse()}
+                            renderItem={({ item }) => (
+                                <TouchableWithoutFeedback>
+                                    <View style={{ marginTop: 6 }}>
+                                        <View
+                                            style={{
+                                                maxWidth: Dimensions.get('screen').width * 0.8,
+                                                backgroundColor: '#3a6ee8',
+                                                alignSelf:
+                                                    item.sender === currentUser.name
+                                                        ? 'flex-end'
+                                                        : 'flex-start',
+                                                marginHorizontal: 10,
+                                                padding: 10,
+                                                borderRadius: 8,
+                                                borderBottomLeftRadius:
+                                                    item.sender === currentUser.name ? 8 : 0,
+                                                borderBottomRightRadius:
+                                                    item.sender === currentUser.name ? 0 : 8,
+                                            }}
+                                        >
+                                            <Text style={{ color: '#fff', fontSize: 16 }}>
+                                                {item.message}
+                                            </Text>
+                                            <Text
+                                                style={{
+                                                    color: '#dfe4ea',
+                                                    fontSize: 14,
+                                                    alignSelf: 'flex-end',
+                                                }}
+                                            >
+                                                {item.time}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            )}
+                            ListFooterComponent={() => (
+                                isLoading ? (
+                                    <View style={{ flexDirection: 'row', marginHorizontal: 10, padding: 10 }}>
+                                        <Text style={{ color: '#666', fontSize: 14 }}>ChatBot is typing...</Text>
+                                        {/* Optionally add a loading spinner here */}
+                                        <Icon name="spinner" type="font-awesome" color="#666" spin size={16} />
+                                    </View>
+                                ) : null
+                            )}
+                        />
+
+
+                        <View style={{ paddingVertical: 30 }}>
+                            <View style={styles.messageInputView}>
+                                <TextInput
+                                    defaultValue={inputMessage}
+                                    style={styles.messageInput}
+                                    placeholder='Message'
+                                    onChangeText={(text) => setInputMessage(text)}
+                                    onSubmitEditing={() => {
+                                        sendMessage();
+                                    }}
+                                />
+                                <TouchableOpacity
+                                    style={styles.messageSendView}
+                                    onPress={() => {
+                                        sendMessage();
+                                    }}
+                                >
+                                    <Icon name='send' type='material' />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
+        );
+    }
+
+const styles = StyleSheet.create({
+    headerLeft: {
+        paddingVertical: 4,
+        paddingHorizontal: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    userProfileImage: {height: '100%', aspectRatio: 1, borderRadius: 100},
+    container: {
+        flex: 1,
+        backgroundColor: '#f2f2ff',
+    },
+    messageInputView: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginHorizontal: 14,
+        backgroundColor: '#fff',
+        borderRadius: 4,
+    },
+    messageInput: {
+        height: 40,
+        flex: 1,
+        paddingHorizontal: 10,
+    },
+    messageSendView: {
+        paddingHorizontal: 10,
+        justifyContent: 'center',
+    },
+});
+/*
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -196,3 +418,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
 });
+
+ */

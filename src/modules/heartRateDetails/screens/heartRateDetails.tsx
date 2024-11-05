@@ -5,6 +5,7 @@ import { Header } from '@components/Headers/Header.tsx';
 import { CText } from '@components/CText.tsx';
 import { HeartRateAVGCard } from '@modules/heartRateDetails/components/heartRAteAVGCard.tsx';
 import { core } from '@config/Configuration.ts';
+import {RootState, useAppSelector} from "@store/index.ts";
 
 interface HeartRateDetails {
   date: string;
@@ -17,12 +18,12 @@ export const HeartRateDetailsScreen: React.FC = () => {
   const [heartRate, setHeartRate] = useState<HeartRateDetails[]>([]);
   const [todayData, setTodayData] = useState<HeartRateDetails | null>(null);
   const today: string = new Date().toISOString().split('T')[0];
+  const { hr } = useAppSelector((state: RootState) => state.bleData);
 
   useEffect(() => {
     const fetchHeartRateData = async () => {
       try {
         const res = await core.getHeartRateWeeklyData.execute();
-        console.log('res', res);
         const heartRateData: HeartRateDetails[] = res['value'];
 
         // Find today's data
@@ -56,7 +57,7 @@ export const HeartRateDetailsScreen: React.FC = () => {
           <HeartRateAVGCard
               title={'Realtime Heart rate'}
               dateTime={'Now'}
-              value={'76'}
+              value={hr}
           />
           {todayData && (
               <>
