@@ -142,16 +142,16 @@ export const Home: React.FC = () => {
       noHorizontalPadding
       containerStyles={styles.container}
     >
-      <MainHeader firstName={firstName} lastName={lastName} />
+      <MainHeader firstName={firstName} lastName={lastName}  />
       <View style={styles.wrapper}>
         <PatientInfoCard
           name={`${firstName} ${lastName}`}
           id={`ID: ${user?.id.split('-')[0]}`}
           lastSeizure="Sun, Apr 07, 22:54"
           seizureFrequency="Weekly"
-          seizureRisk="Moderate"
+          seizureRisk="Calculating..." //"Moderate"
           isDevicePaired={isDeviceConnectedBLE}
-          mood="happy"
+          mood="Calculating..." //"happy"
           temp={
             temperature === '--'
               ? '--'
@@ -267,13 +267,13 @@ export const Home: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    gap: 12,
+    //gap: 12,
     paddingTop: 40,
     paddingHorizontal: 20,
     paddingBottom: 50,
   },
   wrapper: {
-    gap: 20,
+    gap: 20
   },
   row: {
     flexDirection: 'row',
