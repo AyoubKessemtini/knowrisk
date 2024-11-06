@@ -1,103 +1,89 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Screen } from '@components/Screen';
 import { EventCalendar } from '@components/EventCalendar';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 import { CText } from '@components/CText';
 import { Header } from '@components/Headers/Header';
+import { PersistenceStorage } from '@storage/index';
+import { KEYS } from '@storage/Keys';
+import { RootState } from '@store/index';
+import { seizureActions } from '@store/sagas/seizureSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+type EventData = {
+  id: string;
+  title: string;
+  date: string;
+  description: string;
+  timeFrom: string;
+  timeTo: string;
+};
 
 export const SeizureForecastScreen: React.FC<
   RootStackScreenProps<'SeizureForecastScreen'>
 > = () => {
-  const markedDates = {
-    '2024-08-20': { selected: true, marked: true, selectedColor: '#e74c3c' },
-    '2024-08-21': { selected: true, marked: true, selectedColor: '#f1c40f' },
-    '2024-08-22': { selected: true, marked: true, selectedColor: '#2ecc71' },
-    '2024-08-23': { selected: true, marked: true, selectedColor: '#f1c40f' },
-    '2024-08-25': { selected: true, marked: true, selectedColor: '#e74c3c' },
-    '2024-09-01': { selected: true, marked: true, selectedColor: '#2ecc71' },
-    '2024-09-03': { selected: true, marked: true, selectedColor: '#f1c40f' },
-    '2024-09-05': { selected: true, marked: true, selectedColor: '#e74c3c' },
-    '2024-09-07': { selected: true, marked: true, selectedColor: '#f1c40f' },
-    '2024-09-10': { selected: true, marked: true, selectedColor: '#2ecc71' },
-    '2024-09-15': { selected: true, marked: true, selectedColor: '#f1c40f' },
-    '2024-09-20': { selected: true, marked: true, selectedColor: '#e74c3c' },
-  };
+  const dispatch = useDispatch();
+  const { events, loading, error } = useSelector(
+    (state: RootState) => state.seizureForecast,
+  );
+  const [userId, setUserId] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
-  const events = [
-    {
-      id: '1',
-      title: 'Seizure Alert',
-      date: '2024-08-20',
-      description: 'High risk of seizure today.',
+  // Marked dates configuration
+  const markedDates = events.reduce(
+    (acc, event) => {
+      acc[event.date] = {
+        selected: true,
+        marked: true,
+
+        selectedColor: event.type === 'Reported' ? '#e74c3c' : '#2ecc71',
+      };
+      return acc;
     },
-    {
-      id: '2',
-      title: 'Routine Check',
-      date: '2024-08-21',
-      description: 'Medium risk. Ensure medication adherence.',
-    },
-    {
-      id: '3',
-      title: 'Low Risk',
-      date: '2024-08-22',
-      description: 'Low risk, continue monitoring.',
-    },
-    {
-      id: '4',
-      title: 'Emergency Preparedness',
-      date: '2024-08-23',
-      description: 'High seizure risk, carry emergency medication.',
-    },
-    {
-      id: '5',
-      title: 'Follow-Up Check',
-      date: '2024-08-25',
-      description: 'Medium risk, monitor symptoms.',
-    },
-    {
-      id: '6',
-      title: 'Stable Day',
-      date: '2024-09-01',
-      description: 'Low risk, stay consistent with medication.',
-    },
-    {
-      id: '7',
-      title: 'Routine Monitoring',
-      date: '2024-09-03',
-      description: 'Medium risk, review recent triggers.',
-    },
-    {
-      id: '8',
-      title: 'Medication Reminder',
-      date: '2024-09-05',
-      description: 'Ensure all medications are taken.',
-    },
-    {
-      id: '9',
-      title: 'Symptom Check',
-      date: '2024-09-07',
-      description: 'Monitor symptoms closely today.',
-    },
-    {
-      id: '10',
-      title: 'Follow-Up Appointment',
-      date: '2024-09-10',
-      description: 'Visit the doctor for a check-up.',
-    },
-    {
-      id: '11',
-      title: 'Trigger Review',
-      date: '2024-09-15',
-      description: 'Review triggers from the past month.',
-    },
-    {
-      id: '12',
-      title: 'Emergency Drill',
-      date: '2024-09-20',
-      description: 'Practice emergency procedures with caregivers.',
-    },
-  ];
+    {} as Record<
+      string,
+      { selected: boolean; marked: boolean; selectedColor: string }
+    >,
+  );
+
+  // Populate `eventsData` directly from `events`
+  const eventsData: EventData[] = events.map((event) => ({
+    id: '',
+    title: '',
+    date: event.date,
+    description: '',
+    timeFrom: event.time_from || 'N/A', // Default to 'N/A' if not provided
+    timeTo: event.time_to || 'N/A', // Default to 'N/A' if not provided
+  }));
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      const userData = await PersistenceStorage.getItem(KEYS.USER_DATA);
+      if (userData) {
+        const user = JSON.parse(userData);
+        setUserId(user.id);
+      }
+    };
+    fetchUserId();
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      const currentMonth = new Date().toISOString().slice(0, 7);
+      dispatch(
+        seizureActions.fetchSeizureForecastRequest({
+          id: userId,
+          month: currentMonth,
+        }),
+      );
+    }
+  }, [dispatch, userId]);
+
+  // Determine which events to display based on selectedDate
+  const filteredEvents = selectedDate
+    ? eventsData.filter((event) => event.date === selectedDate)
+    : eventsData; // Show all events initially
 
   return (
     <Screen
@@ -107,27 +93,42 @@ export const SeizureForecastScreen: React.FC<
       containerStyles={styles.container}
     >
       <Header hasBackButton text="common.seizure" />
-      <EventCalendar markedDates={markedDates} />
+
+      {/* Pass the onDayPress handler to EventCalendar */}
+      <EventCalendar
+        markedDates={markedDates}
+        onDayPress={(day) => {
+          console.log('Selected date:', day.dateString);
+          setSelectedDate(day.dateString); // Update the selected date
+        }}
+      />
 
       <CText style={styles.sectionTitle}>Seizure Events</CText>
       <ScrollView style={styles.eventsContainer}>
-        {events.length > 0 ? (
-          events.map((item) => (
-            <View key={item.id} style={styles.eventItem}>
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((item, index) => (
+            <View
+              key={`${item.date}-${item.id || index}`}
+              style={styles.eventItem}
+            >
               <View style={styles.eventIcon}>
                 <CText style={styles.iconText}>⚡</CText>
               </View>
               <View style={styles.eventDetails}>
-                <CText style={styles.eventTitle}>{item.title}</CText>
                 <CText style={styles.eventDate}>{item.date}</CText>
+                <CText style={styles.eventTime}>
+                  {`From: ${item.timeFrom || 'N/A'} To: ${item.timeTo || 'N/A'}`}
+                </CText>
                 <CText style={styles.eventDescription}>
-                  {item.description}
+                  {item.description || ''}
                 </CText>
               </View>
             </View>
           ))
         ) : (
-          <CText style={styles.emptyText}>No events available</CText>
+          <CText style={styles.emptyText}>
+            No events available for this date
+          </CText>
         )}
       </ScrollView>
     </Screen>
@@ -179,15 +180,14 @@ const styles = StyleSheet.create({
   eventDetails: {
     flex: 1,
   },
-  eventTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#2c3e50',
-    marginBottom: 4,
-  },
   eventDate: {
     fontSize: 14,
     color: '#7f8c8d',
+    marginBottom: 2,
+  },
+  eventTime: {
+    fontSize: 13,
+    color: '#2c3e50',
     marginBottom: 2,
   },
   eventDescription: {

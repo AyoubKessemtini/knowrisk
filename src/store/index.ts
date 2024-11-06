@@ -8,8 +8,11 @@ import { authSlice } from './authSlice';
 import { bleDataSlice } from '@store/bleDataSlice.ts';
 import rootSaga from './sagas'; // Import your root saga
 import { reportSeizureFormSlice } from './reportSeizureFormSlice';
-     
+import { ProfileSlice } from './profileSlice';
+import { seizureSlice } from './sagas/seizureSlice';
+import { forgetPasswordSlice } from './forgetPasswordSlice';
  
+
 // Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -19,6 +22,10 @@ const rootReducer = combineReducers({
   [localeSlice.name]: localeSlice.reducer,
   [authSlice.name]: authSlice.reducer,
   [bleDataSlice.name]: bleDataSlice.reducer,
+  [ProfileSlice.name]: ProfileSlice.reducer, // Ajout du reducer reportSeizure
+  [seizureSlice.name]: seizureSlice.reducer, // Ajout du reducer reportSeizure
+  [forgetPasswordSlice.name]: forgetPasswordSlice.reducer, // Ajout du reducer reportSeizure
+
   [reportSeizureFormSlice.name]: reportSeizureFormSlice.reducer, // Ajout du reducer reportSeizure
 });
 

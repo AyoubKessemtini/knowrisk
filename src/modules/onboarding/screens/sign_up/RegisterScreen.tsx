@@ -26,7 +26,7 @@ import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigat
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { DeviceType } from '@constants/DeviceTypes';
- 
+
 export const RegisterScreen =
   ({}: OnboardingStackScreenProps<'SignUpScreen'>): JSX.Element => {
     const navigation = useNavigation();
@@ -300,6 +300,13 @@ export const RegisterScreen =
           </View>
         </Modal>
 
+        {/* <CButton
+          mt={20}
+          text="common.continue"
+          onPress={() =>
+            navigation.navigate(RootStackRoutes.SetProfil_FormScreen)
+          }
+        /> */}
         <CButton
           mt={20}
           text="common.continue"

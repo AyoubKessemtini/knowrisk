@@ -1,21 +1,21 @@
 import { Colors } from '@constants/Colors';
-import { NavigatorScreenParams } from '@react-navigation/native';
+import {
+  NavigatorScreenParams,
+  useFocusEffect,
+} from '@react-navigation/native';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { navigatorConfig } from '../navigatorConfigs';
 import { RootStackRoutes } from '../routes';
 import { FooStackParamList } from './FooNavigator';
 import { TabNavigator, TabStackParamList } from './TabNavigator';
-import { useAuth } from '@hooks/useAuth';
 import {
   OnboardingNavigator,
   OnboardingStackParamList,
 } from './OnboardingNavigator';
-// import { PersistenceStorage } from '@storage/index';
-// import { KEYS } from '@storage/Keys';
 import { SettingsInformationScreen } from '@modules/profile/screens/Settings/Information_Screen';
 import { EditProfileScreen } from '../../modules/profile/screens/Settings/EditProfile_Screen';
 import { ChangePasswordScreen } from '../../modules/profile/screens/Settings/ChangePassword_Screen';
@@ -31,10 +31,10 @@ import { JournalScreen } from '@modules/journal/screens/journal.tsx';
 import { HeartRateDetailsScreen } from '@modules/heartRateDetails/screens/heartRateDetails.tsx';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
-/* import { useAppSelector } from '@store/index'; */
 import { RootState } from '@store/index'; // Adjust the import path as necessary
 import { AuthActions } from '@store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import SetProfilFormScreen from '@modules/home/screens/SetProfil/setProfile';
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -55,6 +55,7 @@ export type RootStackParamList = {
   [RootStackRoutes.CHATBOT]: undefined;
   [RootStackRoutes.JOURNAL]: undefined;
   [RootStackRoutes.HEART_RATE_DETAILS]: undefined;
+  [RootStackRoutes.SetProfil_FormScreen]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -63,28 +64,70 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
-  //const { login } = useAuth();
-  // const isLoggedIn = PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
-  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const profileUpdateStatus = useSelector(
+    (state: RootState) => state.profile.successMessage,
+  );
 
-  //const isLoggedIn = false;
+  const onbordingUpdateStatus = useSelector(
+    (state: RootState) => state.auth.successMessage,
+  );
+
+  const [isProfileSet, setIsProfileSet] = useState<boolean | null>(null);
+  // const [isOnbordSet, setIsOnbordSet] = useState<boolean | null>(null);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       const token = await PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
-
       if (token) {
-        dispatch(AuthActions.loginSuccess()); // Automatically log in if the token exists
+        dispatch(AuthActions.loginSuccess());
       }
-
-      console.log('token root ', token);
     };
-
     checkLoginStatus();
   }, [dispatch]);
 
+  // Check profile setup status whenever the profile update status changes
+
+  useEffect(() => {
+    const checkProfileSetupStatus = async () => {
+      if (isLoggedIn) {
+        const profileSetupStatus = await PersistenceStorage.getItem(
+          KEYS.IS_PROFILE_SET,
+        );
+        setIsProfileSet(profileSetupStatus === 'true');
+      } else {
+        setIsProfileSet(false); // Reset isProfileSet on logout
+      }
+    };
+
+    checkProfileSetupStatus();
+
+    // Recheck whenever profile is successfully updated
+    if (profileUpdateStatus && isLoggedIn) {
+      checkProfileSetupStatus();
+    }
+
+    console.log('update is_profile_set', isProfileSet?.toString());
+  }, [isLoggedIn, profileUpdateStatus]); // Added isLoggedIn dependency
+
+  // Check oborif setup status whenever the profile update status changes
+  // useEffect(() => {
+  //   const checkOnbordingSetupStatus = async () => {
+  //     const onbordSetupStatus = await PersistenceStorage.getItem(
+  //       KEYS.onboarding_completed,
+  //     );
+  //     setIsOnbordSet(onbordSetupStatus === 'true');
+  //   };
+  //   // Check initially on app start
+  //   checkOnbordingSetupStatus();
+
+  //   // Recheck whenever profile is successfully updated
+  //   if (onbordingUpdateStatus) {
+  //     checkOnbordingSetupStatus();
+  //   }
+  //   console.log('update onboarding_completed' + isOnbordSet?.toString());
+  // }, [onbordingUpdateStatus]);
   return (
     <Stack.Navigator
       screenOptions={{
@@ -99,10 +142,17 @@ export function RootNavigator() {
         />
       ) : (
         <>
-          <Stack.Screen
-            name={RootStackRoutes.TAB_STACK}
-            component={TabNavigator}
-          />
+          {isProfileSet ? (
+            <Stack.Screen
+              name={RootStackRoutes.TAB_STACK}
+              component={TabNavigator}
+            />
+          ) : (
+            <Stack.Screen
+              name={RootStackRoutes.ONBOARDING_STACK}
+              component={OnboardingNavigator}
+            />
+          )}
         </>
       )}
 
@@ -149,6 +199,10 @@ export function RootNavigator() {
       <Stack.Screen
         name={RootStackRoutes.HEART_RATE_DETAILS}
         component={HeartRateDetailsScreen}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.SetProfil_FormScreen}
+        component={SetProfilFormScreen}
       />
     </Stack.Navigator>
   );

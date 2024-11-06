@@ -111,6 +111,7 @@ function* registerUser(action: any) {
     );
 
     if (response.status === 200 || response.status === 201) {
+      
       yield call(
         [PersistenceStorage, PersistenceStorage.setItem],
         KEYS.ACCESS_TOKEN,
@@ -121,6 +122,21 @@ function* registerUser(action: any) {
         KEYS.USER_DATA,
         JSON.stringify(decodedToken.user),
       );
+      //  yield call(
+      //   [PersistenceStorage, PersistenceStorage.setItem],
+      //   KEYS.onboarding_completed,
+      //   'true',
+      // );
+      // yield call(
+      //   [PersistenceStorage, PersistenceStorage.setItem],
+      //   KEYS.IS_PROFILE_SET,
+      //   'true',
+      // );
+      // yield call(
+      //   [PersistenceStorage, PersistenceStorage.setItem],
+      //   KEYS.onboarding_completed,
+      //   'false',
+      // );
       yield put(AuthActions.setUser(decodedToken.user)); // Store user information in Redux state
       console.log('decodedToken.user:', decodedToken.user); // Check if it's defined
       yield put(AuthActions.registerSuccess()); // Dispatch success action

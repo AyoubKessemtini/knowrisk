@@ -2,7 +2,7 @@ import { CButton } from '@components/Buttons/CButton';
 import { CText } from '@components/CText';
 import { Header } from '@components/Headers/Header';
 import { Screen } from '@components/Screen';
-import { RootStackRoutes } from '@navigators/routes';
+import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Alert } from 'react-native';
@@ -89,7 +89,9 @@ export const ReportSeizureQuestion4 =
               {
                 text: 'OK',
                 onPress: () =>
-                  navigation.navigate(RootStackRoutes.PROFILE_SCREEN),
+                  navigation.navigate(RootStackRoutes.TAB_STACK, {
+                    screen: RootStackRoutes.HOME,
+                  }),
               },
             ],
             { cancelable: false },
