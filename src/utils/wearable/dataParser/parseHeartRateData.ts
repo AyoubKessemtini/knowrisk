@@ -48,14 +48,13 @@ export const parseHeartRateData = (dataView: DataView, deviceId: string) => {
     const heartRateMeasurements = heartRateValues.map((hrValue, index) => {
       const dateTime = new Date(baseTime.getTime() + index * 10 * 1000);
       return {
-        date: formatDate(dateTime, 'yyyy-MM-dd HH:mm:ss').split(' ')[0],
-        time: formatDate(dateTime, 'yyyy-MM-dd HH:mm:ss').split(' ')[1],
+        date: formatDate(dateTime, 'yyyy-MM-dd HH:mm:ss'),
         hr: hrValue,
       };
     });
 
     // Store the parsed heart rate record
-    heartRateRecords.push(heartRateMeasurements);
+    heartRateRecords.push(heartRateMeasurements[0]);
   }
   // Store the parsed heart rate data
   core.storeDeviceHealthData
