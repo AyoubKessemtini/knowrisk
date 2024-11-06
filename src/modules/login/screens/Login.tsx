@@ -25,7 +25,7 @@ import {
   RootStackRoutes,
   TabBarStackRoutes,
 } from '@navigators/routes';
-import {RootState} from "@store/index.ts";
+import { RootState } from '@store/index.ts';
 
 export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
   const navigation = useNavigation();
@@ -44,7 +44,6 @@ export const LoginScreen = ({}: OnboardingStackScreenProps<'LoginScreen'>) => {
   const loading = useSelector((state: RootState) => state.auth.loading);
   const error = useSelector((state: RootState) => state.auth.errorLogin);
 
- 
   useEffect(() => {
     dispatch(AuthActions.resetErrorLogin()); // Reset error when component mounts
     return () => {

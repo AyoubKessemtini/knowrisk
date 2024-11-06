@@ -60,6 +60,11 @@ function* loginUser(action: any) {
         );
         yield call(
           [PersistenceStorage, PersistenceStorage.setItem],
+          KEYS.IS_PROFILE_SET,
+          'true',
+        );
+        yield call(
+          [PersistenceStorage, PersistenceStorage.setItem],
           KEYS.USER_DATA,
           JSON.stringify(decodedToken.user),
         );
@@ -111,7 +116,6 @@ function* registerUser(action: any) {
     );
 
     if (response.status === 200 || response.status === 201) {
-      
       yield call(
         [PersistenceStorage, PersistenceStorage.setItem],
         KEYS.ACCESS_TOKEN,

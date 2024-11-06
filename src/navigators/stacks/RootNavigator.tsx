@@ -75,6 +75,9 @@ export function RootNavigator() {
   const onbordingUpdateStatus = useSelector(
     (state: RootState) => state.auth.successMessage,
   );
+  const loginSuccess = useSelector(
+    (state: RootState) => state.auth.loginSuccess,
+  ); // To listen for login success
 
   const [isProfileSet, setIsProfileSet] = useState<boolean | null>(null);
   // const [isOnbordSet, setIsOnbordSet] = useState<boolean | null>(null);
@@ -93,7 +96,7 @@ export function RootNavigator() {
 
   useEffect(() => {
     const checkProfileSetupStatus = async () => {
-      if (isLoggedIn) {
+      if (isLoggedIn || loginSuccess) {
         const profileSetupStatus = await PersistenceStorage.getItem(
           KEYS.IS_PROFILE_SET,
         );
@@ -111,7 +114,7 @@ export function RootNavigator() {
     }
 
     console.log('update is_profile_set', isProfileSet?.toString());
-  }, [isLoggedIn, profileUpdateStatus]); // Added isLoggedIn dependency
+  }, [isLoggedIn, loginSuccess, profileUpdateStatus]); // Added isLoggedIn dependency
 
   // Check oborif setup status whenever the profile update status changes
   // useEffect(() => {
