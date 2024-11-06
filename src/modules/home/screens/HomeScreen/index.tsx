@@ -142,16 +142,16 @@ export const Home: React.FC = () => {
       noHorizontalPadding
       containerStyles={styles.container}
     >
-      <MainHeader firstName={firstName} lastName={lastName} />
+      <MainHeader firstName={firstName} lastName={lastName}  />
       <View style={styles.wrapper}>
         <PatientInfoCard
           name={`${firstName} ${lastName}`}
           id={`ID: ${user?.id.split('-')[0]}`}
           lastSeizure="Sun, Apr 07, 22:54"
           seizureFrequency="Weekly"
-          seizureRisk="Moderate"
+          seizureRisk="Calculating..." //"Moderate"
           isDevicePaired={isDeviceConnectedBLE}
-          mood="happy"
+          mood="Calculating..." //"happy"
           temp={
             temperature === '--'
               ? '--'
@@ -228,14 +228,14 @@ export const Home: React.FC = () => {
                       : `${formatStringDate(selectedDate)} (Calculating)`
                 }
                 stressLevels={{
-                  low: stressData ? lowStressData.time : 'Calculating',
-                  good: stressData ? mediumStressData.time : 'Calculating',
-                  high: stressData ? highStressData.time : 'Calculating',
+                  low: lowStressData ? lowStressData.time : 'Calculating',
+                  good: mediumStressData ? mediumStressData.time : 'Calculating',
+                  high: highStressData ? highStressData.time : 'Calculating',
                 }}
                 progress={{
-                  low: stressData ? Number(lowStressData.percentage) : 0,
-                  good: stressData ? Number(mediumStressData.percentage) : 10,
-                  high: stressData ? Number(highStressData.percentage) : 0,
+                  low: lowStressData ? Number(lowStressData.percentage) : 0,
+                  good: mediumStressData ? Number(mediumStressData.percentage) : 10,
+                  high: highStressData ? Number(highStressData.percentage) : 0,
                 }}
                 comparison={{ low: 30, good: 40, high: 30 }}
             />
@@ -267,13 +267,13 @@ export const Home: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    gap: 12,
+    //gap: 12,
     paddingTop: 40,
     paddingHorizontal: 20,
     paddingBottom: 50,
   },
   wrapper: {
-    gap: 20,
+    gap: 20
   },
   row: {
     flexDirection: 'row',

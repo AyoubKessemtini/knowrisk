@@ -78,5 +78,5 @@ export const parseTemperatureData = (dataView: DataView, deviceId: string) => {
     });
 
   // Log the parsed temperature records
-  console.log('Parsed Temperature Records:', temperatureRecords);
+  console.info('Temperature:', temperatureRecords);
 };

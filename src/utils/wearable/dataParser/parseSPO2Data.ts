@@ -64,7 +64,7 @@ export const parseSPO2Data = (dataView: DataView, deviceId: string) => {
       spo2Level,
     });
   }
-
+  console.info('spo2Record', spo2Records);
   core.storeDeviceHealthData.execute({ spo2: spo2Records }).then((result) => {
     if (result.type === 'success') {
       deleteData(deviceId, DataType.SPO2);

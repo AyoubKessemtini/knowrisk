@@ -49,9 +49,7 @@ export const parseHRVData = (dataView: DataView, deviceId: string) => {
       fatigueLevel,
     });
   }
-
-  console.log('Parsed HRV Records:', hrvRecords);
-
+  console.info('hrv', hrvRecords);
   core.storeDeviceHealthData.execute({ hrv: hrvRecords }).then((result) => {
     if (result.type === 'success') {
       deleteData(deviceId, DataType.HRV);
