@@ -5,7 +5,6 @@ import {
   Pressable,
   Alert,
   TouchableOpacity,
-  Text,
   Modal,
 } from 'react-native';
 import { CButton } from '@components/Buttons/CButton';

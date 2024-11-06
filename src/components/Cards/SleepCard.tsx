@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import { CText } from '@components/CText';
 import { Colors } from '@constants/Colors';
 import { I18nKeyPath } from 'src/i18n/types';
@@ -9,6 +9,7 @@ type SleepCardProps = {
   unit?: string;
   lastUpdated: string;
   title: I18nKeyPath;
+  onPress?: void;
 };
 
 export const SleepCard = ({
@@ -16,14 +17,15 @@ export const SleepCard = ({
   unit,
   title,
   lastUpdated,
+  onPress,
 }: SleepCardProps) => {
   return (
     <View style={styles.container}>
       <CText
-        mb={10}
-        size="sm_semiBold"
-        color="black"
-        text={title as I18nKeyPath}
+          mb={10}
+          size="sm_semiBold"
+          color="black"
+          text={title as I18nKeyPath}
       />
 
       <View style={styles.row}>
@@ -36,12 +38,23 @@ export const SleepCard = ({
         </CText>
       </View>
 
-      <CText
-        size="xs"
-        color="grey4"
-        text="home_screen.last_updated"
-        textOptions={{ date: lastUpdated }}
-      />
+      {onPress && (
+        <TouchableOpacity onPress={onPress}>
+        <CText
+            size="xs"
+            color="grey4"
+        >
+         Click for details
+        </CText>
+        </TouchableOpacity>
+      )}
+      {!onPress && (
+          <CText
+              size="xs"
+              color="grey4"
+              text="home_screen.last_updated"
+              textOptions={{ date: lastUpdated }}
+          />)}
     </View>
   );
 };

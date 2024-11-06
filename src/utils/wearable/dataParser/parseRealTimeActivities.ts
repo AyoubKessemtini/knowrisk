@@ -24,7 +24,7 @@ export const parseRealTimeActivities = (
   offset += 4;
 
   const heartRate = dataView.getUint8(offset++);
-  const temperature = dataView.getUint16(offset, true);
+  const temperature = Math.floor(dataView.getUint16(offset, true)) / 10;
   offset += 2;
   const bloodOxygen = dataView.getUint8(offset);
 
@@ -39,7 +39,6 @@ export const parseRealTimeActivities = (
     bloodOxygen,
     date: formatDate(new Date().toISOString(), 'yyyy-MM-dd HH:mm:ss'),
   };
-
   dispatch(BleDataActions.updateHr(activitiesData.heartRate.toString()));
   dispatch(BleDataActions.updateSteps(activitiesData.totalSteps.toString()));
   dispatch(

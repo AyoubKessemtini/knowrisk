@@ -15,7 +15,12 @@ import { GetActivitiesByDate } from '@core/usecases/fitBitRepository/GetActiviti
 import { StoreDeviceHealthData } from '@core/usecases/deviceRepository/StoreDeviceHealthData.ts';
 import { RDDeviceHealthDataRepo } from './adapters/real/repositories/RDDeviceHealthDataRepo.ts';
 import { GetHeartRateWeeklyData } from '@core/usecases/deviceFetchDataApisRepository/GetHeartRateWeeklyData.ts';
-import {RDDeviceDataApisRepo} from "./adapters/real/repositories/deviceDataApis/RDDeviceDataApisRepo.ts";
+import { RDDeviceDataApisRepo } from './adapters/real/repositories/deviceDataApis/RDDeviceDataApisRepo.ts';
+import { GetStressDailyData } from '@core/usecases/deviceFetchDataApisRepository/GetStressDailyData.ts';
+import { GetSleepDailyData } from '@core/usecases/deviceFetchDataApisRepository/GetSleepDailyData.ts';
+import { GetSpo2DailyData } from '@core/usecases/deviceFetchDataApisRepository/GetSpo2DailyData.ts';
+import { RDChatRepo } from './adapters/real/repositories/RDChatRepo.ts';
+import { SendMessage } from '@core/usecases/chatBot/SendMessage.ts';
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -44,6 +49,8 @@ export const Core = (configuration: CoreConfiguration) => {
   const authRepo = new RDAuthRepo(httpClient);
   //fitbit
   const fitBitRepo = new RDFitBit(httpClient);
+  //chatbot
+  const chatRepo = new RDChatRepo(httpClient);
 
   const conversationsRepository = realDependencies
     ? new RDConversationsRepo(httpClient, new GetConversationsMapper())
@@ -59,8 +66,12 @@ export const Core = (configuration: CoreConfiguration) => {
   const getSpo2ByDate = new GetSpo2ByDate(fitBitRepo);
   const getActivities2ByDate = new GetActivitiesByDate(fitBitRepo);
   const storeDeviceHealthData = new StoreDeviceHealthData(deviceHealthDataRepo);
+  const sendMessage = new SendMessage(chatRepo);
   //device
   const getHeartRateWeeklyData = new GetHeartRateWeeklyData(deviceDataApisRepo);
+  const getStressDailyData = new GetStressDailyData(deviceDataApisRepo);
+  const getSleepDailyData = new GetSleepDailyData(deviceDataApisRepo);
+  const getSpo2DailyData = new GetSpo2DailyData(deviceDataApisRepo);
   return {
     getConversations,
     sendIOSHealthData,
@@ -72,5 +83,9 @@ export const Core = (configuration: CoreConfiguration) => {
     getActivities2ByDate,
     storeDeviceHealthData,
     getHeartRateWeeklyData,
+    getStressDailyData,
+    getSleepDailyData,
+    getSpo2DailyData,
+    sendMessage,
   };
 };

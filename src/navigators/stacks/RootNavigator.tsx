@@ -34,6 +34,7 @@ import { KEYS } from '@storage/Keys';
 import { RootState } from '@store/index'; // Adjust the import path as necessary
 import { AuthActions } from '@store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { StressScreen } from '@modules/stress/screens/StressScreen.tsx';
 import SetProfilFormScreen from '@modules/home/screens/SetProfil/setProfile';
 
 export type RootStackParamList = {
@@ -55,6 +56,7 @@ export type RootStackParamList = {
   [RootStackRoutes.CHATBOT]: undefined;
   [RootStackRoutes.JOURNAL]: undefined;
   [RootStackRoutes.HEART_RATE_DETAILS]: undefined;
+  [RootStackRoutes.STRESS_SCREEN]: undefined;
   [RootStackRoutes.SetProfil_FormScreen]: undefined;
 };
 
@@ -196,6 +198,10 @@ export function RootNavigator() {
       <Stack.Screen name={RootStackRoutes.SCAN_SCREEN} component={ScanScreen} />
       <Stack.Screen name={RootStackRoutes.CHATBOT} component={ChatBotScreen} />
       <Stack.Screen name={RootStackRoutes.JOURNAL} component={JournalScreen} />
+      <Stack.Screen
+        name={RootStackRoutes.STRESS_SCREEN}
+        component={StressScreen}
+      />
       <Stack.Screen
         name={RootStackRoutes.HEART_RATE_DETAILS}
         component={HeartRateDetailsScreen}
