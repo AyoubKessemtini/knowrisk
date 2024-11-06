@@ -12,6 +12,7 @@ import { Colors } from '@constants/Colors';
 export const IntroQuestionScreen =
   ({}: OnboardingStackScreenProps<'IntroQuestionScreen'>): JSX.Element => {
     const navigation = useNavigation();
+    console.log('IntroQuestionScreen');
 
     return (
       <Screen

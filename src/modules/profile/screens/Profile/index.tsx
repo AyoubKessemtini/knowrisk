@@ -17,6 +17,7 @@ import { AuthActions } from '@store/authSlice';
 import { RootState } from '@store/index';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ProfileActions } from '@store/profileSlice';
 // const getBackgroundColor = (name: string) => {
 //   const hash = Array.from(name).reduce(
 //     (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
@@ -29,6 +30,12 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const handleLogout = async () => {
     await PersistenceStorage.removeItem(KEYS.USER_DATA); // Clear user data
     await PersistenceStorage.removeItem(KEYS.ACCESS_TOKEN);
+    await PersistenceStorage.setItem(KEYS.IS_PROFILE_SET, 'false');
+
+    await PersistenceStorage.removeItem(KEYS.IS_PROFILE_SET); // Clear user data
+    await PersistenceStorage.clearAll();
+    dispatch(ProfileActions.resetProfileState());
+
     dispatch(AuthActions.logout()); // Dispatch logout action
     navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
       screen: OnboardingStackRoutes.LOGIN_SCREEN,

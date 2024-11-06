@@ -127,7 +127,15 @@
       "times_a_month": "2-3 times a month",
       "once_a_week": "Once a week",
       "multiple_times_a_week": "Multiple times a week",
-      "daily": "Daily"
+      "daily": "Daily",
+      "sleep":"Sleep",
+      "stress":"Stress",
+      "alcohol":"Alcohol",
+      "exercise":"Exercise",
+      "food":"Food",
+      "i_dont_know_my_triggers":"I dont know my triggers",
+      "fatigue":"Fatigue"
+
     }
   },
   "buttons": {
@@ -182,7 +190,7 @@
     "question1": "How long ago were you diagnosed with Epilepsy? This question is required.",
     "question2": "How many seizures do you experience per day/month/year?",
     "question3": "How frequent are your seizures? This question is required.",
-    "question4": "Do you know your triggers?",
+    "question4": "Do you know your triggers? If yes, please select them.",
     "question5": "If yes, please specify your triggers. If no, please type \"N/A\".",
     "question6": "Please provide your phone number. This question is required.",
     "question7": "Please provide your email address.",

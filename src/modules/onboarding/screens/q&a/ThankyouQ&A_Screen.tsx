@@ -2,7 +2,7 @@ import { CButton } from '@components/Buttons/CButton';
 import { CText } from '@components/CText';
 import { Header } from '@components/Headers/Header';
 import { Screen } from '@components/Screen';
-import { RootStackRoutes } from '@navigators/routes';
+import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
@@ -10,6 +10,8 @@ import { StyleSheet, View } from 'react-native';
 import { CImage } from '@components/CImage';
 import ImageAssets from '@assets/images';
 import { Colors } from '@constants/Colors';
+import { KEYS } from '@storage/Keys';
+import { PersistenceStorage } from '@storage/index';
 
 export const ThankyouScreen =
   ({}: OnboardingStackScreenProps<'ThankyouScreen'>): JSX.Element => {
@@ -28,7 +30,7 @@ export const ThankyouScreen =
           backgroundColor={Colors.lightPurple}
           textColor="black"
         />
-        <View style={styles.line}></View>
+        <View style={styles.line} />
         <View style={styles.wrapper}>
           <CImage
             source={ImageAssets.THANKYOU_HEART}
@@ -61,7 +63,10 @@ export const ThankyouScreen =
           <CButton
             text="common.submit"
             onPress={() => {
-              navigation.navigate(RootStackRoutes.PROFILE_SCREEN);
+              PersistenceStorage.setItem(KEYS.onboarding_completed, 'true');
+
+              PersistenceStorage.setItem(KEYS.IS_PROFILE_SET, 'true');
+              navigation.navigate(RootStackRoutes.SetProfil_FormScreen);
             }}
           />
         </View>

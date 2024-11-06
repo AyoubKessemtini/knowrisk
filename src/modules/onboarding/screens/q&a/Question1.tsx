@@ -16,10 +16,14 @@ import {
 import { LineInput } from '@components/Inputs/LineInput';
 import { Colors } from '@constants/Colors';
 import { styles } from './styles';
-
+import { useDispatch } from 'react-redux';
+import { ProfileActions } from '@store/profileSlice';
+ 
 export const Question1 =
   ({}: OnboardingStackScreenProps<'Question1'>): JSX.Element => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
     const {
       control,
       handleSubmit,
@@ -30,13 +34,26 @@ export const Question1 =
       },
       resolver: zodResolver(answersScheme),
     });
+
     const [isFocused, setIsFocused] = useState<{ [key: string]: boolean }>({});
+
     const handleFocus = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: true }));
     };
 
     const handleBlur = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: false }));
+    };
+
+    // Inside your Question1 component
+    const onSubmit = (data: AnswersScheme) => {
+      dispatch(
+        ProfileActions.updateProfileData({ affected_since_when: data.answer }),
+      );
+
+      navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+        screen: OnboardingStackRoutes.QUESTION_THREE_SCREEN,
+      });
     };
 
     return (
@@ -49,7 +66,7 @@ export const Question1 =
           hasBackButton
           useCustomBackButton
           currentStep={1}
-          totalSteps={7}
+          totalSteps={3}
           text="common.questions_header"
           backgroundColor={Colors.lightPurple}
           textColor="purple1"
@@ -83,14 +100,7 @@ export const Question1 =
           )}
         </View>
         <View style={styles.button}>
-          <CButton
-            text="common.continue"
-            onPress={handleSubmit(() => {
-              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.QUESTION_TWO_SCREEN,
-              });
-            })}
-          />
+          <CButton text="common.continue" onPress={handleSubmit(onSubmit)} />
         </View>
       </Screen>
     );

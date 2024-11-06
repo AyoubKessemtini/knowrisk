@@ -9,6 +9,7 @@ interface User {
   id: string;
 }
 interface AuthState {
+  [x: string]: any;
   isLoggedIn: boolean;
   loading: boolean;
   

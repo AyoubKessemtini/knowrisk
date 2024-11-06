@@ -6,14 +6,17 @@ import { Colors } from '@constants/Colors';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { RootStackRoutes } from '@navigators/routes';
+import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { emailScheme, EmailScheme } from '../../../../schemes/email.scheme';
 import { Header } from '@components/Headers/Header';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { forgetPasswordActions } from '@store/forgetPasswordSlice';
+import { RootState } from '@store/index';
+ 
 export const ForgotPasswordScreen =
   ({}: OnboardingStackScreenProps<'ForgotPasswordScreen'>): JSX.Element => {
     const navigation = useNavigation();
@@ -25,6 +28,51 @@ export const ForgotPasswordScreen =
     });
 
     const [isFocused, setIsFocused] = useState<{ [key: string]: boolean }>({});
+    const dispatch = useDispatch();
+    const { successMessage, error } = useSelector(
+      (state: RootState) => state.forgetPassword,
+    );
+    useEffect(() => {
+      dispatch(forgetPasswordActions.forgetPasswordReset()); // Reset error and success message when component mounts
+    }, [dispatch]);
+    useEffect(() => {
+      if (successMessage) {
+        Alert.alert('Success', successMessage as string, [
+          {
+            text: 'OK',
+            onPress: () => {
+              dispatch(forgetPasswordActions.forgetPasswordReset());
+
+              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+                screen: OnboardingStackRoutes.LOGIN_SCREEN,
+              });
+            },
+          },
+        ]);
+      }
+      if (error) {
+        Alert.alert('Error', error as string, [
+          {
+            text: 'OK',
+            onPress: () => {
+              dispatch(forgetPasswordActions.forgetPasswordReset());
+
+              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+                screen: OnboardingStackRoutes.LOGIN_SCREEN,
+              });
+            },
+          },
+        ]);
+      }
+    }, [successMessage, error, dispatch, navigation]);
+
+    const onSubmit = (data: EmailScheme) => {
+      dispatch(forgetPasswordActions.forgetPasswordReset()); // Reset error before submitting
+
+      dispatch(
+        forgetPasswordActions.forgetPasswordRequest(data.email.toString()),
+      ); // Dispatch l'action pour soumettre l'email
+    };
 
     const handleFocus = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: true }));
@@ -43,7 +91,7 @@ export const ForgotPasswordScreen =
           text="onboarding.forgotPass"
           backgroundColor={Colors.lightPurple}
         />
-        <View style={styles.line}></View>
+        <View style={styles.line} />
         <View style={styles.container}>
           <CText text="onboarding.email" color="black" size="md" />
           <ControlledInput
@@ -62,9 +110,11 @@ export const ForgotPasswordScreen =
           />
           <CButton
             text="buttons.send_new_password"
-            onPress={handleSubmit(() => {
-              navigation.navigate(RootStackRoutes.EDIT_PROFILE_SCREEN);
-            })}
+            onPress={handleSubmit(onSubmit)} // Utilisez handleSubmit ici
+
+            // onPress={handleSubmit(() => {
+            //   navigation.navigate(RootStackRoutes.EDIT_PROFILE_SCREEN);
+            // })}
           />
         </View>
       </Screen>
