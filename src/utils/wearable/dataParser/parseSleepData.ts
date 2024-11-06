@@ -4,7 +4,6 @@ import { deleteData } from '@utils/wearable/deleteData.ts';
 import { DataType } from '@utils/wearable/requestData.ts';
 
 export const parseSleepData = (dataView: DataView, deviceId: string) => {
-  console.log('Device ID:', deviceId);
   let offset = 3; // Skip start byte and ID1, ID2
 
   // Helper function to decode BCD to decimal
@@ -52,7 +51,7 @@ export const parseSleepData = (dataView: DataView, deviceId: string) => {
     totalSleepTime, // in minutes
     sleepData: sleepIntervals,
   };
-
+  console.info('sleep', parsedSleepData);
   // Store the parsed sleep data
   core.storeDeviceHealthData
     .execute({ sleep: parsedSleepData })

@@ -228,14 +228,14 @@ export const Home: React.FC = () => {
                       : `${formatStringDate(selectedDate)} (Calculating)`
                 }
                 stressLevels={{
-                  low: stressData ? lowStressData.time : 'Calculating',
-                  good: stressData ? mediumStressData.time : 'Calculating',
-                  high: stressData ? highStressData.time : 'Calculating',
+                  low: lowStressData ? lowStressData.time : 'Calculating',
+                  good: mediumStressData ? mediumStressData.time : 'Calculating',
+                  high: highStressData ? highStressData.time : 'Calculating',
                 }}
                 progress={{
-                  low: stressData ? Number(lowStressData.percentage) : 0,
-                  good: stressData ? Number(mediumStressData.percentage) : 10,
-                  high: stressData ? Number(highStressData.percentage) : 0,
+                  low: lowStressData ? Number(lowStressData.percentage) : 0,
+                  good: mediumStressData ? Number(mediumStressData.percentage) : 10,
+                  high: highStressData ? Number(highStressData.percentage) : 0,
                 }}
                 comparison={{ low: 30, good: 40, high: 30 }}
             />

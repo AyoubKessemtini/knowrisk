@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { ChatRepo } from '@core/domain/repositories/ChatRepo.ts';
-import {API_KEY, ENDPOINT} from "../../../../env.ts";
+import { API_KEY, ENDPOINT } from '../../../../env.ts';
 export class RDChatRepo implements ChatRepo {
     constructor(private httpClient: AxiosInstance) {}
      async sendMessage(message:string): Promise<string | null> {
@@ -30,7 +30,6 @@ export class RDChatRepo implements ChatRepo {
                 "top_p": 0.95,
                 "max_tokens": 50
             };
-
             const config = {
                 headers: {
                     "Content-Type": "application/json",

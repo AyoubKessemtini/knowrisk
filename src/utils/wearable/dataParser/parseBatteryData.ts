@@ -11,7 +11,7 @@ export const parseBatteryData = (dataView: DataView) => {
     } else {
       batteryLevel = dataView.getUint8(1);
 
-      console.log(`Battery level: ${batteryLevel}%`);
+      console.info(`Battery: ${batteryLevel}%`);
     }
   } else {
     console.warn(

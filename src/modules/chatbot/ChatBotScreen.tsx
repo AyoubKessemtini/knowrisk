@@ -65,9 +65,10 @@ export const ChatBotScreen =
                     time: t,
                 },
             ]);
+            const message=inputMessage;
             setInputMessage('');
             setIsLoading(true);
-            const response = await core.sendMessage.execute(JSON.stringify(messages));
+            const response = await core.sendMessage.execute(message);
             if (response != null) {
                 setMessages((prevMessages) => [
                     ...prevMessages,
