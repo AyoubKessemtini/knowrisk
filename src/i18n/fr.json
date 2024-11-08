@@ -24,7 +24,9 @@
     "steps": "Steps",
     "temperature": "Temperature",
     "chatbot":"Chat with Knowlepsy",
-    "journal" : "Journal"
+    "journal" : "Journal",
+    "respiratoryRates" : "Respiratory rate",
+    "bloodOxygen" : "Blood oxygen"
   },
   "home": {
     "foo": "French Home Screen"

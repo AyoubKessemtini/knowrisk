@@ -51,7 +51,7 @@ export const parseSleepData = (dataView: DataView, deviceId: string) => {
     totalSleepTime, // in minutes
     sleepData: sleepIntervals,
   };
-  console.info('sleep', parsedSleepData);
+  //console.info('sleep', parsedSleepData);
   // Store the parsed sleep data
   core.storeDeviceHealthData
     .execute({ sleep: parsedSleepData })

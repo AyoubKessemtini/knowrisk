@@ -4,6 +4,7 @@ import {HeartRateDeviceData} from "@core/entities/deviceDataApisEntity/HeartRate
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
 import {StressDeviceData} from "@core/entities/deviceDataApisEntity/StressDeviceData.ts";
+import {PatientData} from "@core/entities/deviceDataApisEntity/PatientData.ts";
 export class RDDeviceDataApisRepo implements DeviceDataApisRepo {
     constructor(private httpClient: AxiosInstance) {}
 
@@ -72,6 +73,23 @@ export class RDDeviceDataApisRepo implements DeviceDataApisRepo {
         };
         const result= await this.httpClient.get(
             `${this.baseUrl}/api/patients/${user.id}/oxygen-saturation?date=${date}`,
+            config,
+        );
+        return result;
+    }
+
+    async getPatientData(): Promise<PatientData>{
+        const token = await PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);
+        const userData = await PersistenceStorage.getItem(KEYS.USER_DATA);
+        const user = JSON.parse(userData!);
+        // Add the Ocp-Apim-Subscription-Key to the request headers
+        const config = {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        };
+        const result= await this.httpClient.get(
+            `${this.baseUrl}/api/patients/${user.id}`,
             config,
         );
         return result;

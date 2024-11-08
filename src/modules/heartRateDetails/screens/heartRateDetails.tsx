@@ -66,11 +66,12 @@ export const HeartRateDetailsScreen: React.FC = () => {
                     dateTime={'Today'}
                     value={String(todayData.heartRate)}
                 />
-                <HeartRateAVGCard
+                {todayData.heartRateVariability&& <HeartRateAVGCard
                     title={'Heart rate variability average'}
                     dateTime={'Today'}
                     value={String(todayData.heartRateVariability)}
-                />
+                />}
+
               </>
           )}
           <CText size={'lg_light'}>Past 7 days</CText>
@@ -83,11 +84,11 @@ export const HeartRateDetailsScreen: React.FC = () => {
                         dateTime={`${data.day} ${data.date}`}
                         value={String(data.heartRate)}
                     />
-                    <HeartRateAVGCard
+                    {data.heartRateVariability && <HeartRateAVGCard
                         title={'Heart rate variability average'}
                         dateTime={`${data.day} ${data.date}`}
                         value={String(data.heartRateVariability)}
-                    />
+                    />}
                   </View>
               ))}
         </View>

@@ -21,6 +21,7 @@ import { GetSleepDailyData } from '@core/usecases/deviceFetchDataApisRepository/
 import { GetSpo2DailyData } from '@core/usecases/deviceFetchDataApisRepository/GetSpo2DailyData.ts';
 import { RDChatRepo } from './adapters/real/repositories/RDChatRepo.ts';
 import { SendMessage } from '@core/usecases/chatBot/SendMessage.ts';
+import {GetPatientData} from "@core/usecases/deviceFetchDataApisRepository/GetPatientData.ts";
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -72,6 +73,7 @@ export const Core = (configuration: CoreConfiguration) => {
   const getStressDailyData = new GetStressDailyData(deviceDataApisRepo);
   const getSleepDailyData = new GetSleepDailyData(deviceDataApisRepo);
   const getSpo2DailyData = new GetSpo2DailyData(deviceDataApisRepo);
+  const getPatientData = new GetPatientData(deviceDataApisRepo);
   return {
     getConversations,
     sendIOSHealthData,
@@ -87,5 +89,6 @@ export const Core = (configuration: CoreConfiguration) => {
     getSleepDailyData,
     getSpo2DailyData,
     sendMessage,
+    getPatientData,
   };
 };
