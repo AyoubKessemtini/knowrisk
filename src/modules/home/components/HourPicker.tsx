@@ -46,6 +46,7 @@ export const HourPicker: React.FC<HourPickerProps> = ({
       </TouchableOpacity>
 
       <Modal
+      
         visible={showPicker}
         transparent={true}
         animationType="slide"
@@ -57,7 +58,10 @@ export const HourPicker: React.FC<HourPickerProps> = ({
               value={tempTime}
               mode="time"
               display="spinner"
+              themeVariant="light"
               onChange={handleChange}
+              style={{ backgroundColor: 'white' }}
+
             />
             <TouchableOpacity
               style={styles.confirmButton}
