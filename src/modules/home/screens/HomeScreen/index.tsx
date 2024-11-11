@@ -191,7 +191,13 @@ export const Home: React.FC = () => {
                     value: t.percentage * 100,
                   };
                 })
-              : []
+              : [
+                  {
+                    name: 'Calculating',
+                    color: colors[0],
+                    value: 100,
+                  },
+                ]
           }
         />
         {/*
