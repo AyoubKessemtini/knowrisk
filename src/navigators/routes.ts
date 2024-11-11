@@ -19,6 +19,7 @@ export const RootStackRoutes = {
   JOURNAL: 'journal',
   HEART_RATE_DETAILS: 'heartRateDetails',
   STRESS_SCREEN: 'stressScreen',
+  INVITE_DOCTOR: 'inviteDoctor',
 } as const;
 
 export const TabBarStackRoutes = {

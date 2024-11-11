@@ -16,7 +16,7 @@ export interface PatientData {
     age: number; // age in years
     affected_since_when: string;
     seizures_per_day: string;
-    triggers: Record<string, number>; // key-value pairs for triggers
+    triggers: Trigger[],
     heart_rate: {
         artifact: string | null;
         bpm: number;
@@ -64,4 +64,9 @@ export interface PatientData {
         date: string; // ISO date string
     };
     device: any | null; // Device data structure (to be defined or left as `any`)
+}
+
+interface Trigger {
+    trigger: string,
+    percentage: number
 }

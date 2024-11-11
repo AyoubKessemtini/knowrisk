@@ -36,6 +36,7 @@ import { AuthActions } from '@store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { StressScreen } from '@modules/stress/screens/StressScreen.tsx';
 import SetProfilFormScreen from '@modules/home/screens/SetProfil/setProfile';
+import {InviteDoctor} from "@modules/profile/screens/Settings/InviteDoctor_Screen.tsx";
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -58,6 +59,7 @@ export type RootStackParamList = {
   [RootStackRoutes.HEART_RATE_DETAILS]: undefined;
   [RootStackRoutes.STRESS_SCREEN]: undefined;
   [RootStackRoutes.SetProfil_FormScreen]: undefined;
+  [RootStackRoutes.INVITE_DOCTOR]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -212,6 +214,10 @@ export function RootNavigator() {
       <Stack.Screen
         name={RootStackRoutes.SetProfil_FormScreen}
         component={SetProfilFormScreen}
+      />
+      <Stack.Screen
+          name={RootStackRoutes.INVITE_DOCTOR}
+          component={InviteDoctor}
       />
     </Stack.Navigator>
   );

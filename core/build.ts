@@ -22,6 +22,8 @@ import { GetSpo2DailyData } from '@core/usecases/deviceFetchDataApisRepository/G
 import { RDChatRepo } from './adapters/real/repositories/RDChatRepo.ts';
 import { SendMessage } from '@core/usecases/chatBot/SendMessage.ts';
 import {GetPatientData} from "@core/usecases/deviceFetchDataApisRepository/GetPatientData.ts";
+import {InviteDoctor} from "@core/usecases/invitations/InviteDoctor.ts";
+import {RDInvitationRepo} from "./adapters/real/repositories/RDInvitationRepo.ts";
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -52,6 +54,8 @@ export const Core = (configuration: CoreConfiguration) => {
   const fitBitRepo = new RDFitBit(httpClient);
   //chatbot
   const chatRepo = new RDChatRepo(httpClient);
+  //invitations
+  const invitationsRepo = new RDInvitationRepo(httpClient);
 
   const conversationsRepository = realDependencies
     ? new RDConversationsRepo(httpClient, new GetConversationsMapper())
@@ -74,6 +78,8 @@ export const Core = (configuration: CoreConfiguration) => {
   const getSleepDailyData = new GetSleepDailyData(deviceDataApisRepo);
   const getSpo2DailyData = new GetSpo2DailyData(deviceDataApisRepo);
   const getPatientData = new GetPatientData(deviceDataApisRepo);
+  //invitation
+  const inviteDoctor = new InviteDoctor(invitationsRepo);
   return {
     getConversations,
     sendIOSHealthData,
@@ -90,5 +96,6 @@ export const Core = (configuration: CoreConfiguration) => {
     getSpo2DailyData,
     sendMessage,
     getPatientData,
+    inviteDoctor,
   };
 };

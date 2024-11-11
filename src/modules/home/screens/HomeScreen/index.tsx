@@ -12,15 +12,12 @@ import { RootStackRoutes } from '../../../../navigators/routes';
 import {formatStringDate, formatTime} from '@hooks/useDateFormatter';
 import { RootState, useAppSelector } from '@store/index.ts';
 //import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
-import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard.tsx';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
 import { AuthActions } from '@store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Journal } from '@components/Cards/JournalCard.tsx';
 import { TriggersCard } from '@modules/home/components/triggersCard.tsx';
-import {CText} from "@components/CText.tsx";
-import {CircularQualityCard} from "@modules/sleep/screens/components/circularQualityCard.tsx";
 import {Colors} from "@constants/Colors.ts";
 import {core} from "@config/Configuration.ts";
 import {StressDeviceData, stressRateData} from "@core/entities/deviceDataApisEntity/StressDeviceData.ts";
@@ -35,7 +32,15 @@ export const Home: React.FC = () => {
   const [lowStressData, setLowStressData] = useState<stressRateData>(null);
   const [mediumStressData, setMediumStressData] = useState<stressRateData>(null);
   const [highStressData, setHighStressData] = useState<stressRateData>(null);
-
+  const colors: string[] = [
+    '#FFA224',
+    '#9a76e0',
+    '#eea8b5',
+    '#2AC686',
+    '#E95050',
+    '#a4a4d3',
+    '#3d5434',
+  ];
 
   // Fetch health data for the selected date
   //const { healthData } = useFetchHealthData(selectedDate);
@@ -71,7 +76,6 @@ export const Home: React.FC = () => {
   );
   const dispatch = useDispatch();
 
-  // User's name
 
   // const backgroundColor = getBackgroundColor(firstName + lastName);
   const user = useSelector((state: RootState) => state.auth.user);
@@ -94,6 +98,9 @@ export const Home: React.FC = () => {
 
   const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
   useEffect(() => {
+    setInterval(() => {
+      setSelectedDate(new Date());
+    }, 70000);
     const checkLoginStatus = async () => {
       const userData = await PersistenceStorage.getItem(KEYS.USER_DATA);
 
@@ -136,6 +143,7 @@ export const Home: React.FC = () => {
         try {
           const fetchedData = await core.getPatientData.execute();
           setPatientData(fetchedData);
+          console.log(fetchedData);
         } catch (error) {
           console.error('Failed to fetch patient data:', error);
         }
@@ -144,7 +152,7 @@ export const Home: React.FC = () => {
       console.log('USER_DATA root ', userData);
     };
     checkLoginStatus();
-  }, [dispatch]);
+  }, [dispatch, selectedDate]);
   return (
     <Screen
       fullscreen
@@ -176,7 +184,18 @@ export const Home: React.FC = () => {
           }}
         />
         <TriggersCard
-            data={[
+            data={ patientData ? patientData.triggers.map((t,index)=>{
+              return {
+                    name: t.trigger,
+                    color: colors[index],
+                    value: t.percentage * 100,
+                  };
+                })
+              : []
+          }
+        />
+        {/*
+        [
               {
                 name: 'Fatigue',
                 color: '#E95050',
@@ -192,9 +211,8 @@ export const Home: React.FC = () => {
                 color: '#2AC686',
                 value: 40,
               },
-            ]}
-        />
-        {/*<DateSelector
+            ]
+        <DateSelector
           initialDate={selectedDate}
           onDateChange={handleDateChange}
         />*/}

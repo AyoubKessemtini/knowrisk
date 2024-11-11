@@ -23,7 +23,9 @@ export const TriggersCard: React.FC<TriggersCard> = ({ data }) => {
           <CText mb={5}>Seizure triggers</CText>
           <SeizureTriggers />
         </View>
-        <PieChart data={data} />
+        <View style={{paddingLeft:0}}>
+          <PieChart data={data} />
+        </View>
       </View>
     </View>
   );
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightPurple,
     borderRadius: 12,
     paddingHorizontal: 8,
+    paddingRight:0,
     justifyContent: 'space-between',
     paddingVertical: 8,
     marginBottom: 3,

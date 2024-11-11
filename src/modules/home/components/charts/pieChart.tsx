@@ -32,7 +32,7 @@ export const PieChart: React.FC<PieChartProps> = ({ data }) => {
         }}
         accessor="population"
         backgroundColor="transparent"
-        paddingLeft="15"
+        paddingLeft="1"
         center={[0, 0]} // Center the pie chart
         hasLegend={true}
         absolute // Show values as absolute numbers

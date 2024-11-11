@@ -25,7 +25,10 @@
     "foo": "French Home Screen"
   },
   "profile": {
-    "foo": "French Profile Screen"
+    "foo": "French Profile Screen",
+    "invite_doctor": "Invite doctor",
+    "invite_doctor_by_email": "Invite doctor by email",
+    "send_invitation": "Send invitation"
   },
   "language": {
     "english": "English",
