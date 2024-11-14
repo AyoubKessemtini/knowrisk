@@ -46,6 +46,8 @@ export const ConnectedCard = ({ deviceName }: ConnectedCardProps) => {
         </View>
       </View>
       <View>
+      
+      
         <CImage
           source={ImageAssets.CONNECTED_DEVICE}
           height={160}

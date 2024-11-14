@@ -4,7 +4,7 @@ import { SagaIterator } from 'redux-saga';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
 import axios, { AxiosResponse } from 'axios';
-import { forgetPasswordActions } from '@store/forgetPasswordSlice';
+import { reportSeizureUpdateFormActions } from '@store/reportSeizureUpdateFormSlice';
 
 // Helper pour récupérer le token d'accès
 const getAccessToken = (): string | null => {
@@ -13,30 +13,38 @@ const getAccessToken = (): string | null => {
   return tokenData ? tokenData : null;
 };
 
-function* forgetPasswordSaga(): SagaIterator {
+function* submitSeizureUpdateReportSaga(): SagaIterator {
   try {
     // Récupérer les données de l'état Redux
-    const state = yield select((state: RootState) => state.forgetPassword);
-    const { email } = state;
-    console.log('email: forget-password', email);
-    const accessToken = getAccessToken();
-    const url = `http://172.214.33.253:3001/api/auth/app/forgot-password`;
+    const state = yield select(
+      (state: RootState) => state.reportSeizureUpdateForm,
+    );
+    const { id, date, timeFrom, timeTo, alcohol, exercise, eat } = state;
 
-    // console.log('Data Seizure:', {
-    //   date,
-    //   time_from: timeFrom,
-    //   time_to: timeTo,
-    //   alcohol,
-    //   exercise,
-    //   eat,
-    // });
+    const accessToken = getAccessToken();
+    const url = `http://172.214.33.253:3001/api/patients/${id}/seizure`;
+
+    console.log('Data Seizure:', {
+      id,
+      date,
+      time_from: timeFrom,
+      time_to: timeTo,
+      alcohol,
+      exercise,
+      eat,
+    });
 
     // Appel de l'API avec les données sous forme d'objet
     const response: AxiosResponse = yield call(
-      axios.post,
+      axios.put,
       url,
       {
-        email,
+        date,
+        time_from: timeFrom + ':00',
+        time_to: timeTo + ':00',
+        alcohol,
+        exercise,
+        eat,
       },
       {
         headers: {
@@ -50,27 +58,38 @@ function* forgetPasswordSaga(): SagaIterator {
     console.log('Response Data:', response.data);
 
     // Gérer le succès de la requête
-    if (response.status === 200 || response.status === 202) {
+    if (response.status === 201) {
       const successMessage = response.data?.message || 'Submission successful';
-      yield put(forgetPasswordActions.forgetPasswordSuccess(successMessage));
+      yield put(
+        reportSeizureUpdateFormActions.submitSeizureUpdateReportSuccess(
+          successMessage,
+        ),
+      );
     } else {
       const errorMessage = response.data?.message || 'Submission failed';
-      yield put(forgetPasswordActions.forgetPasswordFailure(errorMessage));
+      yield put(
+        reportSeizureUpdateFormActions.submitSeizureUpdateReportFailure(
+          errorMessage,
+        ),
+      );
     }
   } catch (error: any) {
     // Gestion des erreurs inattendues de l'API
-    console.log('Error: forget', error.message);
     const errorMessage =
       error.response && error.response.data && error.response.data.message
         ? error.response.data.message
         : 'Network or server error. Please check your connection or try again later.';
-    yield put(forgetPasswordActions.forgetPasswordFailure(errorMessage));
+    yield put(
+      reportSeizureUpdateFormActions.submitSeizureUpdateReportFailure(
+        errorMessage,
+      ),
+    );
   }
 }
 
-export function* watchforgetPassword(): SagaIterator {
+export function* watchSubmitSeizureUpdateReport(): SagaIterator {
   yield takeLatest(
-    forgetPasswordActions.forgetPasswordRequest.type,
-    forgetPasswordSaga,
+    reportSeizureUpdateFormActions.submitSeizureUpdateReportRequest.type,
+    submitSeizureUpdateReportSaga,
   );
 }

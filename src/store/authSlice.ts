@@ -12,7 +12,7 @@ interface AuthState {
   [x: string]: any;
   isLoggedIn: boolean;
   loading: boolean;
-  
+
   errorLogin: string | null; // Change this line
   errorRegister: string | null; // New error for registration
   user: User | null; // Add the user property here
@@ -21,8 +21,8 @@ interface AuthState {
 const initialState: AuthState = {
   isLoggedIn: false,
   loading: false,
-  errorLogin: null,// Change this line
-  errorRegister: null,// New error for registration
+  errorLogin: null, // Change this line
+  errorRegister: null, // New error for registration
   user: null, // Add the user property here
 };
 
@@ -37,10 +37,13 @@ export const authSlice = createSlice({
     ) => {
       state.loading = true;
       state.errorLogin = null;
+      state.successLogin = null; // Reset previous success
     },
     loginSuccess: (state) => {
       state.isLoggedIn = true;
       state.loading = false;
+      state.successLogin = 'Login successful'; // Set success message
+
       // Do not set user here; it will be set separately
     },
     loginFailure: (state, action: PayloadAction<string>) => {
@@ -63,10 +66,14 @@ export const authSlice = createSlice({
     ) => {
       state.loading = true;
       state.errorRegister = null;
+      state.successRegister = null; // Reset previous success
+
     },
     registerSuccess: (state) => {
       state.isLoggedIn = true; // or keep it false based on your logic
       state.loading = false;
+      state.successRegister = "Registration successful"; // Set success message
+
     },
     registerFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
@@ -75,12 +82,20 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.isLoggedIn = false;
       state.user = null; // Clear user data
+      state.successLogin = null;
+      state.successRegister = null;
     },
     resetErrorLogin: (state) => {
       state.errorLogin = null; // Reset the error to null
-    }, 
+    },
     resetErrorRegister: (state) => {
       state.errorRegister = null; // Reset the error to null
+    },
+    resetLoginSuccess: (state) => {
+      state.successLogin = null;
+    },
+    resetRegisterSuccess: (state) => {
+      state.successRegister = null;
     },
   },
 });

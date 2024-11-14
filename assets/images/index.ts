@@ -26,6 +26,7 @@ const ImageAssets = {
   DISCONNECTED_DEVICE: require('./disconected_device.png'),
   CONNECTED_DEVICE: require('./connectedDevice.png'),
   SCAN_IN_PROGRESS: require('./scanInProgress.png'),
+  Intro_GIF: require('./knowlepsyintro.gif'),
 };
 
 export default ImageAssets;

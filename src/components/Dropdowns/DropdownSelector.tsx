@@ -1,63 +1,107 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  FlatList,
+} from 'react-native';
 import { Colors } from '@constants/Colors';
-import Icon from 'react-native-easy-icon';
-import { CText } from '@components/CText';
-import { I18nKeyPath } from '../../i18n/types';
+
+type I18nKeyPath =
+  | 'profile.genders.male'
+  | 'profile.genders.female'
+  | 'profile.genders.other'
+  | 'profile.countries.fr'
+  | 'profile.countries.lt'
+  | 'profile.countries.uk'
+  | 'profile.countries.in'
+  | 'profile.countries.tn'
+  | 'profile.countries.au'
+  | 'profile.countries.other';
 
 interface DropdownSelectorProps {
   options: I18nKeyPath[];
+  defaultValue?: I18nKeyPath;
   onSelect: (option: I18nKeyPath) => void;
 }
 
-export const DropdownSelector = ({
+const translations: { [key in I18nKeyPath]: string } = {
+  'profile.genders.male': 'Male',
+  'profile.genders.female': 'Female',
+  'profile.genders.other': 'Other',
+  'profile.countries.fr': '+33',
+  'profile.countries.lt': '+370',
+  'profile.countries.uk': '+44',
+  'profile.countries.au': '+61',
+  'profile.countries.tn': '+216',
+  'profile.countries.other': 'Other Country',
+
+};
+
+const t = (key: I18nKeyPath): string => translations[key];
+
+export const DropdownSelector: React.FC<DropdownSelectorProps> = ({
   options,
+  defaultValue,
   onSelect,
-}: DropdownSelectorProps) => {
+}) => {
   const [selectedOption, setSelectedOption] = useState<I18nKeyPath | null>(
-    null,
+    defaultValue || null,
   );
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
+  useEffect(() => {
+    console.log('DropdownSelector mounted with defaultValue:', defaultValue);
+    if (defaultValue) {
+      setSelectedOption(defaultValue);
+    }
+  }, [defaultValue]);
+
   const handleSelect = (option: I18nKeyPath) => {
+    console.log('handleSelect triggered with option:', option);
     setSelectedOption(option);
     onSelect(option);
     setDropdownVisible(false);
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.selectorContainer}
-        onPress={() => setDropdownVisible(!isDropdownVisible)}
-      >
-        <CText style={styles.selectedOptionText}>
-          {selectedOption ? selectedOption : 'Select an option'}
-        </CText>
-        <Icon
-          type="feather"
-          name={isDropdownVisible ? 'chevron-up' : 'chevron-down'}
-          size={21}
-          color={Colors.fog}
-        />
-      </TouchableOpacity>
-      {isDropdownVisible && (
-        <View style={styles.dropdownContainer}>
-          <FlatList
-            data={options}
-            keyExtractor={(item) => item}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.optionItem}
-                onPress={() => handleSelect(item)}
-              >
-                <CText text={item} />
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-      )}
-    </View>
+    console.log(
+      'DropdownSelector rendered with selectedOption:',
+      selectedOption,
+    ),
+    (
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.selectorContainer}
+          onPress={() => {
+            console.log('Dropdown toggle pressed');
+            setDropdownVisible(!isDropdownVisible);
+          }}
+        >
+          <Text style={styles.selectedOptionText}>
+            {selectedOption ? t(selectedOption) : 'Select an option'}
+          </Text>
+        </TouchableOpacity>
+
+        {isDropdownVisible && (
+          <View style={styles.dropdownContainer}>
+            <FlatList
+              data={options}
+              keyExtractor={(item) => item}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.optionItem}
+                  onPress={() => handleSelect(item)}
+                >
+                  <Text>{t(item)}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        )}
+      </View>
+    )
   );
 };
 
@@ -81,6 +125,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   dropdownContainer: {
+    zIndex: 10, // Ensures dropdown appears on top
+
     backgroundColor: Colors.white,
     borderRadius: 4,
     borderWidth: 1,
@@ -88,7 +134,6 @@ const styles = StyleSheet.create({
   },
   optionItem: {
     padding: 12,
-    borderRadius: 4,
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.grey1,
   },

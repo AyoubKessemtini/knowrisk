@@ -34,7 +34,13 @@ export const forgetPasswordSlice = createSlice({
       state.error = action.payload; // Enregistrer le message d'erreur
     },
     forgetPasswordReset: (state) => {
-      state.error = null; // Reset the error to null
+
+
+      state.loading = false;
+      state.error = null; // Reset error to null
+      state.successMessage = null; // Reset success message
+      state.email = undefined; // Clear `otp`
+ 
     },
   },
 });

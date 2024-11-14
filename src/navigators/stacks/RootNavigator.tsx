@@ -36,6 +36,13 @@ import { AuthActions } from '@store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { StressScreen } from '@modules/stress/screens/StressScreen.tsx';
 import SetProfilFormScreen from '@modules/home/screens/SetProfil/setProfile';
+import GifScreen from '@modules/home/GifScreen';
+import { ChangePasswordOTPScreen } from '../../modules/profile/screens/Settings/ChangePasswordOTP_Screen';
+import { ReportSeizureQuestion1Updated } from '../../modules/home/screens/ReportSeizureScreenUpdated/ReportSeizureQuestion1Updated';
+import { ReportSeizureQuestion2Updated } from '../../modules/home/screens/ReportSeizureScreenUpdated/ReportSeizureQuestion2Updated';
+import { ReportSeizureQuestion3Updated } from '../../modules/home/screens/ReportSeizureScreenUpdated/ReportSeizureQuestion3Updated';
+import { ReportSeizureQuestion4Updated } from '../../modules/home/screens/ReportSeizureScreenUpdated/ReportSeizureQuestion4Updated';
+import { SeizureEvent } from '@utils/types';
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -45,6 +52,7 @@ export type RootStackParamList = {
   [RootStackRoutes.SETTINGS_INFORMATION_SCREEN]: undefined;
   [RootStackRoutes.EDIT_PROFILE_SCREEN]: undefined;
   [RootStackRoutes.CHANGE_PASSWORD_SCREEN]: undefined;
+  [RootStackRoutes.CHANGE_PASSWORD_OTP_SCREEN]: undefined;
   [RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN]: undefined;
   [RootStackRoutes.REPORT_SEIZURE_QUESTION_ONE_SCREEN]: undefined;
   [RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN]: undefined;
@@ -58,6 +66,27 @@ export type RootStackParamList = {
   [RootStackRoutes.HEART_RATE_DETAILS]: undefined;
   [RootStackRoutes.STRESS_SCREEN]: undefined;
   [RootStackRoutes.SetProfil_FormScreen]: undefined;
+  [RootStackRoutes.Gif_INTRO]: undefined;
+  // [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN]: {
+  //   eventId: string;
+  //   eventDate: string;
+  //   eventTimeFrom: string;
+  //   eventTimeTo: string;
+  //   eventDescription: string;
+  // };
+
+  [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN]: {
+    seizureEvent: SeizureEvent;
+  };
+  [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_TWO_SCREEN]: {
+    seizureEvent: SeizureEvent;
+  };
+  [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_THREE_SCREEN]: {
+    seizureEvent: SeizureEvent;
+  };
+  [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_FOUR_SCREEN]: {
+    seizureEvent: SeizureEvent;
+  };
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -112,9 +141,11 @@ export function RootNavigator() {
     if (profileUpdateStatus && isLoggedIn) {
       checkProfileSetupStatus();
     }
+    console.log('profileSetupStatus' + isProfileSet?.toString());
 
     console.log('update is_profile_set', isProfileSet?.toString());
   }, [isLoggedIn, loginSuccess, profileUpdateStatus]); // Added isLoggedIn dependency
+  console.log('isProfileSet' + isProfileSet);
 
   // Check oborif setup status whenever the profile update status changes
   // useEffect(() => {
@@ -173,7 +204,10 @@ export function RootNavigator() {
         name={RootStackRoutes.CHANGE_PASSWORD_SCREEN}
         component={ChangePasswordScreen}
       />
-
+      <Stack.Screen
+        name={RootStackRoutes.CHANGE_PASSWORD_OTP_SCREEN}
+        component={ChangePasswordOTPScreen}
+      />
       <Stack.Screen
         name={RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN}
         component={ReportSeizureIntro}
@@ -212,6 +246,23 @@ export function RootNavigator() {
       <Stack.Screen
         name={RootStackRoutes.SetProfil_FormScreen}
         component={SetProfilFormScreen}
+      />
+      <Stack.Screen name={RootStackRoutes.Gif_INTRO} component={GifScreen} />
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN}
+        component={ReportSeizureQuestion1Updated}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_TWO_SCREEN}
+        component={ReportSeizureQuestion2Updated}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_THREE_SCREEN}
+        component={ReportSeizureQuestion3Updated}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_FOUR_SCREEN}
+        component={ReportSeizureQuestion4Updated}
       />
     </Stack.Navigator>
   );

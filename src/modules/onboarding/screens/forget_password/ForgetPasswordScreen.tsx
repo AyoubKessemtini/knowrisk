@@ -5,7 +5,7 @@ import { Screen } from '@components/Screen';
 import { Colors } from '@constants/Colors';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigator';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, StyleSheet, View } from 'react-native';
@@ -16,7 +16,7 @@ import { Header } from '@components/Headers/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgetPasswordActions } from '@store/forgetPasswordSlice';
 import { RootState } from '@store/index';
- 
+
 export const ForgotPasswordScreen =
   ({}: OnboardingStackScreenProps<'ForgotPasswordScreen'>): JSX.Element => {
     const navigation = useNavigation();
@@ -32,39 +32,41 @@ export const ForgotPasswordScreen =
     const { successMessage, error } = useSelector(
       (state: RootState) => state.forgetPassword,
     );
-    useEffect(() => {
-      dispatch(forgetPasswordActions.forgetPasswordReset()); // Reset error and success message when component mounts
-    }, [dispatch]);
+    useFocusEffect(
+      React.useCallback(() => {
+        dispatch(forgetPasswordActions.forgetPasswordReset());
+      }, [dispatch])
+    );
     useEffect(() => {
       if (successMessage) {
+        dispatch(forgetPasswordActions.forgetPasswordReset());
+
         Alert.alert('Success', successMessage as string, [
           {
             text: 'OK',
             onPress: () => {
-              dispatch(forgetPasswordActions.forgetPasswordReset());
-
-              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.LOGIN_SCREEN,
-              });
+              navigation.navigate(RootStackRoutes.CHANGE_PASSWORD_OTP_SCREEN);
             },
           },
         ]);
+        // Reset successMessage immediately after showing the alert
       }
       if (error) {
         Alert.alert('Error', error as string, [
           {
             text: 'OK',
             onPress: () => {
-              dispatch(forgetPasswordActions.forgetPasswordReset());
-
               navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
                 screen: OnboardingStackRoutes.LOGIN_SCREEN,
               });
             },
           },
         ]);
+        // Reset error immediately after showing the alert
+        dispatch(forgetPasswordActions.forgetPasswordReset());
       }
     }, [successMessage, error, dispatch, navigation]);
+    
 
     const onSubmit = (data: EmailScheme) => {
       dispatch(forgetPasswordActions.forgetPasswordReset()); // Reset error before submitting

@@ -6247,6 +6247,11 @@ human-signals@^2.1.0:
   resolved "https://registry.npmjs.org/human-signals/-/human-signals-2.1.0.tgz"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
+husky@^9.1.6:
+  version "9.1.6"
+  resolved "https://registry.npmjs.org/husky/-/husky-9.1.6.tgz"
+  integrity sha512-sqbjZKK7kf44hfdE94EoX8MZNk0n7HeW37O4YrVGCF4wzgQjp+akPAkfUK5LZ6KuR/6sqeAVuXHji+RzQgOn5A==
+
 i18n-js@^4.4.1:
   version "4.4.3"
   resolved "https://registry.npmjs.org/i18n-js/-/i18n-js-4.4.3.tgz"
@@ -9021,6 +9026,11 @@ react-native-easy-icon@^1.0.10:
   version "1.0.10"
   resolved "https://registry.npmjs.org/react-native-easy-icon/-/react-native-easy-icon-1.0.10.tgz"
   integrity sha512-6SBoYc1QXTuYYabbbkM/RTrwStFIaVWHosF0d6bcqPQaHSZ08OEGhQUp7zuVkvZBys8Pm3Kxqf+LG71QYW8otQ==
+
+react-native-fast-image@^8.6.3:
+  version "8.6.3"
+  resolved "https://registry.npmjs.org/react-native-fast-image/-/react-native-fast-image-8.6.3.tgz"
+  integrity sha512-Sdw4ESidXCXOmQ9EcYguNY2swyoWmx53kym2zRsvi+VeFCHEdkO+WG1DK+6W81juot40bbfLNhkc63QnWtesNg==
 
 react-native-file-access@^3.0.4:
   version "3.1.0"

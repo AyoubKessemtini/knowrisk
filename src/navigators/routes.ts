@@ -12,6 +12,7 @@ export const RootStackRoutes = {
   REPORT_SEIZURE_QUESTION_TWO_SCREEN: 'ReportSeizureQuestion2',
   REPORT_SEIZURE_QUESTION_THREE_SCREEN: 'ReportSeizureQuestion3',
   REPORT_SEIZURE_QUESTION_FOUR_SCREEN: 'ReportSeizureQuestion4',
+  
   SEIZURE_FORCAST_SCREEN: 'SeizureForecastScreen',
   SCAN_SCREEN: 'scanScreen',
   HOME: 'home',
@@ -19,6 +20,12 @@ export const RootStackRoutes = {
   JOURNAL: 'journal',
   HEART_RATE_DETAILS: 'heartRateDetails',
   STRESS_SCREEN: 'stressScreen',
+  Gif_INTRO: 'GifScreen',
+  CHANGE_PASSWORD_OTP_SCREEN: 'ChangePasswordOTPScreen',
+  REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN: 'ReportSeizureQuestion1Updated',
+  REPORT_SEIZURE_QUESTION_UPDATED_TWO_SCREEN: 'ReportSeizureQuestion2Updated',
+  REPORT_SEIZURE_QUESTION_UPDATED_THREE_SCREEN: 'ReportSeizureQuestion3Updated',
+  REPORT_SEIZURE_QUESTION_UPDATED_FOUR_SCREEN: 'ReportSeizureQuestion4Updated',
 } as const;
 
 export const TabBarStackRoutes = {

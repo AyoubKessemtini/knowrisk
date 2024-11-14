@@ -11,6 +11,12 @@ import { reportSeizureFormSlice } from './reportSeizureFormSlice';
 import { ProfileSlice } from './profileSlice';
 import { seizureSlice } from './sagas/seizureSlice';
 import { forgetPasswordSlice } from './forgetPasswordSlice';
+import { getPatientFormSlice } from './getPatientSlice';
+import { updateProfileSlice } from './updateProfilSlice';
+import { forgetPasswordOTPSlice } from './forgetPasswordOTPSlice';
+import { deleteSeizureSlice } from './deleteSeizureSlice';
+import { changePasswordSlice } from './changePasswordSlice';
+import { reportSeizureUpdateFormSlice } from './reportSeizureUpdateFormSlice';
  
 
 // Create the saga middleware
@@ -27,6 +33,16 @@ const rootReducer = combineReducers({
   [forgetPasswordSlice.name]: forgetPasswordSlice.reducer, // Ajout du reducer reportSeizure
 
   [reportSeizureFormSlice.name]: reportSeizureFormSlice.reducer, // Ajout du reducer reportSeizure
+  [getPatientFormSlice.name]: getPatientFormSlice.reducer, // Ajout du reducer reportSeizure,
+  [updateProfileSlice.name]: updateProfileSlice.reducer, // Ajout du reducer reportSeizure
+  [forgetPasswordOTPSlice.name]: forgetPasswordOTPSlice.reducer, // Ajout du reducer reportSeizure
+
+  [deleteSeizureSlice.name]: deleteSeizureSlice.reducer, // Ajout du reducer reportSeizure
+
+  [changePasswordSlice.name]: changePasswordSlice.reducer, // Ajout du reducer reportSeizure
+  [reportSeizureUpdateFormSlice.name]: reportSeizureUpdateFormSlice.reducer, // Ajout du reducer reportSeizure
+
+
 });
 
 // Create the Redux store and apply the saga middleware

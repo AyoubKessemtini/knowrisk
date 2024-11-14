@@ -23,7 +23,24 @@
     "foo": "French Home Screen"
   },
   "profile": {
-    "foo": "French Profile Screen"
+    "countries": {
+      "fr": "+33",       // France
+      "lt": "+370",      // Lithuania
+      "uk": "+44",       // United Kingdom
+       "au": "+61",       // Australia
+      "tn": "+216",      // Tunisia
+
+      
+      "other": "other"  
+    
+
+    },
+    "genders": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    
   },
   "language": {
     "english": "English",
@@ -47,12 +64,14 @@
     "login_to": "Log in to your account",
     "email_address": "Email Address",
     "password": "Password",
+    "otp": "OTP",
     "forgot_password": "Forgot Password?",
     "not_member": "Not a Member ? ",
     "register": "Register",
     "terms_and_conditions": "Terms & Conditions",
     "privacy_policy": "Privacy Policy",
     "signup": {
+      "gender": "Gender",
       "register_account": "Register to Your Account",
       "first_name": "First Name",
       "last_name": "Last Name",

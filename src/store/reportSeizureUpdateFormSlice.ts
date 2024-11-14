@@ -1,7 +1,8 @@
-// reportSeizureFormSlice.ts
+// reportSeizureUpdateFormSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface ReportSeizureFormState {
+interface reportSeizureUpdateFormState {
+  id?: string; // Added `id` for the request
   date?: string;
   timeFrom?: string;
   timeTo?: string;
@@ -11,18 +12,16 @@ interface ReportSeizureFormState {
   loading: boolean;
   error?: string | null; // Ajout de la propriété `error` pour gérer les erreurs,
   successMessage?: string | null; // Ajout de la propriété `successMessage`
-
 }
 
-const initialState: ReportSeizureFormState = {
+const initialState: reportSeizureUpdateFormState = {
   loading: false,
   error: null,
   successMessage: null, // Initialisation de `successMessage`
-
 };
 
-export const reportSeizureFormSlice = createSlice({
-  name: 'reportSeizureForm',
+export const reportSeizureUpdateFormSlice = createSlice({
+  name: 'reportSeizureUpdateForm',
   initialState,
   reducers: {
     setDate(state, action: PayloadAction<string>) {
@@ -31,12 +30,12 @@ export const reportSeizureFormSlice = createSlice({
       state.date = action.payload;
     },
     setTimeFrom(state, action: PayloadAction<string>) {
-       console.log("Mise à jour de 'timeFrom' :", action.payload); // Debugging log
+      console.log("Mise à jour de 'timeFrom' :", action.payload); // Debugging log
 
       state.timeFrom = action.payload;
     },
     setTimeTo(state, action: PayloadAction<string>) {
-       console.log("Mise à jour de 'TimeTo' :", action.payload);
+      console.log("Mise à jour de 'TimeTo' :", action.payload);
 
       state.timeTo = action.payload;
     },
@@ -57,17 +56,22 @@ export const reportSeizureFormSlice = createSlice({
       // console.log("Mise à jour de 'eat' dans le reducer :", action.payload);
       state.eat = action.payload;
     },
-    submitSeizureReportRequest(state) {
+    submitSeizureUpdateReportRequest(
+      state,
+      action: PayloadAction<{ id: string }>,
+    ) {
       state.loading = true;
       state.error = null;
       state.successMessage = null; // Réinitialiser le message de succès
+      state.id = action.payload.id; // Set the `id` in state
+
       // Réinitialiser l'erreur lors d'une nouvelle soumission
     },
-    submitSeizureReportSuccess(state, action: PayloadAction<string>) {
+    submitSeizureUpdateReportSuccess(state, action: PayloadAction<string>) {
       state.loading = false;
       state.successMessage = action.payload; // ou toute logique nécessaire
     },
-    submitSeizureReportFailure(state, action: PayloadAction<string>) {
+    submitSeizureUpdateReportFailure(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload; // Enregistrer le message d'erreur
     },
@@ -81,11 +85,12 @@ export const {
   setAlcohol,
   setExercise,
   setEat,
-  submitSeizureReportRequest,
-  submitSeizureReportSuccess,
-  submitSeizureReportFailure,
-} = reportSeizureFormSlice.actions;
+  submitSeizureUpdateReportRequest,
+  submitSeizureUpdateReportSuccess,
+  submitSeizureUpdateReportFailure,
+} = reportSeizureUpdateFormSlice.actions;
 // Export actions
-export const reportSeizureFormActions = reportSeizureFormSlice.actions;
+export const reportSeizureUpdateFormActions =
+  reportSeizureUpdateFormSlice.actions;
 
-export default reportSeizureFormSlice.reducer;
+export default reportSeizureUpdateFormSlice.reducer;

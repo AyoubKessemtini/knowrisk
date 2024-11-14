@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import { Screen } from '@components/Screen';
 import { EventCalendar } from '@components/EventCalendar';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
@@ -10,33 +17,33 @@ import { KEYS } from '@storage/Keys';
 import { RootState } from '@store/index';
 import { seizureActions } from '@store/sagas/seizureSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
-type EventData = {
-  id: string;
-  title: string;
-  date: string;
-  description: string;
-  timeFrom: string;
-  timeTo: string;
-};
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { deleteSeizureActions } from '@store/deleteSeizureSlice';
+import { Colors } from '@constants/Colors';
+import { RootStackRoutes } from '@navigators/routes';
+import { SeizureEvent } from '@utils/types'; // Make sure SeizureEvent includes all needed properties
 
 export const SeizureForecastScreen: React.FC<
   RootStackScreenProps<'SeizureForecastScreen'>
-> = () => {
+> = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { events, loading, error } = useSelector(
+  const { events, loading, successMessage, error } = useSelector(
     (state: RootState) => state.seizureForecast,
   );
+  const {
+    successMessage: deleteSuccess,
+    error: deleteError,
+    loading: deleteLoading,
+  } = useSelector((state: RootState) => state.deleteSeizure);
+
   const [userId, setUserId] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
-  // Marked dates configuration
   const markedDates = events.reduce(
-    (acc, event) => {
+    (acc, event: SeizureEvent) => {
       acc[event.date] = {
         selected: true,
         marked: true,
-
         selectedColor: event.type === 'Reported' ? '#e74c3c' : '#2ecc71',
       };
       return acc;
@@ -46,16 +53,6 @@ export const SeizureForecastScreen: React.FC<
       { selected: boolean; marked: boolean; selectedColor: string }
     >,
   );
-
-  // Populate `eventsData` directly from `events`
-  const eventsData: EventData[] = events.map((event) => ({
-    id: '',
-    title: '',
-    date: event.date,
-    description: '',
-    timeFrom: event.time_from || 'N/A', // Default to 'N/A' if not provided
-    timeTo: event.time_to || 'N/A', // Default to 'N/A' if not provided
-  }));
 
   useEffect(() => {
     const fetchUserId = async () => {
@@ -69,6 +66,26 @@ export const SeizureForecastScreen: React.FC<
   }, []);
 
   useEffect(() => {
+    if (deleteSuccess) {
+      Alert.alert('Success', deleteSuccess);
+      dispatch(deleteSeizureActions.deleteSeizureReset());
+
+      if (userId) {
+        dispatch(
+          seizureActions.fetchSeizureForecastRequest({
+            id: userId,
+            month: new Date().toISOString().slice(0, 7),
+          }),
+        );
+      }
+    }
+    if (deleteError) {
+      Alert.alert('Error', deleteError);
+      dispatch(deleteSeizureActions.deleteSeizureReset());
+    }
+  }, [deleteSuccess, deleteError, dispatch, userId]);
+
+  useEffect(() => {
     if (userId) {
       const currentMonth = new Date().toISOString().slice(0, 7);
       dispatch(
@@ -80,10 +97,28 @@ export const SeizureForecastScreen: React.FC<
     }
   }, [dispatch, userId]);
 
-  // Determine which events to display based on selectedDate
+  useEffect(() => {
+    if (successMessage) {
+      dispatch(seizureActions.resetSuccessMessage());
+    }
+  }, [successMessage]);
+
+  const handleDeleteEvent = (eventId: string) => {
+    dispatch(deleteSeizureActions.deleteSeizureRequest({ id: eventId }));
+  };
+
+  const handleEventPress = (item: SeizureEvent) => {
+    navigation.navigate(
+      RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN,
+      {
+        seizureEvent: item,
+      },
+    );
+  };
+
   const filteredEvents = selectedDate
-    ? eventsData.filter((event) => event.date === selectedDate)
-    : eventsData; // Show all events initially
+    ? events.filter((event: SeizureEvent) => event.date === selectedDate)
+    : events;
 
   return (
     <Screen
@@ -92,45 +127,58 @@ export const SeizureForecastScreen: React.FC<
       noHorizontalPadding
       containerStyles={styles.container}
     >
-      <Header hasBackButton text="common.seizure" />
+      <Header
+        hasBackButton
+        useCustomBackButton
+        text="common.seizure"
+        textColor="purple1"
+      />
 
-      {/* Pass the onDayPress handler to EventCalendar */}
       <EventCalendar
         markedDates={markedDates}
-        onDayPress={(day) => {
-          console.log('Selected date:', day.dateString);
-          setSelectedDate(day.dateString); // Update the selected date
-        }}
+        onDayPress={(day) => setSelectedDate(day.dateString)}
       />
 
       <CText style={styles.sectionTitle}>Seizure Events</CText>
-      <ScrollView style={styles.eventsContainer}>
-        {filteredEvents.length > 0 ? (
-          filteredEvents.map((item, index) => (
-            <View
-              key={`${item.date}-${item.id || index}`}
-              style={styles.eventItem}
-            >
-              <View style={styles.eventIcon}>
-                <CText style={styles.iconText}>⚡</CText>
-              </View>
-              <View style={styles.eventDetails}>
-                <CText style={styles.eventDate}>{item.date}</CText>
-                <CText style={styles.eventTime}>
-                  {`From: ${item.timeFrom || 'N/A'} To: ${item.timeTo || 'N/A'}`}
-                </CText>
-                <CText style={styles.eventDescription}>
-                  {item.description || ''}
-                </CText>
-              </View>
-            </View>
-          ))
-        ) : (
-          <CText style={styles.emptyText}>
-            No events available for this date
-          </CText>
-        )}
-      </ScrollView>
+
+      {loading || deleteLoading ? (
+        <ActivityIndicator size="large" color={Colors.primary} />
+      ) : (
+        <ScrollView style={styles.eventsContainer}>
+          {filteredEvents.length > 0 ? (
+            filteredEvents.map((item) => (
+              <TouchableOpacity
+                key={`${item.date}-${item.id}`}
+                style={styles.eventItem}
+                onPress={() => handleEventPress(item)}
+              >
+                <View style={styles.eventIcon}>
+                  <CText style={styles.iconText}>⚡</CText>
+                </View>
+                <View style={styles.eventDetails}>
+                  <CText style={styles.eventDate}>{item.date}</CText>
+                  <CText style={styles.eventTime}>
+                    {`From: ${item.time_from} To: ${item.time_to}`}
+                  </CText>
+                  <CText style={styles.eventDescription}>
+                    {item.description}
+                  </CText>
+                </View>
+                <TouchableOpacity
+                  onPress={() => handleDeleteEvent(item.id)}
+                  style={styles.deleteButton}
+                >
+                  <Icon name="delete" size={24} color="#e74c3c" />
+                </TouchableOpacity>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <CText style={styles.emptyText}>
+              No events available for this date
+            </CText>
+          )}
+        </ScrollView>
+      )}
     </Screen>
   );
 };
@@ -193,6 +241,9 @@ const styles = StyleSheet.create({
   eventDescription: {
     fontSize: 13,
     color: '#7f8c8d',
+  },
+  deleteButton: {
+    padding: 6,
   },
   emptyText: {
     textAlign: 'center',

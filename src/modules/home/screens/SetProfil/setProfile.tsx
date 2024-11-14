@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  Platform,
   StyleSheet,
   Dimensions,
   Modal,
@@ -14,7 +13,8 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import DateTimePicker from '@react-native-community/datetimepicker';
+// Removed DateTimePicker import
+// import DateTimePicker from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import { onboardingValidationSchema } from './setProfileSchema';
 import { Colors } from '@constants/Colors';
@@ -23,6 +23,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ProfileActions } from '@store/profileSlice';
 import { useNavigation } from '@react-navigation/native';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
+import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
+// Import BirthDateSelector
 
 type FormData = {
   birthday: string;
@@ -62,10 +64,11 @@ const SetProfilFormScreen: React.FC = () => {
       Alert.alert('Success', successMessage, [
         {
           text: 'OK',
-          onPress: () =>
-            navigation.navigate(RootStackRoutes.TAB_STACK, {
-              screen: RootStackRoutes.HOME,
-            }),
+          onPress: () => navigation.navigate(RootStackRoutes.Gif_INTRO),
+
+          // navigation.navigate(RootStackRoutes.TAB_STACK, {
+          //   screen: RootStackRoutes.HOME,
+          // }),
         },
       ]);
     } else if (errorProfile) {
@@ -104,18 +107,14 @@ const SetProfilFormScreen: React.FC = () => {
     resolver: yupResolver(onboardingValidationSchema),
   });
 
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<string>('');
+  // Removed unnecessary state hooks
+  // const [showDatePicker, setShowDatePicker] = useState(false);
+  // const [selectedDate, setSelectedDate] = useState<string>('');
   const [isGenderPickerVisible, setGenderPickerVisible] = useState(false);
   const [isBloodTypePickerVisible, setBloodTypePickerVisible] = useState(false);
 
-  const onDateChange = (event: any, date?: Date) => {
-    setShowDatePicker(false);
-    const chosenDate = date || new Date(); // Use current date if no date is selected
-    const formattedDate = chosenDate.toISOString().split('T')[0];
-    setSelectedDate(formattedDate);
-    setValue('birthday', formattedDate);
-  };
+  // Removed onDateChange function
+  // const onDateChange = (event: any, date?: Date) => { ... };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -125,43 +124,22 @@ const SetProfilFormScreen: React.FC = () => {
           <Controller
             control={control}
             name="birthday"
-            render={() => (
-              <TouchableOpacity
-                style={styles.inputContainer}
-                onPress={() => setShowDatePicker(true)}
-              >
-                <Text style={styles.inputText}>
-                  {selectedDate || 'Select your date of birth'}
-                </Text>
-              </TouchableOpacity>
+            render={({ field: { onChange, value } }) => (
+              <BirthDateSelector
+                initialDate={value ? new Date(value) : new Date()}
+                onDateChange={(newDate) => {
+                  const formattedDate = newDate.toISOString().split('T')[0];
+                  onChange(formattedDate);
+                  setValue('birthday', formattedDate);
+                }}
+              />
             )}
           />
-          <Modal
-            visible={showDatePicker}
-            transparent
-            animationType="fade"
-            onRequestClose={() => setShowDatePicker(false)}
-          >
-            <View style={styles.modalOverlay}>
-              <View style={styles.datePickerModal}>
-                <DateTimePicker
-                  value={selectedDate ? new Date(selectedDate) : new Date()}
-                  mode="date"
-                  display={Platform.OS === 'ios' ? 'inline' : 'default'}
-                  onChange={onDateChange}
-                />
-                <TouchableOpacity
-                  style={styles.closeButton}
-                  onPress={() => setShowDatePicker(false)}
-                >
-                  <Text style={styles.closeButtonText}>Close</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
           {errors.birthday && (
             <Text style={styles.errorText}>{errors.birthday.message}</Text>
           )}
+
+          {/* Rest of your form fields remain unchanged */}
 
           <Text style={styles.label}>Height (cm)</Text>
           <Controller
@@ -349,31 +327,6 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginBottom: 10,
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  datePickerModal: {
-    width: '90%',
-    height: '70%',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  closeButton: {
-    marginTop: 20,
-    backgroundColor: Colors.deepPurple,
-    padding: 10,
-    borderRadius: 5,
-  },
-  closeButtonText: {
-    color: 'white',
-    fontSize: 16,
   },
   submitButton: {
     width: '100%',

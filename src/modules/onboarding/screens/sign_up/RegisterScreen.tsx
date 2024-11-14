@@ -25,6 +25,7 @@ import { OnboardingStackScreenProps } from '@navigators/stacks/OnboardingNavigat
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { DeviceType } from '@constants/DeviceTypes';
+import { PhoneNumberInputRegister } from '@components/Inputs/PhoneNumberInputRegister';
 
 export const RegisterScreen =
   ({}: OnboardingStackScreenProps<'SignUpScreen'>): JSX.Element => {
@@ -51,6 +52,7 @@ export const RegisterScreen =
     const handleFocus = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: true }));
     };
+    const [selectedCountryCode, setSelectedCountryCode] = useState('+216'); // Default country code
 
     const handleBlur = (name: string) => {
       setIsFocused((prev) => ({ ...prev, [name]: false }));
@@ -62,8 +64,8 @@ export const RegisterScreen =
     const [isPickerVisible, setPickerVisible] = useState(false); // State for dropdown
 
     const onSubmit = (data: RegisterScheme) => {
-      console.log('Dispatching register eeee:');
-
+      const fullPhoneNumber = `${selectedCountryCode}${data.phoneNumber}`;
+      console.log('Dispatching register eeee:' + fullPhoneNumber);
       dispatch(AuthActions.resetErrorRegister()); // Reset error before submitting
 
       const payload = {
@@ -72,7 +74,7 @@ export const RegisterScreen =
         email: data.email,
         password: data.password,
         confirmpassword: data.confirmPassword,
-        phone: data.phoneNumber,
+        phone: fullPhoneNumber,
         device_type: selectedDeviceType, // Include selected device type
       };
       console.log('Dispatching register request:', payload); // Debug: Check payload data
@@ -112,6 +114,7 @@ export const RegisterScreen =
         navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
           screen: OnboardingStackRoutes.INTRO_QUESTION_SCREEN,
         });
+        dispatch(AuthActions.resetRegisterSuccess());
       }
     }, [isLoggedIn]);
     const togglePasswordConfirmVisibility = () => {
@@ -120,7 +123,8 @@ export const RegisterScreen =
     const togglePasswordVisibility = () => {
       setSecureEnabled(!isSecureEnabled);
     };
-
+    const countryCodes = ['+33', '+370', '+44', '+91', '+61', '+216'];
+    const scrollToTop = () => {};
     return (
       <Screen fullscreen containerStyles={styles.container}>
         <View style={{ width: 35 }}>
@@ -136,7 +140,6 @@ export const RegisterScreen =
           size="lg_medium"
           color="grey3"
         />
-
         <ControlledInput
           placeholderText="onboarding.signup.first_name"
           placeholderColor={Colors.grey5}
@@ -151,7 +154,6 @@ export const RegisterScreen =
             <Icon name="person-outline" size={20} color={Colors.deepPurple} />
           )}
         />
-
         <ControlledInput
           placeholderText="onboarding.signup.last_name"
           placeholderColor={Colors.grey5}
@@ -166,7 +168,6 @@ export const RegisterScreen =
             <Icon name="person-outline" size={20} color={Colors.deepPurple} />
           )}
         />
-
         <ControlledInput
           placeholderText="onboarding.signup.email_placeholder"
           placeholderColor={Colors.grey5}
@@ -181,8 +182,7 @@ export const RegisterScreen =
             <Icon name="mail-outline" size={20} color={Colors.deepPurple} />
           )}
         />
-
-        <ControlledInput
+        {/* <ControlledInput
           placeholderText="onboarding.signup.phone_number"
           placeholderColor={Colors.grey5}
           control={control}
@@ -195,8 +195,34 @@ export const RegisterScreen =
           RightAccessory={() => (
             <Icon name="call-outline" size={20} color={Colors.deepPurple} />
           )}
-        />
+        /> */}
+        {/* <PhoneNumberInputRegister
+          control={control}
+          placeholderText="onboarding.signup.phone_number"
+          name="phoneNumber"
+          options={countryCodes}
+          verticalPadding={10}
+          borderColor={isFocused.phoneNumber ? Colors.deepPurple : Colors.grey1}
+          placeholderColor={Colors.grey5}
+          backgroundColor={Colors.white}
+          textStyle={{ color: Colors.deepPurple }}
+          dropdownStyle={{ zIndex: 1000 }}
+          defaultCountryCode={selectedCountryCode}
+          onCountryCodeSelect={(code) => setSelectedCountryCode(code)} // Callback to set selected country code
+        /> */}
+        <PhoneNumberInputRegister
+          control={control}
+          name="phoneNumber"
+          options={countryCodes}
+          verticalPadding={10}
+          borderColor={isFocused.phoneNumber ? Colors.deepPurple : Colors.grey1}
+          backgroundColor={Colors.lightPink}
 
+          textStyle={{ color: Colors.deepPurple }}
+          defaultCountryCode={selectedCountryCode}
+          placeholderText="onboarding.signup.phone_number"
+          onCountryCodeSelect={(code) => setSelectedCountryCode(code)} // Update state in RegisterScreen
+        />
         <ControlledInput
           control={control}
           secureTextEntry={isSecureEnabled} // Use state to control visibility
@@ -217,7 +243,6 @@ export const RegisterScreen =
             </Pressable>
           )}
         />
-
         <ControlledInput
           control={control}
           secureTextEntry={isSecureConfirmEnabled} // Use state to control visibility
@@ -240,7 +265,6 @@ export const RegisterScreen =
             </Pressable>
           )}
         />
-
         {/* Dropdown for device selection using enum */}
         <TouchableOpacity
           style={[
@@ -263,7 +287,6 @@ export const RegisterScreen =
             {selectedDeviceType || 'Select Device Type'}
           </CText>
         </TouchableOpacity>
-
         <Modal
           visible={isPickerVisible}
           transparent
@@ -298,7 +321,6 @@ export const RegisterScreen =
             </View>
           </View>
         </Modal>
-
         {/* <CButton
           mt={20}
           text="common.continue"
@@ -312,7 +334,6 @@ export const RegisterScreen =
           onPress={handleSubmit(onSubmit)}
           loading={loading}
         />
-
         <CText isCentered size="md">
           <CText
             text="onboarding.signup.already_have_account"

@@ -48,8 +48,15 @@
       "other": "Other"
     },
     "countries": {
-      "fr": "France",
-      "lt": "Lithuania"
+      "fr": "+33",       // France
+      "lt": "+370",      // Lithuania
+      "uk": "+44",       // United Kingdom
+       "au": "+61",       // Australia
+      "tn": "+216",      // Tunisia
+
+      
+      "other": "other"   
+
     }
   },
   "language": {
@@ -64,6 +71,7 @@
     "strain": "Strain"
   },
   "onboarding": {
+    "gender": "Gender",
     "forgotPass": "Forgot Password",
     "dontHaveAccount": "Don't have an account?",
     "get_started": "Get Started",
@@ -75,6 +83,8 @@
     "email_address": "Email Address",
     "email": "Email",
     "password": "Password",
+    "otp": "OTP",
+
     "forgot_password": "Forgot Password?",
     "not_member": "Not a Member ? ",
     "register": "Register",
@@ -199,6 +209,7 @@
   },
   "report_seizure": {
     "report_seizure": "Report seizure",
+    "update_seizure": "Update seizure",
     "intro_question": "Did you recently have a seizure?",
     "help_us": "Help us better understand how it happened",
     "last_seizure_time_question": "Give us a time frame of your last seizure",

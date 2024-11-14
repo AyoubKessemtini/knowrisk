@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   TextInput,
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  Modal,
 } from 'react-native';
 import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 import Icon from 'react-native-easy-icon';
@@ -14,51 +15,73 @@ import { CText } from '@components/CText';
 interface CountryCodeDropdownProps {
   options: string[];
   onSelect: (option: string) => void;
+  defaultCode: string;
+  onDropdownPress: () => void;
 }
 
 export const CountryCodeDropdown = ({
   options,
   onSelect,
+  defaultCode,
+  onDropdownPress,
 }: CountryCodeDropdownProps) => {
-  const [selectedCode, setSelectedCode] = useState<string | null>(options[0]);
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedCode, setSelectedCode] = useState<string>(defaultCode);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleSelect = (option: string) => {
     setSelectedCode(option);
     onSelect(option);
-    setDropdownVisible(false);
+    setModalVisible(false);
   };
+
+  const toggleModal = () => {
+    onDropdownPress();
+    setModalVisible(!isModalVisible);
+  };
+
+  useEffect(() => {
+    setSelectedCode(defaultCode);
+  }, [defaultCode]);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.dropdownButton}
-        onPress={() => setDropdownVisible(!isDropdownVisible)}
-      >
+      <TouchableOpacity style={styles.dropdownButton} onPress={toggleModal}>
         <CText style={styles.selectedOptionText}>{selectedCode}</CText>
         <Icon
           type="feather"
-          name={isDropdownVisible ? 'chevron-up' : 'chevron-down'}
+          name={isModalVisible ? 'chevron-up' : 'chevron-down'}
           size={18}
           color={Colors.fog}
         />
       </TouchableOpacity>
-      {isDropdownVisible && (
-        <View style={styles.dropdownContainer}>
-          <FlatList
-            data={options}
-            keyExtractor={(item) => item}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.optionItem}
-                onPress={() => handleSelect(item)}
-              >
-                <CText>{item}</CText>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-      )}
+
+      <Modal
+        visible={isModalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setModalVisible(false)} // Close modal when overlay is clicked
+        >
+          <View style={styles.modalContent}>
+            <FlatList
+              data={options}
+              keyExtractor={(item) => item}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.optionItem}
+                  onPress={() => handleSelect(item)}
+                >
+                  <CText>{item}</CText>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
@@ -73,35 +96,52 @@ interface PhoneNumberInputProps<
   borderColor: string;
   backgroundColor: string;
   textStyle: object;
-  onFocus: () => void;
-  onBlur: () => void;
+  defaultCountryCode: string;
+  onCountryCodeSelect: (code: string) => void;
+  onDropdownPress: () => void;
 }
 
 export const PhoneNumberInput = <TFieldValues extends FieldValues>({
   control,
+  
   name,
   options,
   verticalPadding,
   borderColor,
   backgroundColor,
   textStyle,
-  onFocus,
-  onBlur,
+  defaultCountryCode,
+  onCountryCodeSelect, // Pass down this prop to update parent component
+
+  onDropdownPress,
 }: PhoneNumberInputProps<TFieldValues>) => {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [selectedCode, setSelectedCode] = useState(defaultCountryCode);
 
+  const handleCountryCodeSelect = (code: string) => {
+    setSelectedCode(code); // Update local state
+    if (onCountryCodeSelect) {
+      onCountryCodeSelect(code); // Update parent state
+    }
+  };
   return (
     <Controller
       control={control}
       name={name}
-      render={({ field: { value, onChange }, fieldState: {} }) => (
+      render={({ field: { value, onChange } }) => (
         <View
           style={[
             styles.phoneNumberContainer,
             { borderColor: borderColor, paddingVertical: verticalPadding },
           ]}
         >
-          <CountryCodeDropdown options={options} onSelect={console.log} />
+          <CountryCodeDropdown
+            options={options}
+            onDropdownPress={onDropdownPress}
+            defaultCode={defaultCountryCode}
+            onSelect={handleCountryCodeSelect}
+
+          />
           <TextInput
             style={[styles.phoneNumberInput, { backgroundColor, ...textStyle }]}
             value={value || phoneNumber}
@@ -111,11 +151,6 @@ export const PhoneNumberInput = <TFieldValues extends FieldValues>({
             }}
             placeholder="Enter your phone number"
             keyboardType="phone-pad"
-            onFocus={onFocus}
-            onBlur={() => {
-              onBlur();
-              onChange(phoneNumber);
-            }}
           />
         </View>
       )}
@@ -147,19 +182,21 @@ const styles = StyleSheet.create({
   selectedOptionText: {
     fontSize: 14,
   },
-  dropdownContainer: {
-    position: 'absolute',
-    top: 30,
-    left: 0,
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
     backgroundColor: Colors.white,
-    borderWidth: 1,
-    borderColor: Colors.grey1,
-    borderRadius: 4,
-    width: 100,
-    zIndex: 1000,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    maxHeight: 300,
+    padding: 20,
   },
   optionItem: {
-    padding: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
     borderBottomWidth: 1,
     borderBottomColor: Colors.grey1,
   },
