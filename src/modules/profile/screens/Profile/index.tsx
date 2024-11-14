@@ -133,8 +133,24 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
             text="profile.application_settings"
           />
           <CButton
-            mt={10}
-            text="profile.information"
+              mt={10}
+              text="profile.information"
+              buttonType="magnolia"
+              buttonVersion={2}
+              rightAccessory={
+                <Icon
+                    type="material"
+                    name="chevron-right"
+                    size={21}
+                    color={Colors.fog}
+                />
+              }
+              onPress={() => {
+                navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
+              }}
+          />
+          <CButton
+            text="profile.invite_doctor"
             buttonType="magnolia"
             buttonVersion={2}
             rightAccessory={
@@ -146,7 +162,7 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
               />
             }
             onPress={() => {
-              navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
+              navigation.navigate(RootStackRoutes.INVITE_DOCTOR);
             }}
           />
           <CButton

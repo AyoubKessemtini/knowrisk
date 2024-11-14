@@ -30,9 +30,9 @@
        "au": "+61",       // Australia
       "tn": "+216",      // Tunisia
 
-      
-      "other": "other"  
-    
+
+      "other": "other"
+
 
     },
     "genders": {
@@ -40,7 +40,11 @@
       "female": "Female",
       "other": "Other"
     },
-    
+
+    "foo": "French Profile Screen",
+    "invite_doctor": "Invite doctor",
+    "invite_doctor_by_email": "Invite doctor by email",
+    "send_invitation": "Send invitation"
   },
   "language": {
     "english": "English",

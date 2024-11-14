@@ -9,31 +9,38 @@ import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackRoutes } from '../../../../navigators/routes';
 //import { DateSelector } from '@components/DatePicker/DatePicker';
-import {formatStringDate} from '@hooks/useDateFormatter';
+import {formatStringDate, formatTime} from '@hooks/useDateFormatter';
 import { RootState, useAppSelector } from '@store/index.ts';
 //import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
-import { WeeklyHeartInfosCard } from '@components/Cards/WeeklyHeartInfosCard.tsx';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
 import { AuthActions } from '@store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Journal } from '@components/Cards/JournalCard.tsx';
 import { TriggersCard } from '@modules/home/components/triggersCard.tsx';
-import {CText} from "@components/CText.tsx";
-import {CircularQualityCard} from "@modules/sleep/screens/components/circularQualityCard.tsx";
 import {Colors} from "@constants/Colors.ts";
 import {core} from "@config/Configuration.ts";
 import {StressDeviceData, stressRateData} from "@core/entities/deviceDataApisEntity/StressDeviceData.ts";
+import {PatientData} from "@core/entities/deviceDataApisEntity/PatientData.ts";
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const navigation = useNavigation();
   const [stressData, setStressData] = useState<StressDeviceData>(null);
   const [spo2Data, setSpo2Data] = useState<Spo2Data>(null);
+  const [patientData, setPatientData] = useState<PatientData>(null);
   const [lowStressData, setLowStressData] = useState<stressRateData>(null);
   const [mediumStressData, setMediumStressData] = useState<stressRateData>(null);
   const [highStressData, setHighStressData] = useState<stressRateData>(null);
-
+  const colors: string[] = [
+    '#FFA224',
+    '#9a76e0',
+    '#eea8b5',
+    '#2AC686',
+    '#E95050',
+    '#a4a4d3',
+    '#3d5434',
+  ];
 
   // Fetch health data for the selected date
   //const { healthData } = useFetchHealthData(selectedDate);
@@ -69,7 +76,6 @@ export const Home: React.FC = () => {
   );
   const dispatch = useDispatch();
 
-  // User's name
 
   // const backgroundColor = getBackgroundColor(firstName + lastName);
   const user = useSelector((state: RootState) => state.auth.user);
@@ -92,6 +98,9 @@ export const Home: React.FC = () => {
 
   const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
   useEffect(() => {
+    setInterval(() => {
+      setSelectedDate(new Date());
+    }, 70000);
     const checkLoginStatus = async () => {
       const userData = await PersistenceStorage.getItem(KEYS.USER_DATA);
 
@@ -124,17 +133,26 @@ export const Home: React.FC = () => {
         try {
           const fetchedData = await core.getSpo2DailyData.execute(formatStringDate(selectedDate));
           setSpo2Data(fetchedData);
-          console.log('fetchedData');
-          console.log(fetchedData);
         } catch (error) {
           console.error('Failed to fetch stress data:', error);
         }
       };
       fetchSpo2DailyData();
+
+      const fetchPatientData = async () => {
+        try {
+          const fetchedData = await core.getPatientData.execute();
+          setPatientData(fetchedData);
+          console.log(fetchedData);
+        } catch (error) {
+          console.error('Failed to fetch patient data:', error);
+        }
+      };
+      fetchPatientData();
       console.log('USER_DATA root ', userData);
     };
     checkLoginStatus();
-  }, [dispatch]);
+  }, [dispatch, selectedDate]);
   return (
     <Screen
       fullscreen
@@ -147,11 +165,11 @@ export const Home: React.FC = () => {
         <PatientInfoCard
           name={`${firstName} ${lastName}`}
           id={`ID: ${user?.id.split('-')[0]}`}
-          lastSeizure="Sun, Apr 07, 22:54"
-          seizureFrequency="Weekly"
-          seizureRisk="Calculating..." //"Moderate"
+          lastSeizure={patientData && patientData.seizures ? `${patientData.seizures.date}, ${patientData.seizures.time_from}` : 'No seizures detected'}
+          seizureFrequency={patientData && patientData.seizures_per_day ? patientData.seizures_per_day : 'N/A'}
+          seizureRisk={patientData && patientData.stress ? patientData.stress.stress_level : 'N/A'} //"Moderate"
           isDevicePaired={isDeviceConnectedBLE}
-          mood="Calculating..." //"happy"
+          mood={patientData && patientData.stress ? patientData.stress.mood : 'N/A'} //"happy"
           temp={
             temperature === '--'
               ? '--'
@@ -166,7 +184,24 @@ export const Home: React.FC = () => {
           }}
         />
         <TriggersCard
-            data={[
+            data={ patientData ? patientData.triggers.map((t,index)=>{
+              return {
+                    name: t.trigger,
+                    color: colors[index],
+                    value: t.percentage * 100,
+                  };
+                })
+              : [
+                  {
+                    name: 'Calculating',
+                    color: colors[0],
+                    value: 100,
+                  },
+                ]
+          }
+        />
+        {/*
+        [
               {
                 name: 'Fatigue',
                 color: '#E95050',
@@ -182,9 +217,8 @@ export const Home: React.FC = () => {
                 color: '#2AC686',
                 value: 40,
               },
-            ]}
-        />
-        {/*<DateSelector
+            ]
+        <DateSelector
           initialDate={selectedDate}
           onDateChange={handleDateChange}
         />*/}
@@ -242,22 +276,21 @@ export const Home: React.FC = () => {
           </View>
         </TouchableOpacity>
         {/*<MedicationsList />*/}
-        <View style={styles.qualityCardRatesContainer}>
-          {/* <CText mb={15} size="md_medium" color="black">
-            Sleep quality
-          </CText>*/}
-          <View style={styles.row}>
-            <CircularQualityCard
-                value={spo2Data ? spo2Data.averageOxygenSaturation*100 : 0}
-                title={'Blood oxygen'}
-                date={spo2Data ?formatStringDate(selectedDate) : `${formatStringDate(selectedDate)} \n\t(Calculating)`}
-            />
-            <CircularQualityCard
-                value={0}
-                title={'Respiratory rate'}
-                date={`${formatStringDate(selectedDate)} \n\t(Calculating)`}
-            />
-          </View>
+        <View style={styles.row}>
+          <SleepCard
+              lastUpdated={patientData && patientData.oxygen_saturations ? formatTime(patientData.oxygen_saturations.date) : '  --'}
+              sleepData={patientData && patientData.oxygen_saturations ? patientData.oxygen_saturations.oxygen_saturation.toString() : '--'}
+              title="common.bloodOxygen"
+              unit="%"
+              //onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
+          />
+          <SleepCard
+              lastUpdated={patientData && patientData.respiratory_rates ? formatTime(patientData.respiratory_rates.date) : '  --'}
+              sleepData={patientData && patientData.respiratory_rates ? patientData.respiratory_rates.respiratory_rate.toString() : '--'}
+              title="common.respiratoryRates"
+              unit=""
+              //onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
+          />
         </View>
       </View>
     </Screen>

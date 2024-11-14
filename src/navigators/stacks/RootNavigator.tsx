@@ -43,6 +43,7 @@ import { ReportSeizureQuestion2Updated } from '../../modules/home/screens/Report
 import { ReportSeizureQuestion3Updated } from '../../modules/home/screens/ReportSeizureScreenUpdated/ReportSeizureQuestion3Updated';
 import { ReportSeizureQuestion4Updated } from '../../modules/home/screens/ReportSeizureScreenUpdated/ReportSeizureQuestion4Updated';
 import { SeizureEvent } from '@utils/types';
+import {InviteDoctor} from "@modules/profile/screens/Settings/InviteDoctor_Screen.tsx";
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -52,7 +53,6 @@ export type RootStackParamList = {
   [RootStackRoutes.SETTINGS_INFORMATION_SCREEN]: undefined;
   [RootStackRoutes.EDIT_PROFILE_SCREEN]: undefined;
   [RootStackRoutes.CHANGE_PASSWORD_SCREEN]: undefined;
-  [RootStackRoutes.CHANGE_PASSWORD_OTP_SCREEN]: undefined;
   [RootStackRoutes.REPORT_SEIZURE_INTRO_SCREEN]: undefined;
   [RootStackRoutes.REPORT_SEIZURE_QUESTION_ONE_SCREEN]: undefined;
   [RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN]: undefined;
@@ -87,6 +87,7 @@ export type RootStackParamList = {
   [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_FOUR_SCREEN]: {
     seizureEvent: SeizureEvent;
   };
+  [RootStackRoutes.INVITE_DOCTOR]: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -263,6 +264,10 @@ export function RootNavigator() {
       <Stack.Screen
         name={RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_FOUR_SCREEN}
         component={ReportSeizureQuestion4Updated}
+      />
+      <Stack.Screen
+          name={RootStackRoutes.INVITE_DOCTOR}
+          component={InviteDoctor}
       />
     </Stack.Navigator>
   );
