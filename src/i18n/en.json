@@ -10,7 +10,9 @@
     "questions_header" : "Q&A",
     "steps": "Steps",
     "temperature": "Temperature",
-    "stress": "Stress"
+    "stress": "Stress",
+    "respiratoryRates" : "Respiratory rate",
+    "bloodOxygen" : "Blood oxygen"
   },
   "buttons": {
     "tap_to_report": "Tap this button if you had a seizure",
@@ -23,7 +25,10 @@
     "foo": "French Home Screen"
   },
   "profile": {
-    "foo": "French Profile Screen"
+    "foo": "French Profile Screen",
+    "invite_doctor": "Invite doctor",
+    "invite_doctor_by_email": "Invite doctor by email",
+    "send_invitation": "Send invitation"
   },
   "language": {
     "english": "English",

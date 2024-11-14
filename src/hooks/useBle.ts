@@ -208,6 +208,12 @@ export const useBle = () => {
         setInterval(async () => {
           if (isDeviceConnectedBLE) {
             await enableRealtimeMode(id, 'fff0', 'fff6');
+            //Read historical data
+            await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.HR);
+            await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.HRV);
+            await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.TEMP);
+            await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.SPO2);
+            await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.SLEEP);
             await sendRequestDataCommand(id, 'fff0', 'fff6', DataType.BATTERY);
           }
         }, 30000);

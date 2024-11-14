@@ -24,7 +24,9 @@
     "steps": "Steps",
     "temperature": "Temperature",
     "chatbot":"Chat with Knowlepsy",
-    "journal" : "Journal"
+    "journal" : "Journal",
+    "respiratoryRates" : "Respiratory rate",
+    "bloodOxygen" : "Blood oxygen"
   },
   "home": {
     "foo": "French Home Screen"
@@ -35,6 +37,9 @@
     "user_account": "User Account",
     "edit_profile": "Edit Profile",
     "information": "Information",
+    "invite_doctor": "Invite doctor",
+    "invite_doctor_by_email": "Invite doctor by email",
+    "send_invitation": "Send invitation",
     "change_password": "Change Password",
     "emergency_call": "Emergency Call",
     "profile": "Profile",
