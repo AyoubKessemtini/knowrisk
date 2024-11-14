@@ -17,11 +17,11 @@ export const PieChart: React.FC<PieChartProps> = ({ data }) => {
     <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
       <ChartKitPieChart
         data={data.map((datum) => ({
-          name: datum.name,
+          name: '% '+ datum.name,
           population: datum.value, // Map 'value' to 'population' for chart data
           color: datum.color,
           legendFontColor: datum.color,
-          legendFontSize: 12,
+          legendFontSize: 10,
         }))}
         width={220} // Chart width
         height={100} // Chart height

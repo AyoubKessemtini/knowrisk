@@ -8,6 +8,7 @@ import {
   TextInput,
   Button,
   Dimensions,
+  Alert,
 } from 'react-native';
 import { Colors } from '@constants/Colors';
 import { CText } from '../CText';
@@ -15,25 +16,18 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { MedicationCard } from './MedicationCard'; // Import your MedicationCard component
 import ImageAssets from '@assets/images';
+import { core } from '@config/Configuration.ts';
 
 const { height } = Dimensions.get('window');
 
-interface Medication {
-  title: string;
-  dosage: string;
-  frequency: string;
-  scheduleMessage: string;
+interface MedicationsListProps {
+  medicationsData: Medication[];
 }
 
-export const MedicationsList: React.FC = () => {
-  const [medications, setMedications] = useState<Medication[]>([
-    {
-      title: 'Grippex',
-      dosage: '3/day',
-      frequency: 'Every day',
-      scheduleMessage: "Don't forget it",
-    },
-  ]);
+export const MedicationsList: React.FC<MedicationsListProps> = ({
+    medicationsData
+                                          }) => {
+  const [medications, setMedications] = useState<Medication[]>(medicationsData);
   const [modalVisible, setModalVisible] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newDosage, setNewDosage] = useState('');
@@ -44,17 +38,30 @@ export const MedicationsList: React.FC = () => {
     number | null
   >(null);
 
-  const addMedication = () => {
+
+  const addMedication = async () => {
     if (newTitle && newDosage && newFrequency && newScheduleMessage) {
-      const newMedication = {
+      const newMedication: Medication = {
         title: newTitle,
         dosage: newDosage,
         frequency: newFrequency,
-        scheduleMessage: newScheduleMessage,
+        schedule_message: newScheduleMessage,
       };
-      setMedications([...medications, newMedication]);
-      setModalVisible(false);
-      clearInputs();
+      const ok = await core.addMedication.execute({
+        medication: newMedication,
+      });
+      if (ok) {
+        console.log('newMedication');
+        console.log(newMedication);
+        setMedications([...medications, newMedication]);
+        setModalVisible(false);
+        clearInputs();
+      } else {
+        Alert.alert(
+          'Error',
+          'Error while adding medication, please try again.',
+        );
+      }
     }
   };
 
@@ -65,13 +72,20 @@ export const MedicationsList: React.FC = () => {
     setNewScheduleMessage('');
   };
 
-  const deleteMedication = () => {
+   const  deleteMedication = async () => {
     if (selectedMedicationIndex !== null) {
       const updatedMedications = medications.filter(
         (_, index) => index !== selectedMedicationIndex,
       );
-      setMedications(updatedMedications);
-      setDeleteModalVisible(false);
+      const ok = await core.deleteMedication.execute({
+        id: medications[selectedMedicationIndex].id,
+      });
+      if (ok) {
+        setMedications(updatedMedications);
+        setDeleteModalVisible(false);
+      } else {
+        Alert.alert('Error', 'Error while deleting medication.');
+      }
     }
   };
 
@@ -116,7 +130,7 @@ export const MedicationsList: React.FC = () => {
                 title={medication.title}
                 dosage={medication.dosage}
                 frequency={medication.frequency}
-                scheduleMessage={medication.scheduleMessage}
+                scheduleMessage={medication.schedule_message}
               />
             </TouchableOpacity>
           ))
@@ -145,24 +159,28 @@ export const MedicationsList: React.FC = () => {
               style={styles.input}
               placeholder="Medication Title"
               value={newTitle}
+              placeholderTextColor={Colors.grey4}
               onChangeText={setNewTitle}
             />
             <TextInput
               style={styles.input}
               placeholder="Dosage"
               value={newDosage}
+              placeholderTextColor={Colors.grey4}
               onChangeText={setNewDosage}
             />
             <TextInput
               style={styles.input}
               placeholder="Frequency"
               value={newFrequency}
+              placeholderTextColor={Colors.grey4}
               onChangeText={setNewFrequency}
             />
             <TextInput
               style={styles.input}
               placeholder="Schedule Message"
               value={newScheduleMessage}
+              placeholderTextColor={Colors.grey4}
               onChangeText={setNewScheduleMessage}
             />
             <View style={styles.buttonContainer}>

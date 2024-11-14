@@ -98,13 +98,20 @@ export const SleepScreen: React.FC = () => {
       <View style={styles.row}>
         <RecoveryComponent
           title="Rest and Recovery Status"
-          value={44}
-          maxValue={30}
+          value={
+            sleepData && sleepData.restAndRecovery
+              ? sleepData.restAndRecovery
+              : -1
+          }
           unit="%"
           onPress={() => {}}
           activeStrokeColor={Colors.yellow2}
           inActiveStrokeColor={Colors.lightPurple}
-          description={formatStringDate(selectedDate)}
+          description={
+            sleepData && sleepData.restAndRecovery
+              ? formatStringDate(selectedDate)
+              : `${formatStringDate(selectedDate)} (Calculating)`
+          }
         />
       </View>
     </Screen>
@@ -129,6 +136,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   sleepStagesContainer:{
+    borderRadius: 15,
     paddingVertical: 5,
     paddingHorizontal: 10,
   }

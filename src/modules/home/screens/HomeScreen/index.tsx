@@ -11,7 +11,6 @@ import { RootStackRoutes } from '../../../../navigators/routes';
 //import { DateSelector } from '@components/DatePicker/DatePicker';
 import {formatStringDate, formatTime} from '@hooks/useDateFormatter';
 import { RootState, useAppSelector } from '@store/index.ts';
-//import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
 import { AuthActions } from '@store/authSlice';
@@ -22,6 +21,7 @@ import {Colors} from "@constants/Colors.ts";
 import {core} from "@config/Configuration.ts";
 import {StressDeviceData, stressRateData} from "@core/entities/deviceDataApisEntity/StressDeviceData.ts";
 import {PatientData} from "@core/entities/deviceDataApisEntity/PatientData.ts";
+import {MedicationsList} from "@components/Medication/MedicationsList.tsx";
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -41,6 +41,7 @@ export const Home: React.FC = () => {
     '#a4a4d3',
     '#3d5434',
   ];
+  const [medications, setMedications] = useState<Medication[]>(null);
 
   // Fetch health data for the selected date
   //const { healthData } = useFetchHealthData(selectedDate);
@@ -98,61 +99,62 @@ export const Home: React.FC = () => {
 
   const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
   useEffect(() => {
-    setInterval(() => {
-      setSelectedDate(new Date());
-    }, 70000);
     const checkLoginStatus = async () => {
       const userData = await PersistenceStorage.getItem(KEYS.USER_DATA);
-
       if (userData) {
         // Parse the user data and dispatch to Redux
         const user = JSON.parse(userData);
         dispatch(AuthActions.setUser(user)); // Store user data in Redux
       }
-
-      //get daily stress
-      const fetchStressDailyData = async () => {
-        try {
-          const fetchedData = await core.getStressDailyData.execute(formatStringDate(selectedDate));
-          setStressData(fetchedData);
-          if(fetchedData !=null){
-            setHighStressData(
-              fetchedData.data.find((s) => s.stressLevel === 'High'),
-            );
-            setMediumStressData(fetchedData.data.find(s => s.stressLevel === "Medium"));
-            setLowStressData(fetchedData.data.find(s => s.stressLevel === "Low"));
-          }
-        } catch (error) {
-          console.error('Failed to fetch stress data:', error);
-        }
-      };
-      fetchStressDailyData();
-
-      //get daily spo2
-      const fetchSpo2DailyData = async () => {
-        try {
-          const fetchedData = await core.getSpo2DailyData.execute(formatStringDate(selectedDate));
-          setSpo2Data(fetchedData);
-        } catch (error) {
-          console.error('Failed to fetch stress data:', error);
-        }
-      };
-      fetchSpo2DailyData();
-
-      const fetchPatientData = async () => {
-        try {
-          const fetchedData = await core.getPatientData.execute();
-          setPatientData(fetchedData);
-          console.log(fetchedData);
-        } catch (error) {
-          console.error('Failed to fetch patient data:', error);
-        }
-      };
-      fetchPatientData();
+      await fetchStressDailyData();
+      await fetchSpo2DailyData();
+      await fetchMedications();
+      await fetchPatientData();
       console.log('USER_DATA root ', userData);
     };
     checkLoginStatus();
-  }, [dispatch, selectedDate]);
+    const fetchStressDailyData = async () => {
+      try {
+        const fetchedData = await core.getStressDailyData.execute(formatStringDate(selectedDate));
+        setStressData(fetchedData);
+        if(fetchedData !=null){
+          setHighStressData(
+              fetchedData.data.find((s) => s.stressLevel === 'High'),
+          );
+          setMediumStressData(fetchedData.data.find(s => s.stressLevel === "Medium"));
+          setLowStressData(fetchedData.data.find(s => s.stressLevel === "Low"));
+        }
+      } catch (error) {
+        console.error('Failed to fetch stress data:', error);
+      }
+    };
+    const fetchSpo2DailyData = async () => {
+      try {
+        const fetchedData = await core.getSpo2DailyData.execute(formatStringDate(selectedDate));
+        setSpo2Data(fetchedData);
+      } catch (error) {
+        console.error('Failed to fetch stress data:', error);
+      }
+    };
+    const fetchMedications = async () => {
+      try {
+        const fetchedData = await core.getMedications.execute();
+        console.log('medications')
+        console.log(fetchedData)
+        setMedications(fetchedData);
+      } catch (error) {
+        console.error('Failed to fetch medications:', error);
+      }
+    };
+    const fetchPatientData = async () => {
+      try {
+        const fetchedData = await core.getPatientData.execute();
+        setPatientData(fetchedData);
+      } catch (error) {
+        console.error('Failed to fetch patient data:', error);
+      }
+    };
+  }, []);
   return (
     <Screen
       fullscreen
@@ -288,10 +290,13 @@ export const Home: React.FC = () => {
               lastUpdated={patientData && patientData.respiratory_rates ? formatTime(patientData.respiratory_rates.date) : '  --'}
               sleepData={patientData && patientData.respiratory_rates ? patientData.respiratory_rates.respiratory_rate.toString() : '--'}
               title="common.respiratoryRates"
-              unit=""
+              unit="RPM"
               //onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
           />
         </View>
+        {medications !== null && (
+          <MedicationsList medicationsData={medications} />
+        )}
       </View>
     </Screen>
   );
@@ -303,7 +308,7 @@ const styles = StyleSheet.create({
     //gap: 12,
     paddingTop: 40,
     paddingHorizontal: 20,
-    paddingBottom: 50,
+    paddingBottom: 160,
   },
   wrapper: {
     gap: 20

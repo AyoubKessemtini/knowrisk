@@ -12,5 +12,6 @@ interface SleepData {
     totalSleepDuration: string;
     sleepQualityScore: number;
     sleepQuality: string;
+    restAndRecovery:number;
     sleepStages: SleepStage[];
 }

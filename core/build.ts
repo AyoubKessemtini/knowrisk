@@ -24,6 +24,10 @@ import { SendMessage } from '@core/usecases/chatBot/SendMessage.ts';
 import {GetPatientData} from "@core/usecases/deviceFetchDataApisRepository/GetPatientData.ts";
 import {InviteDoctor} from "@core/usecases/invitations/InviteDoctor.ts";
 import {RDInvitationRepo} from "./adapters/real/repositories/RDInvitationRepo.ts";
+import {RDMedicationRepo} from "./adapters/real/repositories/RDMedicationRepo.ts";
+import {AddMedication} from "@core/usecases/medications/AddMedications.ts";
+import {GetMedications} from "@core/usecases/medications/GetMedications.ts";
+import {DeleteMedication} from "@core/usecases/medications/DeleteMedication.ts";
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -56,6 +60,8 @@ export const Core = (configuration: CoreConfiguration) => {
   const chatRepo = new RDChatRepo(httpClient);
   //invitations
   const invitationsRepo = new RDInvitationRepo(httpClient);
+  //medication
+  const medicationRepo = new RDMedicationRepo(httpClient);
 
   const conversationsRepository = realDependencies
     ? new RDConversationsRepo(httpClient, new GetConversationsMapper())
@@ -80,6 +86,10 @@ export const Core = (configuration: CoreConfiguration) => {
   const getPatientData = new GetPatientData(deviceDataApisRepo);
   //invitation
   const inviteDoctor = new InviteDoctor(invitationsRepo);
+  //medication
+  const addMedication = new AddMedication(medicationRepo);
+  const getMedications = new GetMedications(medicationRepo);
+  const deleteMedication = new DeleteMedication(medicationRepo);
   return {
     getConversations,
     sendIOSHealthData,
@@ -97,5 +107,8 @@ export const Core = (configuration: CoreConfiguration) => {
     sendMessage,
     getPatientData,
     inviteDoctor,
+    addMedication,
+    getMedications,
+    deleteMedication,
   };
 };

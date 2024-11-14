@@ -6,63 +6,63 @@ import { Colors } from '@constants/Colors';
 
 type RecoveryComponentProps = {
   title: string;
-  value: number;
-  maxValue?: number;
-  description: string;
-  onPress?: () => void;
-  activeStrokeColor?: string;
-  inActiveStrokeColor?: string;
-  unit: string;
+  value: number; // Current value
+  maxValue?: number; // Maximum value to calculate percentage
+  description: string; // Description text
+  onPress?: () => void; // Callback for touch action
+  activeStrokeColor?: string; // Color for active progress
+  inActiveStrokeColor?: string; // Color for inactive progress
 };
 
 export const RecoveryComponent = ({
-  title,
-  value,
-  maxValue = 100,
-  description,
-  unit,
-  onPress,
-  activeStrokeColor = Colors.orange,
-  inActiveStrokeColor = Colors.purple,
-}: RecoveryComponentProps) => {
+                                    title,
+                                    value,
+                                    maxValue = 100,
+                                    description,
+                                    onPress,
+                                    activeStrokeColor = Colors.orange,
+                                    inActiveStrokeColor = Colors.purple,
+                                  }: RecoveryComponentProps) => {
+  // Calculate percentage value
+  const percentage = (value / maxValue) * 100;
+
   return (
-    <View style={styles.container}>
-      <CText mb={5} size="md_medium" color="black">
-        {title}
-      </CText>
-      <View style={styles.progressContainer}>
-        <CircularProgress
-          value={value}
-          maxValue={maxValue}
-          radius={45}
-          showProgressValue={false}
-          activeStrokeColor={activeStrokeColor}
-          inActiveStrokeColor={inActiveStrokeColor}
-          inActiveStrokeOpacity={0.3}
-          activeStrokeWidth={10}
-          inActiveStrokeWidth={10}
-          duration={1500}
-          title={`${value} ${unit}`}
-          titleColor={Colors.yellow2}
-          titleStyle={styles.progressTitle}
-        />
-        <TouchableOpacity
-          style={styles.descriptionContainer}
-          onPress={onPress}
-          activeOpacity={0.8}
-        >
-          <View style={styles.textContainer}>
-            <CText size="xs" color="black" mb={5}>
-              last updated at :
-            </CText>
-            <CText size="xm" color={'deepPurple'} mb={5} numberOfLines={2}>
-              {description}
-            </CText>
-          </View>
-          {/* <Icon name="chevron-right" size={29} color={Colors.deepPurple} /> */}
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <CText mb={5} size="md_medium" color="black">
+          {title}
+        </CText>
+        <View style={styles.progressContainer}>
+          <CircularProgress
+              value={percentage} // Value to reflect as progress
+              maxValue={100} // maxValue set to 100 as it's now in percentage
+              radius={45} // Size of the circle
+              showProgressValue={false} // Hide progress number inside
+              activeStrokeColor={activeStrokeColor} // Active progress color
+              inActiveStrokeColor={inActiveStrokeColor} // Inactive progress color
+              inActiveStrokeOpacity={0.3} // Opacity for inactive stroke
+              activeStrokeWidth={10} // Width of active stroke
+              inActiveStrokeWidth={10} // Width of inactive stroke
+              duration={1500} // Animation duration
+              title={value!=-1 ? `${Math.round(percentage)}%` : 'Calculating'} // Title displaying percentage
+              titleColor={Colors.yellow2} // Color for title
+              titleStyle={styles.progressTitle} // Title text styling
+          />
+          <TouchableOpacity
+              style={styles.descriptionContainer}
+              onPress={onPress}
+              activeOpacity={0.8}
+          >
+            <View style={styles.textContainer}>
+              <CText size="xs" color="black" mb={5}>
+                last updated at :
+              </CText>
+              <CText size="xm" color={'deepPurple'} mb={5} numberOfLines={2}>
+                {description}
+              </CText>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
   );
 };
 
