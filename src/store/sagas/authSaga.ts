@@ -41,6 +41,7 @@ function* loginUser(action: any) {
     ///    console.log('API status:', response.status); // Log the entire response object
 
     if (response.status === 200) {
+      console.log("response.data register", response.data);
       const { accessToken } = response.data;
       console.log('decode' + accessToken);
       const decodedToken: CustomJwtPayload = base64UrlDecode(

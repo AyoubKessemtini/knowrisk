@@ -38,6 +38,7 @@ import { KEYS } from '@storage/Keys';
 import { updateProfileActions } from '@store/updateProfilSlice';
 import { Picker } from '@react-native-picker/picker';
 import { TextInput } from 'react-native';
+import { RootStackRoutes } from '@navigators/routes';
 
 export const EditProfileScreen =
   ({}: RootStackScreenProps<'EditProfileScreen'>): JSX.Element => {
@@ -133,6 +134,9 @@ export const EditProfileScreen =
       if (successMessage) {
         Alert.alert('Success', successMessage);
         dispatch(updateProfileActions.updateProfileReset());
+        navigation.navigate(RootStackRoutes.TAB_STACK, {
+          screen: RootStackRoutes.HOME,
+        });
       } else if (updateError) {
         Alert.alert('Error', updateError);
         dispatch(updateProfileActions.updateProfileReset());
@@ -182,7 +186,8 @@ export const EditProfileScreen =
           // weight: patient.weight.toString() || 0,
           height: parseFloat(patient.height.toString()) || 0, // Convert to number
           weight: parseFloat(patient.weight.toString()) || 0, // Convert to number
-          phoneNumber: patient.phone.replace(countryCode, '') || '',
+          phoneNumber:
+            patient.phone.replace(countryCode, '').replace(/-/g, '') || '',
         });
 
         setDefaultCountry(initialCountry); // Set mapped country key as default
@@ -225,9 +230,13 @@ export const EditProfileScreen =
     ];
 
     const extractCountryCode = (phoneNumber: string): string => {
+      // Remove any dashes from the input
+      const formattedPhoneNumber = phoneNumber.replace(/-/g, '');
+
       for (const code of countryCodes) {
-        if (phoneNumber.startsWith(code)) return code;
+        if (formattedPhoneNumber.startsWith(code)) return code;
       }
+
       return ''; // default if no matching code
     };
 
