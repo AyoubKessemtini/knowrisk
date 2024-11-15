@@ -41,6 +41,7 @@ import {
 import DeviceInfo from 'react-native-device-info';
 import axios from 'axios';
 import compareVersions from 'compare-versions'; // Assurez-vous que esModuleInterop est activé dans tsconfig.json
+import { TouchableWithoutFeedback } from 'react-native';
 const NAVIGATION_KEY = 'NAVIGATION_PERSISTENCE_KEY';
 
 function App() {
@@ -67,7 +68,7 @@ function App() {
         // Comparer les versions
         if (compareVersions.compare(latestVersion, localVersion, '<')) {
           // latestVersion est supérieure à localVersion
-        //  setShowUpdateModal(true);
+          setShowUpdateModal(true);
         }
       } catch (error) {
         console.error(
@@ -84,7 +85,7 @@ function App() {
   const openStore = () => {
     const url =
       Platform.OS === 'ios'
-        ? 'itms-apps://itunes.apple.com/app/idVotreAppID' // Remplacez par votre ID d'application iOS
+        ? 'https://testflight.apple.com/join/b2Bv3sUM' // Remplacez par votre ID d'application iOS
         : 'market://details?id=VotrePackageName'; // Remplacez par le nom de package Android
 
     Linking.openURL(url).catch((err) =>
@@ -122,20 +123,30 @@ function App() {
                     visible={showUpdateModal}
                     transparent={true}
                     animationType="fade"
-                    onRequestClose={() => {}}
+                    onRequestClose={() => {
+                      // Si vous voulez fermer le modal en appuyant sur le bouton "Retour" sur Android
+                      setShowUpdateModal(false);
+                    }}
                   >
-                    <View style={styles.modalOverlay}>
-                      <View style={styles.modalContainer}>
-                        <Text style={styles.modalTitle}>
-                          Mise à jour disponible
-                        </Text>
-                        <Text style={styles.modalMessage}>
-                          Une nouvelle version de l'application est disponible.
-                          Veuillez la mettre à jour pour continuer.
-                        </Text>
-                        <Button title="Mettre à jour" onPress={openStore} />
+                    <TouchableWithoutFeedback
+                      onPress={() => setShowUpdateModal(false)}
+                    >
+                      <View style={styles.modalOverlay}>
+                        <TouchableWithoutFeedback onPress={() => {}}>
+                          <View style={styles.modalContainer}>
+                            <Text style={styles.modalTitle}>
+                              Mise à jour disponible
+                            </Text>
+                            <Text style={styles.modalMessage}>
+                              Une nouvelle version de l'application est
+                              disponible. Veuillez la mettre à jour pour
+                              continuer.
+                            </Text>
+                            <Button title="Mettre à jour" onPress={openStore} />
+                          </View>
+                        </TouchableWithoutFeedback>
                       </View>
-                    </View>
+                    </TouchableWithoutFeedback>
                   </Modal>
                 </SheetProvider>
               </ErrorBoundary>
