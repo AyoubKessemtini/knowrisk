@@ -65,9 +65,9 @@ function App() {
         const latestVersion = response.data.version;
         console.log('latestVersion', localVersion);
         // Comparer les versions
-        if (compareVersions.compare(latestVersion, localVersion, '>')) {
+        if (compareVersions.compare(latestVersion, localVersion, '<')) {
           // latestVersion est supérieure à localVersion
-          setShowUpdateModal(true);
+        //  setShowUpdateModal(true);
         }
       } catch (error) {
         console.error(
