@@ -162,7 +162,7 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
               />
             }
             onPress={() => {
-              navigation.navigate(RootStackRoutes.Gif_INTRO_SCREEN);
+              navigation.navigate(RootStackRoutes.Gif_INTRO_GUIDE);
             }}
           />
           <CButton

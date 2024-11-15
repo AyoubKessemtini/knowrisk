@@ -43,7 +43,8 @@ import { ReportSeizureQuestion2Updated } from '../../modules/home/screens/Report
 import { ReportSeizureQuestion3Updated } from '../../modules/home/screens/ReportSeizureScreenUpdated/ReportSeizureQuestion3Updated';
 import { ReportSeizureQuestion4Updated } from '../../modules/home/screens/ReportSeizureScreenUpdated/ReportSeizureQuestion4Updated';
 import { SeizureEvent } from '@utils/types';
-import {InviteDoctor} from "@modules/profile/screens/Settings/InviteDoctor_Screen.tsx";
+import { InviteDoctor } from '@modules/profile/screens/Settings/InviteDoctor_Screen.tsx';
+import GifScreenGuide from '@modules/home/GifScreenGuide';
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -67,7 +68,8 @@ export type RootStackParamList = {
   [RootStackRoutes.STRESS_SCREEN]: undefined;
   [RootStackRoutes.SetProfil_FormScreen]: undefined;
   [RootStackRoutes.Gif_INTRO]: undefined;
-  
+  [RootStackRoutes.Gif_INTRO_GUIDE]: undefined;
+
   // [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN]: {
   //   eventId: string;
   //   eventDate: string;
@@ -267,8 +269,12 @@ export function RootNavigator() {
         component={ReportSeizureQuestion4Updated}
       />
       <Stack.Screen
-          name={RootStackRoutes.INVITE_DOCTOR}
-          component={InviteDoctor}
+        name={RootStackRoutes.INVITE_DOCTOR}
+        component={InviteDoctor}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.Gif_INTRO_GUIDE}
+        component={GifScreenGuide}
       />
     </Stack.Navigator>
   );

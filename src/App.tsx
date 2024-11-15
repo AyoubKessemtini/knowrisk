@@ -1,3 +1,5 @@
+// Vos importations existantes
+// ...
 if (__DEV__) {
   require('./devtools/ReactotronConfig');
 }
@@ -26,7 +28,19 @@ import { ThemeProvider } from './context/ThemeContext';
 import './i18n';
 import './lib/sheets';
 import { store } from './store';
-
+import { useEffect, useState } from 'react';
+import {
+  Modal,
+  View,
+  Text,
+  Button,
+  Platform,
+  Linking,
+  StyleSheet,
+} from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+import axios from 'axios';
+import compareVersions from 'compare-versions'; // Assurez-vous que esModuleInterop est activé dans tsconfig.json
 const NAVIGATION_KEY = 'NAVIGATION_PERSISTENCE_KEY';
 
 function App() {
@@ -36,11 +50,53 @@ function App() {
     restoreState: isRestored,
   } = useNavigationPersistance(NAVIGATION_KEY);
 
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+
+  useEffect(() => {
+    const checkForUpdate = async () => {
+      try {
+        // Obtenir la version locale
+        const localVersion = DeviceInfo.getVersion(); // Par exemple, "1.0.0"
+
+        // Faire une requête à votre API pour obtenir la dernière version
+        const response = await axios.get(
+          'http://172.214.33.253:3001/api/app/version',
+        ); // Remplacez par votre URL d'API
+        const latestVersion = response.data.version;
+        console.log('latestVersion', localVersion);
+        // Comparer les versions
+        if (compareVersions.compare(latestVersion, localVersion, '>')) {
+          // latestVersion est supérieure à localVersion
+          setShowUpdateModal(true);
+        }
+      } catch (error) {
+        console.error(
+          'Erreur lors de la vérification de la mise à jour :',
+          error,
+        );
+      }
+    };
+
+    checkForUpdate();
+  }, []);
+
+  // Fonction pour ouvrir le store
+  const openStore = () => {
+    const url =
+      Platform.OS === 'ios'
+        ? 'itms-apps://itunes.apple.com/app/idVotreAppID' // Remplacez par votre ID d'application iOS
+        : 'market://details?id=VotrePackageName'; // Remplacez par le nom de package Android
+
+    Linking.openURL(url).catch((err) =>
+      console.error("Erreur lors de l'ouverture du store :", err),
+    );
+  };
+
   if (!isRestored) return null;
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <GestureHandlerRootView>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <Provider store={store}>
           <PersistQueryClientProvider
             client={queryClient}
@@ -61,6 +117,26 @@ function App() {
                     <RootNavigator />
                     <CStatusBar />
                   </NavigationContainer>
+                  {/* Modal de mise à jour */}
+                  <Modal
+                    visible={showUpdateModal}
+                    transparent={true}
+                    animationType="fade"
+                    onRequestClose={() => {}}
+                  >
+                    <View style={styles.modalOverlay}>
+                      <View style={styles.modalContainer}>
+                        <Text style={styles.modalTitle}>
+                          Mise à jour disponible
+                        </Text>
+                        <Text style={styles.modalMessage}>
+                          Une nouvelle version de l'application est disponible.
+                          Veuillez la mettre à jour pour continuer.
+                        </Text>
+                        <Button title="Mettre à jour" onPress={openStore} />
+                      </View>
+                    </View>
+                  </Modal>
                 </SheetProvider>
               </ErrorBoundary>
             </ThemeProvider>
@@ -72,3 +148,32 @@ function App() {
 }
 
 export default App;
+
+// Styles
+const styles = StyleSheet.create({
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fond semi-transparent
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 20,
+    elevation: 5, // Pour l'ombre sur Android
+    shadowColor: '#000', // Pour l'ombre sur iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  modalMessage: {
+    fontSize: 16,
+    marginBottom: 20,
+  },
+});

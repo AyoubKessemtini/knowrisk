@@ -12,6 +12,7 @@ import {
   StackActions,
 } from '@react-navigation/native';
 import { RootStackParamList } from '@navigators/stacks/RootNavigator';
+import { Header } from '@components/Headers/Header';
 
 const GIF_DISPLAYED_KEY = 'hasSeenGif';
 
@@ -23,19 +24,11 @@ const GifScreenGuide: React.FC = () => {
 
     const checkGifDisplayed = async () => {
       try {
-        const hasSeenGif = await PersistenceStorage.getItem(GIF_DISPLAYED_KEY);
-        if (hasSeenGif) {
-          // Navigate immediately if the GIF has been displayed before
+        // Display the GIF for 20 seconds, then navigate
+        timer = setTimeout(async () => {
+          await PersistenceStorage.setItem(GIF_DISPLAYED_KEY, 'true');
           navigation.dispatch(StackActions.replace(RootStackRoutes.TAB_STACK));
-        } else {
-          // Display the GIF for 20 seconds, then navigate
-          timer = setTimeout(async () => {
-            await PersistenceStorage.setItem(GIF_DISPLAYED_KEY, 'true');
-            navigation.dispatch(
-              StackActions.replace(RootStackRoutes.TAB_STACK),
-            );
-          }, 20000); // 20 seconds
-        }
+        }, 20000); // 20 seconds
       } catch (error) {
         console.error('Error checking GIF display status:', error);
         // Navigate to the main screen to prevent being stuck
@@ -54,6 +47,12 @@ const GifScreenGuide: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <Header
+        hasBackButton
+        useCustomBackButton
+        text="profile.guide"
+        textColor="black"
+      />
       <GifDisplay source={ImageAssets.Intro_GIF} />
       <View style={styles.buttonContainer}>
         {/* Add your buttons here if needed */}

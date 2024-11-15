@@ -8,10 +8,7 @@ interface deleteSeizureState {
   successMessage?: string | null; // For success messages
 }
 
-
-
- 
-const initialState: deleteSeizureState = {     
+const initialState: deleteSeizureState = {
   loading: false,
   error: null,
   successMessage: null, // Initialisation de `successMessage`
@@ -41,7 +38,6 @@ export const deleteSeizureSlice = createSlice({
       state.error = null; // Reset error to null
       state.successMessage = null; // Reset success message
       state.id = undefined; // Clear `otp`
-    
     },
   },
 });
