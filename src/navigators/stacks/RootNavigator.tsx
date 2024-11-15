@@ -67,6 +67,7 @@ export type RootStackParamList = {
   [RootStackRoutes.STRESS_SCREEN]: undefined;
   [RootStackRoutes.SetProfil_FormScreen]: undefined;
   [RootStackRoutes.Gif_INTRO]: undefined;
+  
   // [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN]: {
   //   eventId: string;
   //   eventDate: string;

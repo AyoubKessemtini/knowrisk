@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
@@ -9,7 +9,7 @@ import { StressLevelCard } from '@components/Cards/StressLevelIndicator';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackRoutes } from '../../../../navigators/routes';
 //import { DateSelector } from '@components/DatePicker/DatePicker';
-import {formatStringDate, formatTime} from '@hooks/useDateFormatter';
+import { formatStringDate, formatTime } from '@hooks/useDateFormatter';
 import { RootState, useAppSelector } from '@store/index.ts';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
@@ -17,11 +17,14 @@ import { AuthActions } from '@store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Journal } from '@components/Cards/JournalCard.tsx';
 import { TriggersCard } from '@modules/home/components/triggersCard.tsx';
-import {Colors} from "@constants/Colors.ts";
-import {core} from "@config/Configuration.ts";
-import {StressDeviceData, stressRateData} from "@core/entities/deviceDataApisEntity/StressDeviceData.ts";
-import {PatientData} from "@core/entities/deviceDataApisEntity/PatientData.ts";
-import {MedicationsList} from "@components/Medication/MedicationsList.tsx";
+import { Colors } from '@constants/Colors.ts';
+import { core } from '@config/Configuration.ts';
+import {
+  StressDeviceData,
+  stressRateData,
+} from '@core/entities/deviceDataApisEntity/StressDeviceData.ts';
+import { PatientData } from '@core/entities/deviceDataApisEntity/PatientData.ts';
+import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
 
 export const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -30,7 +33,8 @@ export const Home: React.FC = () => {
   const [spo2Data, setSpo2Data] = useState<Spo2Data>(null);
   const [patientData, setPatientData] = useState<PatientData>(null);
   const [lowStressData, setLowStressData] = useState<stressRateData>(null);
-  const [mediumStressData, setMediumStressData] = useState<stressRateData>(null);
+  const [mediumStressData, setMediumStressData] =
+    useState<stressRateData>(null);
   const [highStressData, setHighStressData] = useState<stressRateData>(null);
   const colors: string[] = [
     '#FFA224',
@@ -77,7 +81,6 @@ export const Home: React.FC = () => {
   );
   const dispatch = useDispatch();
 
-
   // const backgroundColor = getBackgroundColor(firstName + lastName);
   const user = useSelector((state: RootState) => state.auth.user);
   const getFirstNameAndLastName = (
@@ -115,14 +118,20 @@ export const Home: React.FC = () => {
     checkLoginStatus();
     const fetchStressDailyData = async () => {
       try {
-        const fetchedData = await core.getStressDailyData.execute(formatStringDate(selectedDate));
+        const fetchedData = await core.getStressDailyData.execute(
+          formatStringDate(selectedDate),
+        );
         setStressData(fetchedData);
-        if(fetchedData !=null){
+        if (fetchedData != null) {
           setHighStressData(
-              fetchedData.data.find((s) => s.stressLevel === 'High'),
+            fetchedData.data.find((s) => s.stressLevel === 'High'),
           );
-          setMediumStressData(fetchedData.data.find(s => s.stressLevel === "Medium"));
-          setLowStressData(fetchedData.data.find(s => s.stressLevel === "Low"));
+          setMediumStressData(
+            fetchedData.data.find((s) => s.stressLevel === 'Medium'),
+          );
+          setLowStressData(
+            fetchedData.data.find((s) => s.stressLevel === 'Low'),
+          );
         }
       } catch (error) {
         console.error('Failed to fetch stress data:', error);
@@ -130,7 +139,9 @@ export const Home: React.FC = () => {
     };
     const fetchSpo2DailyData = async () => {
       try {
-        const fetchedData = await core.getSpo2DailyData.execute(formatStringDate(selectedDate));
+        const fetchedData = await core.getSpo2DailyData.execute(
+          formatStringDate(selectedDate),
+        );
         setSpo2Data(fetchedData);
       } catch (error) {
         console.error('Failed to fetch stress data:', error);
@@ -139,8 +150,8 @@ export const Home: React.FC = () => {
     const fetchMedications = async () => {
       try {
         const fetchedData = await core.getMedications.execute();
-        console.log('medications')
-        console.log(fetchedData)
+        console.log('medications');
+        console.log(fetchedData);
         setMedications(fetchedData);
       } catch (error) {
         console.error('Failed to fetch medications:', error);
@@ -162,16 +173,30 @@ export const Home: React.FC = () => {
       noHorizontalPadding
       containerStyles={styles.container}
     >
-      <MainHeader firstName={firstName} lastName={lastName}  />
+      <MainHeader firstName={firstName} lastName={lastName} />
       <View style={styles.wrapper}>
         <PatientInfoCard
           name={`${firstName} ${lastName}`}
           id={`ID: ${user?.id.split('-')[0]}`}
-          lastSeizure={patientData && patientData.seizures ? `${patientData.seizures.date}, ${patientData.seizures.time_from}` : 'No seizures detected'}
-          seizureFrequency={patientData && patientData.seizures_per_day ? patientData.seizures_per_day : 'N/A'}
-          seizureRisk={patientData && patientData.stress ? patientData.stress.stress_level : 'N/A'} //"Moderate"
+          lastSeizure={
+            patientData && patientData.seizures
+              ? `${patientData.seizures.date}, ${patientData.seizures.time_from}`
+              : 'No seizures detected'
+          }
+          seizureFrequency={
+            patientData && patientData.seizures_per_day
+              ? patientData.seizures_per_day
+              : 'N/A'
+          }
+          seizureRisk={
+            patientData && patientData.stress
+              ? patientData.stress.stress_level
+              : 'N/A'
+          } //"Moderate"
           isDevicePaired={isDeviceConnectedBLE}
-          mood={patientData && patientData.stress ? patientData.stress.mood : 'N/A'} //"happy"
+          mood={
+            patientData && patientData.stress ? patientData.stress.mood : 'N/A'
+          } //"happy"
           temp={
             temperature === '--'
               ? '--'
@@ -186,8 +211,10 @@ export const Home: React.FC = () => {
           }}
         />
         <TriggersCard
-            data={ patientData ? patientData.triggers.map((t,index)=>{
-              return {
+          data={
+            patientData
+              ? patientData.triggers.map((t, index) => {
+                  return {
                     name: t.trigger,
                     color: colors[index],
                     value: t.percentage * 100,
@@ -247,51 +274,73 @@ export const Home: React.FC = () => {
         </View>
         <View style={styles.row}>
           <SleepCard
-              lastUpdated={isDeviceConnectedBLE ? 'Now' : '  --'}
-              sleepData={hr as string}
-              title="common.heartRate"
-              unit="BPM"
-              onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
+            lastUpdated={isDeviceConnectedBLE ? 'Now' : '  --'}
+            sleepData={hr as string}
+            title="common.heartRate"
+            unit="BPM"
+            onPress={() =>
+              navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)
+            }
           />
           <Journal />
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate(RootStackRoutes.STRESS_SCREEN)}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(RootStackRoutes.STRESS_SCREEN)}
+        >
           <View style={styles.row}>
             <StressLevelCard
-                date={
-                  stressData
-                      ? formatStringDate(selectedDate)
-                      : `${formatStringDate(selectedDate)} (Calculating)`
-                }
-                stressLevels={{
-                  low: lowStressData ? lowStressData.time : 'Calculating',
-                  good: mediumStressData ? mediumStressData.time : 'Calculating',
-                  high: highStressData ? highStressData.time : 'Calculating',
-                }}
-                progress={{
-                  low: lowStressData ? Number(lowStressData.percentage) : 0,
-                  good: mediumStressData ? Number(mediumStressData.percentage) : 10,
-                  high: highStressData ? Number(highStressData.percentage) : 0,
-                }}
-                comparison={{ low: 30, good: 40, high: 30 }}
+              date={
+                stressData
+                  ? formatStringDate(selectedDate)
+                  : `${formatStringDate(selectedDate)} (Calculating)`
+              }
+              stressLevels={{
+                low: lowStressData ? lowStressData.time : 'Calculating',
+                good: mediumStressData ? mediumStressData.time : 'Calculating',
+                high: highStressData ? highStressData.time : 'Calculating',
+              }}
+              progress={{
+                low: lowStressData ? Number(lowStressData.percentage) : 0,
+                good: mediumStressData
+                  ? Number(mediumStressData.percentage)
+                  : 10,
+                high: highStressData ? Number(highStressData.percentage) : 0,
+              }}
+              comparison={{ low: 30, good: 40, high: 30 }}
             />
           </View>
         </TouchableOpacity>
         {/*<MedicationsList />*/}
         <View style={styles.row}>
           <SleepCard
-              lastUpdated={patientData && patientData.oxygen_saturations ? formatTime(patientData.oxygen_saturations.date) : '  --'}
-              sleepData={patientData && patientData.oxygen_saturations ? patientData.oxygen_saturations.oxygen_saturation.toString() : '--'}
-              title="common.bloodOxygen"
-              unit="%"
-              //onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
+            lastUpdated={
+              patientData && patientData.oxygen_saturations
+                ? formatTime(patientData.oxygen_saturations.date)
+                : '  --'
+            }
+            sleepData={
+              patientData && patientData.oxygen_saturations
+                ? patientData.oxygen_saturations.oxygen_saturation.toString()
+                : '--'
+            }
+            title="common.bloodOxygen"
+            unit="%"
+            //onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
           />
           <SleepCard
-              lastUpdated={patientData && patientData.respiratory_rates ? formatTime(patientData.respiratory_rates.date) : '  --'}
-              sleepData={patientData && patientData.respiratory_rates ? patientData.respiratory_rates.respiratory_rate.toString() : '--'}
-              title="common.respiratoryRates"
-              unit="RPM"
-              //onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
+            lastUpdated={
+              patientData && patientData.respiratory_rates
+                ? formatTime(patientData.respiratory_rates.date)
+                : '  --'
+            }
+            sleepData={
+              patientData && patientData.respiratory_rates
+                ? patientData.respiratory_rates.respiratory_rate.toString()
+                : '--'
+            }
+            title="common.respiratoryRates"
+            unit="RPM"
+            //onPress={()=>navigation.navigate(RootStackRoutes.HEART_RATE_DETAILS)}
           />
         </View>
         {medications !== null && (
@@ -311,7 +360,7 @@ const styles = StyleSheet.create({
     paddingBottom: 160,
   },
   wrapper: {
-    gap: 20
+    gap: 20,
   },
   row: {
     flexDirection: 'row',

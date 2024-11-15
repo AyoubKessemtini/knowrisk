@@ -149,6 +149,22 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
                 navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
               }}
           />
+                    <CButton
+            text="profile.guide"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.Gif_INTRO_SCREEN);
+            }}
+          />
           <CButton
             text="profile.invite_doctor"
             buttonType="magnolia"
