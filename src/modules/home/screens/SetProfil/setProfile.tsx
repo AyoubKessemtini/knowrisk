@@ -48,6 +48,8 @@ const bloodTypes = [
   { label: 'AB-', value: 'AB-' },
   { label: 'O+', value: 'O+' },
   { label: 'O-', value: 'O-' },
+  { label: "I don't know", value: "I don't know" },
+  
 ];
 
 const { width } = Dimensions.get('window');

@@ -64,9 +64,15 @@ function App() {
           'http://172.214.33.253:3001/api/users/version',
         ); // Remplacez par votre URL d'API
         const latestVersion = response.data.version;
-        console.log('latestVersion', localVersion);
+
+        console.log('localVersion', localVersion);
+        console.log('latestVersion', latestVersion);
+        console.log(
+          'compareVersions.compare(latestVersion, localVersion, ">")',
+          compareVersions.compare(latestVersion, localVersion, '>'),
+        );
         // Comparer les versions
-        if (compareVersions.compare(latestVersion, localVersion, '<')) {
+        if (compareVersions.compare(latestVersion, localVersion, '>')) {
           // latestVersion est supérieure à localVersion
           setShowUpdateModal(true);
         }

@@ -45,6 +45,7 @@ import { ReportSeizureQuestion4Updated } from '../../modules/home/screens/Report
 import { SeizureEvent } from '@utils/types';
 import { InviteDoctor } from '@modules/profile/screens/Settings/InviteDoctor_Screen.tsx';
 import GifScreenGuide from '@modules/home/GifScreenGuide';
+import { TermsAndConditionsScreen } from '@modules/home/screens/TermsAndConditionsScreen';
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -69,6 +70,7 @@ export type RootStackParamList = {
   [RootStackRoutes.SetProfil_FormScreen]: undefined;
   [RootStackRoutes.Gif_INTRO]: undefined;
   [RootStackRoutes.Gif_INTRO_GUIDE]: undefined;
+  [RootStackRoutes.TERMS_CONDITIONS_PROFIL]: undefined;
 
   // [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN]: {
   //   eventId: string;
@@ -275,6 +277,11 @@ export function RootNavigator() {
       <Stack.Screen
         name={RootStackRoutes.Gif_INTRO_GUIDE}
         component={GifScreenGuide}
+      />
+      <Stack.Screen
+        name={RootStackRoutes.TERMS_CONDITIONS_PROFIL}
+        component={TermsAndConditionsScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
