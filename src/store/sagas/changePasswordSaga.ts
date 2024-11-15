@@ -20,7 +20,7 @@ function* changePasswordSaga(): SagaIterator {
     const { oldPassword, password } = state; // Ensure 'password' is part of your state
 
     const accessToken = getAccessToken();
-    const url = `http://172.214.33.253:3001/api/patients/password`;
+    const url = `https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/patients/password`;
     console.log('URL:', url);
 
     // console.log('Data Seizure:', {

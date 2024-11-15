@@ -8,7 +8,7 @@ import {PatientData} from "@core/entities/deviceDataApisEntity/PatientData.ts";
 export class RDDeviceDataApisRepo implements DeviceDataApisRepo {
     constructor(private httpClient: AxiosInstance) {}
 
-    baseUrl:string='http://172.214.33.253:3001';
+    baseUrl:string='https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net';
 
      async getHeartRateWeeklyData(): Promise<HeartRateDeviceData[]> {
          const token = await PersistenceStorage.getItem(KEYS.ACCESS_TOKEN);

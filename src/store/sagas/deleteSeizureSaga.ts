@@ -20,7 +20,7 @@ function* deleteSeizureSaga(): SagaIterator {
     const { id } = state; // Ensure 'password' is part of your state
 
     const accessToken = getAccessToken();
-    const url = `http://172.214.33.253:3001/api/patients/${id}/seizure`;
+    const url = `https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/patients/${id}/seizure`;
 
     // console.log('Data Seizure:', {
     //   date,

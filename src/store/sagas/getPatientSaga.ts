@@ -24,17 +24,17 @@ function* fetchgetPatientForecastSaga(
     const state = yield select((state: RootState) => state.getPatientForm);
 
     const accessToken = getAccessToken();
-    // const baseUrl = 'http://172.214.33.253:3001/api/getPatients';
+    // const baseUrl = 'https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/getPatients';
 
     const { id } = action.payload;
 
     console.log('id PayloadAction:', id);
-    const baseUrl = `http://172.214.33.253:3001/api/patients/${id}`;
+    const baseUrl = `https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/patients/${id}`;
 
     console.log('baseUrl getPatient:', baseUrl.toString());
 
     // const url =
-    //   'http://172.214.33.253:3001/api/patients/df8715e1-c724-44fc-86b5-316917360b1a/getPatients?month=2024-11';
+    //   'https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/patients/df8715e1-c724-44fc-86b5-316917360b1a/getPatients?month=2024-11';
     // // Construct the URL with query parameters
     // const url = `${baseUrl}?id=${id}&month=${month}`;
     console.log('list getPatient:', baseUrl.toString());

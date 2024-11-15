@@ -20,7 +20,7 @@ function* submitSeizureReportSaga(): SagaIterator {
     const { date, timeFrom, timeTo, alcohol, exercise, eat } = state;
 
     const accessToken = getAccessToken();
-    const url = `http://172.214.33.253:3001/api/patients/report-seizure`;
+    const url = `https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/patients/report-seizure`;
 
     console.log('Data Seizure:', {
       date,

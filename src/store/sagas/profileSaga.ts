@@ -17,7 +17,7 @@ interface ProfileData {
   answer: string;
 }
 
-const url = `http://172.214.33.253:3001/api/patients/profile`;
+const url = `https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/patients/profile`;
 
 // Profile saga function to handle setProfileRequest
 function* setProfileSaga(action: PayloadAction<ProfileData>) {

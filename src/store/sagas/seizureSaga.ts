@@ -24,7 +24,7 @@ function* fetchSeizureForecastSaga(
 
     const state = yield select((state: RootState) => state.seizureForecast);
     const accessToken = getAccessToken();
-    const baseUrl = 'http://172.214.33.253:3001/api/patients';
+    const baseUrl = 'https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/patients';
     console.log('baseUrl Seizure:', baseUrl.toString());
 
     const { id, month } = action.payload;

@@ -20,7 +20,7 @@ function* forgetPasswordSaga(): SagaIterator {
     const { email } = state;
     console.log('email: forget-password', email);
     const accessToken = getAccessToken();
-    const url = `http://172.214.33.253:3001/api/auth/app/forgot-password`;
+    const url = `https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/auth/app/forgot-password`;
 
     // console.log('Data Seizure:', {
     //   date,

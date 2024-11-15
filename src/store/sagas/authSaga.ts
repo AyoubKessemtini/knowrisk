@@ -33,7 +33,7 @@ function* loginUser(action: any) {
   try {
     const response = yield call(
       axios.post,
-      'http://172.214.33.253:3001/api/auth/app/login',
+      'https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/auth/app/login',
       action.payload,
     );
 
@@ -101,7 +101,7 @@ function* registerUser(action: any) {
 
     const response = yield call(
       axios.post,
-      'http://172.214.33.253:3001/api/auth/app/register',
+      'https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/auth/app/register',
       action.payload,
       {
         headers: {

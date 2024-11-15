@@ -6,8 +6,8 @@ import {InviteDoctorCommand} from "@core/usecases/invitations/InviteDoctor.ts";
 
 export class RDInvitationRepo implements InvitationRepo {
     constructor(private httpClient: AxiosInstance) {}
-
-    baseUrl:string='http://172.214.33.253:3001';
+    //oldBaseUrl:string='http://172.214.33.253:3001'
+    baseUrl:string='https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net';
 
     async inviteDoctor(req:InviteDoctorCommand): Promise<any> {
         try {

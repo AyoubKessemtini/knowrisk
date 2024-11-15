@@ -8,7 +8,7 @@ export class RDMedicationRepo implements MedicationRepo {
     constructor(private httpClient: AxiosInstance) {
     }
 
-    baseUrl:string='http://172.214.33.253:3001';
+    baseUrl:string='https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net';
 
     async addMedication(medication: Medication): Promise<any> {
         try {

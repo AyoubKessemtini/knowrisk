@@ -62,7 +62,7 @@ function App() {
 
         // Faire une requête à votre API pour obtenir la dernière version
         const response = await axios.get(
-          'http://172.214.33.253:3001/api/users/version',
+          'https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/users/version',
         ); // Remplacez par votre URL d'API
         const latestVersion = response.data.version;
 

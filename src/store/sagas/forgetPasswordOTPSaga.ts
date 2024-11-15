@@ -21,7 +21,7 @@ function* forgetPasswordOTPSaga(): SagaIterator {
 
     console.log('email: forget-password', otp);
     const accessToken = getAccessToken();
-    const url = `http://172.214.33.253:3001/api/auth/reset-password/${otp}`;
+    const url = `https://knowrisk-b5hafebsage9dna6.eastus-01.azurewebsites.net/api/auth/reset-password/${otp}`;
 
     // console.log('Data Seizure:', {
     //   date,
