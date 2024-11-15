@@ -21,7 +21,7 @@ export interface PatientData {
     | 'AB-'
     | 'O+'
     | 'O-'
-    | "I don't know"
+    // | "I don't know"
     | string;
   age: number; // age in years
   affected_since_when: string;

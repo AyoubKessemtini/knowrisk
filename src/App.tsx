@@ -57,7 +57,8 @@ function App() {
     const checkForUpdate = async () => {
       try {
         // Obtenir la version locale
-        const localVersion = DeviceInfo.getVersion(); // Par exemple, "1.0.0"
+        //   const localVersion = DeviceInfo.getVersion(); // Par exemple, "1.0.0"
+        const localVersion = '25.1.2'; // Par exemple, "1.0.0"
 
         // Faire une requête à votre API pour obtenir la dernière version
         const response = await axios.get(
