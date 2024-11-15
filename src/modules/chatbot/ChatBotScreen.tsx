@@ -33,7 +33,7 @@ export const ChatBotScreen =
         const [messages, setMessages] = useState([
             {
                 sender: chatUser.name,
-                message: 'Hello, I am EpyChat, how can I assit you today?',
+                message: 'Hello, I am EpyChat, how can I assist you today?',
                 time: '6:02 AM',
             },
         ]);
@@ -65,36 +65,41 @@ export const ChatBotScreen =
                     time: t,
                 },
             ]);
-            const message=inputMessage;
-            setInputMessage('');
-            setIsLoading(true);
-            const response = await core.sendMessage.execute(message);
-            if (response != null) {
-                setMessages((prevMessages) => [
-                    ...prevMessages,
-                    {
-                        sender: chatUser.name,
-                        message: response,
-                        time: t,
-                    },
-                ]);
-            }else {
-                setMessages((prevMessages) => [
-                    ...prevMessages,
-                    {
-                        sender: chatUser.name,
-                        message: "I'm currently receiving too many requests. Please wait a moment and try again.",
-                        time: t,
-                    },
-                ]);
-            }
-            setIsLoading(false);
         }
 
 
         useEffect(() => {
-
-        }, []);
+            const refreshChat = async ()=>{
+                setInputMessage('');
+                console.log('Updated messages:', JSON.stringify(messages));
+                const t = getTime(new Date());
+                setIsLoading(true);
+                const response = await core.sendMessage.execute(JSON.stringify(messages));
+                if (response != null) {
+                    setMessages((prevMessages) => [
+                        ...prevMessages,
+                        {
+                            sender: chatUser.name,
+                            message: response,
+                            time: t,
+                        },
+                    ]);
+                }else {
+                    setMessages((prevMessages) => [
+                        ...prevMessages,
+                        {
+                            sender: chatUser.name,
+                            message: "I'm currently receiving too many requests. Please wait a moment and try again.",
+                            time: t,
+                        },
+                    ]);
+                }
+                setIsLoading(false);
+            }
+            if(messages[messages.length-1].sender==="user"){
+                refreshChat()
+            }
+        }, [messages]);
 
         return (
             <KeyboardAvoidingView

@@ -210,7 +210,7 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
               />
             }
             onPress={() => {
-              navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
+              navigation.navigate(RootStackRoutes.EMERGENCY_SCREEN);
             }}
           />
           <CButton

@@ -524,16 +524,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.grey1,
   },
-  container: {
-    gap: 5,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-  },
-  line: {
-    height: 1,
-    borderBottomWidth: 0.2,
-    borderColor: Colors.fog,
-  },
   loaderContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -544,13 +534,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-  },
-  fixedButtonContainer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 20,
-    right: 20,
-    zIndex: 1,
   },
   scrollContainer: {
     flex: 1,

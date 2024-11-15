@@ -12,35 +12,35 @@ export const QuestionComponent: React.FC<QuestionProps> = ({ question }) => {
   const [selected, setSelected] = useState<'yes' | 'no' | null>(null);
 
   return (
-    <View style={styles.questionContainer}>
-      <CText size="md" color="purpleGrey">
-        {question}
-      </CText>
-      <View style={styles.answerContainer}>
-        <TouchableOpacity
-          style={[
-            styles.answerButton,
-            selected === 'no' && styles.selectedButton,
-          ]}
-          onPress={() => setSelected('no')}
-        >
-          <CText size="md" color={selected === 'no' ? 'white' : 'fadedPurple'}>
-            ✕
-          </CText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.answerButton,
-            selected === 'yes' && styles.selectedButton,
-          ]}
-          onPress={() => setSelected('yes')}
-        >
-          <CText size="md" color={selected === 'yes' ? 'white' : 'fadedPurple'}>
-            <Icon type="material" name="done" size={15} />
-          </CText>
-        </TouchableOpacity>
+      <View style={styles.questionContainer}>
+        <CText size="md" color="purpleGrey" style={styles.questionText}>
+          {question}
+        </CText>
+        <View style={styles.answerContainer}>
+          <TouchableOpacity
+              style={[
+                styles.answerButton,
+                selected === 'no' && styles.selectedButton,
+              ]}
+              onPress={() => setSelected('no')}
+          >
+            <CText size="md" color={selected === 'no' ? 'white' : 'fadedPurple'}>
+              ✕
+            </CText>
+          </TouchableOpacity>
+          <TouchableOpacity
+              style={[
+                styles.answerButton,
+                selected === 'yes' && styles.selectedButton,
+              ]}
+              onPress={() => setSelected('yes')}
+          >
+            <CText size="md" color={selected === 'yes' ? 'white' : 'fadedPurple'}>
+              <Icon type="material" name="done" size={15} />
+            </CText>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
   );
 };
 
@@ -53,9 +53,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%', // Ensures the container takes up full width
+  },
+  questionText: {
+    flex: 1, // Allows the text to take the available space before the icons
   },
   answerContainer: {
     flexDirection: 'row',
+    justifyContent: 'flex-end', // Align buttons to the right
+    alignItems: 'center',
   },
   answerButton: {
     width: 30,
