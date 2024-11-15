@@ -60,7 +60,7 @@ function App() {
 
         // Faire une requête à votre API pour obtenir la dernière version
         const response = await axios.get(
-          'http://172.214.33.253:3001/api/app/version',
+          '172.214.33.253:3001/api/users/version',
         ); // Remplacez par votre URL d'API
         const latestVersion = response.data.version;
         console.log('latestVersion', localVersion);
