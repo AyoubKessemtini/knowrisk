@@ -226,9 +226,11 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
               />
             }
             onPress={() => {
-              navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-                screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
-              });
+              navigation.navigate(RootStackRoutes.TERMS_CONDITIONS_PROFIL);
+
+              // navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
+              //   screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
+              // });
             }}
           />
         </View>

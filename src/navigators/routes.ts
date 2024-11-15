@@ -29,6 +29,7 @@ export const RootStackRoutes = {
   REPORT_SEIZURE_QUESTION_UPDATED_FOUR_SCREEN: 'ReportSeizureQuestion4Updated',
   Gif_INTRO_GUIDE: 'GifScreenGuide',
   EMERGENCY_SCREEN: 'EmergencyScreen',
+  TERMS_CONDITIONS_PROFIL: 'TermsAndConditionsScreen',
 } as const;
 
 export const TabBarStackRoutes = {

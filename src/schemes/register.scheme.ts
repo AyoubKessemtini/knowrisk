@@ -10,9 +10,16 @@ export const registerScheme = z
     phoneNumber: z.string().min(1, 'Phone number is required'),
     password: z.string().min(8, 'Password must be at least 8 characters'),
     confirmPassword: z.string().min(8, 'Confirm password is required'),
-    device_type: z.nativeEnum(DeviceType).refine((value) => value !== '', {
-      message: 'Please select a device type',
-    }), // Ensures device_type is selected and valid
+    device_type: z
+      .nativeEnum(DeviceType)
+      .refine((value) => value !== undefined, {
+        message: 'Please select a device type',
+      }),
+    acceptedTerms: z.boolean(),
+  })
+  .refine((data) => data.acceptedTerms === true, {
+    path: ['acceptedTerms'],
+    message: 'You must accept the terms and conditions',
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",

@@ -227,6 +227,8 @@ export const EditProfileScreen =
       { label: 'AB-', value: 'AB-' },
       { label: 'O+', value: 'O+' },
       { label: 'O-', value: 'O-' },
+      // { label: "I don't know", value: "I don't know" },
+
     ];
 
     const extractCountryCode = (phoneNumber: string): string => {

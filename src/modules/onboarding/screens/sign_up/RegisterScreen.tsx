@@ -6,13 +6,14 @@ import {
   Alert,
   TouchableOpacity,
   Modal,
+  Switch,
 } from 'react-native';
 import { CButton } from '@components/Buttons/CButton';
 import { ControlledInput } from '@components/ControlledInput';
 import { CText } from '@components/CText';
 import { Screen } from '@components/Screen';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { registerScheme, RegisterScheme } from 'src/schemes/register.scheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
@@ -26,7 +27,7 @@ import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { DeviceType } from '@constants/DeviceTypes';
 import { PhoneNumberInputRegister } from '@components/Inputs/PhoneNumberInputRegister';
-
+ 
 export const RegisterScreen =
   ({}: OnboardingStackScreenProps<'SignUpScreen'>): JSX.Element => {
     const navigation = useNavigation();
@@ -41,6 +42,7 @@ export const RegisterScreen =
         confirmPassword: '',
         phoneNumber: '',
         device_type: DeviceType.Device,
+        acceptedTerms: false,
       },
       resolver: zodResolver(registerScheme),
     });
@@ -64,22 +66,30 @@ export const RegisterScreen =
     const [isPickerVisible, setPickerVisible] = useState(false); // State for dropdown
 
     const onSubmit = (data: RegisterScheme) => {
-      const fullPhoneNumber = `${selectedCountryCode}${data.phoneNumber}`;
-      console.log('Dispatching register eeee:' + fullPhoneNumber);
-      dispatch(AuthActions.resetErrorRegister()); // Reset error before submitting
+      try {
+        // Your existing logic
 
-      const payload = {
-        first_name: data.firstname,
-        last_name: data.lastname,
-        email: data.email,
-        password: data.password,
-        confirmpassword: data.confirmPassword,
-        phone: fullPhoneNumber,
-        device_type: selectedDeviceType, // Include selected device type
-      };
-      console.log('Dispatching register request:', payload); // Debug: Check payload data
+        const fullPhoneNumber = `${selectedCountryCode}${data.phoneNumber}`;
+        console.log('Dispatching register eeee:' + fullPhoneNumber);
+        dispatch(AuthActions.resetErrorRegister()); // Reset error before submitting
 
-      dispatch(AuthActions.registerRequest(payload));
+        const payload = {
+          first_name: data.firstname,
+          last_name: data.lastname,
+          email: data.email,
+          password: data.password,
+          confirmpassword: data.confirmPassword,
+          phone: fullPhoneNumber,
+          device_type: selectedDeviceType, // Include selected device type
+        };
+        console.log('Dispatching register request:', payload); // Debug: Check payload data
+
+        dispatch(AuthActions.registerRequest(payload));
+        // eslint-disable-next-line no-catch-shadow
+      } catch (error) {
+        console.error('Submission error:', error);
+        Alert.alert('An error occurred', 'Please try again.');
+      }
     };
 
     const loading = useSelector((state) => state.auth.loading);
@@ -217,7 +227,6 @@ export const RegisterScreen =
           verticalPadding={10}
           borderColor={isFocused.phoneNumber ? Colors.deepPurple : Colors.grey1}
           backgroundColor={Colors.lightPink}
-
           textStyle={{ color: Colors.deepPurple }}
           defaultCountryCode={selectedCountryCode}
           placeholderText="onboarding.signup.phone_number"
@@ -328,6 +337,44 @@ export const RegisterScreen =
             navigation.navigate(RootStackRoutes.SetProfil_FormScreen)
           }
         /> */}
+        <Controller
+          control={control}
+          name="acceptedTerms"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <View style={styles.switchContainer}>
+              <View
+                style={[
+                  styles.switchWrapper,
+                  error && styles.switchWrapperError, // Apply error style if there's an error
+                ]}
+              >
+                <Switch
+                  value={value}
+                  onValueChange={(val: boolean) => onChange(val)}
+                  thumbColor={value ? Colors.deepPurple : Colors.grey3}
+                  trackColor={{ false: Colors.grey1, true: Colors.lightPurple }}
+                />
+              </View>
+
+              <View style={styles.switchTextContainer}>
+                <CText style={styles.label}>
+                  I have read and accepted the{' '}
+                </CText>
+                <Pressable
+                  onPress={() => {
+                    // Navigate to Terms and Conditions screen
+                    navigation.navigate(
+                      RootStackRoutes.TERMS_CONDITIONS_PROFIL,
+                    );
+                  }}
+                >
+                  <CText style={styles.link}>terms and conditions</CText>
+                </Pressable>
+              </View>
+            </View>
+          )}
+        />
+
         <CButton
           mt={20}
           text="common.continue"
@@ -383,6 +430,40 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     overflow: 'hidden',
     borderWidth: 1, // Border width to match ControlledInput
+  },
+  label: {
+    color: Colors.black,
+    fontSize: 16,
+  },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+    fontSize: 16,
+  },
+  errorText: {
+    marginTop: 5,
+    fontSize: 12,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  switchTextContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    flex: 1,
+    marginLeft: 10,
+    alignItems: 'center',
+  },
+  switchWrapper: {
+    padding: 2,
+    borderRadius: 4,
+  },
+  switchWrapperError: {
+    borderColor: 'red',
+    borderWidth: 1,
+    borderRadius: 20,
   },
 });
 

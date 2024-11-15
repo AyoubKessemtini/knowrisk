@@ -57,16 +57,23 @@ function App() {
     const checkForUpdate = async () => {
       try {
         // Obtenir la version locale
-        const localVersion = DeviceInfo.getVersion(); // Par exemple, "1.0.0"
+        //   const localVersion = DeviceInfo.getVersion(); // Par exemple, "1.0.0"
+        const localVersion = '25.1.2'; // Par exemple, "1.0.0"
 
         // Faire une requête à votre API pour obtenir la dernière version
         const response = await axios.get(
           'http://172.214.33.253:3001/api/users/version',
         ); // Remplacez par votre URL d'API
         const latestVersion = response.data.version;
-        console.log('latestVersion', localVersion);
+
+        console.log('localVersion', localVersion);
+        console.log('latestVersion', latestVersion);
+        console.log(
+          'compareVersions.compare(latestVersion, localVersion, ">")',
+          compareVersions.compare(latestVersion, localVersion, '>'),
+        );
         // Comparer les versions
-        if (compareVersions.compare(latestVersion, localVersion, '<')) {
+        if (compareVersions.compare(latestVersion, localVersion, '>')) {
           // latestVersion est supérieure à localVersion
           setShowUpdateModal(true);
         }
