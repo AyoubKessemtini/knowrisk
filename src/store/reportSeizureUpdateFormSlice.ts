@@ -24,27 +24,27 @@ export const reportSeizureUpdateFormSlice = createSlice({
   name: 'reportSeizureUpdateForm',
   initialState,
   reducers: {
-    setDate(state, action: PayloadAction<string>) {
+    setDateUpdated(state, action: PayloadAction<string>) {
       // console.log("Mise à jour de 'date' :", action.payload); // Debugging log
 
       state.date = action.payload;
     },
-    setTimeFrom(state, action: PayloadAction<string>) {
+    setTimeFromUpdated(state, action: PayloadAction<string>) {
       console.log("Mise à jour de 'timeFrom' :", action.payload); // Debugging log
 
       state.timeFrom = action.payload;
     },
-    setTimeTo(state, action: PayloadAction<string>) {
+    setTimeToUpdated(state, action: PayloadAction<string>) {
       console.log("Mise à jour de 'TimeTo' :", action.payload);
 
       state.timeTo = action.payload;
     },
-    setAlcohol(state, action: PayloadAction<boolean>) {
+    setAlcoholUpdated(state, action: PayloadAction<boolean>) {
       // console.log("Mise à jour de 'alcohol' dans le reducer :", action.payload);
 
       state.alcohol = action.payload;
     },
-    setExercise(state, action: PayloadAction<boolean>) {
+    setExerciseUpdated(state, action: PayloadAction<boolean>) {
       // console.log(
       //   "Mise à jour de 'exercise' dans le reducer :",
       //   action.payload,
@@ -52,7 +52,7 @@ export const reportSeizureUpdateFormSlice = createSlice({
 
       state.exercise = action.payload;
     },
-    setEat(state, action: PayloadAction<string>) {
+    setEatUpdated(state, action: PayloadAction<string>) {
       // console.log("Mise à jour de 'eat' dans le reducer :", action.payload);
       state.eat = action.payload;
     },
@@ -79,12 +79,12 @@ export const reportSeizureUpdateFormSlice = createSlice({
 });
 
 export const {
-  setDate,
-  setTimeFrom,
-  setTimeTo,
-  setAlcohol,
-  setExercise,
-  setEat,
+  setDateUpdated,
+  setTimeFromUpdated,
+  setTimeToUpdated,
+  setAlcoholUpdated,
+  setExerciseUpdated,
+  setEatUpdated,
   submitSeizureUpdateReportRequest,
   submitSeizureUpdateReportSuccess,
   submitSeizureUpdateReportFailure,

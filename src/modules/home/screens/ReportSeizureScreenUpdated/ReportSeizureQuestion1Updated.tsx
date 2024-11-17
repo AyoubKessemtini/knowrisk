@@ -11,9 +11,9 @@ import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
 import { HourPicker } from '../../components/HourPicker';
 import { useDispatch } from 'react-redux';
 import {
-  setDate,
-  setTimeFrom,
-  setTimeTo,
+  setDateUpdated,
+  setTimeFromUpdated,
+  setTimeToUpdated,
 } from '@store/reportSeizureUpdateFormSlice';
 import {
   RootStackParamList,
@@ -35,29 +35,27 @@ export const ReportSeizureQuestion1Updated: React.FC<
 
   const { seizureEvent } = route.params;
 
-  // Initialize state with seizureEvent data
   const [selectedDate, setSelectedDate] = useState(
     seizureEvent ? new Date(seizureEvent.date) : new Date(),
   );
   const [timeFrom, setTimeFromState] = useState(seizureEvent?.time_from || '');
   const [timeTo, setTimeToState] = useState(seizureEvent?.time_to || '');
 
-  // Set date and time in Redux when state changes
   useEffect(() => {
     if (seizureEvent) {
-      dispatch(setDate(seizureEvent.date));
-      dispatch(setTimeFrom(seizureEvent.time_from));
-      dispatch(setTimeTo(seizureEvent.time_to));
+      dispatch(setDateUpdated(seizureEvent.date));
+      dispatch(setTimeFromUpdated(seizureEvent.time_from));
+      dispatch(setTimeToUpdated(seizureEvent.time_to));
     }
   }, [dispatch, seizureEvent]);
 
   const handleDateChange = (newDate: Date) => {
     const formattedDate = new Date(newDate).toISOString().split('T')[0];
     setSelectedDate(newDate);
-    dispatch(setDate(formattedDate));
+    dispatch(setDateUpdated(formattedDate));
   };
 
-  function formatTimeString(time: string | Date): string {
+  const formatTimeString = (time: string | Date): string => {
     let dateObj: Date;
     if (typeof time === 'string') {
       const [hour, minute] = time.split(':');
@@ -71,42 +69,81 @@ export const ReportSeizureQuestion1Updated: React.FC<
       minute: '2-digit',
       hour12: false,
     });
-  }
+  };
 
   const handleTimeFromChange = (time: string) => {
     const formattedTimeFrom = formatTimeString(time);
     setTimeFromState(time);
-    dispatch(setTimeFrom(formattedTimeFrom));
+    dispatch(setTimeFromUpdated(formattedTimeFrom));
   };
 
   const handleTimeToChange = (time: string) => {
     const formattedTimeTo = formatTimeString(time);
     setTimeToState(time);
-    dispatch(setTimeTo(formattedTimeTo));
+    dispatch(setTimeToUpdated(formattedTimeTo));
+  };
+  const parseTime = (time: string): Date => {
+    const date = new Date();
+    const timeParts = time.match(/^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i);
+
+    if (!timeParts) {
+      throw new Error(`Invalid time format: ${time}`);
+    }
+
+    const hour = parseInt(timeParts[1], 10); // Convert hour to number
+    const minute = parseInt(timeParts[2], 10); // Convert minute to number
+    const period = timeParts[3]; // AM/PM part (if present)
+
+    let adjustedHour = hour; // Declare a separate variable for adjustments
+
+    if (period) {
+      // Adjust for 12-hour clock
+      if (period.toUpperCase() === 'PM' && hour < 12) {
+        adjustedHour += 12;
+      } else if (period.toUpperCase() === 'AM' && hour === 12) {
+        adjustedHour = 0;
+      }
+    }
+
+    date.setHours(adjustedHour, minute, 0, 0);
+    return date;
   };
 
   const handleContinue = () => {
-    if (timeFrom && timeTo && timeFrom >= timeTo) {
-      Alert.alert(
-        'Time Error',
-        'The start time must be earlier than the end time.',
-        [{ text: 'OK' }],
+    try {
+      const fromTime = parseTime(timeFrom);
+      const toTime = parseTime(timeTo);
+      console.log('date is' + fromTime);
+      console.log('date is timeTo' + timeTo);
+
+      if (fromTime >= toTime) {
+        Alert.alert(
+          'Time Error',
+          'The start time must be earlier than the end time.',
+          [{ text: 'OK' }],
+        );
+        return;
+      }
+
+      const updatedSeizureEvent = {
+        ...seizureEvent,
+        date: selectedDate.toISOString().split('T')[0],
+        time_from: timeFrom,
+        time_to: timeTo,
+      };
+
+      navigation.navigate(
+        RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_TWO_SCREEN,
+        {
+          seizureEvent: updatedSeizureEvent,
+        },
       );
-      return;
+    } catch (error) {
+      console.error('error parsing');
+      Alert.alert('Invalid Time Format', 'Please enter a valid time.', [
+        { text: 'OK' },
+      ]);
     }
-    // Create an updated seizureEvent object with current state values
-    const updatedSeizureEvent = {
-      ...seizureEvent,
-      date: selectedDate.toISOString().split('T')[0],
-      time_from: timeFrom,
-      time_to: timeTo,
-    };
-    navigation.navigate(
-      RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_TWO_SCREEN,
-      {
-        seizureEvent: updatedSeizureEvent,
-      },
-    );
   };
 
   return (

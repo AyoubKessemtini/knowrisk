@@ -9,6 +9,7 @@ import ReactNativeHapticFeedback, {
 } from 'react-native-haptic-feedback';
 import { BackButton } from '@components/BackButton';
 import { I18nKeyPath } from 'src/i18n/types';
+import { RootStackRoutes } from '@navigators/routes';
 
 type TextColor = keyof typeof Colors.texts.light;
 interface HeaderProps {
@@ -38,7 +39,14 @@ export const Header = ({
 
   const goBack = () => {
     ReactNativeHapticFeedback.trigger(HapticFeedbackTypes.soft);
-    navigation.goBack();
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      // Optional: Redirect to a default screen if no previous screen exists
+      navigation.navigate(RootStackRoutes.TAB_STACK, {
+        screen: RootStackRoutes.HOME,
+      });
+    }
   };
 
   return (

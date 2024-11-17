@@ -1,31 +1,31 @@
-import { CButton } from '@components/Buttons/CButton';
-import { CText } from '@components/CText';
-import { Header } from '@components/Headers/Header';
-import { Screen } from '@components/Screen';
-import { RootStackRoutes } from '@navigators/routes';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { View, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+
+import { CButton } from '@components/Buttons/CButton';
+import { CText } from '@components/CText';
+import { Header } from '@components/Headers/Header';
+import { Screen } from '@components/Screen';
+import { LineInput } from '@components/Inputs/LineInput';
+import { Colors } from '@constants/Colors';
 import {
   AnswersScheme,
   answersScheme,
 } from '../../../../schemes/answers.scheme';
-import { LineInput } from '@components/Inputs/LineInput';
-import { Colors } from '@constants/Colors';
 import { styles } from './styles';
 import {
   RootStackParamList,
   RootStackScreenProps,
 } from '@navigators/stacks/RootNavigator';
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@store/index';
-
 import {
-  setEat,
+  setEatUpdated,
   submitSeizureUpdateReportRequest,
 } from '@store/reportSeizureUpdateFormSlice';
+import { RootStackRoutes } from '@navigators/routes';
 
 type ReportSeizureQuestion4UpdatedRouteProp = RouteProp<
   RootStackParamList,
@@ -42,6 +42,7 @@ export const ReportSeizureQuestion4Updated: React.FC = () => {
     useSelector((state: RootState) => state.reportSeizureForm);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false); // Track button state
 
   const {
     control,
@@ -64,7 +65,8 @@ export const ReportSeizureQuestion4Updated: React.FC = () => {
   };
 
   const onSubmit = (data: AnswersScheme) => {
-    dispatch(setEat(data.answer)); // Save answer in Redux
+    setIsButtonDisabled(true); // Disable button when clicked
+    dispatch(setEatUpdated(data.answer)); // Save answer in Redux
     if (
       date &&
       timeFrom &&
@@ -79,6 +81,7 @@ export const ReportSeizureQuestion4Updated: React.FC = () => {
         'Error',
         'Some fields are missing. Please complete them before proceeding.',
       );
+      setIsButtonDisabled(false); // Re-enable button if validation fails
     }
   };
 
@@ -87,6 +90,7 @@ export const ReportSeizureQuestion4Updated: React.FC = () => {
       if (error) {
         Alert.alert('Error', error);
         setIsSubmitted(false); // Reset on error
+        setIsButtonDisabled(false); // Re-enable button after error
       } else {
         Alert.alert(
           'Success',
@@ -103,6 +107,7 @@ export const ReportSeizureQuestion4Updated: React.FC = () => {
           { cancelable: false },
         );
         setIsSubmitted(false); // Reset after success
+        setIsButtonDisabled(false); // Re-enable button after success
       }
     }
   }, [loading, error, navigation, isSubmitted]);
@@ -135,8 +140,8 @@ export const ReportSeizureQuestion4Updated: React.FC = () => {
             errors.answer
               ? Colors.lightRed
               : isFocused.answer
-                ? Colors.fadedPurple
-                : Colors.fadedPurple
+              ? Colors.fadedPurple
+              : Colors.fadedPurple
           }
           onFocus={() => handleFocus('answer')}
           onBlur={() => handleBlur('answer')}
@@ -150,7 +155,14 @@ export const ReportSeizureQuestion4Updated: React.FC = () => {
         )}
       </View>
       <View style={styles.button}>
-        <CButton text="common.continue" onPress={handleSubmit(onSubmit)} />
+        <CButton
+          text="common.continue"
+          onPress={handleSubmit(onSubmit)}
+          disabled={isButtonDisabled} // Disable the button based on state
+          containerStyle={{
+            opacity: isButtonDisabled ? 0.2 : 1, // Very reduced opacity for disabled state
+          }}
+        />
       </View>
     </Screen>
   );

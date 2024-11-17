@@ -10,7 +10,7 @@ import { styles } from './styles';
 import { I18nKeyPath } from '../../../../i18n/types';
 import { Colors } from '@constants/Colors';
 import { useDispatch } from 'react-redux';
-import { setExercise } from '@store/reportSeizureUpdateFormSlice';
+import { setExerciseUpdated } from '@store/reportSeizureUpdateFormSlice';
 import { RootStackParamList } from '@navigators/stacks/RootNavigator';
 import { ChoiceBoxUpdateSeizure } from '@components/ChoiceBoxs/ChoiceBoxUpdateSeizure';
 
@@ -35,7 +35,7 @@ export const ReportSeizureQuestion3Updated: React.FC = () => {
   const handleChoiceSelect = (selectedValue: I18nKeyPath) => {
     setSelectedOption(selectedValue);
     const isExercise = selectedValue === 'questions.choices.yes';
-    dispatch(setExercise(isExercise));
+    dispatch(setExerciseUpdated(isExercise));
   };
 
   // Options for ChoiceBox

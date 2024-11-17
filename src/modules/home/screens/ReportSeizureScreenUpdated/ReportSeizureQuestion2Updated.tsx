@@ -10,7 +10,7 @@ import { styles } from './styles';
 import { ChoiceBox } from '@components/ChoiceBoxs/ChoiceBox';
 import { Colors } from '@constants/Colors';
 import { useDispatch } from 'react-redux';
-import { setAlcohol } from '@store/reportSeizureUpdateFormSlice';
+import { setAlcoholUpdated } from '@store/reportSeizureUpdateFormSlice';
 import { I18nKeyPath } from 'src/i18n/types';
 import { RootStackParamList } from '@navigators/stacks/RootNavigator';
 import { ChoiceBoxUpdateSeizure } from '@components/ChoiceBoxs/ChoiceBoxUpdateSeizure';
@@ -36,7 +36,7 @@ export const ReportSeizureQuestion2Updated: React.FC = () => {
   const handleChoiceSelect = (selectedValue: I18nKeyPath) => {
     setSelectedOption(selectedValue);
     const isAlcohol = selectedValue === 'questions.choices.yes';
-    dispatch(setAlcohol(isAlcohol));
+    dispatch(setAlcoholUpdated(isAlcohol));
   };
 
   // Options for ChoiceBox

@@ -5,7 +5,7 @@ import { Screen } from '@components/Screen';
 import { RootStackRoutes } from '@navigators/routes';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@constants/Colors';
 import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
@@ -24,7 +24,11 @@ export const ReportSeizureQuestion1 =
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [timeFrom, setTimeFromState] = useState('');
     const [timeTo, setTimeToState] = useState('');
-
+    useEffect(() => {
+      const today = new Date().toISOString().split('T')[0]; // Format today's date
+      setSelectedDate(new Date()); // Set local state to today
+      dispatch(setDate(today)); // Dispatch today's date to Redux
+    }, [dispatch]);
     // Gérer le changement de date et enregistrer dans Redux
     const handleDateChange = (newDate: Date) => {
       const formattedDate = new Date(newDate).toISOString().split('T')[0]; // Format YYYY-MM-DD
@@ -51,13 +55,63 @@ export const ReportSeizureQuestion1 =
         hour12: false,
       });
     }
+    const parseTime = (time: string): Date => {
+      const date = new Date();
+      const timeParts = time.match(/^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i);
 
+      if (!timeParts) {
+        throw new Error(`Invalid time format: ${time}`);
+      }
+
+      const hour = parseInt(timeParts[1], 10); // Convert hour to number
+      const minute = parseInt(timeParts[2], 10); // Convert minute to number
+      const period = timeParts[3]; // AM/PM part (if present)
+
+      let adjustedHour = hour; // Declare a separate variable for adjustments
+
+      if (period) {
+        // Adjust for 12-hour clock
+        if (period.toUpperCase() === 'PM' && hour < 12) {
+          adjustedHour += 12;
+        } else if (period.toUpperCase() === 'AM' && hour === 12) {
+          adjustedHour = 0;
+        }
+      }
+
+      date.setHours(adjustedHour, minute, 0, 0);
+      return date;
+    };
+    const handleContinue = () => {
+      try {
+        const fromTime = parseTime(timeFrom);
+        const toTime = parseTime(timeTo);
+        console.log('date is' + fromTime);
+        console.log('date is timeTo' + timeTo);
+
+        if (fromTime >= toTime) {
+          Alert.alert(
+            'Time Error',
+            'The start time must be earlier than the end time.',
+            [{ text: 'OK' }],
+          );
+          return;
+        } else
+          navigation.navigate(
+            RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN,
+          );
+      } catch (error) {
+        console.error('error parsing');
+        Alert.alert('Invalid Time Format', 'Please enter a valid time.', [
+          { text: 'OK' },
+        ]);
+      }
+    };
     // Gérer l'heure de début et enregistrer dans Redux
     const handleTimeFromChange = (time: string) => {
       const formattedTimeFrom = formatTimeString(time); // Renvoie "HH:mm"
       console.log('formattedTimeFrom' + formattedTimeFrom.toString);
       setTimeFromState(time);
-   
+
       dispatch(setTimeFrom(formattedTimeFrom.toString()));
     };
 
@@ -68,22 +122,22 @@ export const ReportSeizureQuestion1 =
 
       setTimeToState(time);
       // Vérification si `timeTo` est postérieur à `timeFrom`
-  
+
       dispatch(setTimeTo(formattedTimeTo.toString()));
     };
 
     // Naviguer vers l'écran suivant après avoir défini les valeurs
-    const handleContinue = () => {
-      if (timeFrom && timeTo && timeFrom >= timeTo) {
-        Alert.alert(
-          'Time Error',
-          'The start time must be earlier than the end time.',
-          [{ text: 'OK' }],
-        );
-        return; // Arrête l'exécution si la condition n'est pas respectée
-      } else
-        navigation.navigate(RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN);
-    };
+    // const handleContinue = () => {
+    //   if (timeFrom && timeTo && timeFrom >= timeTo) {
+    //     Alert.alert(
+    //       'Time Error',
+    //       'The start time must be earlier than the end time.',
+    //       [{ text: 'OK' }],
+    //     );
+    //     return; // Arrête l'exécution si la condition n'est pas respectée
+    //   } else
+    //     navigation.navigate(RootStackRoutes.REPORT_SEIZURE_QUESTION_TWO_SCREEN);
+    // };
 
     return (
       <Screen
