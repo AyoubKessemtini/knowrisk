@@ -10,7 +10,8 @@
     "questions_header" : "Q&A",
     "steps": "Steps",
     "temperature": "Temperature",
-    "stress": "Stress"
+    "stress": "Stress",
+    "emergency": "Emergency"
   },
   "buttons": {
     "tap_to_report": "Tap this button if you had a seizure",

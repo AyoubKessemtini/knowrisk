@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Linking, Alert } from 'react-native';
 import { CText } from '@components/CText';
 import Icon from 'react-native-easy-icon';
 import { Colors } from '@constants/Colors';
@@ -133,23 +133,23 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
             text="profile.application_settings"
           />
           <CButton
-              mt={10}
-              text="profile.information"
-              buttonType="magnolia"
-              buttonVersion={2}
-              rightAccessory={
-                <Icon
-                    type="material"
-                    name="chevron-right"
-                    size={21}
-                    color={Colors.fog}
-                />
-              }
-              onPress={() => {
-                navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
-              }}
+            mt={10}
+            text="profile.information"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
+            }}
           />
-                    <CButton
+          <CButton
             text="profile.guide"
             buttonType="magnolia"
             buttonVersion={2}
@@ -235,7 +235,24 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
           />
         </View>
 
-        <HelpCenterButton onPress={() => {}} />
+        <HelpCenterButton
+          onPress={async () => {
+            const email = 'mailto:contact@knowlepsy.com';
+            try {
+              const supported = await Linking.canOpenURL(email);
+              if (supported) {
+                await Linking.openURL(email);
+              } else {
+                Alert.alert(
+                  'Error',
+                  'Your device does not support this action.',
+                );
+              }
+            } catch (error) {
+              console.error('Failed to send email:', error);
+            }
+          }}
+        />
 
         <CButton
           mt={20}
