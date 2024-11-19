@@ -39,7 +39,9 @@ export const useBle = () => {
 
   const BleManagerModule = NativeModules.BleManager;
   const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-  const { isDeviceConnectedBLE } = useAppSelector((state:RootState) => state.bleData);
+  const { isDeviceConnectedBLE } = useAppSelector(
+    (state: RootState) => state.bleData,
+  );
 
   if (!BleManagerModule) {
     console.error('BleManager native module is not available.');

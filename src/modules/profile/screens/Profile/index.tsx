@@ -80,8 +80,6 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   }, [dispatch]);
   return (
     <Screen fullscreen withoutTopEdge noHorizontalPadding>
-      <Header hasBackButton text="profile.profile" />
-      <View style={styles.line} />
       <View style={styles.container}>
         <View style={styles.profileHeader}>
           <View
@@ -280,6 +278,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    marginTop: 40,
   },
   profileHeader: {
     marginTop: 10,

@@ -15,7 +15,7 @@ export const parseHeartRateData = (dataView: DataView, deviceId: string) => {
 
   // Helper function to decode BCD to decimal with bounds checking
   const bcdToDecimal = (bcdValue: number) =>
-      (bcdValue >> 4) * 10 + (bcdValue & 0x0f);
+    (bcdValue >> 4) * 10 + (bcdValue & 0x0f);
 
   while (offset + MIN_RECORD_LENGTH <= dataView.byteLength) {
     // Skip the dataNumber part
@@ -31,16 +31,22 @@ export const parseHeartRateData = (dataView: DataView, deviceId: string) => {
 
     // Check if the date components fall within valid ranges
     const isValidDate =
-        year >= 2000 && year <= new Date().getFullYear() &&
-        month >= 1 && month <= 12 &&
-        day >= 1 && day <= 31 &&
-        hour >= 0 && hour <= 23 &&
-        minute >= 0 && minute <= 59 &&
-        second >= 0 && second <= 59;
+      year >= 2000 &&
+      year <= new Date().getFullYear() &&
+      month >= 1 &&
+      month <= 12 &&
+      day >= 1 &&
+      day <= 31 &&
+      hour >= 0 &&
+      hour <= 23 &&
+      minute >= 0 &&
+      minute <= 59 &&
+      second >= 0 &&
+      second <= 59;
 
     if (!isValidDate) {
       console.warn(
-          `Invalid date parsed: ${year}-${month}-${day} ${hour}:${minute}:${second}`
+        `Invalid date parsed: ${year}-${month}-${day} ${hour}:${minute}:${second}`,
       );
       notOk++;
       continue; // Skip this record if date is invalid
@@ -72,15 +78,15 @@ export const parseHeartRateData = (dataView: DataView, deviceId: string) => {
 
   if (heartRateRecords.length > 0) {
     core.storeDeviceHealthData
-        .execute({ hr: heartRateRecords })
-        .then((result) => {
-          if (result.type === 'success') {
-            deleteData(deviceId, DataType.HR);
-          }
-        })
-        .catch((error) => {
-          console.error('Error storing heart rate data:', error);
-        });
+      .execute({ hr: heartRateRecords })
+      .then((result) => {
+        if (result.type === 'success') {
+          deleteData(deviceId, DataType.HR);
+        }
+      })
+      .catch((error) => {
+        console.error('Error storing heart rate data:', error);
+      });
   } else {
     console.warn('No valid heart rate records to store.');
   }

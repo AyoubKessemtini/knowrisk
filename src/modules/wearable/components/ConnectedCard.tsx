@@ -6,11 +6,13 @@ import { CImage } from '@components/CImage.tsx';
 import ImageAssets from '@assets/images';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import Icon from 'react-native-easy-icon';
+import { RootState, useAppSelector } from '@store/index.ts';
 
 interface ConnectedCardProps {
   deviceName: string;
 }
 export const ConnectedCard = ({ deviceName }: ConnectedCardProps) => {
+  const { battery } = useAppSelector((state: RootState) => state.bleData);
   return (
     <View style={styles.container}>
       <View>
@@ -32,7 +34,7 @@ export const ConnectedCard = ({ deviceName }: ConnectedCardProps) => {
             color="white"
           />
           <CircularProgress
-            value={89}
+            value={battery !== '--' ? parseInt(battery, 10) : 0}
             maxValue={100}
             radius={45}
             showProgressValue={true}
@@ -46,13 +48,11 @@ export const ConnectedCard = ({ deviceName }: ConnectedCardProps) => {
         </View>
       </View>
       <View>
-      
-      
         <CImage
           source={ImageAssets.CONNECTED_DEVICE}
           height={160}
           width={160}
-        ></CImage>
+        />
       </View>
     </View>
   );

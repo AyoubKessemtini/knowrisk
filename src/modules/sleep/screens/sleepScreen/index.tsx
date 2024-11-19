@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { DateSelector } from '@components/DatePicker/DatePicker.tsx';
 import { formatStringDate } from '@hooks/useDateFormatter.ts';
@@ -8,12 +8,16 @@ import { CText } from '@components/CText.tsx';
 import { SleepQualityCard } from '@modules/sleep/screens/components/sleepQualityCard.tsx';
 import { RecoveryComponent } from '@components/Cards/RecoveryCard.tsx';
 import { Colors } from '@constants/Colors.ts';
-import {core} from "@config/Configuration.ts";
-import {SleepStagesChart} from "@modules/sleep/screens/components/SleepStagesChart.tsx";
+import { core } from '@config/Configuration.ts';
+import { SleepStagesChart } from '@modules/sleep/screens/components/SleepStagesChart.tsx';
 
 export const SleepScreen: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [sleepData, setSleepData] = useState<SleepData>(null);
+  const { width, height } = Dimensions.get('window');
+  const w04 = width * 0.04;
+  const h10 = height * 0.1;
+  console.log(w04, h10);
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
   };
@@ -45,7 +49,7 @@ export const SleepScreen: React.FC = () => {
       containerStyles={styles.container}
     >
       {/* <MainHeader firstName="Aziz" lastName="Sassi" /> */}
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, { paddingHorizontal: w04 }]}>
         <DateSelector
           initialDate={selectedDate}
           onDateChange={handleDateChange}
@@ -60,27 +64,26 @@ export const SleepScreen: React.FC = () => {
                 ? formatStringDate(selectedDate)
                 : formatStringDate(selectedDate)
             }
-            sleepData={
-              sleepData ? String(sleepData.sleepQualityScore) : '--'
-            }
+            sleepData={sleepData ? String(sleepData.sleepQualityScore) : '--'}
             title="common.quality"
             unit="%"
           />
           <SleepCard
-              lastUpdated={
-                sleepData
-                    ? formatStringDate(selectedDate)
-                    : formatStringDate(selectedDate)
-              }
-              sleepData={
-                sleepData ? String(sleepData.totalSleepDuration) : '--'
-              }
+            lastUpdated={
+              sleepData
+                ? formatStringDate(selectedDate)
+                : formatStringDate(selectedDate)
+            }
+            sleepData={sleepData ? String(sleepData.totalSleepDuration) : '--'}
             title="common.average"
           />
         </View>
         {sleepData && (
           <View
-            style={[styles.sleepStagesContainer, { backgroundColor: Colors.lightPurple }]}
+            style={[
+              styles.sleepStagesContainer,
+              { backgroundColor: Colors.lightPurple },
+            ]}
           >
             <SleepStagesChart sleepData={sleepData} />
           </View>
@@ -94,25 +97,25 @@ export const SleepScreen: React.FC = () => {
           startSleep={sleepData ? String(sleepData.startSleep) : '--'}
           endSleep={sleepData ? String(sleepData.endSleep) : '--'}
         />
-      </View>
-      <View style={styles.row}>
-        <RecoveryComponent
-          title="Rest and Recovery Status"
-          value={
-            sleepData && sleepData.restAndRecovery
-              ? sleepData.restAndRecovery
-              : -1
-          }
-          unit="%"
-          onPress={() => {}}
-          activeStrokeColor={Colors.yellow2}
-          inActiveStrokeColor={Colors.lightPurple}
-          description={
-            sleepData && sleepData.restAndRecovery
-              ? formatStringDate(selectedDate)
-              : `${formatStringDate(selectedDate)} (Calculating)`
-          }
-        />
+        <View style={styles.row}>
+          <RecoveryComponent
+            title="Rest and Recovery Status"
+            value={
+              sleepData && sleepData.restAndRecovery
+                ? sleepData.restAndRecovery
+                : -1
+            }
+            unit="%"
+            onPress={() => {}}
+            activeStrokeColor={Colors.yellow2}
+            inActiveStrokeColor={Colors.lightPurple}
+            description={
+              sleepData && sleepData.restAndRecovery
+                ? formatStringDate(selectedDate)
+                : `${formatStringDate(selectedDate)} (Calculating)`
+            }
+          />
+        </View>
       </View>
     </Screen>
   );
@@ -122,22 +125,23 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     gap: 12,
-    paddingVertical: 80,
-    paddingHorizontal: 20,
+    paddingVertical: 10,
+    paddingTop: 50,
+    //paddingHorizontal: 20,
   },
   wrapper: {
     justifyContent: 'center',
     width: '100%',
-    gap: 30,
+    gap: 15,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
   },
-  sleepStagesContainer:{
+  sleepStagesContainer: {
     borderRadius: 15,
     paddingVertical: 5,
     paddingHorizontal: 10,
-  }
+  },
 });

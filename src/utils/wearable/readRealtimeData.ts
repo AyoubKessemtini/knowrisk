@@ -36,7 +36,7 @@ export const readRealTimeData = async (
       ({ value }) => {
         (async () => {
           try {
-            if (value.length > 16) {
+            if (value.length >= 16) {
               const decodedData = Buffer.from(value, 'base64');
               await parseRealTimeData(decodedData, deviceId, dispatch);
             }
@@ -89,7 +89,9 @@ const parseRealTimeData = (
         break;
 
       case DataType.BATTERY:
-        parseBatteryData(dataView);
+        console.log('data battery');
+        console.log(dataView);
+        parseBatteryData(dataView,dispatch);
         break;
 
       default:
