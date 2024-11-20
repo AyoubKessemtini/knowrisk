@@ -7,6 +7,7 @@ interface BleDataSlice {
   hr: string;
   steps: string;
   temperature: string;
+  battery: string;
 }
 
 const initialState: BleDataSlice = {
@@ -16,6 +17,7 @@ const initialState: BleDataSlice = {
   hr: '--',
   steps: '--',
   temperature: '--',
+  battery: '--',
 };
 
 export const bleDataSlice = createSlice({
@@ -40,6 +42,9 @@ export const bleDataSlice = createSlice({
     updateDeviceName: (state, { payload }: PayloadAction<string>) => {
       state.deviceName = payload;
     },
+    updateBattery: (state, { payload }: PayloadAction<string>) => {
+      state.battery = payload;
+    },
     //reset all
     reset: (state) => {
       state.isDeviceConnectedBLE = false;
@@ -48,6 +53,7 @@ export const bleDataSlice = createSlice({
       state.hr = '--';
       state.steps = '--';
       state.temperature = '--';
+      state.battery = '--';
     },
   },
 });

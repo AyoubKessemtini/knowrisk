@@ -25,8 +25,8 @@ interface MedicationsListProps {
 }
 
 export const MedicationsList: React.FC<MedicationsListProps> = ({
-    medicationsData
-                                          }) => {
+  medicationsData,
+}) => {
   const [medications, setMedications] = useState<Medication[]>(medicationsData);
   const [modalVisible, setModalVisible] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -37,7 +37,6 @@ export const MedicationsList: React.FC<MedicationsListProps> = ({
   const [selectedMedicationIndex, setSelectedMedicationIndex] = useState<
     number | null
   >(null);
-
 
   const addMedication = async () => {
     if (newTitle && newDosage && newFrequency && newScheduleMessage) {
@@ -51,8 +50,6 @@ export const MedicationsList: React.FC<MedicationsListProps> = ({
         medication: newMedication,
       });
       if (ok) {
-        console.log('newMedication');
-        console.log(newMedication);
         setMedications([...medications, newMedication]);
         setModalVisible(false);
         clearInputs();
@@ -72,7 +69,7 @@ export const MedicationsList: React.FC<MedicationsListProps> = ({
     setNewScheduleMessage('');
   };
 
-   const  deleteMedication = async () => {
+  const deleteMedication = async () => {
     if (selectedMedicationIndex !== null) {
       const updatedMedications = medications.filter(
         (_, index) => index !== selectedMedicationIndex,
@@ -95,7 +92,12 @@ export const MedicationsList: React.FC<MedicationsListProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { marginBottom: medications.length === 0 ? 120 : 0 },
+      ]}
+    >
       <View style={styles.header}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <CText

@@ -364,7 +364,9 @@ export const RegisterScreen =
                   onPress={() => {
                     // Navigate to Terms and Conditions screen
                     navigation.navigate(
-                      RootStackRoutes.TERMS_CONDITIONS_PROFIL,
+                      RootStackRoutes.WEB_VIEW_SCREEN, {
+                            url: 'https://www.knowlepsy.com/personal-data-policy',
+                        }
                     );
                   }}
                 >

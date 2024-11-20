@@ -17,7 +17,7 @@ export enum DataType {
 const getDataCommand = (dataType: DataType) => {
   const data = [
     dataType,
-    0x00,
+    dataType === DataType.BATTERY ? 0x99 : 0x00,
     0x00,
     0x00,
     0x00,

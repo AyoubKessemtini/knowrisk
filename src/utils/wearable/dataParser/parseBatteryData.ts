@@ -1,4 +1,7 @@
-export const parseBatteryData = (dataView: DataView) => {
+import {BleDataActions} from "@store/bleDataSlice.ts";
+import {AppDispatch} from "@store/index.ts";
+
+export const parseBatteryData = (dataView: DataView, dispatch: AppDispatch) => {
   const MIN_RECORD_LENGTH = 15;
   console.log(dataView);
 
@@ -10,8 +13,8 @@ export const parseBatteryData = (dataView: DataView) => {
       console.warn(`Invalid start byte for battery data: ${startByte}`);
     } else {
       batteryLevel = dataView.getUint8(1);
-
       console.info(`Battery: ${batteryLevel}%`);
+      dispatch(BleDataActions.updateBattery(batteryLevel));
     }
   } else {
     console.warn(

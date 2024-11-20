@@ -1,15 +1,13 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Linking, Alert } from 'react-native';
 import { CText } from '@components/CText';
 import Icon from 'react-native-easy-icon';
 import { Colors } from '@constants/Colors';
 import HelpCenterButton from '@components/Buttons/HelpCenterButton';
 import { CButton } from '@components/Buttons/CButton';
 import { Screen } from '@components/Screen';
-
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { TabStackScreenProps } from '@navigators/stacks/TabNavigator';
-import { Header } from '@components/Headers/Header';
 import { useNavigation } from '@react-navigation/native';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
@@ -18,13 +16,6 @@ import { RootState } from '@store/index';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProfileActions } from '@store/profileSlice';
-// const getBackgroundColor = (name: string) => {
-//   const hash = Array.from(name).reduce(
-//     (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
-//     0,
-//   );
-//   return `hsl(${hash % 360}, 70%, 80%)`;
-// };
 
 export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const handleLogout = async () => {
@@ -83,8 +74,6 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   }, [dispatch]);
   return (
     <Screen fullscreen withoutTopEdge noHorizontalPadding>
-      <Header hasBackButton text="profile.profile" />
-      <View style={styles.line} />
       <View style={styles.container}>
         <View style={styles.profileHeader}>
           <View
@@ -136,23 +125,23 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
             text="profile.application_settings"
           />
           <CButton
-              mt={10}
-              text="profile.information"
-              buttonType="magnolia"
-              buttonVersion={2}
-              rightAccessory={
-                <Icon
-                    type="material"
-                    name="chevron-right"
-                    size={21}
-                    color={Colors.fog}
-                />
-              }
-              onPress={() => {
-                navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
-              }}
+            mt={10}
+            text="profile.information"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.SETTINGS_INFORMATION_SCREEN);
+            }}
           />
-                    <CButton
+          <CButton
             text="profile.guide"
             buttonType="magnolia"
             buttonVersion={2}
@@ -229,16 +218,50 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
               />
             }
             onPress={() => {
-              navigation.navigate(RootStackRoutes.TERMS_CONDITIONS_PROFIL);
-
-              // navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              //   screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
-              // });
+              navigation.navigate(RootStackRoutes.WEB_VIEW_SCREEN, {
+                url: 'https://www.knowlepsy.com/personal-data-policy',
+              });
+            }}
+          />
+          <CButton
+            text="profile.disclaimer"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.WEB_VIEW_SCREEN, {
+                url: 'https://www.knowlepsy.com/disclaimer',
+                title:'Disclaimer'
+              });
             }}
           />
         </View>
 
-        <HelpCenterButton onPress={() => {}} />
+        <HelpCenterButton
+          onPress={async () => {
+            const email = 'mailto:contact@knowlepsy.com';
+            try {
+              const supported = await Linking.canOpenURL(email);
+              if (supported) {
+                await Linking.openURL(email);
+              } else {
+                Alert.alert(
+                  'Error',
+                  'Your device does not support this action.',
+                );
+              }
+            } catch (error) {
+              console.error('Failed to send email:', error);
+            }
+          }}
+        />
 
         <CButton
           mt={20}
@@ -266,6 +289,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    marginTop: 40,
   },
   profileHeader: {
     marginTop: 10,
@@ -286,10 +310,5 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 25,
-  },
-  line: {
-    height: 1,
-    borderBottomWidth: 0.2,
-    borderColor: Colors.fog,
   },
 });

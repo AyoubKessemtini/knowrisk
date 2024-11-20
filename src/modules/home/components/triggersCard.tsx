@@ -36,13 +36,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightPurple,
     borderRadius: 12,
     paddingHorizontal: 8,
-    paddingRight:0,
-    justifyContent: 'space-between',
     paddingVertical: 8,
     marginBottom: 3,
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'space-around',
   },
 });

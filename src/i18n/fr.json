@@ -26,7 +26,8 @@
     "chatbot":"Chat with Knowlepsy",
     "journal" : "Journal",
     "respiratoryRates" : "Respiratory rate",
-    "bloodOxygen" : "Blood oxygen"
+    "bloodOxygen" : "Blood oxygen",
+    "emergency": "Emergency"
   },
   "home": {
     "foo": "French Home Screen"
@@ -44,6 +45,7 @@
     "emergency_call": "Emergency Call",
     "profile": "Profile",
     "guide":"User guide",
+    "disclaimer": "Disclaimer",
     "help_center": "Help Center",
     "save_changes": "Save Changes",
     "new_password": "New Password",

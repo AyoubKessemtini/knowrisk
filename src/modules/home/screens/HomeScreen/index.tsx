@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
@@ -27,6 +27,9 @@ import { PatientData } from '@core/entities/deviceDataApisEntity/PatientData.ts'
 import { MedicationsList } from '@components/Medication/MedicationsList.tsx';
 
 export const Home: React.FC = () => {
+  const { width, height } = Dimensions.get('window');
+  const w04 = width * 0.04;
+  const h10 = height * 0.1;
   const [selectedDate, setSelectedDate] = useState(new Date());
   const navigation = useNavigation();
   const [stressData, setStressData] = useState<StressDeviceData>(null);
@@ -174,7 +177,7 @@ export const Home: React.FC = () => {
       containerStyles={styles.container}
     >
       <MainHeader firstName={firstName} lastName={lastName} />
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, { paddingHorizontal: w04 }]}>
         <PatientInfoCard
           name={`${firstName} ${lastName}`}
           id={`ID: ${user?.id.split('-')[0]}`}
@@ -229,28 +232,6 @@ export const Home: React.FC = () => {
                 ]
           }
         />
-        {/*
-        [
-              {
-                name: 'Fatigue',
-                color: '#E95050',
-                value: 27,
-              },
-              {
-                name: 'Sleep',
-                color: '#FFA224',
-                value: 33,
-              },
-              {
-                name: 'Stess',
-                color: '#2AC686',
-                value: 40,
-              },
-            ]
-        <DateSelector
-          initialDate={selectedDate}
-          onDateChange={handleDateChange}
-        />*/}
         <View style={styles.row}>
           <SleepCard
             lastUpdated={isDeviceConnectedBLE ? 'Now' : '--'}
@@ -356,48 +337,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     //gap: 12,
     paddingTop: 40,
-    paddingHorizontal: 20,
-    paddingBottom: 160,
+    paddingBottom: 40,
   },
   wrapper: {
-    gap: 20,
+    gap: 15,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
   },
-  qualityCardRatesContainer: {
-    padding: 14,
-    borderRadius: 12,
-    backgroundColor: Colors.white,
-    marginVertical: 10,
-    marginHorizontal: 5,
-    shadowColor: Colors.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    width: '100%',
-  },
 });
-
-export default Home;
-
-/*
-<View style={styles.row}>
-          <RecoveryComponent
-            title="Respiratory rate"
-            value={respiratoryRateData.value}
-            maxValue={30}
-            unit="RPM"
-            onPress={() => {}}
-            activeStrokeColor={Colors.yellow2}
-            inActiveStrokeColor={Colors.lightPurple}
-            description={
-              respiratoryRateData.endDate
-                ? formatTime(respiratoryRateData.endDate)
-                : formatTime(new Date().toISOString())
-            }
-          />
-        </View>
- */
