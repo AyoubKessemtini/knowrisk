@@ -6,7 +6,7 @@ export interface Patient {
   last_name: string;
   email: string;
   phone: string;
-  gender: string; 
+  gender: string;
   birthday: string;
   blood_type: string;
   height: number;
@@ -48,6 +48,7 @@ export const getPatientFormSlice = createSlice({
       state.loading = false;
       state.error = action.payload; // Enregistrer le message d'erreur
     },
+    resetGetPatientForm: () => initialState,
   },
 });
 
@@ -55,6 +56,7 @@ export const {
   submitgetPatientReportRequest,
   submitgetPatientReportSuccess,
   submitgetPatientReportFailure,
+  resetGetPatientForm,
 } = getPatientFormSlice.actions;
 // Export actions
 export const getPatientFormActions = getPatientFormSlice.actions;

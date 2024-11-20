@@ -53,6 +53,7 @@ export const BirthDateSelector = ({
         modal
         open={open}
         date={date}
+        maximumDate={new Date()} // Prevents selecting future dates
         onConfirm={handleConfirm}
         onCancel={() => setOpen(false)}
         mode="date"

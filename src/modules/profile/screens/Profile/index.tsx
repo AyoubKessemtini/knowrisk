@@ -30,6 +30,9 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const handleLogout = async () => {
     await PersistenceStorage.removeItem(KEYS.USER_DATA); // Clear user data
     await PersistenceStorage.removeItem(KEYS.ACCESS_TOKEN);
+    await PersistenceStorage.removeItem(KEYS.onboarding_completed); // Clear user data
+    await PersistenceStorage.removeItem(KEYS.USER_DATA); // Clear user data
+
     await PersistenceStorage.setItem(KEYS.IS_PROFILE_SET, 'false');
 
     await PersistenceStorage.removeItem(KEYS.IS_PROFILE_SET); // Clear user data

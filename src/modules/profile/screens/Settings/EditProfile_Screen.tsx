@@ -22,7 +22,7 @@ import { CButton } from '@components/Buttons/CButton';
 import { CText } from '@components/CText';
 import { Screen } from '@components/Screen';
 import { Colors } from '@constants/Colors';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RootStackScreenProps } from '@navigators/stacks/RootNavigator';
 import { BirthDateSelector } from '@components/DatePicker/BirthdayDatePicker';
@@ -157,22 +157,25 @@ export const EditProfileScreen =
       fetchPatientId();
     }, []);
 
-    useEffect(() => {
-      if (patientId) {
-        dispatch(
-          getPatientFormActions.submitgetPatientReportRequest({
-            id: patientId,
-          }),
-        );
-      }
-    }, [dispatch, patientId]);
+    useFocusEffect(
+      React.useCallback(() => {
+        if (patientId) {
+          dispatch(
+            getPatientFormActions.submitgetPatientReportRequest({
+              id: patientId,
+            })
+          );
+        }
+      }, [patientId, dispatch])
+    );
 
     useEffect(() => {
       if (patient) {
+        // Map patient data to form values
         const genderOption = mapGenderToOption(patient.gender);
         const countryCode = extractCountryCode(patient.phone);
         const initialCountry = countryCodeToCountryKey(countryCode);
-        console.log('initialCountry patient', patient.height);
+
         reset({
           firstname: patient.first_name || '',
           lastname: patient.last_name || '',
@@ -182,26 +185,23 @@ export const EditProfileScreen =
           email: patient.email || '',
           sex: genderOption,
           bloodType: patient.blood_type || '',
-          // height: patient.height.toString() || 0,
-          // weight: patient.weight.toString() || 0,
-          height: parseFloat(patient.height.toString()) || 0, // Convert to number
-          weight: parseFloat(patient.weight.toString()) || 0, // Convert to number
+          height: parseFloat(patient.height.toString()) || 0,
+          weight: parseFloat(patient.weight.toString()) || 0,
           phoneNumber:
             patient.phone.replace(countryCode, '').replace(/-/g, '') || '',
         });
 
-        setDefaultCountry(initialCountry); // Set mapped country key as default
+        setDefaultCountry(initialCountry); // Update UI state
         setDefaultCountryCode(countryCode);
-        //  setValue('country', initialCountry);
         setSelectedCountryCode(countryCode || '+216');
-
         setSelectedDate(
           patient.birthday ? new Date(patient.birthday) : new Date(),
         );
-        setValue('sex', genderOption);
-        setValue('bloodType', patient.blood_type); // Set the initial bloodType value in form state
+        setValue('sex', genderOption); // Ensure sex is updated in the form state
+        setValue('bloodType', patient.blood_type); // Ensure bloodType is updated in the form state
       }
     }, [patient, reset, setValue]);
+
     const scrollToTop = () => {
       if (scrollViewRef.current) {
         scrollViewRef.current.scrollToOffset({ offset: 0, animated: true });
@@ -228,7 +228,6 @@ export const EditProfileScreen =
       { label: 'O+', value: 'O+' },
       { label: 'O-', value: 'O-' },
       // { label: "I don't know", value: "I don't know" },
-
     ];
 
     const extractCountryCode = (phoneNumber: string): string => {
@@ -243,26 +242,39 @@ export const EditProfileScreen =
     };
 
     const onSubmit = (data: EditProfileScheme) => {
-      console.log(
-        'Submitted data:',
-        data.sex === 'profile.genders.male' ? 'Male' : 'Female',
-      );
-      const fullPhoneNumber = `${selectedCountryCode}-${data.phoneNumber}`;
-      console.log('Submitted data:', selectedCountryCode);
-      const sex = data.sex === 'profile.genders.male' ? 'Male' : 'Female';
-      dispatch(
-        updateProfileActions.updateProfileRequest({
-          email: data.email,
-          phone: fullPhoneNumber,
-          birthday: data.birthDate,
-          height: data.height, // Replace with actual form input if available
-          weight: data.weight, // Replace with actual form input if available
-          blood_type: data.bloodType, // Replace with actual form input if available
-          gender: sex,
-          first_name: data.firstname,
-          last_name: data.lastname,
-        }),
-      );
+      try {
+        console.log(
+          'Submitted data:',
+          data.sex === 'profile.genders.male' ? 'Male' : 'Female',
+        );
+
+        const fullPhoneNumber = `${selectedCountryCode}-${data.phoneNumber}`;
+        console.log('Submitted country code:', selectedCountryCode);
+
+        const sex = data.sex === 'profile.genders.male' ? 'Male' : 'Female';
+
+        dispatch(
+          updateProfileActions.updateProfileRequest({
+            email: data.email,
+            phone: fullPhoneNumber,
+            birthday: data.birthDate,
+            height: data.height, // Replace with actual form input if available
+            weight: data.weight, // Replace with actual form input if available
+            blood_type: data.bloodType, // Replace with actual form input if available
+            gender: sex,
+            first_name: data.firstname,
+            last_name: data.lastname,
+          }),
+        );
+
+        console.log('Profile update request dispatched successfully.');
+      } catch (error) {
+        console.error('Error during profile update submission:', error);
+        // Optionally, you can show a user-friendly error message
+        alert(
+          'An error occurred while submitting the profile update. Please try again.',
+        );
+      }
     };
 
     if (loading) {
@@ -346,7 +358,11 @@ export const EditProfileScreen =
             />,
             <BirthDateSelector
               initialDate={selectedDate}
-              onDateChange={(newDate) => setSelectedDate(newDate)}
+              onDateChange={(newDate) => {
+                setSelectedDate(newDate); // Update local state
+                setValue('birthDate', moment(newDate).format('YYYY-MM-DD')); // Sync with form
+              }}
+              // onDateChange={(newDate) => setSelectedDate(newDate)}
             />,
 
             <CText color="grey3" size="sm_medium" mt={10} text="common.mail" />,
