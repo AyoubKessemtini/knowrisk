@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { MainHeader } from '@components/Headers/MainHeader';
 import { PatientInfoCard } from '@components/Cards/GeneralPatientInformationsCard';
@@ -177,7 +177,7 @@ export const Home: React.FC = () => {
       containerStyles={styles.container}
     >
       <MainHeader firstName={firstName} lastName={lastName} />
-      <View style={[styles.wrapper,{paddingHorizontal:w04}]}>
+      <View style={[styles.wrapper, { paddingHorizontal: w04 }]}>
         <PatientInfoCard
           name={`${firstName} ${lastName}`}
           id={`ID: ${user?.id.split('-')[0]}`}

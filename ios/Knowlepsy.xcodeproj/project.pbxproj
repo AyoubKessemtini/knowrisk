@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* KnowlepsyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* KnowlepsyTests.m */; };
+		063163334E898BB59C7C7BB5 /* libPods-Knowlepsy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 880D1DC34AA97FDF6AAB6C03 /* libPods-Knowlepsy.a */; };
 		0F6FB60844BF4470A4A152C9 /* Poppins Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C60BE5C3918743DDA45DFE31 /* Poppins Light.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1D02F0CD04E4F93F260DCE7B /* libPods-Knowlepsy-KnowlepsyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 458BDAB6413E1E9B7D4222AE /* libPods-Knowlepsy-KnowlepsyTests.a */; };
 		338AA94F731D4AA4BFE8FB2F /* Poppins Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51D4CE3C511141AE9C509E73 /* Poppins Bold.ttf */; };
-		38398F5B6E2538099A61DCF1 /* libPods-Knowlepsy-KnowlepsyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87991E7E12FB11DD4D136043 /* libPods-Knowlepsy-KnowlepsyTests.a */; };
 		4110EF232AA4C9BE0061D6B4 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4110EF222AA4C9BD0061D6B4 /* BootSplash.storyboard */; };
 		534A1A0B0C0445F5B6D9019C /* Poppins Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C69262BDB08F4AC8BA38EFC2 /* Poppins Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen */; };
 		8DC1E1423C0D4423A37A166C /* GoogleSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E18C2C3D8964E1EAAB3761B /* GoogleSans-Italic.ttf */; };
 		C608AA1FB7E34D4291ACA7D2 /* GoogleSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0A5344E1F5F40639B7E280B /* GoogleSans-MediumItalic.ttf */; };
-		CAA9EB90658753DD7005FA3A /* libPods-Knowlepsy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C79B495622AFF769746FA76D /* libPods-Knowlepsy.a */; };
 		D8CD39E5671B4496B4D347C8 /* GoogleSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8794049648C46AA8DBDF547 /* GoogleSans-Bold.ttf */; };
 		DD4FB5BD5FD3412B9F16BBE7 /* GoogleSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9045E6B27A854DD181A9E60A /* GoogleSans-Medium.ttf */; };
 		E160B635C4124CE7BC62793B /* GoogleSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DEDC9A0C14F4FE4A0A12BD4 /* GoogleSans-Regular.ttf */; };
@@ -47,7 +47,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Knowlepsy/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Knowlepsy/main.m; sourceTree = "<group>"; };
 		13E4117E2C5A54C1001A6AA3 /* Knowlepsy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Knowlepsy.entitlements; path = Knowlepsy/Knowlepsy.entitlements; sourceTree = "<group>"; };
-		173BB453D68CF8E128D3C00D /* Pods-Knowlepsy-KnowlepsyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowlepsy-KnowlepsyTests.release.xcconfig"; path = "Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests.release.xcconfig"; sourceTree = "<group>"; };
+		2C3C84CAAD08A5D9843069CF /* Pods-Knowlepsy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowlepsy.release.xcconfig"; path = "Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy.release.xcconfig"; sourceTree = "<group>"; };
 		3DEDC9A0C14F4FE4A0A12BD4 /* GoogleSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Regular.ttf"; path = "../assets/fonts/GoogleSans-Regular.ttf"; sourceTree = "<group>"; };
 		4110EF222AA4C9BD0061D6B4 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = Knowlepsy/BootSplash.storyboard; sourceTree = "<group>"; };
 		41701D162AB1B49800990880 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
@@ -69,21 +69,21 @@
 		41701D262AB1B49A00990880 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		41701D272AB1B49B00990880 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		41701D282AB1B49B00990880 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		458BDAB6413E1E9B7D4222AE /* libPods-Knowlepsy-KnowlepsyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Knowlepsy-KnowlepsyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51D4CE3C511141AE9C509E73 /* Poppins Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins Bold.ttf"; path = "../assets/fonts/Poppins Bold.ttf"; sourceTree = "<group>"; };
+		6327E4F50E5E2E8CA2C90DA0 /* Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig"; path = "Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = LaunchScreen; path = Knowlepsy/LaunchScreen; sourceTree = "<group>"; };
-		87991E7E12FB11DD4D136043 /* libPods-Knowlepsy-KnowlepsyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Knowlepsy-KnowlepsyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D0D3FAD854914FE355E50D3 /* Pods-Knowlepsy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowlepsy.debug.xcconfig"; path = "Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy.debug.xcconfig"; sourceTree = "<group>"; };
+		880D1DC34AA97FDF6AAB6C03 /* libPods-Knowlepsy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Knowlepsy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E18C2C3D8964E1EAAB3761B /* GoogleSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Italic.ttf"; path = "../assets/fonts/GoogleSans-Italic.ttf"; sourceTree = "<group>"; };
 		901B9EA07E1F421FA7926F2C /* GoogleSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-BoldItalic.ttf"; path = "../assets/fonts/GoogleSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		9045E6B27A854DD181A9E60A /* GoogleSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Medium.ttf"; path = "../assets/fonts/GoogleSans-Medium.ttf"; sourceTree = "<group>"; };
-		B1471A8290692A7A4716AC3E /* Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig"; path = "Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BDE9C0D05CFD2A5DD5287B19 /* Pods-Knowlepsy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowlepsy.debug.xcconfig"; path = "Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy.debug.xcconfig"; sourceTree = "<group>"; };
 		C60BE5C3918743DDA45DFE31 /* Poppins Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins Light.ttf"; path = "../assets/fonts/Poppins Light.ttf"; sourceTree = "<group>"; };
 		C69262BDB08F4AC8BA38EFC2 /* Poppins Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins Regular.ttf"; path = "../assets/fonts/Poppins Regular.ttf"; sourceTree = "<group>"; };
-		C79B495622AFF769746FA76D /* libPods-Knowlepsy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Knowlepsy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8794049648C46AA8DBDF547 /* GoogleSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Bold.ttf"; path = "../assets/fonts/GoogleSans-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EF82CDFF52B74DE037CE41B1 /* Pods-Knowlepsy-KnowlepsyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowlepsy-KnowlepsyTests.release.xcconfig"; path = "Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests.release.xcconfig"; sourceTree = "<group>"; };
 		F0A5344E1F5F40639B7E280B /* GoogleSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-MediumItalic.ttf"; path = "../assets/fonts/GoogleSans-MediumItalic.ttf"; sourceTree = "<group>"; };
-		FA0A330372E44FB41D024D20 /* Pods-Knowlepsy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowlepsy.release.xcconfig"; path = "Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38398F5B6E2538099A61DCF1 /* libPods-Knowlepsy-KnowlepsyTests.a in Frameworks */,
+				1D02F0CD04E4F93F260DCE7B /* libPods-Knowlepsy-KnowlepsyTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAA9EB90658753DD7005FA3A /* libPods-Knowlepsy.a in Frameworks */,
+				063163334E898BB59C7C7BB5 /* libPods-Knowlepsy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,8 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				C79B495622AFF769746FA76D /* libPods-Knowlepsy.a */,
-				87991E7E12FB11DD4D136043 /* libPods-Knowlepsy-KnowlepsyTests.a */,
+				880D1DC34AA97FDF6AAB6C03 /* libPods-Knowlepsy.a */,
+				458BDAB6413E1E9B7D4222AE /* libPods-Knowlepsy-KnowlepsyTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -210,10 +210,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8D0D3FAD854914FE355E50D3 /* Pods-Knowlepsy.debug.xcconfig */,
-				FA0A330372E44FB41D024D20 /* Pods-Knowlepsy.release.xcconfig */,
-				B1471A8290692A7A4716AC3E /* Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig */,
-				173BB453D68CF8E128D3C00D /* Pods-Knowlepsy-KnowlepsyTests.release.xcconfig */,
+				BDE9C0D05CFD2A5DD5287B19 /* Pods-Knowlepsy.debug.xcconfig */,
+				2C3C84CAAD08A5D9843069CF /* Pods-Knowlepsy.release.xcconfig */,
+				6327E4F50E5E2E8CA2C90DA0 /* Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig */,
+				EF82CDFF52B74DE037CE41B1 /* Pods-Knowlepsy-KnowlepsyTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -241,12 +241,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "KnowlepsyTests" */;
 			buildPhases = (
-				D9F1D07A5FADB09AE8A18408 /* [CP] Check Pods Manifest.lock */,
+				73AA8E057321A2C865C2FF82 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				90B49818EE6915D15ECC94B0 /* [CP] Embed Pods Frameworks */,
-				87D39EC05A771CD19857494E /* [CP] Copy Pods Resources */,
+				07B1BD5F7C9BACCB481F372D /* [CP] Embed Pods Frameworks */,
+				828607098D7F9EE74EB6C34E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,14 +262,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Knowlepsy" */;
 			buildPhases = (
-				827110DDF6F0333EA8E26B84 /* [CP] Check Pods Manifest.lock */,
+				8C5A5B094EEAC98E5E670128 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				B9990CAD37C83555593C95B1 /* [CP] Embed Pods Frameworks */,
-				D0C35E8A9102DFDF26197D33 /* [CP] Copy Pods Resources */,
+				AB1BDB5012C5BCB10AAD9294 /* [CP] Embed Pods Frameworks */,
+				0D97DF13E5CB7E7C1E1CFBAF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -363,7 +363,80 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		827110DDF6F0333EA8E26B84 /* [CP] Check Pods Manifest.lock */ = {
+		07B1BD5F7C9BACCB481F372D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0D97DF13E5CB7E7C1E1CFBAF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73AA8E057321A2C865C2FF82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Knowlepsy-KnowlepsyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		828607098D7F9EE74EB6C34E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C5A5B094EEAC98E5E670128 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -385,41 +458,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		87D39EC05A771CD19857494E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		90B49818EE6915D15ECC94B0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy-KnowlepsyTests/Pods-Knowlepsy-KnowlepsyTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B9990CAD37C83555593C95B1 /* [CP] Embed Pods Frameworks */ = {
+		AB1BDB5012C5BCB10AAD9294 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -434,45 +473,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D0C35E8A9102DFDF26197D33 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Knowlepsy/Pods-Knowlepsy-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D9F1D07A5FADB09AE8A18408 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Knowlepsy-KnowlepsyTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -527,7 +527,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1471A8290692A7A4716AC3E /* Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig */;
+			baseConfigurationReference = 6327E4F50E5E2E8CA2C90DA0 /* Pods-Knowlepsy-KnowlepsyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -555,7 +555,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 173BB453D68CF8E128D3C00D /* Pods-Knowlepsy-KnowlepsyTests.release.xcconfig */;
+			baseConfigurationReference = EF82CDFF52B74DE037CE41B1 /* Pods-Knowlepsy-KnowlepsyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -580,7 +580,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D0D3FAD854914FE355E50D3 /* Pods-Knowlepsy.debug.xcconfig */;
+			baseConfigurationReference = BDE9C0D05CFD2A5DD5287B19 /* Pods-Knowlepsy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -617,7 +617,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA0A330372E44FB41D024D20 /* Pods-Knowlepsy.release.xcconfig */;
+			baseConfigurationReference = 2C3C84CAAD08A5D9843069CF /* Pods-Knowlepsy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

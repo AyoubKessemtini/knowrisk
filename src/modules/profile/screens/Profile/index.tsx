@@ -6,10 +6,8 @@ import { Colors } from '@constants/Colors';
 import HelpCenterButton from '@components/Buttons/HelpCenterButton';
 import { CButton } from '@components/Buttons/CButton';
 import { Screen } from '@components/Screen';
-
 import { OnboardingStackRoutes, RootStackRoutes } from '@navigators/routes';
 import { TabStackScreenProps } from '@navigators/stacks/TabNavigator';
-import { Header } from '@components/Headers/Header';
 import { useNavigation } from '@react-navigation/native';
 import { PersistenceStorage } from '@storage/index';
 import { KEYS } from '@storage/Keys';
@@ -18,13 +16,6 @@ import { RootState } from '@store/index';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProfileActions } from '@store/profileSlice';
-// const getBackgroundColor = (name: string) => {
-//   const hash = Array.from(name).reduce(
-//     (acc, char) => char.charCodeAt(0) + ((acc << 5) - acc),
-//     0,
-//   );
-//   return `hsl(${hash % 360}, 70%, 80%)`;
-// };
 
 export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
   const handleLogout = async () => {
@@ -224,11 +215,28 @@ export const Profile = ({}: TabStackScreenProps<'profile'>): JSX.Element => {
               />
             }
             onPress={() => {
-              navigation.navigate(RootStackRoutes.TERMS_CONDITIONS_PROFIL);
-
-              // navigation.navigate(RootStackRoutes.ONBOARDING_STACK, {
-              //   screen: OnboardingStackRoutes.QUESTION_ONE_SCREEN,
-              // });
+              navigation.navigate(RootStackRoutes.WEB_VIEW_SCREEN, {
+                url: 'https://www.knowlepsy.com/personal-data-policy',
+              });
+            }}
+          />
+          <CButton
+            text="profile.disclaimer"
+            buttonType="magnolia"
+            buttonVersion={2}
+            rightAccessory={
+              <Icon
+                type="material"
+                name="chevron-right"
+                size={21}
+                color={Colors.fog}
+              />
+            }
+            onPress={() => {
+              navigation.navigate(RootStackRoutes.WEB_VIEW_SCREEN, {
+                url: 'https://www.knowlepsy.com/disclaimer',
+                title:'Disclaimer'
+              });
             }}
           />
         </View>
@@ -299,10 +307,5 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 25,
-  },
-  line: {
-    height: 1,
-    borderBottomWidth: 0.2,
-    borderColor: Colors.fog,
   },
 });

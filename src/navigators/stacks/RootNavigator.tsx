@@ -46,7 +46,7 @@ import { SeizureEvent } from '@utils/types';
 import { InviteDoctor } from '@modules/profile/screens/Settings/InviteDoctor_Screen.tsx';
 import GifScreenGuide from '@modules/home/GifScreenGuide';
 import EmergencyScreen from "@modules/profile/screens/Settings/EmergencyScreen.tsx";
-import { TermsAndConditionsScreen } from '@modules/home/screens/TermsAndConditionsScreen';
+import { WebViewRouteScreen } from '@modules/home/screens/WebViewRouteScreen.tsx';
 
 export type RootStackParamList = {
   [RootStackRoutes.TAB_STACK]: NavigatorScreenParams<TabStackParamList>;
@@ -72,7 +72,7 @@ export type RootStackParamList = {
   [RootStackRoutes.Gif_INTRO]: undefined;
   [RootStackRoutes.Gif_INTRO_GUIDE]: undefined;
   [RootStackRoutes.EMERGENCY_SCREEN]: undefined;
-  [RootStackRoutes.TERMS_CONDITIONS_PROFIL]: undefined;
+  [RootStackRoutes.WEB_VIEW_SCREEN]: undefined;
 
   // [RootStackRoutes.REPORT_SEIZURE_QUESTION_UPDATED_ONE_SCREEN]: {
   //   eventId: string;
@@ -285,8 +285,8 @@ export function RootNavigator() {
           component={EmergencyScreen}
       />
       <Stack.Screen
-        name={RootStackRoutes.TERMS_CONDITIONS_PROFIL}
-        component={TermsAndConditionsScreen}
+        name={RootStackRoutes.WEB_VIEW_SCREEN}
+        component={WebViewRouteScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

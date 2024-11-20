@@ -10,9 +10,10 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
 
-export const TermsAndConditionsScreen = (): JSX.Element => {
+export const WebViewRouteScreen = ({ route }): JSX.Element => {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
+  const { url, title } = route.params;
 
   const handleClose = () => {
     // Use navigation.dismiss() if the screen is presented modally
@@ -24,33 +25,34 @@ export const TermsAndConditionsScreen = (): JSX.Element => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        {/* En-tête personnalisé */}
 
-    <View style={{ flex: 1 }}>
-      {/* En-tête personnalisé */}
-      
-      <View style={styles.header}>
-        <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
-          <Text style={styles.closeButtonText}>Close</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Terms & Conditions</Text>
-      </View>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
+            <Text style={styles.closeButtonText}>Close</Text>
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>
+            {title ?? 'Terms & Conditions'}
+          </Text>
+        </View>
 
-      {/* Indicateur de chargement */}
-      {loading && (
-        <ActivityIndicator
-          size="large"
-          color="#0000ff"
-          style={styles.activityIndicator}
+        {/* Indicateur de chargement */}
+        {loading && (
+          <ActivityIndicator
+            size="large"
+            color="#0000ff"
+            style={styles.activityIndicator}
+          />
+        )}
+
+        {/* WebView */}
+        <WebView
+          source={{ uri: url }}
+          style={{ flex: 1 }}
+          onLoadEnd={() => setLoading(false)}
         />
-      )}
-
-      {/* WebView */}
-      <WebView
-        source={{ uri: 'https://www.knowlepsy.com/personal-data-policy' }}
-        style={{ flex: 1 }}
-        onLoadEnd={() => setLoading(false)}
-      />
-    </View>
+      </View>
     </SafeAreaView>
   );
 };
