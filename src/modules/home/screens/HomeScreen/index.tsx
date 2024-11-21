@@ -168,7 +168,7 @@ export const Home: React.FC = () => {
         console.error('Failed to fetch patient data:', error);
       }
     };
-  }, []);
+  }, [dispatch, selectedDate]);
   return (
     <Screen
       fullscreen

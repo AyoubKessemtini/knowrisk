@@ -127,7 +127,7 @@ export const PatientInfoCard = ({
         </View>
         <View style={styles.detailItem}>
           <CText color="darkPurple" size="xm_medium">
-            mood :
+            Mood :
           </CText>
           <TextChip
             isCentred={false}
