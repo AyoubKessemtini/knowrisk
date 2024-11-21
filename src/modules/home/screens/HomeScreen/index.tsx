@@ -153,8 +153,6 @@ export const Home: React.FC = () => {
     const fetchMedications = async () => {
       try {
         const fetchedData = await core.getMedications.execute();
-        console.log('medications');
-        console.log(fetchedData);
         setMedications(fetchedData);
       } catch (error) {
         console.error('Failed to fetch medications:', error);
@@ -162,8 +160,11 @@ export const Home: React.FC = () => {
     };
     const fetchPatientData = async () => {
       try {
-        const fetchedData = await core.getPatientData.execute();
-        setPatientData(fetchedData);
+        setInterval(async () => {
+          const fetchedData = await core.getPatientData.execute();
+          setPatientData(fetchedData);
+          console.log('fetchedData');
+        }, 5000);
       } catch (error) {
         console.error('Failed to fetch patient data:', error);
       }
