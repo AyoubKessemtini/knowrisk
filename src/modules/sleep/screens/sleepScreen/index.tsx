@@ -5,7 +5,7 @@ import { DateSelector } from '@components/DatePicker/DatePicker.tsx';
 import { formatStringDate } from '@hooks/useDateFormatter.ts';
 import { SleepCard } from '@components/Cards/SleepCard.tsx';
 import { CText } from '@components/CText.tsx';
-import { SleepQualityCard } from '@modules/sleep/screens/components/sleepQualityCard.tsx';
+//import { SleepQualityCard } from '@modules/sleep/screens/components/sleepQualityCard.tsx';
 import { RecoveryComponent } from '@components/Cards/RecoveryCard.tsx';
 import { Colors } from '@constants/Colors.ts';
 import { core } from '@config/Configuration.ts';
@@ -48,7 +48,7 @@ export const SleepScreen: React.FC = () => {
       noHorizontalPadding
       containerStyles={styles.container}
     >
-      {/* <MainHeader firstName="Aziz" lastName="Sassi" /> */}
+      {/* <MainHeader firstName="Aziz" lastName="Sass" /> */}
       <View style={[styles.wrapper, { paddingHorizontal: w04 }]}>
         <DateSelector
           initialDate={selectedDate}
@@ -88,6 +88,27 @@ export const SleepScreen: React.FC = () => {
             <SleepStagesChart sleepData={sleepData} />
           </View>
         )}
+        <View style={styles.row}>
+          <SleepCard
+            lastUpdated={
+              sleepData
+                ? formatStringDate(selectedDate)
+                : formatStringDate(selectedDate)
+            }
+            sleepData={sleepData ? String(sleepData.startSleep) : '--'}
+            title="common.start_sleep"
+          />
+          <SleepCard
+            lastUpdated={
+              sleepData
+                ? formatStringDate(selectedDate)
+                : formatStringDate(selectedDate)
+            }
+            sleepData={sleepData ? String(sleepData.endSleep) : '--'}
+            title="common.end_sleep"
+          />
+        </View>
+        {/*
         <SleepQualityCard
           sleepQuality={sleepData ? String(sleepData.sleepQualityScore) : '--'}
           date={formatStringDate(selectedDate)}
@@ -96,7 +117,7 @@ export const SleepScreen: React.FC = () => {
           }
           startSleep={sleepData ? String(sleepData.startSleep) : '--'}
           endSleep={sleepData ? String(sleepData.endSleep) : '--'}
-        />
+        />*/}
         <View style={styles.row}>
           <RecoveryComponent
             title="Rest and Recovery Status"

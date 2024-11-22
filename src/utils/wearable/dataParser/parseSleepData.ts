@@ -68,11 +68,10 @@ export const parseSleepData = (dataView: DataView, deviceId: string) => {
 // Helper function to map sleep quality
 const mapSleepQuality = (qualityCode: number) => {
   const sleepQualityMap: { [key: number]: string } = {
-    1: 'Awake',
-    2: 'REM',
-    3: 'Light Sleep',
-    4: 'Deep Sleep',
-    5: 'Nap',
+    1: 'REM',
+    2: 'Light Sleep',
+    3: 'Deep Sleep',
+    4: 'Nap',
   };
   return sleepQualityMap[qualityCode] || 'Unknown';
 };

@@ -11,7 +11,9 @@
     "steps": "Steps",
     "temperature": "Temperature",
     "stress": "Stress",
-    "emergency": "Emergency"
+    "emergency": "Emergency",
+    "start_sleep": "Start sleep",
+    "end_sleep": "End sleep"
   },
   "buttons": {
     "tap_to_report": "Tap this button if you had a seizure",

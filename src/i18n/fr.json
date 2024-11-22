@@ -11,6 +11,8 @@
     "submit": "Submit",
     "date": "Date",
     "quality": "Quality",
+    "start_sleep": "Start sleep",
+    "end_sleep": "End sleep",
     "average": "Average sleeping time",
     "duration": "Duration",
     "contact_email": "Contact@knowlepsy.com",
