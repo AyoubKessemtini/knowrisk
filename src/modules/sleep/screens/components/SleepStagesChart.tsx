@@ -75,8 +75,8 @@ export const SleepStagesChart = ({ sleepData }) => {
 
   const yPositions = {
     REM: 0,
-    'Light Sleep': chartHeight * 0.25,
-    'Deep Sleep': chartHeight * 0.5,
+    'Light Sleep': chartHeight * 0.33,
+    'Deep Sleep': chartHeight * 0.67,
     Nap: chartHeight * 0.75,
   };
 
