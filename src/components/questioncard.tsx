@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { CText } from '@components/CText'; // Assuming CText is your custom text component
 import { Colors } from '@constants/Colors'; // Assuming Colors contains your app's color definitions
@@ -6,41 +6,45 @@ import Icon from 'react-native-easy-icon';
 
 interface QuestionProps {
   question: string;
+  answer: boolean | null;
+  onAnswerChange: (newAnswer: boolean | null) => void;
 }
 
-export const QuestionComponent: React.FC<QuestionProps> = ({ question }) => {
-  const [selected, setSelected] = useState<'yes' | 'no' | null>(null);
-
+export const QuestionComponent: React.FC<QuestionProps> = ({
+  question,
+  answer,
+  onAnswerChange,
+}) => {
   return (
-      <View style={styles.questionContainer}>
-        <CText size="md" color="purpleGrey" style={styles.questionText}>
-          {question}
-        </CText>
-        <View style={styles.answerContainer}>
-          <TouchableOpacity
-              style={[
-                styles.answerButton,
-                selected === 'no' && styles.selectedButton,
-              ]}
-              onPress={() => setSelected('no')}
-          >
-            <CText size="md" color={selected === 'no' ? 'white' : 'fadedPurple'}>
-              ✕
-            </CText>
-          </TouchableOpacity>
-          <TouchableOpacity
-              style={[
-                styles.answerButton,
-                selected === 'yes' && styles.selectedButton,
-              ]}
-              onPress={() => setSelected('yes')}
-          >
-            <CText size="md" color={selected === 'yes' ? 'white' : 'fadedPurple'}>
-              <Icon type="material" name="done" size={15} />
-            </CText>
-          </TouchableOpacity>
-        </View>
+    <View style={styles.questionContainer}>
+      <CText size="md" color="purpleGrey" style={styles.questionText}>
+        {question}
+      </CText>
+      <View style={styles.answerContainer}>
+        <TouchableOpacity
+          style={[
+            styles.answerButton,
+            answer === false ? styles.selectedButton : styles.unselectedButton,
+          ]}
+          onPress={() => onAnswerChange(false)}
+        >
+          <CText size="md" color={answer === false ? 'white' : 'fadedPurple'}>
+            ✕
+          </CText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.answerButton,
+            answer === true ? styles.selectedButton : styles.unselectedButton,
+          ]}
+          onPress={() => onAnswerChange(true)}
+        >
+          <CText size="md" color={answer === true ? 'white' : 'fadedPurple'}>
+            <Icon type="material" name="done" size={15} />
+          </CText>
+        </TouchableOpacity>
       </View>
+    </View>
   );
 };
 
@@ -67,12 +71,14 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 5,
-    backgroundColor: Colors.lightPurple, // Light background for buttons
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
   },
   selectedButton: {
     backgroundColor: Colors.deepPurple, // Highlight selected button
+  },
+  unselectedButton: {
+    backgroundColor: Colors.lightPurple, // Grey background for unselected buttons
   },
 });

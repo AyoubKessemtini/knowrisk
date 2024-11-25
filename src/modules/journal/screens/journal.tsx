@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, StyleSheet, View } from 'react-native';
 import { Screen } from '@components/Screen';
 import { QuestionComponent } from '@components/questioncard';
 import { CText } from '@components/CText';
@@ -8,61 +8,48 @@ import { Header } from '@components/Headers/Header.tsx';
 import { CButton } from '@components/Buttons/CButton.tsx';
 import { DateSelector } from '@components/DatePicker/DatePicker.tsx';
 import { formatStringDate } from '@hooks/useDateFormatter.ts';
+import { Journal } from '@core/entities/deviceDataApisEntity/Journal.ts';
+import { core } from '@config/Configuration.ts';
+import { UpdateDailyJournalCommand } from '@core/usecases/journal/UpdateDailyJournal.ts';
 
 export const JournalScreen: React.FC = () => {
+  type GroupedJournal = {
+    [category: string]: Omit<Journal, 'category'>[];
+  };
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const questionsData = [
-    {
-      category: 'Stress',
-      questions: [
-        'Did you experience stress today?',
-        'Did you have any emotional distress or anxiety today?',
-        'Did you notice any changes in your mood or mental state today?',
-      ],
-    },
-    {
-      category: 'Nutrition',
-      questions: [
-        'Did you consume any caffeine today?',
-        'Did you consume any alcohol today?',
-        'Did you consume any new foods or drinks today?',
-      ],
-    },
-    {
-      category: 'Sleep',
-      questions: [
-        'Did you experience any unusual lack of sleep last night?',
-        'Were you feeling particularly tired or fatigued today?',
-      ],
-    },
-    {
-      category: 'Physical Activity',
-      questions: ['Did you engage in any intense physical activity today?'],
-    },
-    {
-      category: 'Environment',
-      questions: [
-        'Were you exposed to flashing or bright lights today?',
-        'Were you in a crowded or noisy environment today?',
-      ],
-    },
-    {
-      category: 'Medication',
-      questions: [
-        'Did you miss any doses of your prescribed medication today?',
-      ],
-    },
-    {
-      category: 'Headaches/Migraines',
-      questions: ['Did you experience a headache or migraine today?'],
-    },
-    {
-      category: 'Screen Time',
-      questions: [
-        'Did you spend more time than usual on screens (phone, computer, etc.) today?',
-      ],
-    },
-  ];
+  const [journal, setJournal] = useState<GroupedJournal>({});
+  const [journalExists, setJournalExists] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const groupQuestionsByCategory = (j: Journal[]): GroupedJournal => {
+    return j.reduce((acc, question) => {
+      const { category, ...rest } = question;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(rest);
+      return acc;
+    }, {} as GroupedJournal);
+  };
+  useEffect(() => {
+    const fetchJournal = async () => {
+      setLoading(true);
+      const dailyJournal = await core.getDailyJournal.execute({
+        date: formatStringDate(selectedDate),
+      });
+      if (dailyJournal.length === 0) {
+        setLoading(false);
+        Alert.alert('Error', 'No questions for the chosen date.');
+        setJournalExists(false);
+      } else {
+        setLoading(false);
+        setJournalExists(true);
+        setJournal(groupQuestionsByCategory(dailyJournal));
+      }
+    };
+    fetchJournal();
+  }, [selectedDate]);
+
   const handleDateChange = (newDate: Date) => {
     if (newDate > new Date()) {
       Alert.alert(
@@ -73,16 +60,55 @@ export const JournalScreen: React.FC = () => {
       setSelectedDate(newDate);
     }
   };
-  const allQuestions = questionsData.flatMap((section) =>
-    section.questions.map((question) => ({
-      question,
-      category: section.category,
-    })),
-  );
-  const shuffleArray = (array: { question: string; category: string }[]) => {
-    return array.sort(() => Math.random() - 0.5);
+
+  const handleAnswerChange = (
+    category: string,
+    questionId: number,
+    newAnswer: boolean | null,
+  ) => {
+    setJournal((prevJournal) => ({
+      ...prevJournal,
+      [category]: prevJournal[category].map((question) =>
+        question.question_id === questionId
+          ? { ...question, answer: newAnswer }
+          : question,
+      ),
+    }));
   };
-  const randomQuestions = shuffleArray(allQuestions).slice(0, 4);
+
+  const ungroupJournal = (grouped: GroupedJournal): Journal[] => {
+    return Object.entries(grouped).flatMap(([category, questions]) =>
+      questions.map((question) => ({
+        ...question,
+        category,
+      })),
+    );
+  };
+
+  const transformQuestions = (questions): UpdateDailyJournalCommand => {
+    return questions.map(({ question_id, answer }) => ({
+      question_id: Number(question_id),
+      answer,
+    }));
+  };
+  const saveJournal = (j) => {
+    const ungroupedJournal = ungroupJournal(j);
+    const nullAnswers = ungroupedJournal.filter((j) => j.answer == null);
+    if (nullAnswers.length > 0) {
+      Alert.alert('Error', 'Please complete all the questions.');
+    } else {
+      core.updateDailyJournal
+        .execute(transformQuestions(ungroupedJournal))
+        .then(() => {
+          Alert.alert('Success', 'Your answers are successfully saved.');
+        })
+        .catch((e) => {
+          console.log(e);
+          Alert.alert('Error', 'Unknown error, please try again.');
+        });
+    }
+  };
+
   return (
     <Screen
       fullscreen
@@ -96,36 +122,66 @@ export const JournalScreen: React.FC = () => {
         text="common.journal"
         textColor="black"
       />
-      <View style={styles.wrapper}>
-        <DateSelector
-          initialDate={selectedDate}
-          onDateChange={handleDateChange}
+      {loading && (
+        <ActivityIndicator
+          style={{ marginTop: 200 }}
+          size="large"
+          color="#0000ff"
         />
-        <CText
-          style={{ textAlign: 'center' }}
-          mt={20}
-          mb={20}
-          size={'md_light'}
-          color={'grey3'}
-        >
-          {' '}
-          What happened {formatStringDate(selectedDate)}
-        </CText>
-        {randomQuestions.map((item, idx) => (
-          <View key={idx} style={styles.sectionContainer}>
-            <CText size="lg_bold" color="purple">
-              {item.category}
+      )}
+      {!loading && (
+        <>
+          <View style={styles.wrapper}>
+            <DateSelector
+              initialDate={selectedDate}
+              onDateChange={handleDateChange}
+            />
+            <CText
+              style={{ textAlign: 'center' }}
+              mt={20}
+              mb={20}
+              size={'md_light'}
+              color={'grey3'}
+            >
+              {journalExists
+                ? `What happened ${formatStringDate(selectedDate)}`
+                : 'No questions for the chosen date.'}
             </CText>
-            <QuestionComponent key={idx} question={item.question} />
+            {journalExists && (
+              <>
+                {Object.entries(journal).map(([category, questions], idx) => (
+                  <View key={idx} style={styles.sectionContainer}>
+                    <CText size="lg_bold" color="purple">
+                      {category}
+                    </CText>
+                    {questions.map((question, questionIdx) => (
+                      <QuestionComponent
+                        key={question.question_id}
+                        answer={question.answer}
+                        question={question.question_text}
+                        onAnswerChange={(newAnswer) =>
+                          handleAnswerChange(
+                            category,
+                            question.question_id,
+                            newAnswer,
+                          )
+                        }
+                      />
+                    ))}
+                  </View>
+                ))}
+              </>
+            )}
           </View>
-        ))}
-      </View>
-      <CButton
-        text="buttons.save"
-        onPress={() => {
-          console.log('save journal');
-        }}
-      />
+          {formatStringDate(selectedDate) === formatStringDate(new Date()) &&
+            journalExists && (
+              <CButton
+                text="buttons.save"
+                onPress={() => saveJournal(journal)}
+              />
+            )}
+        </>
+      )}
     </Screen>
   );
 };

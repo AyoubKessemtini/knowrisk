@@ -1,6 +1,7 @@
 import { HeartRateDeviceData } from '@core/entities/deviceDataApisEntity/HeartRate.ts';
 import { StressDeviceData } from '@core/entities/deviceDataApisEntity/StressDeviceData.ts';
-import {PatientData} from "@core/entities/deviceDataApisEntity/PatientData.ts";
+import { PatientData } from '@core/entities/deviceDataApisEntity/PatientData.ts';
+import { Journal } from '@core/entities/deviceDataApisEntity/Journal.ts';
 
 export interface DeviceDataApisRepo {
   getHeartRateWeeklyData(): Promise<HeartRateDeviceData[]>;

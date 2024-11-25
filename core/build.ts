@@ -21,13 +21,16 @@ import { GetSleepDailyData } from '@core/usecases/deviceFetchDataApisRepository/
 import { GetSpo2DailyData } from '@core/usecases/deviceFetchDataApisRepository/GetSpo2DailyData.ts';
 import { RDChatRepo } from './adapters/real/repositories/RDChatRepo.ts';
 import { SendMessage } from '@core/usecases/chatBot/SendMessage.ts';
-import {GetPatientData} from "@core/usecases/deviceFetchDataApisRepository/GetPatientData.ts";
-import {InviteDoctor} from "@core/usecases/invitations/InviteDoctor.ts";
-import {RDInvitationRepo} from "./adapters/real/repositories/RDInvitationRepo.ts";
-import {RDMedicationRepo} from "./adapters/real/repositories/RDMedicationRepo.ts";
-import {AddMedication} from "@core/usecases/medications/AddMedications.ts";
-import {GetMedications} from "@core/usecases/medications/GetMedications.ts";
-import {DeleteMedication} from "@core/usecases/medications/DeleteMedication.ts";
+import { GetPatientData } from '@core/usecases/deviceFetchDataApisRepository/GetPatientData.ts';
+import { InviteDoctor } from '@core/usecases/invitations/InviteDoctor.ts';
+import { RDInvitationRepo } from './adapters/real/repositories/RDInvitationRepo.ts';
+import { RDMedicationRepo } from './adapters/real/repositories/RDMedicationRepo.ts';
+import { AddMedication } from '@core/usecases/medications/AddMedications.ts';
+import { GetMedications } from '@core/usecases/medications/GetMedications.ts';
+import { DeleteMedication } from '@core/usecases/medications/DeleteMedication.ts';
+import { RDJournalRepo } from './adapters/real/repositories/RDJournalRepo.ts';
+import { GetDailyJournal } from '@core/usecases/journal/GetDailyJournal.ts';
+import { UpdateDailyJournal } from '@core/usecases/journal/UpdateDailyJournal.ts';
 
 export enum PersistNavigationEnum {
   DEV = 'dev',
@@ -62,6 +65,8 @@ export const Core = (configuration: CoreConfiguration) => {
   const invitationsRepo = new RDInvitationRepo(httpClient);
   //medication
   const medicationRepo = new RDMedicationRepo(httpClient);
+  //journal
+  const journalRepo = new RDJournalRepo(httpClient);
 
   const conversationsRepository = realDependencies
     ? new RDConversationsRepo(httpClient, new GetConversationsMapper())
@@ -90,6 +95,9 @@ export const Core = (configuration: CoreConfiguration) => {
   const addMedication = new AddMedication(medicationRepo);
   const getMedications = new GetMedications(medicationRepo);
   const deleteMedication = new DeleteMedication(medicationRepo);
+  //journal
+  const getDailyJournal = new GetDailyJournal(journalRepo);
+  const updateDailyJournal = new UpdateDailyJournal(journalRepo);
   return {
     getConversations,
     sendIOSHealthData,
@@ -110,5 +118,7 @@ export const Core = (configuration: CoreConfiguration) => {
     addMedication,
     getMedications,
     deleteMedication,
+    getDailyJournal,
+    updateDailyJournal,
   };
 };
